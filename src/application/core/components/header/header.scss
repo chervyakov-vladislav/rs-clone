@@ -1,0 +1,23 @@
+.header {
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__buttons {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__logo {
+    font-size: 30px;
+  }
+}
