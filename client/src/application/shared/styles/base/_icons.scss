@@ -1,0 +1,12 @@
+.search-icon,
+.filter-icon {
+  transition: .3s;
+    &:hover {
+      fill: #000;
+    }
+}
+
+.header-logo {
+  width: 200px;
+  height: 50px;
+}

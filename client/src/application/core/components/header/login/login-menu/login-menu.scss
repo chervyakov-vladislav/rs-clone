@@ -1,0 +1,35 @@
+.login-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  width: 180px;
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  z-index: 10;
+
+    &__item{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 12px 16px;
+      font-weight: 500;
+      line-height: 16px;
+      color: rgba(0, 0, 0, 0.6);
+      transition: background-color 0.1s ease-out 0s;
+      width: 100%;
+      cursor: pointer;
+      border-radius: 8px;
+  
+        &:hover{ 
+          background-color: rgb(247, 247, 247);
+        }
+    }
+
+    &__link,
+    &__button {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+}
