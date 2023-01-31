@@ -1,15 +1,12 @@
 import { Header } from './core/components/header/header';
 import { Main } from './core/components/main-container/main-container';
-import { Router } from './shared/services/router/router';
-import { routes } from './shared/services/router/routes';
-import { state } from './shared/services/state';
 
 class App {
   private header: Header;
 
   private main: Main;
 
-  private router: Router | null;
+  private router: null;
 
   constructor() {
     this.header = new Header(document.body);
@@ -19,9 +16,7 @@ class App {
   }
 
   public async start() {
-    const currPage = state.getCarsPage();
-    await state.updateGarageState(currPage);
-    this.router = new Router(routes, this.main.container, [this.header.garageButton, this.header.winnersButton]);
+    console.log('start');
   }
 }
 
