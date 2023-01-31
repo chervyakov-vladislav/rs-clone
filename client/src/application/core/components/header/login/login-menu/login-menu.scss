@@ -24,4 +24,12 @@
           background-color: rgb(247, 247, 247);
         }
     }
+
+    &__link,
+    &__button {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
 }
