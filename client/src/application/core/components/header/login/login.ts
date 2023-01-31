@@ -1,13 +1,20 @@
+import './login.scss';
 import { ButtonElement } from '../../../../shared/components/base-elements/button-element';
+import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
 
-export class Login extends ButtonElement {
+export class Login extends DOMElement {
+  private loginBtn: ButtonElement;
+
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
-      tagName: 'button',
+      tagName: 'div',
       classList: ['login'],
-      content: 'Вход',
     });
 
-    // какая-то модалка при авторизации, для выхода и перехода в личный кабинет
+    this.loginBtn = new ButtonElement(this.node, {
+      tagName: 'button',
+      classList: ['login__button'],
+      content: 'Вход',
+    });
   }
 }

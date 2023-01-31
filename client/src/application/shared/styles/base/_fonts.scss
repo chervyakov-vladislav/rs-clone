@@ -1,55 +1,52 @@
 @font-face {
-	font-family: 'Lato-Bold';
-	src: url('./../assets/fonts/Lato-Bold.woff2');
-	src: url('./../assets/fonts/Lato-Bold.woff2') format('woff2'), 
-			 url('./../assets/fonts/Lato-Bold.woff') format('woff'); 
-			 font-weight: 600;
-			 font-style: normal; 
-}
-
-@font-face {
-	font-family: 'Lato-Regular';
-	src: url('./../assets/fonts/Lato-Regular.woff2');
-	src: url('./../assets/fonts/Lato-Regular.woff2') format('woff2'), 
-			 url('./../assets/fonts/Lato-Regular.woff') format('woff'); 
+	font-family: 'Kinopoisk';
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Regular-Web.woff2');
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Regular-Web.woff2') format('woff2');
 			 font-weight: 400;
 			 font-style: normal; 
 }
 
 @font-face {
-	font-family: 'Montserrat-Bold';
-	src: url('./../assets/fonts/Montserrat-Bold.woff2');
-	src: url('./../assets/fonts/Montserrat-Bold.woff2') format('woff2'), 
-			 url('./../assets/fonts/Montserrat-Bold.woff') format('woff'); 
+	font-family: 'Kinopoisk-bold';
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Bold-Web.woff2');
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Bold-Web.woff2') format('woff2');
 			 font-weight: 600;
 			 font-style: normal; 
 }
 
 @font-face {
-	font-family: 'Montserrat-Medium';
-	src: url('./../assets/fonts/Montserrat-Medium.woff2');
-	src: url('./../assets/fonts/Montserrat-Medium.woff2') format('woff2'), 
-			 url('./../assets/fonts/Montserrat-Medium.woff') format('woff'); 
+	font-family: 'Kinopoisk-light';
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Light-Web.woff2');
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Light-Web.woff2') format('woff2');
+			 font-weight: 300;
+			 font-style: normal; 
+}
+
+@font-face {
+	font-family: 'Kinopoisk-medium';
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Medium-Web.woff2');
+	src: url('./../assets/fonts/GraphikKinopoiskLC-Medium-Web.woff2') format('woff2');
 			 font-weight: 500;
 			 font-style: normal; 
 }
 
-@font-face {
-	font-family: 'Montserrat-Regular';
-	src: url('./../assets/fonts/Montserrat-Regular.woff2');
-	src: url('./../assets/fonts/Montserrat-Regular.woff2') format('woff2'), 
-			 url('./../assets/fonts/Montserrat-Regular.woff') format('woff'); 
-			 font-weight: 400;
-			 font-style: normal; 
-}
-
 	@mixin font-bold() {
-		font-family: "Lato-Bold" , Arial, sans-serif;
+		font-family: "Kinopoisk-bold" , Arial, sans-serif;
     font-size: 36px;
 	}
 
 	
 	@mixin font-regular() {
-		font-family: "Lato-Bold" , Arial, sans-serif;
+		font-family: "Kinopoisk" , Arial, sans-serif;
     font-size: 16px;
+	}
+
+  @mixin font-light() {
+		font-family: "Kinopoisk-light" , Arial, sans-serif;
+    font-size: 14px;
+	}
+
+  @mixin font-medium() {
+		font-family: "Kinopoisk-medium" , Arial, sans-serif;
+    font-size: 18px;
 	} 

@@ -1,3 +1,4 @@
+
 .header {
   min-height: 70px;
   display: flex;
@@ -12,14 +13,15 @@
   }
 
   &__buttons {
-    width: 100%;
-    max-width: 320px;
+    width: 50%;
     display: flex;
     justify-content: space-between;
     gap: 10px;
   }
 
   &__logo {
-    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

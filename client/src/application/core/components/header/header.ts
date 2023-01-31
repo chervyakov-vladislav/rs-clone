@@ -2,24 +2,21 @@ import './header.scss';
 
 import { ButtonElement } from '../../../shared/components/base-elements/button-element';
 import { DOMElement } from '../../../shared/components/base-elements/dom-element';
-import { ImageElement } from '../../../shared/components/base-elements/image-element';
 import { Search } from './search/search';
 import { Login } from './login/login';
+import { SVG } from '../../../shared/components/svg-icons';
+import { LinkElement } from '../../../shared/components/base-elements/link-element';
 
 export class Header extends DOMElement {
   private container: DOMElement;
 
   private headerButtons: DOMElement;
 
-  private headerLogo: DOMElement;
-
   public headerLogoContainer: ButtonElement;
 
   private search: Search;
 
   private login: Login;
-
-  // public winnersButton: ButtonElement;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -32,16 +29,12 @@ export class Header extends DOMElement {
       classList: ['container', 'header__container'],
     });
 
-    this.headerLogoContainer = new DOMElement(this.container.node, {
-      tagName: 'div',
+    this.headerLogoContainer = new LinkElement(this.container.node, {
+      tagName: 'a',
       classList: ['header__logo'],
+      href: '/',
     });
-
-    this.headerLogo = new ImageElement(this.headerLogoContainer.node, {
-      tagName: 'img',
-      classList: ['header__pic'],
-      src: './../../../../assets/images/kinopoisk.png',
-    });
+    this.headerLogoContainer.node.innerHTML = SVG.headerLogo;
 
     this.headerButtons = new DOMElement(this.container.node, {
       tagName: 'div',
