@@ -1,7 +1,10 @@
 import './login.scss';
 import { ButtonElement } from '../../../../shared/components/base-elements/button-element';
+import { LoginMenu } from './login-menu/login-menu';
 
 export class Login extends ButtonElement {
+  private menu: LoginMenu;
+
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'button',
@@ -9,6 +12,6 @@ export class Login extends ButtonElement {
       content: 'Вход',
     });
 
-    // какая-то модалка при авторизации, для выхода и перехода в личный кабинет
+    this.menu = new LoginMenu(this.node);
   }
 }

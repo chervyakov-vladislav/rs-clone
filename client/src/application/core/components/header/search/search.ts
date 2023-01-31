@@ -3,6 +3,7 @@ import { ButtonElement } from '../../../../shared/components/base-elements/butto
 import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
 import { InputElement } from '../../../../shared/components/base-elements/input-element';
 import { SVG } from '../../../../shared/components/svg-icons';
+import { Suggest } from './search-suggest/search-suggest';
 
 export class Search extends DOMElement {
   private input: InputElement;
@@ -10,6 +11,8 @@ export class Search extends DOMElement {
   private filterButton: ButtonElement;
 
   private searchButton: ButtonElement;
+
+  private suggest: Suggest;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -34,5 +37,7 @@ export class Search extends DOMElement {
       classList: ['search__search-button'],
     });
     this.searchButton.node.innerHTML = SVG.searchIcon;
+
+    this.suggest = new Suggest(this.node);
   }
 }
