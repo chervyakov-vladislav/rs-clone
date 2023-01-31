@@ -4,6 +4,7 @@ import { ButtonElement } from '../../../shared/components/base-elements/button-e
 import { DOMElement } from '../../../shared/components/base-elements/dom-element';
 import { ImageElement } from '../../../shared/components/base-elements/image-element';
 import { Search } from './search/search';
+import { Login } from './login/login';
 
 export class Header extends DOMElement {
   private container: DOMElement;
@@ -15,6 +16,8 @@ export class Header extends DOMElement {
   public headerLogoContainer: ButtonElement;
 
   private search: Search;
+
+  private login: Login;
 
   // public winnersButton: ButtonElement;
 
@@ -46,5 +49,6 @@ export class Header extends DOMElement {
     });
 
     this.search = new Search(this.headerButtons.node);
+    this.login = new Login(this.headerButtons.node);
   }
 }

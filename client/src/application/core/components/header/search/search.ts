@@ -8,6 +8,8 @@ export class Search extends DOMElement {
 
   private filterButton: ButtonElement;
 
+  private searchButton: ButtonElement;
+
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'div',
@@ -24,6 +26,12 @@ export class Search extends DOMElement {
       tagName: 'button',
       classList: ['search__filter-button'],
     });
-    this.filterButton.node.innerHTML = `${SVG.filterIcon}`;
+    this.filterButton.node.innerHTML = SVG.filterIcon;
+
+    this.searchButton = new ButtonElement(this.node, {
+      tagName: 'button',
+      classList: ['search__search-button'],
+    });
+    this.searchButton.node.innerHTML = SVG.searchIcon;
   }
 }
