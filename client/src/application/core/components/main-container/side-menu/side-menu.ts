@@ -3,7 +3,7 @@ import { DOMElement } from '../../../../shared/components/base-elements/dom-elem
 import { LinkElement } from '../../../../shared/components/base-elements/link-element';
 import { SVG } from '../../../../shared/components/svg-icons';
 
-export class SideMenu extends DOMElement {
+export default class SideMenu extends DOMElement {
   private mainPageItem: DOMElement;
 
   private mainPagePic: DOMElement;
