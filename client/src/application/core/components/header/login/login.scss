@@ -1,9 +1,16 @@
 .login {
-  transition: .3s;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
+  &__button {
+    transition: .3s;
+    height: 100%;
+    
     &:hover {
       color: #fff;
     }
- 
+  }
+  
 }
