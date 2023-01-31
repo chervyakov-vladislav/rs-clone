@@ -2,6 +2,11 @@
 .filter-icon {
   transition: .3s;
     &:hover {
-      fill: #fff;
+      fill: #000;
     }
+}
+
+.header-logo {
+  width: 200px;
+  height: 50px;
 }

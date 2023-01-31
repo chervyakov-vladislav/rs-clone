@@ -1,3 +1,4 @@
+import './login.scss';
 import { ButtonElement } from '../../../../shared/components/base-elements/button-element';
 
 export class Login extends ButtonElement {
