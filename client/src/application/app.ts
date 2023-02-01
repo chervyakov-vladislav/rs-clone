@@ -13,7 +13,12 @@ class App {
   }
 
   public async start() {
-    
+    console.log('грузим дату');
+    this.main.container.append(mainRouter.node);
+    window.addEventListener('', (e) => {
+      e.preventDefault();
+      console.log('state change');
+    });
   }
 }
 

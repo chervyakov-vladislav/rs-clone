@@ -8,7 +8,7 @@ export class Router extends DOMElement {
 
   private container: HTMLElement;
 
-  private template: Page;
+  private template: (() => Page) | Page;
 
   private nestedRoute: string;
 
@@ -31,16 +31,18 @@ export class Router extends DOMElement {
     const url = this.nestedRoute + `${route}`;
     history.pushState({}, '', url);
 
-    this.container.append(this.template.node);
+    this.container.append((this.template as Page).node);
   }
 
   private findTemplateName(path: string) {
     return path.split('/')[0];
   }
 
-  private findTemplate(route: string): Page {
+  private findTemplate(route: string) {
     const templateName = this.findTemplateName(route);
-    return (this.routes.find((item) => item.path === templateName) as RouterOptions).template;
+    const routeToNavigate = this.routes.find((item) => item.path === templateName);
+
+    return routeToNavigate ? routeToNavigate.template() : this.routes[0].template;
   }
 
   private isGithub() {
