@@ -1,7 +1,7 @@
-import { DOMElement } from './dom-element';
+import DOMElement from './dom-element';
 import { ButtonOptions } from '../../models/base-elements';
 
-export class ButtonElement extends DOMElement {
+export default class ButtonElement extends DOMElement {
   constructor(parentNode: HTMLElement | null, options: ButtonOptions) {
     super(parentNode, {
       tagName: options.tagName,

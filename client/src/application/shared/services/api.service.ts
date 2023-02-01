@@ -65,7 +65,7 @@ class ApiService {
     const res: EngineData = await data.json();
     return {
       status: data.status,
-      res: res,
+      res,
     };
   }
 
@@ -134,4 +134,4 @@ class ApiService {
 }
 
 const apiService = new ApiService();
-export { apiService };
+export default apiService;
