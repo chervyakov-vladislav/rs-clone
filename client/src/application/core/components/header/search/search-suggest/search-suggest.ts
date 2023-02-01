@@ -2,7 +2,7 @@ import './search-suggest.scss';
 import { ButtonElement } from '../../../../../shared/components/base-elements/button-element';
 import { DOMElement } from '../../../../../shared/components/base-elements/dom-element';
 
-export class Suggest extends DOMElement {
+export default class Suggest extends DOMElement {
   private suggestList: DOMElement;
 
   private showAllBtn: ButtonElement;

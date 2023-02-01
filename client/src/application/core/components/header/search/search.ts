@@ -4,7 +4,7 @@ import { DOMElement } from '../../../../shared/components/base-elements/dom-elem
 import { InputElement } from '../../../../shared/components/base-elements/input-element';
 import { SVG } from '../../../../shared/components/svg-icons';
 
-export class Search extends DOMElement {
+export default class Search extends DOMElement {
   private input: InputElement;
 
   private filterButton: ButtonElement;

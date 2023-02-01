@@ -2,15 +2,16 @@ import './side-menu.scss';
 import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
 import { LinkElement } from '../../../../shared/components/base-elements/link-element';
 import { SVG } from '../../../../shared/components/svg-icons';
+import sideMenuListeners from '../../../services/router-controllers/side-menu-controllers.service';
 
 export default class SideMenu extends DOMElement {
-  private mainPageItem: DOMElement;
+  public mainPageItem: DOMElement;
 
   private mainPagePic: DOMElement;
 
   private mainPageLink: LinkElement;
 
-  private moviesItem: DOMElement;
+  public moviesItem: DOMElement;
 
   private moviesPic: DOMElement;
 
@@ -25,12 +26,12 @@ export default class SideMenu extends DOMElement {
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'ul',
-      classList: ['side-menu__list'],
+      classList: ['side-menu'],
     });
 
     this.mainPageItem = new DOMElement(this.node, {
       tagName: 'li',
-      classList: ['side-menu__item'],
+      classList: ['side-menu__item', 'side-menu__item--active'],
     });
 
     this.mainPagePic = new DOMElement(this.mainPageItem.node, {
@@ -81,5 +82,7 @@ export default class SideMenu extends DOMElement {
       classList: ['side-menu__link'],
       content: 'Сериалы',
     });
+
+    sideMenuListeners.appendListeners(this);
   }
 }

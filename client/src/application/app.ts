@@ -1,22 +1,19 @@
-import { Header } from './core/components/header/header';
-import { Main } from './core/components/main-container/main-container';
+import Header from './core/components/header/header';
+import Main from './core/components/main-container/main-container';
+import mainRouter from './shared/services/router/router';
 
 class App {
   private header: Header;
 
   private main: Main;
 
-  private router: null;
-
   constructor() {
     this.header = new Header(document.body);
     this.main = new Main(document.body);
-
-    this.router = null;
   }
 
   public async start() {
-    console.log('start');
+    this.main.container.append(mainRouter.node);
   }
 }
 
