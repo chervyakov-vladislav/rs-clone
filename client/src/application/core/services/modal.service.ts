@@ -1,4 +1,4 @@
-import { ModalPage } from '../components/modal/modal';
+import ModalPage from '../components/modal/modal';
 
 class ModalService {
   public modal: ModalPage;
@@ -20,4 +20,4 @@ class ModalService {
 }
 
 const modalService = new ModalService();
-export { modalService };
+export default modalService;

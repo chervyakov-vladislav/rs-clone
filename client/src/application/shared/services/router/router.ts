@@ -1,7 +1,7 @@
-import { DOMElement } from '../../components/base-elements/dom-element';
-import { Page } from '../../components/page';
+import DOMElement from '../../components/base-elements/dom-element';
+import Page from '../../components/page';
 import { RouterOptions } from '../../models/router-options';
-import { routes as mainRoutes } from './routes';
+import mainRoutes from './routes';
 
 export class Router extends DOMElement {
   private routes: RouterOptions[];
@@ -29,8 +29,7 @@ export class Router extends DOMElement {
     this.container.innerHTML = '';
     this.template = route.length > 0 ? this.findTemplate(route) : this.findTemplate('');
 
-    const url = this.nestedRoute + `${route}`;
-    history.pushState({}, '', url);
+    window.location.href = `${this.nestedRoute}${route}`;
 
     this.container.append((this.template as Page).node);
   }
@@ -43,7 +42,7 @@ export class Router extends DOMElement {
     const templateName = this.findTemplateName(route);
     const routeToNavigate = this.routes.find((item) => item.path === templateName);
 
-    return routeToNavigate ? routeToNavigate.template() : this.routes[0].template;
+    return routeToNavigate ? routeToNavigate.template() : this.routes[0].template();
   }
 
   private isGithub() {

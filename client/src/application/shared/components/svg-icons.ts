@@ -1,4 +1,4 @@
-export const enum SVG {
+const enum SVG {
   github = `<svg class="github-icon" height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32" data-view-component="true">\
     <path fill-rule="evenodd"\
     d="M8 0C3.58 0 0 3.58 0 8c0 
@@ -174,3 +174,5 @@ export const enum SVG {
   </defs>
   </svg>`,
 }
+
+export default SVG;

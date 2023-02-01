@@ -1,5 +1,5 @@
-import { DOMElement } from '../../../shared/components/base-elements/dom-element';
-import { Page } from '../../../shared/components/page';
+import DOMElement from '../../../shared/components/base-elements/dom-element';
+import Page from '../../../shared/components/page';
 
 export default class SecondPage extends Page {
   private premiereContainer: DOMElement;

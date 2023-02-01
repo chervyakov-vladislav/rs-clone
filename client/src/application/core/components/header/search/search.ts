@@ -1,8 +1,8 @@
 import './search.scss';
-import { ButtonElement } from '../../../../shared/components/base-elements/button-element';
-import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
-import { InputElement } from '../../../../shared/components/base-elements/input-element';
-import { SVG } from '../../../../shared/components/svg-icons';
+import ButtonElement from '../../../../shared/components/base-elements/button-element';
+import DOMElement from '../../../../shared/components/base-elements/dom-element';
+import InputElement from '../../../../shared/components/base-elements/input-element';
+import SVG from '../../../../shared/components/svg-icons';
 
 export default class Search extends DOMElement {
   private input: InputElement;

@@ -1,4 +1,4 @@
-import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
+import DOMElement from '../../../../shared/components/base-elements/dom-element';
 
 export default class PremierePreview extends DOMElement {
   constructor(parentNode: HTMLElement) {

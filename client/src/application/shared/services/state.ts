@@ -1,5 +1,5 @@
 import { StateInterface } from '../models/state';
-import { apiService } from './api.service';
+import apiService from './api.service';
 
 class State {
   public allData: StateInterface;
@@ -76,4 +76,4 @@ class State {
 }
 
 const state = new State();
-export { state };
+export default state;

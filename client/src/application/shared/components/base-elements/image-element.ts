@@ -1,7 +1,7 @@
 import { ImageOptions } from '../../models/base-elements';
-import { DOMElement } from './dom-element';
+import DOMElement from './dom-element';
 
-export class ImageElement extends DOMElement {
+export default class ImageElement extends DOMElement {
   constructor(parentNode: HTMLElement | null, options: ImageOptions) {
     super(parentNode, {
       tagName: options.tagName,

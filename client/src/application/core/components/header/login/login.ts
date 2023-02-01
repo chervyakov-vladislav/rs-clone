@@ -1,6 +1,6 @@
 import './login.scss';
-import { ButtonElement } from '../../../../shared/components/base-elements/button-element';
-import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
+import ButtonElement from '../../../../shared/components/base-elements/button-element';
+import DOMElement from '../../../../shared/components/base-elements/dom-element';
 
 export default class Login extends DOMElement {
   private loginBtn: ButtonElement;

@@ -1,8 +1,8 @@
 import './side-menu.scss';
-import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
-import { LinkElement } from '../../../../shared/components/base-elements/link-element';
-import { SVG } from '../../../../shared/components/svg-icons';
-import sideMenuListeners from '../../../services/router-controllers/side-menu-controllers.service';
+import DOMElement from '../../../../shared/components/base-elements/dom-element';
+import LinkElement from '../../../../shared/components/base-elements/link-element';
+import SVG from '../../../../shared/components/svg-icons';
+import mainRouter from '../../../../shared/services/router/router';
 
 export default class SideMenu extends DOMElement {
   public mainPageItem: DOMElement;
@@ -34,6 +34,11 @@ export default class SideMenu extends DOMElement {
       classList: ['side-menu__item', 'side-menu__item--active'],
     });
 
+    this.mainPageItem.node.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      mainRouter.navigate('');
+    });
+
     this.mainPagePic = new DOMElement(this.mainPageItem.node, {
       tagName: 'span',
       classList: ['side-menu__pic'],
@@ -50,6 +55,11 @@ export default class SideMenu extends DOMElement {
     this.moviesItem = new DOMElement(this.node, {
       tagName: 'li',
       classList: ['side-menu__item'],
+    });
+
+    this.moviesItem.node.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      mainRouter.navigate('premiere');
     });
 
     this.moviesPic = new DOMElement(this.moviesItem.node, {
@@ -82,7 +92,5 @@ export default class SideMenu extends DOMElement {
       classList: ['side-menu__link'],
       content: 'Сериалы',
     });
-
-    sideMenuListeners.appendListeners(this);
   }
 }

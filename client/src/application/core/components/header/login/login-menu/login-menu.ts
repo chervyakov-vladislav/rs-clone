@@ -1,7 +1,7 @@
 import './login-menu.scss';
-import { DOMElement } from '../../../../../shared/components/base-elements/dom-element';
-import { LinkElement } from '../../../../../shared/components/base-elements/link-element';
-import { ButtonElement } from '../../../../../shared/components/base-elements/button-element';
+import DOMElement from '../../../../../shared/components/base-elements/dom-element';
+import LinkElement from '../../../../../shared/components/base-elements/link-element';
+import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 
 export default class LoginMenu extends DOMElement {
   private accountItem: DOMElement;

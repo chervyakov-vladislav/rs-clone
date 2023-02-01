@@ -1,7 +1,7 @@
 import MainPage from '../../../main/pages/main-page/main-page';
 import SecondPage from '../../../main/pages/second-page/second-page';
 
-export const routes = [
+const mainRoutes = [
   {
     path: '',
     template: () => new MainPage('main-page'),
@@ -11,3 +11,5 @@ export const routes = [
     template: () => new SecondPage('sec-page'),
   },
 ];
+
+export default mainRoutes;
