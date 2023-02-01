@@ -1,7 +1,7 @@
-import { DOMElement } from './dom-element';
+import DOMElement from './dom-element';
 import { RouteOptions } from '../../models/base-elements';
 
-export class RouteElement extends DOMElement {
+export default class RouteElement extends DOMElement {
   constructor(parentNode: HTMLElement | null, options: RouteOptions) {
     super(parentNode, {
       tagName: options.tagName,

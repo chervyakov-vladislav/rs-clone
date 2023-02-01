@@ -1,8 +1,8 @@
 import './main-container.scss';
-import { DOMElement } from '../../../shared/components/base-elements/dom-element';
+import DOMElement from '../../../shared/components/base-elements/dom-element';
 import SideMenu from './side-menu/side-menu';
 
-export class Main extends DOMElement {
+export default class Main extends DOMElement {
   private mainContainer: DOMElement;
 
   private sideMenu: DOMElement;

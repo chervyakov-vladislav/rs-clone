@@ -1,7 +1,7 @@
 import './side-menu.scss';
-import { DOMElement } from '../../../../shared/components/base-elements/dom-element';
-import { LinkElement } from '../../../../shared/components/base-elements/link-element';
-import { SVG } from '../../../../shared/components/svg-icons';
+import DOMElement from '../../../../shared/components/base-elements/dom-element';
+import LinkElement from '../../../../shared/components/base-elements/link-element';
+import SVG from '../../../../shared/components/svg-icons';
 
 export default class SideMenu extends DOMElement {
   private mainPageItem: DOMElement;

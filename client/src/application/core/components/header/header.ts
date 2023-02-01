@@ -1,13 +1,13 @@
 import './header.scss';
 
-import { ButtonElement } from '../../../shared/components/base-elements/button-element';
-import { DOMElement } from '../../../shared/components/base-elements/dom-element';
-import { Search } from './search/search';
-import { Login } from './login/login';
-import { SVG } from '../../../shared/components/svg-icons';
-import { LinkElement } from '../../../shared/components/base-elements/link-element';
+import ButtonElement from '../../../shared/components/base-elements/button-element';
+import DOMElement from '../../../shared/components/base-elements/dom-element';
+import Search from './search/search';
+import Login from './login/login';
+import SVG from '../../../shared/components/svg-icons';
+import LinkElement from '../../../shared/components/base-elements/link-element';
 
-export class Header extends DOMElement {
+export default class Header extends DOMElement {
   private container: DOMElement;
 
   private headerButtons: DOMElement;
