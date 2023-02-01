@@ -1,0 +1,22 @@
+{
+  "name": "rs-clone-server",
+  "version": "0.0.1",
+  "description": "RS School final task backend",
+  "main": "src/server.ts",
+  "scripts": {
+    "test": "eslint ./src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/chervyakov-vladislav/RS-Clone"
+  },
+  "keywords": [
+    "kinopoisk",
+    "film",
+    "movie",
+    "backend",
+    "server"
+  ],
+  "author": "Vladislav Chervyakov, Magomed Oziev, Pavel Demaev",
+  "license": "ISC"
+}
