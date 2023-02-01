@@ -1,7 +1,7 @@
-import { DOMElement } from './dom-element';
+import DOMElement from './dom-element';
 import { LinkOptions } from '../../models/base-elements';
 
-export class LinkElement extends DOMElement {
+export default class LinkElement extends DOMElement {
   constructor(parentNode: HTMLElement | null, options: LinkOptions) {
     super(parentNode, {
       tagName: options.tagName,

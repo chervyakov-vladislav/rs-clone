@@ -1,6 +1,6 @@
 import { Options } from '../../models/base-elements';
 
-export class DOMElement {
+export default class DOMElement {
   public node: HTMLElement;
 
   constructor(parentNode: HTMLElement | null, options: Options) {

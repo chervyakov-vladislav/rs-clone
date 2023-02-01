@@ -1,7 +1,7 @@
-import { DOMElement } from './dom-element';
+import DOMElement from './dom-element';
 import { InputOptions } from '../../models/base-elements';
 
-export class InputElement extends DOMElement {
+export default class InputElement extends DOMElement {
   private _value = '';
 
   constructor(parentNode: HTMLElement | null, options: InputOptions) {

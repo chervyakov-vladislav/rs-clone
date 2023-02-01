@@ -1,10 +1,9 @@
 import './modal.scss';
-import { ButtonElement } from '../../../shared/components/base-elements/button-element';
-import { DOMElement } from '../../../shared/components/base-elements/dom-element';
-import { Page } from '../../../shared/components/page';
-import { modalService } from '../../services/modal.service';
+import ButtonElement from '../../../shared/components/base-elements/button-element';
+import DOMElement from '../../../shared/components/base-elements/dom-element';
+import Page from '../../../shared/components/page';
 
-export class ModalPage extends Page {
+export default class ModalPage extends Page {
   private container: DOMElement;
 
   private close: ButtonElement;
@@ -35,9 +34,9 @@ export class ModalPage extends Page {
         e.stopPropagation();
       }
       if (e.target === this.node) {
-        modalService.removeModal();
+        console.log('need implement removeModal()');
       }
     });
-    this.close.node.addEventListener('click', () => modalService.removeModal());
+    this.close.node.addEventListener('click', () => console.log('need implement removeModal()'));
   }
 }

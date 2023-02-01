@@ -1,5 +1,5 @@
-import { Header } from './core/components/header/header';
-import { Main } from './core/components/main-container/main-container';
+import Header from './core/components/header/header';
+import Main from './core/components/main-container/main-container';
 
 class App {
   private header: Header;
