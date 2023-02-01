@@ -18,5 +18,10 @@
     "server"
   ],
   "author": "Vladislav Chervyakov, Magomed Oziev, Pavel Demaev",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "5.0.0",
+    "@types/mongodb": "^4.0.7"
+  }
 }
