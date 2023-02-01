@@ -22,6 +22,7 @@ export class Router extends DOMElement {
     this.template = this.findTemplate('');
     this.nestedRoute = this.isGithub();
     this.navigate('');
+    this.hashChangeListener();
   }
 
   public navigate(route: string) {
@@ -46,7 +47,14 @@ export class Router extends DOMElement {
   }
 
   private isGithub() {
-    return window.location.hostname.includes('github') ? '/RS-Clone/' : '/';
+    return window.location.hostname.includes('github') ? '/RS-Clone/#/' : '/#/';
+  }
+
+  private hashChangeListener() {
+    window.addEventListener('hashchange', () => {
+      const hash = window.location.hash.slice(2);
+      this.navigate(hash);
+    });
   }
 }
 
