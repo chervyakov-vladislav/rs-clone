@@ -1,6 +1,7 @@
 import './main-container.scss';
 import { DOMElement } from '../../../shared/components/base-elements/dom-element';
 import SideMenu from './side-menu/side-menu';
+import mainRouter from '../../../shared/services/router/router';
 
 export default class Main extends DOMElement {
   private mainContainer: DOMElement;
@@ -28,5 +29,7 @@ export default class Main extends DOMElement {
       classList: ['nav'],
     });
     this.sideMenu = new SideMenu(this.navigation.node);
+
+    this.container.append(mainRouter.node);
   }
 }

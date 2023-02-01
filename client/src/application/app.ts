@@ -13,7 +13,7 @@ class App {
   }
 
   public async start() {
-    this.main.container.append(mainRouter.node);
+    
   }
 }
 

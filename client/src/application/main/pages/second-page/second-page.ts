@@ -17,7 +17,7 @@ export default class SecondPage extends Page {
   }
 
   public render() {
-    console.log('render');
+    console.log('render second');
     // какие-то еще коммпоненты
   }
 }

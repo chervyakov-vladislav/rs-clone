@@ -26,7 +26,7 @@ export class Router extends DOMElement {
 
   public navigate(route: string) {
     this.container.innerHTML = '';
-    this.template = this.findTemplate(route) ? this.findTemplate(route) : this.findTemplate('');
+    this.template = route.length > 0 ? this.findTemplate(route) : this.findTemplate('');
 
     const url = this.nestedRoute + `${route}`;
     history.pushState({}, '', url);
