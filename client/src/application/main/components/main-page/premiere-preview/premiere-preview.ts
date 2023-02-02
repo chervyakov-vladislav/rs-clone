@@ -7,6 +7,5 @@ export default class PremierePreview extends DOMElement {
       classList: ['premiere-preview'],
       content: 'page element: premiere',
     });
-    console.log('render main page component');
   }
 }

@@ -40,3 +40,13 @@ export interface ImageOptions extends Options {
   src: string;
   alt?: string;
 }
+
+export interface IFrameOptions extends Options {
+  id?: string;
+  src?: string;
+}
+
+export interface ScriptOptions extends Options {
+  src: string;
+  id?: string;
+}
