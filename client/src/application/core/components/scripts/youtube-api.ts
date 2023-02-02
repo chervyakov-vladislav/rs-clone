@@ -7,6 +7,5 @@ export default class YoutubeAPI extends ScriptElement {
       src: 'https://www.youtube.com/iframe_api',
       id: 'youtube-api',
     });
-    console.log('добавлен апи');
   }
 }

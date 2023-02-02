@@ -12,7 +12,6 @@ export default class VideoPlayer extends DOMElement {
     super(parentNode, {
       tagName: 'div',
       classList: ['video-player'],
-      content: 'video-player',
     });
 
     this.iFrameContainer = new DOMElement(this.node, {
@@ -21,10 +20,10 @@ export default class VideoPlayer extends DOMElement {
     });
 
     this.iFrame = new IFrameElement(this.iFrameContainer.node, {
-      tagName: 'div',
-      id: 'premiere-page-youtubeplayer',
+      tagName: 'iframe',
+      classList: ['video-player__iframe'],
+      id: 'premiere-page-player',
+      src: ytPlayerService.getIFrameLink(),
     });
-
-    ytPlayerService.appendIFrame();
   }
 }

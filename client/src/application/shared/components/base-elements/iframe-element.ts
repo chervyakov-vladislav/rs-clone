@@ -9,6 +9,8 @@ export default class IFrameElement extends DOMElement {
       content: options.content,
     });
 
+    this.node.setAttribute('frameborder', '0');
+
     if (options.id) {
       this.node.id = options.id;
     }

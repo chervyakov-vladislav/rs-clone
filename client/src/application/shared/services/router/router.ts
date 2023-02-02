@@ -22,16 +22,13 @@ export class Router extends DOMElement {
     this.template = this.findTemplate('');
     this.nestedRoute = this.isGithub();
     this.navigate('');
-    this.hashChangeListener();
   }
 
   public navigate(route: string) {
     this.container.innerHTML = '';
     this.template = route.length > 0 ? this.findTemplate(route) : this.findTemplate('');
-
     window.location.href = `${this.nestedRoute}${route}`;
-
-    this.container.append((this.template as Page).node);
+    this.container.append((this.template() as Page).node);
   }
 
   private findTemplateName(path: string) {
@@ -42,18 +39,11 @@ export class Router extends DOMElement {
     const templateName = this.findTemplateName(route);
     const routeToNavigate = this.routes.find((item) => item.path === templateName);
 
-    return routeToNavigate ? routeToNavigate.template() : this.routes[0].template();
+    return routeToNavigate !== undefined ? routeToNavigate.template : this.routes[0].template;
   }
 
   private isGithub() {
     return window.location.hostname.includes('github') ? '/RS-Clone/#/' : '/#/';
-  }
-
-  private hashChangeListener() {
-    window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.slice(2);
-      this.navigate(hash);
-    });
   }
 }
 
