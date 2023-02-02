@@ -15,7 +15,7 @@ export default class Server {
 
   public start() {
     this.app.use('/api/user', this.usersRouter.router);
-    this.app.listen(this.PORT)
+    this.app.listen(this.PORT) 
     console.info(`Server is started on port ${this.PORT}`);
   }
 }
