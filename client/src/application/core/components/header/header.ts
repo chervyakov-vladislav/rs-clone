@@ -1,11 +1,11 @@
 import './header.scss';
-
 import ButtonElement from '../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import Search from './search/search';
 import Login from './login/login';
 import SVG from '../../../shared/components/svg-icons';
 import LinkElement from '../../../shared/components/base-elements/link-element';
+import mainRouter from '../../../shared/services/router/router';
 
 export default class Header extends DOMElement {
   private container: DOMElement;
@@ -35,6 +35,10 @@ export default class Header extends DOMElement {
       href: '/',
     });
     this.headerLogoContainer.node.innerHTML = SVG.headerLogo;
+    this.headerLogoContainer.node.addEventListener('click', (e) => {
+      e.preventDefault();
+      mainRouter.navigate('');
+    });
 
     this.headerButtons = new DOMElement(this.container.node, {
       tagName: 'div',

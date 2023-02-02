@@ -10,3 +10,10 @@
   width: 200px;
   height: 50px;
 }
+
+.home-icon,
+.movies-icon,
+.serials-icon {
+  transition: .3s;
+  fill: rgba(0,0,0, .6);
+}

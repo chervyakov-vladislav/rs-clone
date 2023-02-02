@@ -2,15 +2,16 @@ import './side-menu.scss';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
 import SVG from '../../../../shared/components/svg-icons';
+import mainRouter from '../../../../shared/services/router/router';
 
 export default class SideMenu extends DOMElement {
-  private mainPageItem: DOMElement;
+  public mainPageItem: DOMElement;
 
   private mainPagePic: DOMElement;
 
   private mainPageLink: LinkElement;
 
-  private moviesItem: DOMElement;
+  public moviesItem: DOMElement;
 
   private moviesPic: DOMElement;
 
@@ -25,12 +26,17 @@ export default class SideMenu extends DOMElement {
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'ul',
-      classList: ['side-menu__list'],
+      classList: ['side-menu'],
     });
 
     this.mainPageItem = new DOMElement(this.node, {
       tagName: 'li',
-      classList: ['side-menu__item'],
+      classList: ['side-menu__item', 'side-menu__item--active'],
+    });
+
+    this.mainPageItem.node.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      mainRouter.navigate('');
     });
 
     this.mainPagePic = new DOMElement(this.mainPageItem.node, {
@@ -49,6 +55,11 @@ export default class SideMenu extends DOMElement {
     this.moviesItem = new DOMElement(this.node, {
       tagName: 'li',
       classList: ['side-menu__item'],
+    });
+
+    this.moviesItem.node.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      mainRouter.navigate('premiere');
     });
 
     this.moviesPic = new DOMElement(this.moviesItem.node, {

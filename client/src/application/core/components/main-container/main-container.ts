@@ -5,11 +5,11 @@ import SideMenu from './side-menu/side-menu';
 export default class Main extends DOMElement {
   private mainContainer: DOMElement;
 
-  private sideMenu: DOMElement;
+  private navigation: DOMElement;
 
   public container: HTMLElement;
 
-  private sidemenu: SideMenu;
+  private sideMenu: SideMenu;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -23,11 +23,10 @@ export default class Main extends DOMElement {
     });
     this.container = this.mainContainer.node;
 
-    this.sideMenu = new DOMElement(this.mainContainer.node, {
+    this.navigation = new DOMElement(this.mainContainer.node, {
       tagName: 'nav',
-      classList: ['nav__side-menu'],
+      classList: ['nav'],
     });
-
-    this.sidemenu = new SideMenu(this.sideMenu.node);
+    this.sideMenu = new SideMenu(this.navigation.node);
   }
 }
