@@ -5,7 +5,6 @@ import Search from './search/search';
 import Login from './login/login';
 import SVG from '../../../shared/components/svg-icons';
 import LinkElement from '../../../shared/components/base-elements/link-element';
-import mainRouter from '../../../shared/services/router/router';
 
 export default class Header extends DOMElement {
   private container: DOMElement;
@@ -37,7 +36,7 @@ export default class Header extends DOMElement {
     this.headerLogoContainer.node.innerHTML = SVG.headerLogo;
     this.headerLogoContainer.node.addEventListener('click', (e) => {
       e.preventDefault();
-      mainRouter.navigate('');
+      window.location.hash = '#';
     });
 
     this.headerButtons = new DOMElement(this.container.node, {

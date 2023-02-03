@@ -1,61 +1,35 @@
 import DOMElement from '../../components/base-elements/dom-element';
-import Page from '../../components/page';
+// import Page from '../../components/page';
 import { RouterOptions } from '../../models/router-options';
 import mainRoutes from './routes';
 
-export class Router extends DOMElement {
-  private routes: RouterOptions[];
-
-  private container: HTMLElement;
-
-  private template: (() => Page) | Page;
-
-  private nestedRoute: string;
-
-  constructor(routes: RouterOptions[]) {
-    super(null, {
+export default class Router extends DOMElement {
+  constructor(parentNode: HTMLElement) {
+    super(parentNode, {
       tagName: 'div',
       classList: ['router-container'],
     });
-    this.routes = routes;
-    this.container = this.node;
-    this.template = this.findTemplate('');
-    this.nestedRoute = this.isGithub();
-    this.navigate('');
-    this.hashChangeListener();
+    this.enableRouteChange();
+    this.renderNewPage('');
   }
 
-  public navigate(route: string) {
-    this.container.innerHTML = '';
-    this.template = route.length > 0 ? this.findTemplate(route) : this.findTemplate('');
-
-    window.location.href = `${this.nestedRoute}${route}`;
-
-    this.container.append((this.template as Page).node);
+  public renderNewPage(pageID: string) {
+    this.node.innerHTML = '';
+    const element = this.findNewtemplate(pageID);
+    const newPage = element.length !== 0 ? element[0].template().node : mainRoutes[0].template().node;
+    // тут написать, если pageID, это страница какого-то одного фильма, то загрузить новый фильм в стейт страницы и только потом её рисовать
+    // можно испольвовать конструкцию switch, как в online-store: https://github.com/chervyakov-vladislav/online-store/blob/main/src/application/main/router/router.ts
+    this.node.append(newPage);
   }
 
-  private findTemplateName(path: string) {
-    return path.split('/')[0];
+  private findNewtemplate(pageID: string): RouterOptions[] {
+    return mainRoutes.filter((route) => route.id === pageID);
   }
 
-  private findTemplate(route: string) {
-    const templateName = this.findTemplateName(route);
-    const routeToNavigate = this.routes.find((item) => item.path === templateName);
-
-    return routeToNavigate ? routeToNavigate.template() : this.routes[0].template();
-  }
-
-  private isGithub() {
-    return window.location.hostname.includes('github') ? '/RS-Clone/#/' : '/#/';
-  }
-
-  private hashChangeListener() {
+  private enableRouteChange() {
     window.addEventListener('hashchange', () => {
-      const hash = window.location.hash.slice(2);
-      this.navigate(hash);
+      const hash = window.location.hash.slice(1).split('/')[0];
+      this.renderNewPage(hash);
     });
   }
 }
-
-const mainRouter = new Router(mainRoutes);
-export default mainRouter;
