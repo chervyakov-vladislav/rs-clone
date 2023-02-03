@@ -1,0 +1,38 @@
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity .3s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &__container {
+      display: flex;
+      gap: .3rem;
+      align-items: center;
+      padding: .2rem;
+    }
+
+    &__container button {
+      background: none;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__play-button .player__play,
+    &__play-button .player__pause {
+      width: 25px;
+      height: 25px;
+    }
+}
