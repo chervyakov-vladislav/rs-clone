@@ -44,6 +44,10 @@ export default class PremierePreview extends DOMElement {
         classList: ['premiere__button'],
         content: 'Трейлер',
       });
+
+      this.premiereBtn.node.addEventListener('click', () => {
+        window.location.hash = '#premiere';
+      });
     };
     showFilmData();
   }
