@@ -3,15 +3,16 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import ImageElement from '../../../../shared/components/base-elements/image-element';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import state from '../../../../shared/services/state';
+import { IFilmData } from '../../../../shared/models/response-data';
 
 export default class PremierePreview extends DOMElement {
-  private premiereImage: ImageElement | undefined;
+  private premiereImage: ImageElement;
 
-  private premiereText: DOMElement | undefined;
+  private premiereText: DOMElement;
 
-  private premiereName: DOMElement | undefined;
+  private premiereName: DOMElement;
 
-  private premiereBtn: ButtonElement | undefined;
+  private premiereBtn: ButtonElement;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -19,22 +20,24 @@ export default class PremierePreview extends DOMElement {
       classList: ['premiere-preview'],
     });
 
+    const premiereState = state.allData.premiere as IFilmData;
+
     this.premiereImage = new ImageElement(this.node, {
       tagName: 'img',
       classList: ['premiere__img'],
-      src: state.allData.premiere.coverUrl,
+      src: premiereState.coverUrl,
     });
 
     this.premiereName = new DOMElement(this.node, {
       tagName: 'div',
       classList: ['premiere__name'],
-      content: state.allData.premiere.nameRu,
+      content: premiereState.nameRu,
     });
 
     this.premiereText = new DOMElement(this.node, {
       tagName: 'div',
       classList: ['premiere__text'],
-      content: state.allData.premiere.description,
+      content: premiereState.description,
     });
 
     this.premiereBtn = new ButtonElement(this.node, {

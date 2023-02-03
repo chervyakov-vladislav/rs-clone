@@ -16,6 +16,7 @@ export interface WinnerInterface {
 }
 
 export interface IFilmData {
+  link?: string;
   coverUrl: string;
   posterUrl: string;
   posterUrlPreview: string;
