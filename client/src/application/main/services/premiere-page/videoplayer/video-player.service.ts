@@ -17,14 +17,13 @@ class YTPlayerService {
     const videoID = this.getVideoID(videoLink) as string;
 
     // удаляем старый скрипт апи
-    // this.removeOldApi();
+    this.removeOldApi();
 
     // грузим данные в YT Player
     this.setNewPlayerData(videoID);
 
     // добавляем новый скрипт апи
-    // this.ytService = new YoutubeAPI(document.body);
-    (<any>window).onYouTubeIframeAPIReady(this.player);
+    this.ytService = new YoutubeAPI(document.body);
   }
 
   private getVideoID(link: string) {
