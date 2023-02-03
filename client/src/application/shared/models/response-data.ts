@@ -14,3 +14,14 @@ export interface WinnerInterface {
   time: number;
   wins: number;
 }
+
+export interface IFilmData {
+  coverUrl: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+  description: string;
+  shortDescription: string;
+  nameOriginal: string;
+  nameRu: string;
+  year: string;
+}
