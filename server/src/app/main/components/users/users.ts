@@ -1,11 +1,13 @@
 import express from 'express';
-import { Request, Response } from 'express-serve-static-core';
+import { ParamsDictionary, Request, Response } from 'express-serve-static-core';
 import { User } from '../../../shared/types';
 import { check, validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import UsersService from '../../services/users.service';
 import bodyParser from 'body-parser';
+import { registerValidation } from '../../../shared/validations';
+import { ParsedQs } from 'qs';
 
 export default class UsersRouter {
   public router = express.Router();
@@ -14,7 +16,7 @@ export default class UsersRouter {
   constructor() {
     this.usersService = new UsersService();
     this.router.post('/login', (req, res) => this.login(req ,res));
-    this.router.post('/register', (req, res) => this.register(req ,res));
+    this.router.post('/register', registerValidation, (req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>) => this.register(req ,res));
   }
 
   private async login(req: Request , res: Response) {
@@ -43,11 +45,6 @@ export default class UsersRouter {
 
       const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
 
-      // res.header('auth-token', token).json({
-      //   error: null,
-      //   token,
-      //   data: isNameExist,
-      // });
     } catch (err) {
       console.log(err);
       return res.status(400).json({
