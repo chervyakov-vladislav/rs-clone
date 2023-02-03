@@ -6,7 +6,7 @@ private mongoClient: MongoClient;
 private users: User[];
 
   constructor() {
-    this.mongoClient = new MongoClient('mongodb+srv://rs-clone:<password>@cluster0.2uewvbb.mongodb.net/?retryWrites=true&w=majority');
+    this.mongoClient = new MongoClient('mongodb+srv://rs-clone');
     this.users = [];
     this.users.push({ login: 'exi', password: '$2a$10$ZVeTin07G8KvTVsMRS0JCOiIaFhPlL4EMkuqHqX5b30THx8WYoKBi'}); //3256
     this.users.push({ login: 'guest', password: '$2a$10$PhbuteuClinD4c6HI.ZIlerUb5ap/cicvGQFoBGbJYbAsVs19npw6' }); //111
