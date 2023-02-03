@@ -28,20 +28,20 @@ export default class UsersRouter {
     }
 
     try {
-      const isNameExist = await this.usersService.findByName(req.body.name);
-      if (!isNameExist) {
+      const isUserExist = await this.usersService.findByLogin(req.body.login);
+      if (!isUserExist) {
         throw new Error('Login is wrong');
       }
-      console.log(isNameExist);
+      console.log(isUserExist);
       const validPassword = await bcrypt.compare(
         req.body.password,
-        isNameExist.password
+        isUserExist.password
       );
       if (!validPassword) {
         throw new Error('Password is wrong');
       }
 
-      const payLoad = { name: isNameExist.name };
+      const payLoad = { login: isUserExist.login };
 
       const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
 
@@ -61,8 +61,8 @@ export default class UsersRouter {
     }
 
     try {
-      const isNameExist = await this.usersService.findByName(req.body.name);
-      if (isNameExist) {
+      const isUserExist = await this.usersService.findByLogin(req.body.login);
+      if (isUserExist) {
         throw new Error('login is already exists');
       }
     } catch (err) {
@@ -76,11 +76,11 @@ export default class UsersRouter {
       const password = await bcrypt.hash(req.body.password, salt);
 
       const user = await this.usersService.create({
-        name: req.body.name,
+        login: req.body.login,
         password,
       });
 
-      const payLoad = { name: user.name };
+      const payLoad = { login: user.login };
 
       const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
 
