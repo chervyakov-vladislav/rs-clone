@@ -43,11 +43,11 @@ export default class UsersRouter {
 
       const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
 
-      res.header('auth-token', token).json({
-        error: null,
-        token: { token },
-        data: isNameExist,
-      });
+      // res.header('auth-token', token).json({
+      //   error: null,
+      //   token,
+      //   data: isNameExist,
+      // });
     } catch (err) {
       console.log(err);
       return res.status(400).json({
@@ -58,7 +58,42 @@ export default class UsersRouter {
   }
 
   private async register(req: Request , res: Response) {
-    console.log(req.body);
-    res.send('Registered!')
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array()[0] });
+    }
+
+    try {
+      const isNameExist = await this.usersService.findByName(req.body.name);
+      if (isNameExist) {
+        throw new Error('login is already exists');
+      }
+    } catch (err) {
+      return res.status(400).json({
+        errors: (err as Error).message,
+      });
+    }
+
+    try {
+      const salt = await bcrypt.genSalt(5);
+      const password = await bcrypt.hash(req.body.password, salt);
+
+      const user = await this.usersService.create({
+        name: req.body.name,
+        password,
+      });
+
+      const payLoad = { name: user.name };
+
+      const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
+
+      res.header('auth-token', token).json({
+        error: null,
+        token,
+        data: user,
+      });
+    } catch (err) {
+      res.send('error');
+    }
   }
 }
