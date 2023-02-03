@@ -41,7 +41,7 @@ export default class UsersRouter {
 
       const payLoad = { name: isNameExist.name };
 
-      const token = jwt.sign(payLoad, process.env.TOKEN_SECRET!);
+      const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
 
       res.header('auth-token', token).json({
         error: null,
