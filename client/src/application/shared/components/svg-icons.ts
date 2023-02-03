@@ -173,6 +173,9 @@ const enum SVG {
   </clipPath>
   </defs>
   </svg>`,
+  recomendArrow = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.08865 2.2225L15.5562 9.99875L8.0899 17.7775L6.6674 16.3013L12.7374 9.99875L6.6674 3.69875L8.08865 2.2225Z" fill="#999999"/>
+  </svg>`,
 }
 
 export default SVG;
