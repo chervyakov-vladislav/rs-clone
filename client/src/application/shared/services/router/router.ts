@@ -9,8 +9,18 @@ export default class Router extends DOMElement {
       tagName: 'div',
       classList: ['router-container'],
     });
+<<<<<<< HEAD
     this.enableRouteChange();
     this.renderNewPage('');
+=======
+    this.routes = routes;
+    this.container = this.node;
+    this.template = this.findTemplate('');
+    this.nestedRoute = this.isGithub();
+    this.navigate('');
+    // this.hashChangeListener();
+    console.log('router work');
+>>>>>>> feat/add-trailer-to-main-page
   }
 
   public renderNewPage(pageID: string) {
@@ -26,10 +36,30 @@ export default class Router extends DOMElement {
     return mainRoutes.filter((route) => route.id === pageID);
   }
 
+<<<<<<< HEAD
   private enableRouteChange() {
     window.addEventListener('hashchange', () => {
       const hash = window.location.hash.slice(1).split('/')[0];
       this.renderNewPage(hash);
     });
   }
+=======
+  private findTemplate(route: string) {
+    const templateName = this.findTemplateName(route);
+    const routeToNavigate = this.routes.find((item) => item.path === templateName);
+
+    return routeToNavigate ? routeToNavigate.template() : this.routes[0].template();
+  }
+
+  private isGithub() {
+    return window.location.hostname.includes('github') ? '/RS-Clone/#/' : '/#/';
+  }
+
+  // private hashChangeListener() {
+  //   window.addEventListener('hashchange', () => {
+  //     const hash = window.location.hash.slice(2);
+  //     this.navigate(hash);
+  //   });
+  // }
+>>>>>>> feat/add-trailer-to-main-page
 }

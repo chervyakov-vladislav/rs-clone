@@ -1,6 +1,7 @@
 import Header from './core/components/header/header';
 import Main from './core/components/main-container/main-container';
 import Router from './shared/services/router/router';
+import state from './shared/services/state';
 
 class App {
   private header: Header;
@@ -16,7 +17,7 @@ class App {
   }
 
   public async start() {
-    // грузим дату
+    await state.showPremiereData();
     this.router = new Router(this.main.container);
   }
 }
