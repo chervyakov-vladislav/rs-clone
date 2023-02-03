@@ -1,6 +1,6 @@
 import Page from '../components/page';
 
 export interface RouterOptions {
-  path: string;
+  id: string;
   template: () => Page;
 }
