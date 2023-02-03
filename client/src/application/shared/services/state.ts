@@ -7,6 +7,9 @@ class State {
   constructor() {
     this.allData = {
       premiere: null,
+      player: {
+        status: 'paused',
+      },
     };
   }
 
@@ -22,6 +25,17 @@ class State {
     this.allData.premiere.link = premiereLink;
 
     // грузим данные для следующего компонента
+  }
+
+  public getPlayerState() {
+    return this.allData.player;
+  }
+
+  public setPlayerState(options: Record<string, string>) {
+    const keyArr = Object.keys(options);
+    keyArr.forEach((key) => {
+      this.allData.player[key] = options[key];
+    });
   }
 }
 

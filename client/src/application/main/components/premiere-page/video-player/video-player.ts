@@ -76,6 +76,9 @@ export default class VideoPlayer extends DOMElement {
       this.playButton.node.classList.add('video-player__play--active');
       this.pauseButton.node.classList.add('video-player__pause--active');
       this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
+      state.setPlayerState({
+        status: 'play',
+      });
     });
 
     // пауза
@@ -85,6 +88,32 @@ export default class VideoPlayer extends DOMElement {
       this.playButton.node.classList.remove('video-player__play--active');
       this.pauseButton.node.classList.remove('video-player__pause--active');
       this.controls.playPauseButton.node.innerHTML = PlayerIcon.playButton;
+      state.setPlayerState({
+        status: 'paused',
+      });
+    });
+
+    this.controls.playPauseButton.node.addEventListener('click', () => {
+      const { status } = state.getPlayerState();
+      if (status === 'paused') {
+        ytPlayerService.togglePlay();
+        this.coverImage.node.classList.add('video-player__cover-image--active');
+        this.playButton.node.classList.add('video-player__play--active');
+        this.pauseButton.node.classList.add('video-player__pause--active');
+        this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
+        state.setPlayerState({
+          status: 'play',
+        });
+      } else {
+        ytPlayerService.togglePause();
+        this.coverImage.node.classList.remove('video-player__cover-image--active');
+        this.playButton.node.classList.remove('video-player__play--active');
+        this.pauseButton.node.classList.remove('video-player__pause--active');
+        this.controls.playPauseButton.node.innerHTML = PlayerIcon.playButton;
+        state.setPlayerState({
+          status: 'paused',
+        });
+      }
     });
   }
 }
