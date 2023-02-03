@@ -1,0 +1,19 @@
+.premiere-recomend {
+  padding: 30px 0;
+}
+
+.recomend {
+
+  &__title {
+    display: flex;
+    
+    &_link {
+      font-size: 1.6rem;
+      font-weight: 600;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
