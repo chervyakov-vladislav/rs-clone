@@ -1,6 +1,7 @@
 import Header from './core/components/header/header';
 import Main from './core/components/main-container/main-container';
 import mainRouter from './shared/services/router/router';
+import state from './shared/services/state';
 
 class App {
   private header: Header;
@@ -13,7 +14,7 @@ class App {
   }
 
   public async start() {
-    console.log('грузим дату');
+    await state.showPremiereData();
     this.main.container.append(mainRouter.node);
   }
 }
