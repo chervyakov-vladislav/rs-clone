@@ -13,11 +13,11 @@ export default class SecondPage extends Page {
       content: 'sec-page',
     });
 
-    this.render();
+    // this.render();
   }
 
-  public render() {
-    console.log('render second');
-    // какие-то еще коммпоненты
-  }
+  // public render() {
+  //   console.log('render second');
+  //   // какие-то еще коммпоненты
+  // }
 }
