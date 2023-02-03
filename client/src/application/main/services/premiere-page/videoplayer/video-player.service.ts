@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { IFilmData } from '../../../../shared/models/response-data';
+import YoutubeAPI from '../../../../core/components/scripts/youtube-api';
+// import { IFilmData } from '../../../../shared/models/response-data';
 import state from '../../../../shared/services/state';
 
 let YT: any;
@@ -7,16 +8,42 @@ let YT: any;
 class YTPlayerService {
   private player: any;
 
-  public getIFrameLink() {
-    const { link } = state.getPremiereInfo() as IFilmData;
-    const id = this.getVideoID(link as string);
-    const playerParams1 = 'enablejsapi=1&controls=0&iv_load_policy=3&loop=1';
-    const playerParams2 = '&modestbranding=1&rel=0&showinfo=0&color=white';
-    return `http://www.youtube.com/embed/${id}?${playerParams1}${playerParams2}`;
+  private ytService: YoutubeAPI | null;
+
+  constructor() {
+    this.ytService = null;
+  }
+
+  public initPlayer() {
+    const videoLink = state.getPremiereInfo()?.link as string;
+    const videoID = this.getVideoID(videoLink) as string;
+
+    // удаляем старый скрипт апи
+    this.removeOldApi();
+
+    // грузим данные в YT Player
+    this.setNewPlayerData(videoID);
+
+    // добавляем новый скрипт апи
+    this.ytService = new YoutubeAPI(document.body);
   }
 
   private getVideoID(link: string) {
     return link.trim().split('/').pop()?.split('?t=')[0];
+  }
+
+  private removeOldApi() {
+    document.querySelector('#youtube-api')?.remove();
+  }
+
+  private setNewPlayerData(videoID: string) {
+    (<any>window).onYouTubeIframeAPIReady = () => {
+      const player = (<any>window).YT.Player('premiere-page-player', {
+        videoId: videoID,
+        height: '100%',
+        width: '100%',
+      });
+    }
   }
 
   public setControls(player: HTMLVideoElement) {

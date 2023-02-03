@@ -3,10 +3,10 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import IFrameElement from '../../../../shared/components/base-elements/iframe-element';
 import ytPlayerService from '../../../services/premiere-page/videoplayer/video-player.service';
 import PlayerControls from './controls/controls';
-import ImageElement from '../../../../shared/components/base-elements/image-element';
-import state from '../../../../shared/services/state';
+// import ImageElement from '../../../../shared/components/base-elements/image-element';
+// import state from '../../../../shared/services/state';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
-import { IFilmData } from '../../../../shared/models/response-data';
+// import { IFilmData } from '../../../../shared/models/response-data';
 
 export default class VideoPlayer extends DOMElement {
   private iFrameContainer: DOMElement;
@@ -17,7 +17,7 @@ export default class VideoPlayer extends DOMElement {
 
   private cover: DOMElement;
 
-  private coverImage: ImageElement;
+  // private coverImage: ImageElement;
 
   private playButton: ButtonElement;
 
@@ -27,7 +27,7 @@ export default class VideoPlayer extends DOMElement {
       classList: ['video-player'],
     });
 
-    const premierState = state.allData.premiere as IFilmData;
+    // const premierState = state.allData.premiere as IFilmData;
 
     this.controls = new PlayerControls(this.node);
 
@@ -37,22 +37,20 @@ export default class VideoPlayer extends DOMElement {
     });
 
     this.iFrame = new IFrameElement(this.iFrameContainer.node, {
-      tagName: 'iframe',
-      classList: ['video-player__iframe'],
+      tagName: 'div',
       id: 'premiere-page-player',
-      src: ytPlayerService.getIFrameLink(),
     });
+    ytPlayerService.initPlayer();
 
     this.cover = new DOMElement(this.iFrameContainer.node, {
       tagName: 'div',
       classList: ['video-player__cover-container'],
     });
-
-    this.coverImage = new ImageElement(this.cover.node, {
-      tagName: 'img',
-      src: premierState.coverUrl,
-      classList: ['video-player__cover-image'],
-    });
+    // this.coverImage = new ImageElement(this.cover.node, {
+    //   tagName: 'img',
+    //   src: premierState.coverUrl,
+    //   classList: ['video-player__cover-image'],
+    // });
 
     this.playButton = new ButtonElement(this.cover.node, {
       tagName: 'button',

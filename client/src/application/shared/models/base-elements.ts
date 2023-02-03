@@ -44,6 +44,7 @@ export interface ImageOptions extends Options {
 export interface IFrameOptions extends Options {
   id?: string;
   src?: string;
+  frameborder?: string;
 }
 
 export interface ScriptOptions extends Options {
