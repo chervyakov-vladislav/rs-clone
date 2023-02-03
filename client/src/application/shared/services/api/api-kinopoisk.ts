@@ -1,3 +1,5 @@
+import { IFilmData } from '../../models/response-data';
+
 class ApiServiceKinopoisk {
   private apiKey = '1eed0f50-3f3b-49f1-b171-1547c878ae42';
 
@@ -11,7 +13,7 @@ class ApiServiceKinopoisk {
   // Возвращает список фильмов с пагинацией. Каждая страница содержит не более чем 20 фильмов.
   private topFilms: string = `${this.filmData}/top?type=TOP_100_POPULAR_FILMS&page=`;
 
-  public async getFilmData(id: number): Promise<void> {
+  public async getFilmData(id: number): Promise<IFilmData> {
     const response = await fetch(`${this.filmData}/${id}`, {
       headers: {
         Accept: 'application/json',

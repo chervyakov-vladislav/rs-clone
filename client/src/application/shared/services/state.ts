@@ -1,23 +1,35 @@
+// import { StateInterface } from '../models/state';
+import apiKinopoisk from './api/api-kinopoisk';
+
 class State {
-  public data;
+  public allData;
   // public data: Interface; описать интерфейс
 
   constructor() {
-    this.data = {
+    this.allData = {
       premiere: {
         link: 'https://youtu.be/d9MyW72ELq0',
-        info: 12321,
+        coverUrl: '',
+        posterUrl: '',
+        posterUrlPreview: '',
+        description: '',
+        shortDescription: '',
+        nameOriginal: '',
+        nameRu: '',
+        year: '',
       },
     };
   }
 
-  public setPremiereInfo(link: string, info: number) {
-    this.data.premiere.link = link;
-    this.data.premiere.info = info;
+  public getPremiereInfo() {
+    return this.allData.premiere;
   }
 
-  public getPremiereInfo() {
-    return this.data.premiere;
+  public async showPremiereData(id = 301) {
+    const data = await apiKinopoisk.getFilmData(id);
+    this.allData.premiere.coverUrl = data.coverUrl;
+    this.allData.premiere.nameRu = data.nameRu;
+    this.allData.premiere.description = data.description;
   }
 }
 

@@ -3,11 +3,11 @@ import PremierePage from '../../../main/pages/premiere-page/premiere-page';
 
 const mainRoutes = [
   {
-    path: '',
+    id: '',
     template: () => new MainPage('main-page'),
   },
   {
-    path: 'premiere',
+    id: 'premiere',
     template: () => new PremierePage('premiere-page'),
   },
 ];
