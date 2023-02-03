@@ -24,7 +24,6 @@ class State {
     this.allData.premiere.coverUrl = data.coverUrl;
     this.allData.premiere.nameRu = data.nameRu;
     this.allData.premiere.description = data.description;
-    console.log(this.allData.premiere.nameRu);
   }
 }
 
