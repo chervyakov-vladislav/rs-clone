@@ -177,5 +177,22 @@ export default class VideoPlayer extends DOMElement {
         });
       }
     }, 500);
+
+    this.controls.speed.node.addEventListener('click', () => {
+      const { speed } = state.getPlayerState();
+      if (speed === '2') {
+        this.controls.speed.node.innerText = 'x1';
+        ytPlayerService.changeSpeed(1);
+        state.setPlayerState({
+          speed: '1',
+        });
+      } else {
+        this.controls.speed.node.innerText = 'x2';
+        ytPlayerService.changeSpeed(2);
+        state.setPlayerState({
+          speed: '2',
+        });
+      }
+    });
   }
 }

@@ -102,6 +102,10 @@ class YTPlayerService {
   public setVolume(volume: number) {
     player.setVolume(volume);
   }
+
+  public changeSpeed(speed: number) {
+    player.setPlaybackRate(speed);
+  }
 }
 const ytPlayerService = new YTPlayerService();
 export default ytPlayerService;

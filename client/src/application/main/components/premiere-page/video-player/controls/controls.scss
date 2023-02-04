@@ -59,9 +59,10 @@
       height: 20px;
     }
 
-    &__container .controls__fullscreen {
+    &__container .controls__speed-button {
       justify-content: flex-end;
       margin-left: auto;
+      margin-right: 20px;
     }
 
     &__volume-input {
@@ -84,9 +85,14 @@
     }
 
     &__duration,
-    &__total-time {
+    &__total-time,
+    &__speed-button {
       color: #ff5500;
       font-family: "Kinopoisk-bold" , Arial, sans-serif;
+    }
+
+    &__speed-button {
+      
     }
 
     &__duration {

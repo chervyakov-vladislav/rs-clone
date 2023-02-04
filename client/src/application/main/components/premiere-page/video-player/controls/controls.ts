@@ -20,6 +20,8 @@ export default class PlayerControls extends DOMElement {
 
   public totalTime: DOMElement;
 
+  public speed: ButtonElement;
+
   public fullScreenButton: ButtonElement;
 
   constructor(parantNode: HTMLElement) {
@@ -74,6 +76,12 @@ export default class PlayerControls extends DOMElement {
       tagName: 'div',
       classList: ['controls__total-time'],
       content: state.getPlayerState().totalTime,
+    });
+
+    this.speed = new ButtonElement(this.controlsContiner.node, {
+      tagName: 'button',
+      classList: ['controls__speed-button'],
+      content: 'x1',
     });
 
     this.fullScreenButton = new ButtonElement(this.controlsContiner.node, {
