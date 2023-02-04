@@ -1,10 +1,8 @@
-import { StateInterface, StateTopInterface } from '../models/state';
+import { StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
 class State {
   public allData: StateInterface;
-
-  public allTopData: StateTopInterface;
 
   constructor() {
     this.allData = {
@@ -18,8 +16,6 @@ class State {
         nameRu: '',
         year: '',
       },
-    };
-    this.allTopData = {
       films: [],
     };
   }
@@ -37,7 +33,7 @@ class State {
 
     // Получаем массив данных рекомендованных фильмов
     const dataTop = await apiKinopoisk.getTopData();
-    this.allTopData.films = dataTop.films;
+    this.allData.films = dataTop.films;
   }
 }
 
