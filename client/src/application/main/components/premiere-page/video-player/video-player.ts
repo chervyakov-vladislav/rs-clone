@@ -161,5 +161,21 @@ export default class VideoPlayer extends DOMElement {
         value === '0' || muted === 'true' ? PlayerIcon.muted : PlayerIcon.volume;
       ytPlayerService.setVolume(parseInt(value, 10));
     });
+
+    setInterval(() => {
+      const { currentTime, totalTime, finish } = state.getPlayerState();
+      this.controls.totalTime.node.innerText = totalTime;
+      this.controls.duration.node.innerText = currentTime;
+      if (finish === 'true') {
+        this.coverImage.node.classList.remove('video-player__cover-image--active');
+        this.playButton.node.classList.remove('video-player__play--active');
+        this.pauseButton.node.classList.remove('video-player__pause--active');
+        this.controls.playPauseButton.node.innerHTML = PlayerIcon.playButton;
+        state.setPlayerState({
+          status: 'paused',
+          finish: 'false',
+        });
+      }
+    }, 500);
   }
 }

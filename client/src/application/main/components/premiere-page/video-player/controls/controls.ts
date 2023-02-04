@@ -3,6 +3,7 @@ import DOMElement from '../../../../../shared/components/base-elements/dom-eleme
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 import PlayerIcon from '../player-icons/player-icons';
 import InputElement from '../../../../../shared/components/base-elements/input-element';
+import state from '../../../../../shared/services/state';
 
 export default class PlayerControls extends DOMElement {
   private timelineContainer: DOMElement;
@@ -14,6 +15,10 @@ export default class PlayerControls extends DOMElement {
   public muteButton: ButtonElement;
 
   public inputVolume: InputElement;
+
+  public duration: DOMElement;
+
+  public totalTime: DOMElement;
 
   public fullScreenButton: ButtonElement;
 
@@ -52,6 +57,23 @@ export default class PlayerControls extends DOMElement {
       min: '0',
       max: '100',
       step: 'any',
+    });
+
+    state.setPlayerState({
+      totalTime: '0 : 00',
+      currentTime: '0 : 00',
+    });
+
+    this.duration = new DOMElement(this.controlsContiner.node, {
+      tagName: 'div',
+      classList: ['controls__duration'],
+      content: state.getPlayerState().currentTime,
+    });
+
+    this.totalTime = new DOMElement(this.controlsContiner.node, {
+      tagName: 'div',
+      classList: ['controls__total-time'],
+      content: state.getPlayerState().totalTime,
     });
 
     this.fullScreenButton = new ButtonElement(this.controlsContiner.node, {

@@ -46,6 +46,35 @@ class State {
   public setIframe(elem: HTMLElement) {
     this.allData.iframe = elem;
   }
+
+  public setTotalTime(time: number) {
+    const totalTime = this.formatDurtion(time);
+    this.setPlayerState({
+      totalTime,
+    });
+  }
+
+  public setCurrentTime(time: number) {
+    const currentTime = this.formatDurtion(time);
+    this.setPlayerState({
+      currentTime,
+    });
+  }
+
+  private formatDurtion(time: number) {
+    const seconds = Math.floor(time % 60);
+    const minutes = Math.floor(time / 60) % 60;
+    if (minutes === 0 && seconds < 10) {
+      return `0:0${seconds}`;
+    }
+    if (minutes === 0) {
+      return `0:${seconds}`;
+    }
+    if (seconds < 10) {
+      return `${minutes}:0${seconds}`;
+    }
+    return `${minutes}:${seconds}`;
+  }
 }
 
 const state = new State();

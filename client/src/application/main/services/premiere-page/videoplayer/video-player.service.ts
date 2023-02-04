@@ -67,11 +67,22 @@ class YTPlayerService {
   }
 
   private onPlayerStateChange(e: Event) {
-    // const target: any = e.target;
+    const currentState = player.getPlayerState();
+    if (currentState === 0) {
+      player.stopVideo();
+      state.setPlayerState({
+        finish: 'true',
+      })
+    }
   }
 
   private onPlayerReady(e: Event) {
     state.setIframe(player.getIframe());
+    const time = player.getDuration();
+    state.setTotalTime(time);
+    setInterval(() => {
+      state.setCurrentTime(player.getCurrentTime())
+    }, 300);
   }
 
   private createIFrame(toggleDiv: HTMLElement, parantNode: HTMLElement) {

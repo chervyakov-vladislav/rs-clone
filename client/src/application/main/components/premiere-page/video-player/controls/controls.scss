@@ -82,4 +82,18 @@
           background: #ff5500;
         }
     }
+
+    &__duration,
+    &__total-time {
+      color: #ff5500;
+      font-family: "Kinopoisk-bold" , Arial, sans-serif;
+    }
+
+    &__duration {
+      margin-left: 20px;
+      &::after {
+        content: '/';
+        margin-left: .3rem;
+      }
+    }
 }
