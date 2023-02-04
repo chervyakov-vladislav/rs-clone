@@ -31,17 +31,15 @@ export interface ITopData {
 }
 
 export interface ITopFilm {
-  film: {
-    filmId: number;
-    genres: [
-      {
-        genre: string;
-      }
-    ];
-    nameRu: string;
-    posterUrl: string;
-    posterUrlPreview: string;
-    rating: string;
-    year: string;
-  };
+  filmId: number;
+  genres: [
+    {
+      genre: string;
+    }
+  ];
+  nameRu: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+  rating: string;
+  year: string;
 }

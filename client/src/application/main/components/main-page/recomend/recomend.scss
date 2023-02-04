@@ -24,4 +24,43 @@
     align-items: center;
     user-select: none;
   }
+
+  &__cards_list {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+
+  &__card {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    width: 140px;
+
+    &_poster {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &_img {
+      height: 210px;
+      width: 140px;
+    }
+
+    &_title {
+      padding: 5px 0;
+      font-weight: 600;
+    }
+
+    &_info {
+      display: flex;
+      gap: 5px;
+    }
+  }
 }
