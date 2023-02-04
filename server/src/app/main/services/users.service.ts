@@ -1,6 +1,7 @@
 import { MongoClient } from 'mongodb';
 import { User } from '../../shared/types';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
 export default class UsersService {
 private mongoClient: MongoClient;
@@ -24,8 +25,24 @@ private users: User[];
     return user;
   }
 
+  public async hashPassword(password: string) {
+    const salt = await bcrypt.genSalt(5);
+    return await bcrypt.hash(password, salt);
+  }
+
   public createToken(login: string) {
     return jwt.sign({ login: login }, process.env.TOKEN_SECRET||'secret');
   }
 
+  public verifyToken(auth: string) {
+    const token:string = auth.split(' ')[0] === 'Bearer' ? auth.split(' ')[1]: '';
+    try {
+      const verified = jwt.verify(token, process.env.TOKEN_SECRET!||'secret');
+      console.log('verified', verified);
+      return true;
+    } catch (err) {
+      console.log(err);
+    }
+    return false;
+  }
 }

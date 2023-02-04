@@ -16,8 +16,6 @@ export default class UsersRouter {
   }
 
   private async login(req: Request , res: Response) {
-    console.log(req.body);
-    
     const validateErr = validationResult(req);
     if (!validateErr.isEmpty()) {
       return res.status(400).json({ errors: validateErr.array()[0] });
@@ -28,10 +26,7 @@ export default class UsersRouter {
       if (!existedUser) {
         throw new Error('Login is wrong');
       }
-      const validPassword = await bcrypt.compare(
-        req.body.password,
-        existedUser.password
-      );
+      const validPassword = await bcrypt.compare(req.body.password, existedUser.password);
       if (!validPassword) {
         throw new Error('Password is wrong');
       }
@@ -69,8 +64,7 @@ export default class UsersRouter {
     }
 
     try {
-      const salt = await bcrypt.genSalt(5);
-      const password = await bcrypt.hash(req.body.password, salt);
+      const password = await this.usersService.hashPassword(req.body.password);
 
       const user = await this.usersService.create({
         login: req.body.login,
