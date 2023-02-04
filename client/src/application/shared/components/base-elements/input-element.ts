@@ -27,6 +27,10 @@ export default class InputElement extends DOMElement {
       (this.node as HTMLInputElement).required = true;
     }
 
+    if (options.step) {
+      (this.node as HTMLInputElement).step = options.step;
+    }
+
     if (options.selected) {
       (this.node as HTMLOptionElement).selected = true;
     }

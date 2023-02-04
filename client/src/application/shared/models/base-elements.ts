@@ -34,6 +34,7 @@ export interface InputOptions extends Options {
   max?: string;
   checked?: boolean;
   readonly?: boolean;
+  step?: string;
 }
 
 export interface ImageOptions extends Options {

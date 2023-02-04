@@ -119,22 +119,47 @@ export default class VideoPlayer extends DOMElement {
 
     this.controls.fullScreenButton.node.addEventListener('click', () => {
       const { fullScreen } = state.getPlayerState();
-      const container = document.querySelector('.main__container');
+      const container = document.querySelector('.main__container') as HTMLElement;
       if (fullScreen === undefined || fullScreen === 'false') {
         state.setPlayerState({
           fullScreen: 'true',
         });
         this.iFrameContainer.node.classList.add('video-player__player--active');
         this.node.classList.add('video-player--active');
-        container?.classList.add('container--active');
+        container.classList.add('container--active');
       } else {
         state.setPlayerState({
           fullScreen: 'false',
         });
         this.iFrameContainer.node.classList.remove('video-player__player--active');
         this.node.classList.remove('video-player--active');
-        container?.classList.remove('container--active');
+        container.classList.remove('container--active');
       }
+    });
+
+    this.controls.muteButton.node.addEventListener('click', () => {
+      const { muted } = state.getPlayerState();
+      if (muted === undefined || muted === 'false') {
+        state.setPlayerState({
+          muted: 'true',
+        });
+        this.controls.muteButton.node.innerHTML = PlayerIcon.muted;
+        ytPlayerService.mute();
+      } else {
+        state.setPlayerState({
+          muted: 'false',
+        });
+        this.controls.muteButton.node.innerHTML = PlayerIcon.volume;
+        ytPlayerService.unmute();
+      }
+    });
+
+    this.controls.inputVolume.node.addEventListener('input', (e) => {
+      const { value } = e.target as HTMLInputElement;
+      const { muted } = state.getPlayerState();
+      this.controls.muteButton.node.innerHTML =
+        value === '0' || muted === 'true' ? PlayerIcon.muted : PlayerIcon.volume;
+      ytPlayerService.setVolume(parseInt(value, 10));
     });
   }
 }

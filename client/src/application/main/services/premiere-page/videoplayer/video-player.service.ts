@@ -79,6 +79,18 @@ class YTPlayerService {
     parantNode.insertBefore(newIFrame, toggleDiv);
     toggleDiv.remove();
   }
+
+  public mute() {
+    player.mute();
+  }
+
+  public unmute() {
+    player.unMute();
+  }
+
+  public setVolume(volume: number) {
+    player.setVolume(volume);
+  }
 }
 const ytPlayerService = new YTPlayerService();
 export default ytPlayerService;
