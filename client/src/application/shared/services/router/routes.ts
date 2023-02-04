@@ -1,5 +1,6 @@
 import MainPage from '../../../main/pages/main-page/main-page';
 import SecondPage from '../../../main/pages/second-page/second-page';
+import AuthPage from '../../../main/pages/auth-page/auth-page';
 
 const mainRoutes = [
   {
@@ -9,6 +10,10 @@ const mainRoutes = [
   {
     id: 'premiere',
     template: () => new SecondPage('sec-page'),
+  },
+  {
+    id: 'auth',
+    template: () => new AuthPage('auth-page'),
   },
 ];
 
