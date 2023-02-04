@@ -72,7 +72,7 @@ export default class VideoPlayer extends DOMElement {
     // запуск видео
     this.playButton.node.addEventListener('click', () => {
       ytPlayerService.togglePlay();
-      this.coverImage.node.classList.add('video-player__cover-image--active');
+      setTimeout(() => this.coverImage.node.classList.add('video-player__cover-image--active'), 400);
       this.playButton.node.classList.add('video-player__play--active');
       this.pauseButton.node.classList.add('video-player__pause--active');
       this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
@@ -98,7 +98,7 @@ export default class VideoPlayer extends DOMElement {
       const { status } = state.getPlayerState();
       if (status === 'paused') {
         ytPlayerService.togglePlay();
-        this.coverImage.node.classList.add('video-player__cover-image--active');
+        setTimeout(() => this.coverImage.node.classList.add('video-player__cover-image--active'), 400);
         this.playButton.node.classList.add('video-player__play--active');
         this.pauseButton.node.classList.add('video-player__pause--active');
         this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
