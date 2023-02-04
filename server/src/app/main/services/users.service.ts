@@ -1,5 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { User } from '../../shared/types';
+import jwt from 'jsonwebtoken';
 
 export default class UsersService {
 private mongoClient: MongoClient;
@@ -22,4 +23,9 @@ private users: User[];
     this.users.push(user);
     return user;
   }
+
+  public createToken(login: string) {
+    return jwt.sign({ login: login }, process.env.TOKEN_SECRET||'secret');
+  }
+
 }

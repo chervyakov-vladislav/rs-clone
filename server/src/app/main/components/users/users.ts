@@ -2,7 +2,6 @@ import express from 'express';
 import { Request, Response } from 'express-serve-static-core';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import UsersService from '../../services/users.service';
 import { loginValidation, registerValidation } from '../../../shared/validations';
 
@@ -37,8 +36,7 @@ export default class UsersRouter {
         throw new Error('Password is wrong');
       }
 
-      const payLoad = { login: existedUser.login };
-      const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
+      const token = this.usersService.createToken(existedUser.login);
 
       res.header('auth-token', token).json({
         error: null,
@@ -62,7 +60,7 @@ export default class UsersRouter {
     try {
       const existedUser = await this.usersService.findByLogin(req.body.login);
       if (existedUser) {
-        throw new Error('login is already exists');
+        throw new Error('user is already exists');
       }
     } catch (err) {
       return res.status(400).json({
@@ -79,9 +77,7 @@ export default class UsersRouter {
         password,
       });
 
-      const payLoad = { login: user.login };
-
-      const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
+      const token = this.usersService.createToken(user.login);
 
       res.header('auth-token', token).json({
         error: null,
