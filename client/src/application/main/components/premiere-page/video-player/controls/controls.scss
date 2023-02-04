@@ -5,6 +5,7 @@
   right: 0;
   width: 100%;
   z-index: 10;
+  // убрать прозрачность, когда доделаешь
   opacity: 1;
   transition: opacity .3s;
 
@@ -34,5 +35,11 @@
     &__play-button .player__pause {
       width: 25px;
       height: 25px;
+      opacity: 1;
+      transition: opacity .3s;
+
+        &:hover {
+          opacity: .85;
+        }
     }
 }

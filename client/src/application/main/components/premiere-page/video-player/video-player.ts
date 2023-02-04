@@ -44,7 +44,7 @@ export default class VideoPlayer extends DOMElement {
       tagName: 'div',
       id: 'premiere-page-player',
     });
-    ytPlayerService.initPlayer();
+    ytPlayerService.initPlayer(this.iFrame.node, this.iFrameContainer.node);
 
     this.cover = new DOMElement(this.iFrameContainer.node, {
       tagName: 'div',
