@@ -3,11 +3,11 @@ import SecondPage from '../../../main/pages/second-page/second-page';
 
 const mainRoutes = [
   {
-    path: '',
+    id: '',
     template: () => new MainPage('main-page'),
   },
   {
-    path: 'premiere',
+    id: 'premiere',
     template: () => new SecondPage('sec-page'),
   },
 ];
