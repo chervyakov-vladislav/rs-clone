@@ -2,8 +2,9 @@ import './recomend.scss';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import SVG from '../../../../shared/components/svg-icons';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
+import state from '../../../../shared/services/state';
 
-export default class RecomendPreview extends DOMElement {
+export default class RecomendSection extends DOMElement {
   private recomendTitle: DOMElement | undefined;
 
   private recomendLink: DOMElement | undefined;
@@ -30,7 +31,7 @@ export default class RecomendPreview extends DOMElement {
 
     this.recomendPic = new DOMElement(this.recomendTitle.node, {
       tagName: 'span',
-      classList: ['side-menu__pic'],
+      classList: ['recomend__pic'],
     });
     this.recomendPic.node.innerHTML = SVG.recomendArrow;
 

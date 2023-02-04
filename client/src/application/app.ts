@@ -17,7 +17,7 @@ class App {
   }
 
   public async start() {
-    await state.showPremiereData();
+    await state.loadAppData();
     this.router = new Router(this.main.container);
   }
 }
