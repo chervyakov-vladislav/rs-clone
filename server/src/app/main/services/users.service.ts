@@ -41,8 +41,7 @@ private users: User[];
       console.log('verified', verified);
       return true;
     } catch (err) {
-      console.log(err);
+      return false;
     }
-    return false;
   }
 }

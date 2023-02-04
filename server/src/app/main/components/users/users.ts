@@ -13,6 +13,7 @@ export default class UsersRouter {
     this.usersService = new UsersService();
     this.router.post('/login', loginValidation, (req: Request, res: Response) => this.login(req ,res));
     this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req ,res));
+    this.router.get('/auth', (req, res) => this.authentification(req, res));
   }
 
   private async login(req: Request , res: Response) {
@@ -80,6 +81,19 @@ export default class UsersRouter {
       });
     } catch (err) {
       res.send('error');
+    }
+  }
+
+  private async authentification(req: Request, res: Response) {
+    try {
+      if (!this.usersService.verifyToken(req.headers.authorization || '')) {
+        throw new Error('Invalid token');
+      }
+      res.send('authorization success');
+    } catch (err) {
+      return res.status(400).json({
+        errors: (err as Error).message,
+      });
     }
   }
 }
