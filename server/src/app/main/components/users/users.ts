@@ -1,13 +1,10 @@
 import express from 'express';
-import { ParamsDictionary, Request, Response } from 'express-serve-static-core';
-import { User } from '../../../shared/types';
-import { check, validationResult } from 'express-validator';
+import { Request, Response } from 'express-serve-static-core';
+import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import UsersService from '../../services/users.service';
-import bodyParser from 'body-parser';
-import { registerValidation } from '../../../shared/validations';
-import { ParsedQs } from 'qs';
+import { loginValidation, registerValidation } from '../../../shared/validations';
 
 export default class UsersRouter {
   public router = express.Router();
@@ -15,8 +12,8 @@ export default class UsersRouter {
 
   constructor() {
     this.usersService = new UsersService();
-    this.router.post('/login', (req, res) => this.login(req ,res));
-    this.router.post('/register', registerValidation, (req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>, res: Response<any, Record<string, any>, number>) => this.register(req ,res));
+    this.router.post('/login', loginValidation, (req: Request, res: Response) => this.login(req ,res));
+    this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req ,res));
   }
 
   private async login(req: Request , res: Response) {
@@ -28,30 +25,32 @@ export default class UsersRouter {
     }
 
     try {
-      const isUserExist = await this.usersService.findByLogin(req.body.login);
-      if (!isUserExist) {
+      const existedUser = await this.usersService.findByLogin(req.body.login);
+      if (!existedUser) {
         throw new Error('Login is wrong');
       }
-      console.log(isUserExist);
       const validPassword = await bcrypt.compare(
         req.body.password,
-        isUserExist.password
+        existedUser.password
       );
       if (!validPassword) {
         throw new Error('Password is wrong');
       }
 
-      const payLoad = { login: isUserExist.login };
-
+      const payLoad = { login: existedUser.login };
       const token = jwt.sign(payLoad, process.env.TOKEN_SECRET||'secret');
 
+      res.header('auth-token', token).json({
+        error: null,
+        token,
+        data: existedUser,
+      });
+
     } catch (err) {
-      console.log(err);
       return res.status(400).json({
         errors: (err as Error).message,
       });
     }
-    res.send('Login succeed!')
   }
 
   private async register(req: Request , res: Response) {
@@ -61,8 +60,8 @@ export default class UsersRouter {
     }
 
     try {
-      const isUserExist = await this.usersService.findByLogin(req.body.login);
-      if (isUserExist) {
+      const existedUser = await this.usersService.findByLogin(req.body.login);
+      if (existedUser) {
         throw new Error('login is already exists');
       }
     } catch (err) {
