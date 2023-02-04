@@ -10,6 +10,7 @@ class State {
       player: {
         status: 'paused',
       },
+      iframe: document.createElement('div'),
     };
   }
 
@@ -36,6 +37,14 @@ class State {
     keyArr.forEach((key) => {
       this.allData.player[key] = options[key];
     });
+  }
+
+  public getIframe() {
+    return this.allData.iframe;
+  }
+
+  public setIframe(elem: HTMLElement) {
+    this.allData.iframe = elem;
   }
 }
 

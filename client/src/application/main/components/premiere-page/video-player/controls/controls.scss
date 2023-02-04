@@ -13,11 +13,22 @@
       opacity: 1;
     }
 
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0, .75), transparent);
+      width: 100%;
+      aspect-ratio: 6 / 1;
+      pointer-events: none;
+      z-index: -1;
+    }
+
     &__container {
       display: flex;
       gap: .3rem;
       align-items: center;
-      padding: .2rem;
+      padding: .2rem .5rem;
     }
 
     &__container button {
@@ -29,17 +40,27 @@
       display: flex;
       justify-content: center;
       align-items: center;
-    }
-
-    &__play-button .player__play,
-    &__play-button .player__pause {
-      width: 25px;
-      height: 25px;
       opacity: 1;
       transition: opacity .3s;
 
         &:hover {
           opacity: .85;
         }
+    }
+
+    &__play-button .player__play,
+    &__play-button .player__pause {
+      width: 25px;
+      height: 25px;
+    }
+
+    &__fullscreen {
+      width: 20px;
+      height: 20px;
+    }
+
+    &__container .controls__fullscreen {
+      justify-content: flex-end;
+      margin-left: auto;
     }
 }

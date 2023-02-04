@@ -10,6 +10,8 @@ export default class PlayerControls extends DOMElement {
 
   public playPauseButton: ButtonElement;
 
+  public fullScreenButton: ButtonElement;
+
   constructor(parantNode: HTMLElement) {
     super(parantNode, {
       tagName: 'div',
@@ -31,5 +33,11 @@ export default class PlayerControls extends DOMElement {
       classList: ['controls__play-button'],
     });
     this.playPauseButton.node.innerHTML = PlayerIcon.playButton;
+
+    this.fullScreenButton = new ButtonElement(this.controlsContiner.node, {
+      tagName: 'button',
+      classList: ['controls__fullscreen'],
+    });
+    this.fullScreenButton.node.innerHTML = PlayerIcon.fullScreen;
   }
 }

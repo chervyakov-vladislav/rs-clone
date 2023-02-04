@@ -5,9 +5,28 @@
   min-width: 250px;
   position: relative;
 
+    &--active {
+      width: 100%;
+      max-width: initial;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
     &__player {
       position: relative;
       display: flex;
+
+      &--active {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
     }
 
     &__cover-container {

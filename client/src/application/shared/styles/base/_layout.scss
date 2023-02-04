@@ -32,7 +32,19 @@ body {
   display: flex;
   position: relative;
   padding: 0 1%;
-  }
+
+    &--active {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 0;
+      z-index: 100;
+      max-width: initial;
+    }
+}
 
 h1,h2,h3,h4,h5,h6 {
   margin-top: 0;

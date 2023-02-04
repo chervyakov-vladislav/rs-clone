@@ -93,6 +93,7 @@ export default class VideoPlayer extends DOMElement {
       });
     });
 
+    //  Плей пауз на контролах
     this.controls.playPauseButton.node.addEventListener('click', () => {
       const { status } = state.getPlayerState();
       if (status === 'paused') {
@@ -113,6 +114,26 @@ export default class VideoPlayer extends DOMElement {
         state.setPlayerState({
           status: 'paused',
         });
+      }
+    });
+
+    this.controls.fullScreenButton.node.addEventListener('click', () => {
+      const { fullScreen } = state.getPlayerState();
+      const container = document.querySelector('.main__container');
+      if (fullScreen === undefined || fullScreen === 'false') {
+        state.setPlayerState({
+          fullScreen: 'true',
+        });
+        this.iFrameContainer.node.classList.add('video-player__player--active');
+        this.node.classList.add('video-player--active');
+        container?.classList.add('container--active');
+      } else {
+        state.setPlayerState({
+          fullScreen: 'false',
+        });
+        this.iFrameContainer.node.classList.remove('video-player__player--active');
+        this.node.classList.remove('video-player--active');
+        container?.classList.remove('container--active');
       }
     });
   }
