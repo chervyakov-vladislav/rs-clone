@@ -8,12 +8,11 @@ class App {
 
   private main: Main;
 
-  private router: Router | null;
+  private router: Router | null = null;
 
   constructor() {
     this.header = new Header(document.body);
     this.main = new Main(document.body);
-    this.router = null;
   }
 
   public async start() {

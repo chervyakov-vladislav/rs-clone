@@ -71,7 +71,7 @@ export default class SideMenu extends DOMElement {
       tagName: 'a',
       href: '#',
       classList: ['side-menu__link'],
-      content: 'Фильмы',
+      content: 'Премьера',
     });
 
     this.serialsItem = new DOMElement(this.node, {

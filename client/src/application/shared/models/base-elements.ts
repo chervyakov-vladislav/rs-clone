@@ -34,9 +34,21 @@ export interface InputOptions extends Options {
   max?: string;
   checked?: boolean;
   readonly?: boolean;
+  step?: string;
 }
 
 export interface ImageOptions extends Options {
   src: string;
   alt?: string;
+}
+
+export interface IFrameOptions extends Options {
+  id?: string;
+  src?: string;
+  frameborder?: string;
+}
+
+export interface ScriptOptions extends Options {
+  src: string;
+  id?: string;
 }
