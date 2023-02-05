@@ -1,0 +1,26 @@
+.player {
+  &__play {
+    fill: #ff5500;
+    width: 100px;
+    height: 100px;
+  }
+
+  &__pause {
+    fill: #ff5500;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.fullscreen-icon {
+  &__color {
+    fill: #ff5500;
+  }
+}
+
+.volume-icon,
+.mute-icon {
+  &__color {
+    fill: #ff5500;
+  }
+}

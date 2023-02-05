@@ -1,0 +1,120 @@
+.controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 1s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(to top, rgba(0,0,0, .75), transparent);
+      width: 100%;
+      aspect-ratio: 6 / 1;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    &__container {
+      display: flex;
+      gap: .3rem;
+      align-items: center;
+      padding: .2rem .5rem;
+    }
+
+    &__container button {
+      background: none;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      font-size: 1.1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+      transition: opacity .3s;
+
+        &:hover {
+          opacity: .85;
+        }
+    }
+
+    &__play-button .player__play,
+    &__play-button .player__pause {
+      width: 25px;
+      height: 25px;
+    }
+
+    &__fullscreen {
+      width: 20px;
+      height: 20px;
+    }
+
+    &__container .controls__speed-button {
+      justify-content: flex-end;
+      margin-left: auto;
+      margin-right: 20px;
+    }
+
+    &__volume-input {
+      width: 60px;
+      -webkit-appearance: none;
+      height: 3px;
+      outline: 0;
+      border: 0;
+      border-radius: 20px;
+      background-color: #ff5500;
+      cursor: pointer;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #ff5500;
+        }
+    }
+
+    &__duration,
+    &__total-time,
+    &__speed-button {
+      color: #ff5500;
+      font-family: "Kinopoisk-bold" , Arial, sans-serif;
+    }
+
+    &__duration {
+      margin-left: 20px;
+      &::after {
+        content: '/';
+        margin-left: .3rem;
+      }
+    }
+
+    &__timeline {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 3px;
+      outline: 0;
+      border: 0;
+      margin-bottom: 8px;
+      border-radius: 20px;
+      background-color: #ff5500;
+      cursor: pointer;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #ff5500;
+        }
+    }
+}
