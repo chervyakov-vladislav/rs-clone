@@ -16,13 +16,5 @@ export interface WinnerInterface {
 }
 
 export interface IFilmData {
-  link?: string;
-  coverUrl: string;
-  posterUrl: string;
-  posterUrlPreview: string;
-  description: string;
-  shortDescription: string;
-  nameOriginal: string;
-  nameRu: string;
-  year: string;
+  [key: string]: string | null | boolean;
 }

@@ -1,0 +1,50 @@
+.premiere-desc {
+
+  &__first-row {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__title-continer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 60%;
+  }
+
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 48px;
+    color: #000;
+    font-family: "Kinopoisk-bold" , Arial, sans-serif;
+  }
+
+  &__desc {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__rating-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #000;
+    font-family: "Kinopoisk-bold" , Arial, sans-serif;
+  }
+
+  &__rating {
+    margin-left: 10px;
+    -webkit-font-smoothing: antialiased;
+    background: -webkit-linear-gradient(285deg,#ffdb80 16.44%,#ac9c71 63.42%);
+    background: linear-gradient(165deg,#ffdb80 16.44%,#ac9c71 63.42%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 32px;
+    font-family: "Kinopoisk-bold" , Arial, sans-serif;
+  }
+}
