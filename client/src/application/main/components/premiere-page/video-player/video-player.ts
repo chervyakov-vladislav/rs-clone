@@ -53,7 +53,7 @@ export default class VideoPlayer extends DOMElement {
 
     this.coverImage = new ImageElement(this.cover.node, {
       tagName: 'img',
-      src: premierState.coverUrl,
+      src: premierState.coverUrl as string,
       classList: ['video-player__cover-image'],
     });
 

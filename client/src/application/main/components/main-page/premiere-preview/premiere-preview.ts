@@ -25,19 +25,19 @@ export default class PremierePreview extends DOMElement {
     this.premiereImage = new ImageElement(this.node, {
       tagName: 'img',
       classList: ['premiere__img'],
-      src: premiereState.coverUrl,
+      src: premiereState.coverUrl as string,
     });
 
     this.premiereName = new DOMElement(this.node, {
       tagName: 'div',
       classList: ['premiere__name'],
-      content: premiereState.nameRu,
+      content: premiereState.nameRu as string,
     });
 
     this.premiereText = new DOMElement(this.node, {
       tagName: 'div',
       classList: ['premiere__text'],
-      content: premiereState.description,
+      content: premiereState.description as string,
     });
 
     this.premiereBtn = new ButtonElement(this.node, {
