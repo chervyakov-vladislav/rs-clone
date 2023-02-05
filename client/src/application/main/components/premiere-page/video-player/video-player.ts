@@ -163,9 +163,11 @@ export default class VideoPlayer extends DOMElement {
     });
 
     setInterval(() => {
-      const { currentTime, totalTime, finish } = state.getPlayerState();
+      const { currentTime, totalTime, finish, currentTotalSec, totalSec } = state.getPlayerState();
       this.controls.totalTime.node.innerText = totalTime;
       this.controls.duration.node.innerText = currentTime;
+      this.controls.timeline.node.setAttribute('max', totalSec);
+      (this.controls.timeline.node as HTMLInputElement).value = currentTotalSec;
       if (finish === 'true') {
         this.coverImage.node.classList.remove('video-player__cover-image--active');
         this.playButton.node.classList.remove('video-player__play--active');
@@ -193,6 +195,18 @@ export default class VideoPlayer extends DOMElement {
           speed: '2',
         });
       }
+    });
+
+    this.controls.timeline.node.addEventListener('input', (e: Event) => {
+      const input = e.target as HTMLInputElement;
+      ytPlayerService.seek(input.value);
+      setTimeout(() => this.coverImage.node.classList.add('video-player__cover-image--active'), 400);
+      this.playButton.node.classList.add('video-player__play--active');
+      this.pauseButton.node.classList.add('video-player__pause--active');
+      this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
+      state.setPlayerState({
+        status: 'play',
+      });
     });
   }
 }

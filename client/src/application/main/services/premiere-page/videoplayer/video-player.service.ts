@@ -106,6 +106,10 @@ class YTPlayerService {
   public changeSpeed(speed: number) {
     player.setPlaybackRate(speed);
   }
+
+  public seek(value: string) {
+    player.seekTo(value);
+  }
 }
 const ytPlayerService = new YTPlayerService();
 export default ytPlayerService;

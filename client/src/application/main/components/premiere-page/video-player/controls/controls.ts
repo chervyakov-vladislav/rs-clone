@@ -6,7 +6,7 @@ import InputElement from '../../../../../shared/components/base-elements/input-e
 import state from '../../../../../shared/services/state';
 
 export default class PlayerControls extends DOMElement {
-  private timelineContainer: DOMElement;
+  public timeline: DOMElement;
 
   private controlsContiner: DOMElement;
 
@@ -30,9 +30,14 @@ export default class PlayerControls extends DOMElement {
       classList: ['controls'],
     });
 
-    this.timelineContainer = new DOMElement(this.node, {
-      tagName: 'div',
-      classList: ['controls__timeline-container'],
+    this.timeline = new InputElement(this.node, {
+      tagName: 'input',
+      type: 'range',
+      min: '0',
+      max: '1',
+      step: 'any',
+      value: '0',
+      classList: ['controls__timeline'],
     });
 
     this.controlsContiner = new DOMElement(this.node, {

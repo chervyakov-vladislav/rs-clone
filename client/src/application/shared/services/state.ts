@@ -51,6 +51,7 @@ class State {
     const totalTime = this.formatDurtion(time);
     this.setPlayerState({
       totalTime,
+      totalSec: time.toString(),
     });
   }
 
@@ -58,6 +59,7 @@ class State {
     const currentTime = this.formatDurtion(time);
     this.setPlayerState({
       currentTime,
+      currentTotalSec: time.toString(),
     });
   }
 

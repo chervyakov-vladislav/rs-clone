@@ -5,9 +5,8 @@
   right: 0;
   width: 100%;
   z-index: 10;
-  // убрать прозрачность, когда доделаешь
-  opacity: 1;
-  transition: opacity .3s;
+  opacity: 0;
+  transition: opacity 1s;
 
     &:hover {
       opacity: 1;
@@ -91,15 +90,31 @@
       font-family: "Kinopoisk-bold" , Arial, sans-serif;
     }
 
-    &__speed-button {
-      
-    }
-
     &__duration {
       margin-left: 20px;
       &::after {
         content: '/';
         margin-left: .3rem;
       }
+    }
+
+    &__timeline {
+      width: 100%;
+      -webkit-appearance: none;
+      height: 3px;
+      outline: 0;
+      border: 0;
+      margin-bottom: 8px;
+      border-radius: 20px;
+      background-color: #ff5500;
+      cursor: pointer;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          background: #ff5500;
+        }
     }
 }
