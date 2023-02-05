@@ -1,9 +1,9 @@
 import './login.scss';
-import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
+import LinkElement from '../../../../shared/components/base-elements/link-element';
 
 export default class Login extends DOMElement {
-  private loginBtn: ButtonElement;
+  private loginBtn: LinkElement;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -11,9 +11,10 @@ export default class Login extends DOMElement {
       classList: ['login'],
     });
 
-    this.loginBtn = new ButtonElement(this.node, {
-      tagName: 'button',
+    this.loginBtn = new LinkElement(this.node, {
+      tagName: 'a',
       classList: ['login__button'],
+      href: '#auth',
       content: 'Вход',
     });
   }

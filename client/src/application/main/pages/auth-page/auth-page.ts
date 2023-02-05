@@ -1,28 +1,26 @@
+import './auth-page.scss';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import Page from '../../../shared/components/page';
+import AuthForm from '../../components/auth-page/auth-form';
 
 export default class AuthPage extends Page {
-  private loginForm: DOMElement;
+  private togglerRegLog: DOMElement;
 
-  private registrationForm: DOMElement;
+  private authForm: AuthForm;
 
   constructor(id: string) {
     super(id);
-    this.loginForm = new DOMElement(this.node, {
-      tagName: 'div',
-      classList: ['auth__form', 'auth__form-login'],
-      content: 'Login Form',
-    });
-    this.registrationForm = new DOMElement(this.node, {
-      tagName: 'div',
-      classList: ['auth__form', 'auth__form-registration'],
-      content: 'Registration Form',
-    });
 
-    this.render();
+    this.togglerRegLog = new DOMElement(this.node, {
+      tagName: 'div',
+      classList: ['auth__toggler'],
+      content: 'Login  Register',
+    });
+    this.togglerRegLog.node.addEventListener('click', () => this.render());
+    this.authForm = new AuthForm(this.node);
   }
 
   public render() {
-    console.log('lalala');
+    this.authForm.toggleIsRegister();
   }
 }
