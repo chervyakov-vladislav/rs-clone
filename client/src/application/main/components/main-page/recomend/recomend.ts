@@ -3,7 +3,7 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import SVG from '../../../../shared/components/svg-icons';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
 import state from '../../../../shared/services/state';
-import ImageElement from '../../../../shared/components/base-elements/image-element';
+import MovieCard from '../card';
 
 export default class RecomendSection extends DOMElement {
   private recomendTitle: DOMElement;
@@ -13,22 +13,6 @@ export default class RecomendSection extends DOMElement {
   private recomendPic: DOMElement;
 
   private recomendCardsList: DOMElement;
-
-  private recomendCard: DOMElement;
-
-  private recomendCardLink: DOMElement;
-
-  private recomendCardPoster: DOMElement;
-
-  private recomendCardPosterImage: ImageElement;
-
-  private recomendCardTitle: DOMElement;
-
-  private recomendCardInfo: DOMElement;
-
-  private recomendCardYear: DOMElement;
-
-  private recomendCardGenre: DOMElement;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -64,55 +48,14 @@ export default class RecomendSection extends DOMElement {
       classList: ['recomend__cards_list'],
     });
 
-    this.recomendCard = new DOMElement(this.recomendCardsList.node, {
-      tagName: 'div',
-      classList: ['recomend__card'],
-    });
+    this.renderCard();
+  }
 
-    this.recomendCardLink = new LinkElement(this.recomendCard.node, {
-      tagName: 'a',
-      href: '#',
-      classList: ['recomend__card_link'],
-      content: '',
-    });
+  private renderCard() {
+    const container = this.recomendCardsList.node;
+    container.innerHTML = '';
+    const filmdata = state.allData.films.slice(0, 6);
 
-    this.recomendCard.node.addEventListener('click', () => {
-      window.location.hash = `#movie/${state.allData.films[0].filmId}`;
-    });
-
-    this.recomendCardPoster = new DOMElement(this.recomendCard.node, {
-      tagName: 'div',
-      classList: ['recomend__card_poster'],
-    });
-
-    this.recomendCardPosterImage = new ImageElement(this.recomendCardPoster.node, {
-      tagName: 'img',
-      classList: ['recomend__card_img'],
-      src: state.allData.films[0].posterUrlPreview,
-      alt: state.allData.films[0].nameRu,
-    });
-
-    this.recomendCardTitle = new DOMElement(this.recomendCard.node, {
-      tagName: 'p',
-      classList: ['recomend__card_title'],
-      content: state.allData.films[0].nameRu,
-    });
-
-    this.recomendCardInfo = new DOMElement(this.recomendCard.node, {
-      tagName: 'div',
-      classList: ['recomend__card_info'],
-    });
-
-    this.recomendCardYear = new DOMElement(this.recomendCardInfo.node, {
-      tagName: 'p',
-      classList: ['recomend__card_year'],
-      content: state.allData.films[0].year,
-    });
-
-    this.recomendCardGenre = new DOMElement(this.recomendCardInfo.node, {
-      tagName: 'p',
-      classList: ['recomend__card_year'],
-      content: state.allData.films[0].genres[0].genre,
-    });
+    filmdata.map((item) => new MovieCard(container, item));
   }
 }

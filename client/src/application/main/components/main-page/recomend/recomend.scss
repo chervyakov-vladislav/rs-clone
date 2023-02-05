@@ -31,14 +31,19 @@
     flex-wrap: wrap;
     padding: 20px 0;
     gap: 20px;
-    justify-content: flex-start;
+    justify-content:space-evenly;
   }
+}
+
+.movie {
 
   &__card {
     cursor: pointer;
     display: flex;
     flex-direction: column;
     width: 140px;
+    color: #000;
+    font-size: 14px;
 
     &_poster {
       position: relative;
@@ -46,11 +51,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: #000;
     }
 
     &_img {
       height: 210px;
       width: 140px;
+
+      &:hover {
+        opacity: 0.6;
+        transition: 0.3s;
+      }
     }
 
     &_title {
