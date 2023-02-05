@@ -6,29 +6,29 @@ import state from '../../../../shared/services/state';
 import ImageElement from '../../../../shared/components/base-elements/image-element';
 
 export default class RecomendSection extends DOMElement {
-  private recomendTitle: DOMElement | undefined;
+  private recomendTitle: DOMElement;
 
-  private recomendLink: DOMElement | undefined;
+  private recomendLink: DOMElement;
 
-  private recomendPic: DOMElement | undefined;
+  private recomendPic: DOMElement;
 
-  private recomendCardsList: DOMElement | undefined;
+  private recomendCardsList: DOMElement;
 
-  private recomendCard: DOMElement | undefined;
+  private recomendCard: DOMElement;
 
-  private recomendCardLink: DOMElement | undefined;
+  private recomendCardLink: DOMElement;
 
-  private recomendCardPoster: DOMElement | undefined;
+  private recomendCardPoster: DOMElement;
 
-  private recomendCardPosterImage: ImageElement | undefined;
+  private recomendCardPosterImage: ImageElement;
 
-  private recomendCardTitle: DOMElement | undefined;
+  private recomendCardTitle: DOMElement;
 
-  private recomendCardInfo: DOMElement | undefined;
+  private recomendCardInfo: DOMElement;
 
-  private recomendCardYear: DOMElement | undefined;
+  private recomendCardYear: DOMElement;
 
-  private recomendCardGenre: DOMElement | undefined;
+  private recomendCardGenre: DOMElement;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
