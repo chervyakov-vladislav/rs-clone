@@ -36,3 +36,9 @@ export interface ITopFilm {
   rating: string;
   year: string;
 }
+
+export type ObjectLocalStorage = {
+  filmId: number;
+  posterUrlPreview: string;
+  nameRu: string;
+};

@@ -30,7 +30,7 @@ export default class MovieCard {
 
     this.movieCard.node.addEventListener('click', () => {
       window.location.hash = `#movie/${item.filmId}`;
-      const movie = { id: item.filmId, posterUrlPreview: item.posterUrlPreview };
+      const movie = { filmId: item.filmId, posterUrlPreview: item.posterUrlPreview, nameRu: item.nameRu };
       storage.putMovies(movie);
     });
 

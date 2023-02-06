@@ -1,9 +1,6 @@
-type ObjectLocalStorage = {
-  id: number;
-  posterUrlPreview: string;
-};
+import { ObjectLocalStorage } from '../models/response-data';
 
-class LocalStorageUtil {
+class LocalStorage {
   keyName: string;
 
   constructor() {
@@ -22,7 +19,7 @@ class LocalStorageUtil {
     const movies = this.getMovies();
     let isMovie = false;
     movies.forEach((element: ObjectLocalStorage) => {
-      if (element.id === ObjectMovie.id) {
+      if (element.filmId === ObjectMovie.filmId) {
         isMovie = true;
       }
     });
@@ -33,5 +30,5 @@ class LocalStorageUtil {
   }
 }
 
-const storage = new LocalStorageUtil();
+const storage = new LocalStorage();
 export default storage;
