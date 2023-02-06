@@ -2,6 +2,7 @@ import DOMElement from '../../../shared/components/base-elements/dom-element';
 import ImageElement from '../../../shared/components/base-elements/image-element';
 import LinkElement from '../../../shared/components/base-elements/link-element';
 import { ITopFilm } from '../../../shared/models/response-data';
+import storage from '../../../shared/components/local-storage';
 
 export default class MovieCard {
   private movieCard: DOMElement;
@@ -29,6 +30,8 @@ export default class MovieCard {
 
     this.movieCard.node.addEventListener('click', () => {
       window.location.hash = `#movie/${item.filmId}`;
+      const movie = { id: item.filmId, posterUrlPreview: item.posterUrlPreview };
+      storage.putMovies(movie);
     });
 
     this.movieCardLink = new LinkElement(this.movieCard.node, {
