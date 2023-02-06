@@ -1,4 +1,3 @@
-import { IFilmData } from '../models/response-data';
 import { StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 

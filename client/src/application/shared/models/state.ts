@@ -8,6 +8,6 @@ export interface StateInterface {
   iframe: HTMLElement;
   moviePage: {
     pageID: string;
-    currentData: IFilmData | null
-  }
+    currentData: IFilmData | null;
+  };
 }
