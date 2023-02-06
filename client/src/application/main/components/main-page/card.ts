@@ -24,6 +24,7 @@ export default class MovieCard {
     this.movieCard = new DOMElement(container, {
       tagName: 'div',
       classList: ['movie__card'],
+      id: `${item.filmId}`,
     });
     this.movieCardLink = new LinkElement(this.movieCard.node, {
       tagName: 'a',

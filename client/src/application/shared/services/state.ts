@@ -11,6 +11,7 @@ class State {
         status: 'paused',
       },
       films: [],
+      best: [],
       iframe: document.createElement('div'),
     };
   }
@@ -24,6 +25,10 @@ class State {
     // Получаем массив данных рекомендованных фильмов
     const dataTop = await apiKinopoisk.getTopData();
     this.allData.films = dataTop.films;
+
+    // Получаем массив данных лучших фильмов
+    const dataBestTop = await apiKinopoisk.getTopBestData();
+    this.allData.best = dataBestTop.films;
   }
 
   public getPremiereInfo() {

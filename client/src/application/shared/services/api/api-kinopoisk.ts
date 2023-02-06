@@ -14,6 +14,8 @@ class ApiServiceKinopoisk {
   // Возвращает список фильмов с пагинацией. Каждая страница содержит не более чем 20 фильмов.
   private topFilms: string = `${this.filmData}/top?type=TOP_100_POPULAR_FILMS&page=`;
 
+  private topBestFilms: string = `${this.filmData}/top?type=TOP_250_BEST_FILMS&page=`;
+
   public async getFilmData(id: number): Promise<IFilmData> {
     const response = await fetch(`${this.filmData}/${id}`, {
       headers: {
@@ -94,6 +96,17 @@ class ApiServiceKinopoisk {
 
   public async getTopData(page = 1): Promise<ITopData> {
     const response = await fetch(`${this.topFilms}${page}`, {
+      headers: {
+        Accept: 'application/json',
+        'X-Api-Key': this.apiKey,
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  public async getTopBestData(page = 1): Promise<ITopData> {
+    const response = await fetch(`${this.topBestFilms}${page}`, {
       headers: {
         Accept: 'application/json',
         'X-Api-Key': this.apiKey,

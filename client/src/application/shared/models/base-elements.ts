@@ -2,6 +2,7 @@ export interface Options {
   tagName: keyof HTMLElementTagNameMap;
   classList?: string[];
   content?: string;
+  id?: string;
 }
 
 export interface LinkOptions extends Options {

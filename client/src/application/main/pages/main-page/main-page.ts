@@ -1,5 +1,6 @@
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import Page from '../../../shared/components/page';
+import BestSection from '../../components/main-page/best-films/best-films';
 import PremierePreview from '../../components/main-page/premiere-preview/premiere-preview';
 import RecomendSection from '../../components/main-page/recomend/recomend';
 
@@ -9,6 +10,8 @@ export default class MainPage extends Page {
   private premiere: PremierePreview | null;
 
   private recomend: RecomendSection | null;
+
+  private best: BestSection | null;
 
   constructor(id: string) {
     super(id);
@@ -20,6 +23,7 @@ export default class MainPage extends Page {
 
     this.premiere = null;
     this.recomend = null;
+    this.best = null;
 
     this.render();
   }
@@ -27,5 +31,6 @@ export default class MainPage extends Page {
   public render() {
     this.premiere = new PremierePreview(this.premiereContainer.node);
     this.recomend = new RecomendSection(this.premiereContainer.node);
+    this.best = new BestSection(this.premiereContainer.node);
   }
 }
