@@ -1,3 +1,4 @@
+import { IFilmData } from '../models/response-data';
 import { StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
@@ -13,6 +14,10 @@ class State {
       films: [],
       best: [],
       iframe: document.createElement('div'),
+      moviePage: {
+        pageID: '',
+        currentData: null,
+      },
     };
   }
 
@@ -83,6 +88,20 @@ class State {
       return `${minutes}:0${seconds}`;
     }
     return `${minutes}:${seconds}`;
+  }
+
+  public setMoviePageID(id: string) {
+    console.log(id);
+    this.allData.moviePage.pageID = id;
+  }
+
+  public getMoviePageID() {
+    return this.allData.moviePage.pageID;
+  }
+
+  public async setMoviePageCurrentData() {
+    const data = await apiKinopoisk.getFilmData(Number(this.getMoviePageID()));
+    this.allData.moviePage.currentData = data;
   }
 }
 

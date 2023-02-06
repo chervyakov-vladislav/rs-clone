@@ -26,6 +26,11 @@ export default class MovieCard {
       classList: ['movie__card'],
       id: `${item.filmId}`,
     });
+
+    this.movieCard.node.addEventListener('click', () => {
+      window.location.hash = `#movie/${item.filmId}`;
+    });
+
     this.movieCardLink = new LinkElement(this.movieCard.node, {
       tagName: 'a',
       href: `#/movie/${item.filmId}`,

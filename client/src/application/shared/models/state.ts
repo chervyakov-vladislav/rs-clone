@@ -6,4 +6,8 @@ export interface StateInterface {
   best: ITopFilm[];
   player: Record<string, string>;
   iframe: HTMLElement;
+  moviePage: {
+    pageID: string;
+    currentData: IFilmData | null
+  }
 }
