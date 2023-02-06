@@ -1,0 +1,38 @@
+.interested {
+
+  &__cards_list {
+    align-items: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    gap: 20px;
+    justify-content: flex-start;
+  }
+
+  &__card {
+    cursor: pointer;
+    display: flex;
+    width: 100px;
+    color: #000;
+    font-size: 14px;
+
+    &_poster {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
+    }
+
+    &_img {
+      height: 150px;
+      width: 100px;
+
+      &:hover {
+        opacity: 0.6;
+        transition: 0.3s;
+      }
+    }
+  }
+}

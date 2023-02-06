@@ -1,7 +1,5 @@
 /* eslint-disable */
 import YoutubeAPI from '../../../../core/components/scripts/youtube-api';
-import IFrameElement from '../../../../shared/components/base-elements/iframe-element';
-// import { IFilmData } from '../../../../shared/models/response-data';
 import state from '../../../../shared/services/state';
 
 var player: any;

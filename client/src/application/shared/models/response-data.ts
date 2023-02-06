@@ -18,3 +18,27 @@ export interface WinnerInterface {
 export interface IFilmData {
   [key: string]: string | null | boolean;
 }
+
+export interface ITopData {
+  films: ITopFilm[];
+}
+
+export interface ITopFilm {
+  filmId: number;
+  genres: [
+    {
+      genre: string;
+    }
+  ];
+  nameRu: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+  rating: string;
+  year: string;
+}
+
+export type ObjectLocalStorage = {
+  filmId: number;
+  posterUrlPreview: string;
+  nameRu: string;
+};

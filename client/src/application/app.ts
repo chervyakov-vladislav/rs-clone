@@ -9,14 +9,11 @@ class App {
 
   private main: Main;
 
-  // private ytApi: YoutubeAPI;
-
   private router: Router | null = null;
 
   constructor() {
     this.header = new Header(document.body);
     this.main = new Main(document.body);
-    // this.ytApi = new YoutubeAPI(document.body);
   }
 
   public async start() {

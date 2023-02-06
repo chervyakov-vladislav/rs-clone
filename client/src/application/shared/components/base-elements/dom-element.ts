@@ -8,6 +8,9 @@ export default class DOMElement {
     if (options.classList) {
       el.classList.add(...options.classList);
     }
+    if (options.id) {
+      el.id = options.id;
+    }
     if (options.content) {
       el.textContent = options.content;
     }

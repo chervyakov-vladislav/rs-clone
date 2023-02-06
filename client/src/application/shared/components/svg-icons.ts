@@ -173,6 +173,9 @@ const enum SVG {
   </clipPath>
   </defs>
   </svg>`,
+  recomendArrow = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.08865 2.2225L15.5562 9.99875L8.0899 17.7775L6.6674 16.3013L12.7374 9.99875L6.6674 3.69875L8.08865 2.2225Z" fill="#999999"/>
+  </svg>`,
   leftGoldBranch = `
   <svg width='10' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
   <path d='M7.26 19.395s1.385-.617 1.768-1.806c.382-1.188-.384-2.498-.384-2.498s-1.386.618-1.768 1.806c-.382 1.189.384 2.498.384 2.498Z' 
@@ -216,7 +219,7 @@ const enum SVG {
   <stop offset='1' stop-color='#B59646'/></linearGradient><linearGradient id='g' x1='6.3' y1='3.033' x2='.32' y2='12.801' 
   gradientUnits='userSpaceOnUse'><stop stop-color='#FFD25E'/><stop offset='1' stop-color='#B59646'/></linearGradient>
   <linearGradient id='h' x1='6.3' y1='3.033' x2='.32' y2='12.801' gradientUnits='userSpaceOnUse'><stop stop-color='#FFD25E'/>
-  <stop offset='1' stop-color='#B59646'/></linearGradient></defs></svg>`
+  <stop offset='1' stop-color='#B59646'/></linearGradient></defs></svg>`,
 }
 
 export default SVG;
