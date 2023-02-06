@@ -1,6 +1,7 @@
 import ButtonElement from '../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import InputElement from '../../../shared/components/base-elements/input-element';
+import apiService from '../../../shared/services/api/server-api.service';
 
 export default class AuthForm extends DOMElement {
   private loginInput: InputElement;
@@ -30,6 +31,19 @@ export default class AuthForm extends DOMElement {
       tagName: 'button',
       classList: ['auth__button'],
       content: 'Login',
+    });
+
+    this.authButton.node.addEventListener('click', () => {
+      if (this.isRegister)
+        apiService.registerUser({
+          login: this.loginInput.inputNode.value,
+          password: this.passwordInput.inputNode.value,
+        });
+      else
+        apiService.loginUser({
+          login: this.loginInput.inputNode.value,
+          password: this.passwordInput.inputNode.value,
+        });
     });
   }
 

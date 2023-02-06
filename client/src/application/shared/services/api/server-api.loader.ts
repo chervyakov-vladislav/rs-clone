@@ -1,6 +1,6 @@
 import { TSObject, Method, ResponseData } from '../../models/base-types';
 
-const PATH = 'http://localhost:3000/';
+const PATH = 'http://localhost:3000/api/';
 
 class Loader {
   private errorHandler(res: Response): Response {
