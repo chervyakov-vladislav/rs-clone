@@ -42,6 +42,7 @@ export default class InterestedSection extends DOMElement {
     const container = this.interestedCardsList.node;
     container.innerHTML = '';
     const filmdata = storage.getMovies().slice(-8);
+    console.log(filmdata);
     filmdata.map((item: ObjectLocalStorage) => new VisitedCard(container, item));
   }
 }

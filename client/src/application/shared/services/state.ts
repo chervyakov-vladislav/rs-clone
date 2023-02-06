@@ -21,7 +21,8 @@ class State {
   }
 
   public async loadAppData() {
-    const premiereID = 301;
+    // грузим данные для обложки
+    const premiereID = 301; // пока вынесем нужный ID в константу
     const premiereLink = 'https://youtu.be/8qB8EGNOtr8';
     this.allData.premiere = await apiKinopoisk.getFilmData(premiereID);
     this.allData.premiere.link = premiereLink;
@@ -90,7 +91,6 @@ class State {
   }
 
   public setMoviePageID(id: string) {
-    console.log(id);
     this.allData.moviePage.pageID = id;
   }
 
