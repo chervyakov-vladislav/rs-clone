@@ -29,14 +29,8 @@ export default class Router extends DOMElement {
 
   private enableRouteChange() {
     window.addEventListener('hashchange', async () => {
-<<<<<<< HEAD
-      const hash = window.location.hash.slice(1).split('/')[0];
-      // console.log('hash: ', window.location.hash);
-      if (hash === 'movie') {
-=======
       const id = this.getCurrentPageId();
       if (id === 'movie') {
->>>>>>> develop
         await this.setMoviePage(window.location.hash);
       }
       this.renderNewPage(id);
