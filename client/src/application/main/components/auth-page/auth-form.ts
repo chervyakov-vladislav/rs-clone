@@ -30,7 +30,7 @@ export default class AuthForm extends DOMElement {
     this.authButton = new ButtonElement(this.node, {
       tagName: 'button',
       classList: ['auth__button'],
-      content: 'Login',
+      content: 'Войти',
     });
 
     this.authButton.node.addEventListener('click', () => {
@@ -49,6 +49,6 @@ export default class AuthForm extends DOMElement {
 
   public toggleIsRegister() {
     this.isRegister = !this.isRegister;
-    this.authButton.node.textContent = this.isRegister ? 'Register' : 'Login';
+    this.authButton.node.textContent = this.isRegister ? 'Регистрация' : 'Войти';
   }
 }

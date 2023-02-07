@@ -22,8 +22,8 @@ export default class Login extends DOMElement {
       this.loginMenu = new LoginMenu(this.node);
     });
 
-    this.loginBtn = new LinkElement(this.node, {
-      tagName: 'a',
+    this.loginBtn = new ButtonElement(this.node, {
+      tagName: 'button',
       classList: ['login__button'],
       content: 'Войти',
     });
