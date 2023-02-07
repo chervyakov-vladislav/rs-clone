@@ -1,8 +1,8 @@
 import { IFilmData, ITopData } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
-  private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
-  // private apiKey = '864bc0bb-a854-41d0-b411-dcc8376d4427';
+  // private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
+  private apiKey = '864bc0bb-a854-41d0-b411-dcc8376d4427';
   // private apiKey = '1eed0f50-3f3b-49f1-b171-1547c878ae42';
 
   private baseUrl: string = 'https://kinopoiskapiunofficial.tech/api';
