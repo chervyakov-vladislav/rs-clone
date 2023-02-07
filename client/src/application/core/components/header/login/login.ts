@@ -1,21 +1,31 @@
 import './login.scss';
+import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
-import LinkElement from '../../../../shared/components/base-elements/link-element';
+import LoginMenu from './login-menu/login-menu';
 
 export default class Login extends DOMElement {
-  private loginBtn: LinkElement;
+  private loginBtn: ButtonElement;
+
+  private loginMenu: LoginMenu | null = null;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'div',
       classList: ['login'],
     });
+    this.node.addEventListener('click', () => {
+      // проверка на авторизацию. Если авторизованы, то выпадает менюха
+      if (this.loginMenu !== null) {
+        const { node } = this.loginMenu as LoginMenu;
+        node.remove();
+      }
+      this.loginMenu = new LoginMenu(this.node);
+    });
 
     this.loginBtn = new LinkElement(this.node, {
       tagName: 'a',
       classList: ['login__button'],
-      href: '#auth',
-      content: 'Вход',
+      content: 'Войти',
     });
   }
 }

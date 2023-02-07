@@ -1,4 +1,4 @@
-import { StateInterface } from '../models/state';
+import { PreviousPageInfoInterface, StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
 class State {
@@ -10,12 +10,20 @@ class State {
       player: {
         status: 'paused',
       },
+      films: [],
+      best: [],
       iframe: document.createElement('div'),
+      moviePage: {
+        pageID: '',
+        currentData: null,
+      },
+      previousPageInfo: {
+        currentPageHash: '',
+        currentPageID: '',
+        previousPageHash: '',
+        previousPageID: '',
+      },
     };
-  }
-
-  public getPremiereInfo() {
-    return this.allData.premiere;
   }
 
   public async loadAppData() {
@@ -25,7 +33,17 @@ class State {
     this.allData.premiere = await apiKinopoisk.getFilmData(premiereID);
     this.allData.premiere.link = premiereLink;
 
-    // грузим данные для следующего компонента
+    // Получаем массив данных рекомендованных фильмов
+    const dataTop = await apiKinopoisk.getTopData();
+    this.allData.films = dataTop.films;
+
+    // Получаем массив данных лучших фильмов
+    const dataBestTop = await apiKinopoisk.getTopBestData();
+    this.allData.best = dataBestTop.films;
+  }
+
+  public getPremiereInfo() {
+    return this.allData.premiere;
   }
 
   public getPlayerState() {
@@ -76,6 +94,30 @@ class State {
       return `${minutes}:0${seconds}`;
     }
     return `${minutes}:${seconds}`;
+  }
+
+  public setMoviePageID(id: string) {
+    this.allData.moviePage.pageID = id;
+  }
+
+  public getMoviePageID() {
+    return this.allData.moviePage.pageID;
+  }
+
+  public async setMoviePageCurrentData() {
+    const data = await apiKinopoisk.getFilmData(Number(this.getMoviePageID()));
+    this.allData.moviePage.currentData = data;
+  }
+
+  public setPreviousPageInfo(options: PreviousPageInfoInterface) {
+    this.allData.previousPageInfo.currentPageHash = options.currentPageHash;
+    this.allData.previousPageInfo.currentPageID = options.currentPageID;
+    this.allData.previousPageInfo.previousPageHash = options.previousPageHash;
+    this.allData.previousPageInfo.previousPageID = options.previousPageID;
+  }
+
+  public getPreviousPageInfo() {
+    return this.allData.previousPageInfo;
   }
 }
 

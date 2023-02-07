@@ -3,6 +3,7 @@ import ButtonElement from '../../../../shared/components/base-elements/button-el
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import SVG from '../../../../shared/components/svg-icons';
+import Suggest from './search-suggest/search-suggest';
 
 export default class Search extends DOMElement {
   private input: InputElement;
@@ -11,10 +12,19 @@ export default class Search extends DOMElement {
 
   private searchButton: ButtonElement;
 
+  private searchSuggest: Suggest | null = null;
+
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'div',
       classList: ['search'],
+    });
+    this.node.addEventListener('click', () => {
+      if (this.searchSuggest !== null) {
+        const { node } = this.searchSuggest as Suggest;
+        node.remove();
+      }
+      this.searchSuggest = new Suggest(this.node);
     });
 
     this.input = new InputElement(this.node, {

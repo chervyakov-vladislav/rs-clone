@@ -1,7 +1,9 @@
-import { IFilmData } from '../../models/response-data';
+import { IFilmData, ITopData } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
-  private apiKey = '1eed0f50-3f3b-49f1-b171-1547c878ae42';
+  private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
+  // private apiKey = '864bc0bb-a854-41d0-b411-dcc8376d4427';
+  // private apiKey = '1eed0f50-3f3b-49f1-b171-1547c878ae42';
 
   private baseUrl: string = 'https://kinopoiskapiunofficial.tech/api';
 
@@ -12,6 +14,8 @@ class ApiServiceKinopoisk {
   // Выбор топ фильмов TOP_100_POPULAR_FILMS, TOP_250_BEST_FILMS, TOP_AWAIT_FILMS
   // Возвращает список фильмов с пагинацией. Каждая страница содержит не более чем 20 фильмов.
   private topFilms: string = `${this.filmData}/top?type=TOP_100_POPULAR_FILMS&page=`;
+
+  private topBestFilms: string = `${this.filmData}/top?type=TOP_250_BEST_FILMS&page=`;
 
   public async getFilmData(id: number): Promise<IFilmData> {
     const response = await fetch(`${this.filmData}/${id}`, {
@@ -91,8 +95,19 @@ class ApiServiceKinopoisk {
     return data;
   }
 
-  public async getTopData(page = 1): Promise<void> {
+  public async getTopData(page = 1): Promise<ITopData> {
     const response = await fetch(`${this.topFilms}${page}`, {
+      headers: {
+        Accept: 'application/json',
+        'X-Api-Key': this.apiKey,
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  public async getTopBestData(page = 1): Promise<ITopData> {
+    const response = await fetch(`${this.topBestFilms}${page}`, {
       headers: {
         Accept: 'application/json',
         'X-Api-Key': this.apiKey,

@@ -2,6 +2,7 @@ import './login-menu.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
 import LinkElement from '../../../../../shared/components/base-elements/link-element';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
+import headerObserver from '../../../../services/header-observer.service';
 
 export default class LoginMenu extends DOMElement {
   private accountItem: DOMElement;
@@ -17,6 +18,7 @@ export default class LoginMenu extends DOMElement {
       tagName: 'ul',
       classList: ['login-menu'],
     });
+    headerObserver.register(this);
 
     this.accountItem = new DOMElement(this.node, {
       tagName: 'li',
