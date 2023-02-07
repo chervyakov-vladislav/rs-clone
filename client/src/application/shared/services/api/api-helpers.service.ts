@@ -3,7 +3,7 @@ class ApiHelpers {
 
   public debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
     func: F,
-    ms = 400
+    ms = 1000
   ): (...args: Parameters<F>) => void {
     return (...args: Parameters<F>): void => {
       clearTimeout(this.timeout);
