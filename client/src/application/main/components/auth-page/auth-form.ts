@@ -18,13 +18,13 @@ export default class AuthForm extends DOMElement {
     this.loginInput = new InputElement(this.node, {
       tagName: 'input',
       type: 'text',
-      placeholder: 'input login',
+      placeholder: 'Логин',
       classList: ['auth__input', 'auth__input-login'],
     });
     this.passwordInput = new InputElement(this.node, {
       tagName: 'input',
       type: 'password',
-      placeholder: 'input password',
+      placeholder: 'Пароль',
       classList: ['auth__input', 'auth__input-password'],
     });
     this.authButton = new ButtonElement(this.node, {
