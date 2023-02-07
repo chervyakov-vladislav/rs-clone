@@ -2,6 +2,7 @@ import './side-menu.scss';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
 import SVG from '../../../../shared/components/svg-icons';
+import menuObserver from '../../../services/menu-observer.service';
 
 export default class SideMenu extends DOMElement {
   public mainPageItem: DOMElement;
@@ -16,12 +17,6 @@ export default class SideMenu extends DOMElement {
 
   private moviesLink: LinkElement;
 
-  private serialsItem: DOMElement;
-
-  private serialsPic: DOMElement;
-
-  private serialsLink: LinkElement;
-
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'ul',
@@ -30,8 +25,9 @@ export default class SideMenu extends DOMElement {
 
     this.mainPageItem = new DOMElement(this.node, {
       tagName: 'li',
-      classList: ['side-menu__item', 'side-menu__item--active'],
+      classList: ['side-menu__item'],
     });
+    menuObserver.register('', this.mainPageItem);
 
     this.mainPageItem.node.addEventListener('click', (e: Event) => {
       e.preventDefault();
@@ -55,6 +51,7 @@ export default class SideMenu extends DOMElement {
       tagName: 'li',
       classList: ['side-menu__item'],
     });
+    menuObserver.register('premiere', this.moviesItem);
 
     this.moviesItem.node.addEventListener('click', (e: Event) => {
       e.preventDefault();
@@ -72,24 +69,6 @@ export default class SideMenu extends DOMElement {
       href: '#',
       classList: ['side-menu__link'],
       content: 'Премьера',
-    });
-
-    this.serialsItem = new DOMElement(this.node, {
-      tagName: 'li',
-      classList: ['side-menu__item'],
-    });
-
-    this.serialsPic = new DOMElement(this.serialsItem.node, {
-      tagName: 'span',
-      classList: ['side-menu__pic'],
-    });
-    this.serialsPic.node.innerHTML = SVG.serialsIcon;
-
-    this.serialsLink = new LinkElement(this.serialsItem.node, {
-      tagName: 'a',
-      href: '#',
-      classList: ['side-menu__link'],
-      content: 'Сериалы',
     });
   }
 }
