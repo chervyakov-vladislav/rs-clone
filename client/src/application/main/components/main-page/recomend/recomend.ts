@@ -27,9 +27,13 @@ export default class RecomendSection extends DOMElement {
 
     this.recomendLink = new LinkElement(this.recomendTitle.node, {
       tagName: 'a',
-      href: '#',
+      href: '#recomend',
       classList: ['recomend__title_link'],
       content: 'Рекомендации',
+    });
+
+    this.recomendLink.node.addEventListener('click', () => {
+      window.location.hash = '#recomend';
     });
 
     this.recomendPic = new DOMElement(this.recomendTitle.node, {
@@ -37,11 +41,6 @@ export default class RecomendSection extends DOMElement {
       classList: ['recomend__pic'],
     });
     this.recomendPic.node.innerHTML = SVG.recomendArrow;
-
-    this.recomendTitle.node.addEventListener('click', () => {
-      console.log(state.allData.films[1].posterUrlPreview);
-      window.location.hash = '#premiere';
-    });
 
     this.recomendCardsList = new DOMElement(this.node, {
       tagName: 'div',
