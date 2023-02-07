@@ -5,10 +5,9 @@
   width: 100%;
   left: 0;
   height: 100%;
-}
-
-.auth__input,
-.auth__button {
-  display: block;
-  margin: 10px auto;
+  background: url('./../../../../assets/images/bg.png') center center / cover no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
 }

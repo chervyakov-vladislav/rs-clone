@@ -2,6 +2,7 @@ import './main-container.scss';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import SideMenu from './side-menu/side-menu';
 import headerObserver from '../../services/header-observer.service';
+import fullscreenObserver from '../../../main/services/auth-page/fullsrceen/fullscreen-observer';
 
 export default class Main extends DOMElement {
   private mainContainer: DOMElement;
@@ -23,6 +24,7 @@ export default class Main extends DOMElement {
       classList: ['container', 'main__container'],
     });
     this.container = this.mainContainer.node;
+    fullscreenObserver.register(this.mainContainer);
 
     this.navigation = new DOMElement(this.mainContainer.node, {
       tagName: 'nav',

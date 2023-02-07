@@ -1,4 +1,5 @@
 import menuObserver from '../../../core/services/menu-observer.service';
+import fullscreenObserver from '../../../main/services/auth-page/fullsrceen/fullscreen-observer';
 import DOMElement from '../../components/base-elements/dom-element';
 import { RouterOptions } from '../../models/router-options';
 import state from '../state';
@@ -52,6 +53,7 @@ export default class Router extends DOMElement {
     const { hash } = window.location;
     const id = hash.slice(1).split('/')[0];
     this.setPrevPage(hash, id);
+    this.checkStyles(id);
     return id;
   }
 
@@ -63,5 +65,13 @@ export default class Router extends DOMElement {
       currentPageHash: hash,
       currentPageID: id,
     });
+  }
+
+  private checkStyles(id: string) {
+    if (id === 'auth') {
+      fullscreenObserver.addFullscreen();
+    } else {
+      fullscreenObserver.removeFullscreen();
+    }
   }
 }
