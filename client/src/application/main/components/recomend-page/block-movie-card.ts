@@ -48,6 +48,8 @@ export default class BlockMovieCard {
       movieGenres += ` ${e.genre},`;
     });
 
+    movieGenres = movieGenres.slice(0, -1);
+
     this.movieCardFlat = new DOMElement(container, {
       tagName: 'div',
       classList: ['movie-card-flat'],
