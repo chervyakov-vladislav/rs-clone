@@ -16,12 +16,6 @@ export default class SideMenu extends DOMElement {
 
   private moviesLink: LinkElement;
 
-  private serialsItem: DOMElement;
-
-  private serialsPic: DOMElement;
-
-  private serialsLink: LinkElement;
-
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'ul',
@@ -72,24 +66,6 @@ export default class SideMenu extends DOMElement {
       href: '#',
       classList: ['side-menu__link'],
       content: 'Премьера',
-    });
-
-    this.serialsItem = new DOMElement(this.node, {
-      tagName: 'li',
-      classList: ['side-menu__item'],
-    });
-
-    this.serialsPic = new DOMElement(this.serialsItem.node, {
-      tagName: 'span',
-      classList: ['side-menu__pic'],
-    });
-    this.serialsPic.node.innerHTML = SVG.serialsIcon;
-
-    this.serialsLink = new LinkElement(this.serialsItem.node, {
-      tagName: 'a',
-      href: '#',
-      classList: ['side-menu__link'],
-      content: 'Сериалы',
     });
   }
 }

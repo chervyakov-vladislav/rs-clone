@@ -1,5 +1,4 @@
 import DOMElement from '../../components/base-elements/dom-element';
-// import Page from '../../components/page';
 import { RouterOptions } from '../../models/router-options';
 import state from '../state';
 import mainRoutes from './routes';
@@ -11,7 +10,8 @@ export default class Router extends DOMElement {
       classList: ['router-container'],
     });
     this.enableRouteChange();
-    this.renderNewPage('');
+    const id = this.getCurrentPageId();
+    this.renderNewPage(id);
   }
 
   public renderNewPage(pageID: string) {
@@ -29,11 +29,11 @@ export default class Router extends DOMElement {
 
   private enableRouteChange() {
     window.addEventListener('hashchange', async () => {
-      const hash = window.location.hash.slice(1).split('/')[0];
-      if (hash === 'movie') {
+      const id = this.getCurrentPageId();
+      if (id === 'movie') {
         await this.setMoviePage(window.location.hash);
       }
-      this.renderNewPage(hash);
+      this.renderNewPage(id);
     });
   }
 
@@ -46,5 +46,22 @@ export default class Router extends DOMElement {
     state.setMoviePageID(filmID);
     await state.setMoviePageCurrentData();
     console.log(state.allData.moviePage.currentData);
+  }
+
+  private getCurrentPageId() {
+    const { hash } = window.location;
+    const id = hash.slice(1).split('/')[0];
+    this.setPrevPage(hash, id);
+    return id;
+  }
+
+  private setPrevPage(hash: string, id: string) {
+    const prevData = state.getPreviousPageInfo();
+    state.setPreviousPageInfo({
+      previousPageHash: prevData.currentPageHash,
+      previousPageID: prevData.currentPageID,
+      currentPageHash: hash,
+      currentPageID: id,
+    });
   }
 }
