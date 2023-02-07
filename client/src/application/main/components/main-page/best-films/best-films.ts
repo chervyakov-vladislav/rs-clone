@@ -27,7 +27,7 @@ export default class BestSection extends DOMElement {
 
     this.bestLink = new LinkElement(this.bestTitle.node, {
       tagName: 'a',
-      href: '#',
+      href: '#best',
       classList: ['recomend__title_link'],
       content: 'Лучшие фильмы',
     });
@@ -40,7 +40,7 @@ export default class BestSection extends DOMElement {
 
     this.bestTitle.node.addEventListener('click', () => {
       console.log(state.allData.films[1].posterUrlPreview);
-      window.location.hash = '#premiere';
+      window.location.hash = '#best';
     });
 
     this.bestCardsList = new DOMElement(this.node, {

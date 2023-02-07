@@ -220,6 +220,16 @@ const enum SVG {
   gradientUnits='userSpaceOnUse'><stop stop-color='#FFD25E'/><stop offset='1' stop-color='#B59646'/></linearGradient>
   <linearGradient id='h' x1='6.3' y1='3.033' x2='.32' y2='12.801' gradientUnits='userSpaceOnUse'><stop stop-color='#FFD25E'/>
   <stop offset='1' stop-color='#B59646'/></linearGradient></defs></svg>`,
+  starRating = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g clip-path="url(#clip0_61_179)">
+  <path d="M6.99998 10.3L3.13998 12.93C2.83998 13.13 2.42998 12.86 2.53998 12.53L4.06998 8.05L0.149978 5.22C-0.150022 5.01 0.0199782 4.57 0.389978 4.57H5.31998L6.61998 0.27C6.72998 -0.09 7.26998 -0.09 7.36998 0.27L8.66998 4.57H13.61C13.98 4.57 14.14 5.01 13.85 5.22L9.92998 8.05L11.46 12.52C11.57 12.86 11.16 13.14 10.86 12.92L6.99998 10.3Z" fill="black" fill-opacity="0.4"/>
+  </g>
+  <defs>
+  <clipPath id="clip0_61_179">
+  <rect width="14" height="14" fill="white"/>
+  </clipPath>
+  </defs>
+  </svg>`,
 }
 
 export default SVG;

@@ -4,6 +4,7 @@ import BestSection from '../../components/main-page/best-films/best-films';
 import PremierePreview from '../../components/main-page/premiere-preview/premiere-preview';
 import RecomendSection from '../../components/main-page/recomend/recomend';
 import InterestedSection from '../../components/main-page/interested/interested-films';
+import storage from '../../../shared/components/local-storage';
 
 export default class MainPage extends Page {
   private premiereContainer: DOMElement;
@@ -36,6 +37,8 @@ export default class MainPage extends Page {
     this.premiere = new PremierePreview(this.premiereContainer.node);
     this.recomend = new RecomendSection(this.premiereContainer.node);
     this.best = new BestSection(this.premiereContainer.node);
-    this.interested = new InterestedSection(this.premiereContainer.node);
+    if (!(storage.getMovies().length === 0)) {
+      this.interested = new InterestedSection(this.premiereContainer.node);
+    }
   }
 }
