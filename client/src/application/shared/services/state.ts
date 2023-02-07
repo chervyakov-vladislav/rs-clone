@@ -1,4 +1,4 @@
-import { previousPageInfoInterface, StateInterface } from '../models/state';
+import { PreviousPageInfoInterface, StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
 class State {
@@ -109,7 +109,7 @@ class State {
     this.allData.moviePage.currentData = data;
   }
 
-  public setPreviousPageInfo(options: previousPageInfoInterface) {
+  public setPreviousPageInfo(options: PreviousPageInfoInterface) {
     this.allData.previousPageInfo.currentPageHash = options.currentPageHash;
     this.allData.previousPageInfo.currentPageID = options.currentPageID;
     this.allData.previousPageInfo.previousPageHash = options.previousPageHash;

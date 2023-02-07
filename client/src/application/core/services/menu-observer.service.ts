@@ -1,11 +1,11 @@
 import DOMElement from '../../shared/components/base-elements/dom-element';
-import { previousPageInfoInterface } from '../../shared/models/state';
+import { PreviousPageInfoInterface } from '../../shared/models/state';
 import state from '../../shared/services/state';
 
 class MenuObserver {
   private subscribers: Record<string, DOMElement>;
 
-  private pageData: previousPageInfoInterface;
+  private pageData: PreviousPageInfoInterface;
 
   constructor() {
     this.pageData = state.getPreviousPageInfo();

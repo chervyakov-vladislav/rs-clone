@@ -10,10 +10,10 @@ export interface StateInterface {
     pageID: string;
     currentData: IFilmData | null;
   };
-  previousPageInfo: previousPageInfoInterface;
+  previousPageInfo: PreviousPageInfoInterface;
 }
 
-export interface previousPageInfoInterface {
+export interface PreviousPageInfoInterface {
   currentPageHash?: string;
   currentPageID?: string;
   previousPageHash?: string;

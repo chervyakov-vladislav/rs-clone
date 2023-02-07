@@ -1,6 +1,7 @@
 import './main-container.scss';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import SideMenu from './side-menu/side-menu';
+import headerObserver from '../../services/header-observer.service';
 
 export default class Main extends DOMElement {
   private mainContainer: DOMElement;
@@ -28,5 +29,16 @@ export default class Main extends DOMElement {
       classList: ['nav'],
     });
     this.sideMenu = new SideMenu(this.navigation.node);
+    document.body.addEventListener('click', (e) => {
+      const { target } = e;
+      if (
+        (target as HTMLElement).closest('.search') === null &&
+        (target as HTMLElement).closest('.search-suggest') === null &&
+        (target as HTMLElement).closest('.login') === null &&
+        (target as HTMLElement).closest('.login-menu') === null
+      ) {
+        headerObserver.closeAll();
+      }
+    });
   }
 }
