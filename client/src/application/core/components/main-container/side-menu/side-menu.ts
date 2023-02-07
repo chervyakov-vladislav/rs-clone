@@ -2,6 +2,7 @@ import './side-menu.scss';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
 import SVG from '../../../../shared/components/svg-icons';
+import menuObserver from '../../../services/menu-observer.service';
 
 export default class SideMenu extends DOMElement {
   public mainPageItem: DOMElement;
@@ -24,8 +25,9 @@ export default class SideMenu extends DOMElement {
 
     this.mainPageItem = new DOMElement(this.node, {
       tagName: 'li',
-      classList: ['side-menu__item', 'side-menu__item--active'],
+      classList: ['side-menu__item'],
     });
+    menuObserver.register('', this.mainPageItem);
 
     this.mainPageItem.node.addEventListener('click', (e: Event) => {
       e.preventDefault();
@@ -49,6 +51,7 @@ export default class SideMenu extends DOMElement {
       tagName: 'li',
       classList: ['side-menu__item'],
     });
+    menuObserver.register('premiere', this.moviesItem);
 
     this.moviesItem.node.addEventListener('click', (e: Event) => {
       e.preventDefault();

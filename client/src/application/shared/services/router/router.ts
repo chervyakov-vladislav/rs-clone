@@ -1,3 +1,4 @@
+import menuObserver from '../../../core/services/menu-observer.service';
 import DOMElement from '../../components/base-elements/dom-element';
 import { RouterOptions } from '../../models/router-options';
 import state from '../state';
@@ -16,10 +17,9 @@ export default class Router extends DOMElement {
 
   public renderNewPage(pageID: string) {
     this.node.innerHTML = '';
-    const element = this.findNewtemplate(pageID); // movie
+    menuObserver.setPage();
+    const element = this.findNewtemplate(pageID);
     const newPage = element.length !== 0 ? element[0].template().node : mainRoutes[0].template().node;
-    // тут написать, если pageID, это страница какого-то одного фильма, то загрузить новый фильм в стейт страницы и только потом её рисовать
-    // можно испольвовать конструкцию switch, как в online-store: https://github.com/chervyakov-vladislav/online-store/blob/main/src/application/main/router/router.ts
     this.node.append(newPage);
   }
 
