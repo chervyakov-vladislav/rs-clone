@@ -1,23 +1,21 @@
+import LoginForm from '../../../components/auth-page/login-form/login-form';
 import RegistrationForm from '../../../components/auth-page/registration-form/regestration-form';
 
 class FormRouter {
   private container: HTMLElement | null = null;
 
-  private loginForm: HTMLElement | null = null;
+  private loginForm: LoginForm | null = null;
 
   private registerForm: RegistrationForm | null = null;
 
   public appendContainer(elem: HTMLElement) {
     this.container = elem;
-    this.registerForm = new RegistrationForm(this.container);
-  }
-
-  public appendLoginForm(elem: HTMLElement) {
-    this.loginForm = elem;
+    this.loginForm = new LoginForm(this.container);
   }
 
   public routeRegister() {
     const container = this.container as HTMLElement;
+    if (!this.registerForm) this.registerForm = new RegistrationForm(container);
     container.innerHTML = '';
     container.append((this.registerForm as RegistrationForm).node);
   }
@@ -25,7 +23,7 @@ class FormRouter {
   public routeLogin() {
     const container = this.container as HTMLElement;
     container.innerHTML = '';
-    container.append(this.loginForm as HTMLElement);
+    container.append((this.loginForm as LoginForm).node);
   }
 }
 

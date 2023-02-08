@@ -2,6 +2,7 @@ import ButtonElement from '../../../../shared/components/base-elements/button-el
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
+import authValidation from '../../../services/auth-page/validation/validation';
 
 export default class RegistrationForm extends FormElement {
   private formRow: DOMElement;
@@ -42,6 +43,7 @@ export default class RegistrationForm extends FormElement {
       classList: ['auth-form__message'],
       content: 'Пример хорошего сообщения',
     });
+    authValidation.registerRegNameMessage(this.nameValidation.node);
 
     this.formRow = new DOMElement(this.node, {
       tagName: 'div',
@@ -60,6 +62,7 @@ export default class RegistrationForm extends FormElement {
       classList: ['auth-form__message', 'auth-form__message--invalid'],
       content: 'Пример плохого сообщения',
     });
+    authValidation.registerRegPassMessage(this.passwordValidation.node);
 
     this.submitButton = new ButtonElement(this.node, {
       tagName: 'button',
