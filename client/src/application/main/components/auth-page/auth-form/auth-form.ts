@@ -4,7 +4,9 @@ import FormElement from '../../../../shared/components/base-elements/form-elemen
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import authValidation from '../../../services/auth-page/validation/validation';
 
-export default class LoginForm extends FormElement {
+export default class AuthForm extends FormElement {
+  public isRegister: boolean;
+
   private formRow: DOMElement;
 
   private nameInput: InputElement;
@@ -23,6 +25,7 @@ export default class LoginForm extends FormElement {
       classList: ['auth-form'],
       action: '#',
     });
+    this.isRegister = false;
     // обработчик сабмита формы
     this.node.addEventListener('submit', (e) => e.preventDefault());
 
@@ -70,5 +73,13 @@ export default class LoginForm extends FormElement {
       type: 'submit',
       content: 'Войти',
     });
+
+    this.submitButton.node.addEventListener('click', () => {});
+  }
+
+  public changeMode(isRegister: boolean) {
+    this.isRegister = isRegister;
+    if (this.isRegister) this.submitButton.node.textContent = 'Зарегистрировать';
+    else this.submitButton.node.textContent = 'Войти';
   }
 }
