@@ -4,7 +4,7 @@ import DOMElement from '../../../../../shared/components/base-elements/dom-eleme
 import headerObserver from '../../../../services/menu/header-observer.service';
 
 export default class Suggest extends DOMElement {
-  private suggestList: DOMElement;
+  public suggestList: DOMElement;
 
   private showAllBtn: ButtonElement;
 
@@ -24,6 +24,10 @@ export default class Suggest extends DOMElement {
       tagName: 'button',
       classList: ['search-suggest__button'],
       content: 'Показать все',
+    });
+    this.showAllBtn.node.addEventListener('click', () => {
+      headerObserver.closeAll();
+      headerObserver.clearInput();
     });
   }
 }

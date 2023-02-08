@@ -11,7 +11,7 @@ export interface StateInterface {
     currentData: IFilmData | null;
   };
   previousPageInfo: PreviousPageInfoInterface;
-  searchKeyWord: KeyWordSearchInterface | null; 
+  searchKeyWord: KeyWordSearchInterface | null;
 }
 
 export interface PreviousPageInfoInterface {

@@ -1,9 +1,12 @@
 import apiKinopoisk from '../../../shared/services/api/api-kinopoisk';
+import state from '../../../shared/services/state';
+import suggestObserver from './suggest-observer.service';
 
 class SearchService {
   public async headerSearch(value: string) {
     const res = await apiKinopoisk.searchKeyword(value);
-    console.log(res);
+    state.setSearchKeyword(res);
+    suggestObserver.render();
   }
 }
 

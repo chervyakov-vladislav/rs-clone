@@ -6,6 +6,8 @@ import SVG from '../../../../shared/components/svg-icons';
 import Suggest from './search-suggest/search-suggest';
 import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 import searchService from '../../../services/search/search.service';
+import suggestObserver from '../../../services/search/suggest-observer.service';
+import headerObserver from '../../../services/menu/header-observer.service';
 
 export default class Search extends DOMElement {
   private input: InputElement;
@@ -29,10 +31,17 @@ export default class Search extends DOMElement {
         if (this.searchSuggest !== null) {
           const { node } = this.searchSuggest as Suggest;
           node.remove();
+          suggestObserver.unregister(this.searchSuggest);
         }
 
-        if (value.length > 0) searchService.headerSearch(value);
+        if (value.length > 0) {
+          suggestObserver.register(this.searchSuggest as Suggest);
+          searchService.headerSearch(value);
+        }
         this.searchSuggest = value.length > 0 ? new Suggest(this.node) : null;
+        if (this.searchSuggest) {
+          suggestObserver.setContainer((this.searchSuggest as Suggest).suggestList.node);
+        }
       })();
     });
 
@@ -42,6 +51,7 @@ export default class Search extends DOMElement {
       type: 'search',
       placeholder: 'Фильмы, сериалы, персоны',
     });
+    headerObserver.addInput(this.input.node as HTMLInputElement);
 
     this.filterButton = new ButtonElement(this.node, {
       tagName: 'button',
@@ -54,9 +64,5 @@ export default class Search extends DOMElement {
       classList: ['search__search-button'],
     });
     this.searchButton.node.innerHTML = SVG.searchIcon;
-  }
-
-  private getValue(e: Event) {
-    return (e.target as HTMLInputElement).value as string;
   }
 }
