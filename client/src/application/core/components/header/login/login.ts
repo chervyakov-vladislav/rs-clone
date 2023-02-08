@@ -15,6 +15,8 @@ export default class Login extends DOMElement {
     });
     this.node.addEventListener('click', () => {
       // проверка на авторизацию. Если авторизованы, то выпадает менюха
+      // если не авторизованы перебразывает на авторизацию
+      window.location.hash = '#auth';
       if (this.loginMenu !== null) {
         const { node } = this.loginMenu as LoginMenu;
         node.remove();
