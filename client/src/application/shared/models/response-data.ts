@@ -31,6 +31,7 @@ export interface ITopFilm {
     }
   ];
   nameRu: string;
+  nameEn: string;
   posterUrl: string;
   posterUrlPreview: string;
   rating: string;
