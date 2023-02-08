@@ -5,6 +5,7 @@ import InputElement from '../../../../shared/components/base-elements/input-elem
 import SVG from '../../../../shared/components/svg-icons';
 import Suggest from './search-suggest/search-suggest';
 import apiHelpers from '../../../../shared/services/api/api-helpers.service';
+import searchService from '../../../services/search/search.service';
 
 export default class Search extends DOMElement {
   private input: InputElement;
@@ -24,13 +25,14 @@ export default class Search extends DOMElement {
       let value: string = '';
       apiHelpers.debounce(() => {
         value = (e.target as HTMLInputElement).value;
-        // кидаем value в запрос
-        console.log(value);
+
         if (this.searchSuggest !== null) {
           const { node } = this.searchSuggest as Suggest;
           node.remove();
         }
-        this.searchSuggest = new Suggest(this.node);
+
+        if (value.length > 0) searchService.headerSearch(value);
+        this.searchSuggest = value.length > 0 ? new Suggest(this.node) : null;
       })();
     });
 

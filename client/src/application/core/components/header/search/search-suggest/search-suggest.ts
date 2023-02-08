@@ -1,7 +1,7 @@
 import './search-suggest.scss';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
-import headerObserver from '../../../../services/header-observer.service';
+import headerObserver from '../../../../services/menu/header-observer.service';
 
 export default class Suggest extends DOMElement {
   private suggestList: DOMElement;

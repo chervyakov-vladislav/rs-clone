@@ -1,4 +1,4 @@
-import DOMElement from '../../shared/components/base-elements/dom-element';
+import DOMElement from '../../../shared/components/base-elements/dom-element';
 
 class HeaderObserver {
   private subscribers: DOMElement[];

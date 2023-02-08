@@ -1,4 +1,4 @@
-import { IFilmData, ITopFilm } from './response-data';
+import { IFilmData, ITopFilm, KeyWordSearchInterface } from './response-data';
 
 export interface StateInterface {
   premiere: IFilmData | null;
@@ -11,6 +11,7 @@ export interface StateInterface {
     currentData: IFilmData | null;
   };
   previousPageInfo: PreviousPageInfoInterface;
+  searchKeyWord: KeyWordSearchInterface | null; 
 }
 
 export interface PreviousPageInfoInterface {

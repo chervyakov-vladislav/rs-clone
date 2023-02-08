@@ -1,4 +1,4 @@
-import menuObserver from '../../../core/services/menu-observer.service';
+import menuObserver from '../../../core/services/menu/menu-observer.service';
 import DOMElement from '../../components/base-elements/dom-element';
 import { RouterOptions } from '../../models/router-options';
 import state from '../state';

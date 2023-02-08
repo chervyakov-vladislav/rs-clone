@@ -42,3 +42,10 @@ export type ObjectLocalStorage = {
   posterUrlPreview: string;
   nameRu: string;
 };
+
+export interface KeyWordSearchInterface {
+  films: ITopFilm[];
+  keyword: string;
+  pageCount: number;
+  searchFilmsCountResult: number;
+}

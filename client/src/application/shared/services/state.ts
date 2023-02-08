@@ -1,3 +1,4 @@
+import { KeyWordSearchInterface } from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
@@ -23,6 +24,7 @@ class State {
         previousPageHash: '',
         previousPageID: '',
       },
+      searchKeyWord: null,
     };
   }
 
@@ -118,6 +120,14 @@ class State {
 
   public getPreviousPageInfo() {
     return this.allData.previousPageInfo;
+  }
+
+  public setSearchKeyword(value: KeyWordSearchInterface) {
+    this.allData.searchKeyWord = value;
+  }
+
+  public getSearchKeyword() {
+    return this.allData.searchKeyWord as KeyWordSearchInterface;
   }
 }
 

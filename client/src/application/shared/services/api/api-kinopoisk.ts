@@ -17,7 +17,7 @@ class ApiServiceKinopoisk {
 
   private topBestFilms: string = `${this.filmData}/top?type=TOP_250_BEST_FILMS&page=`;
 
-  private searchAdress: string = `${this.baseUrl}/v2.1/films/search-by-keyword`
+  private searchByKeyword: string = `${this.baseUrl}/v2.1/films/search-by-keyword`;
 
   public async getFilmData(id: number): Promise<IFilmData> {
     const response = await fetch(`${this.filmData}/${id}`, {
@@ -119,8 +119,8 @@ class ApiServiceKinopoisk {
     return data;
   }
 
-  public async searchByKeyword(page = 1): Promise<ITopData> {
-    const response = await fetch(`${this.topBestFilms}${page}`, {
+  public async searchKeyword(word: string, page = 1) {
+    const response = await fetch(`${this.searchByKeyword}?keyword=${word}&page=${page}`, {
       headers: {
         Accept: 'application/json',
         'X-Api-Key': this.apiKey,
@@ -129,7 +129,6 @@ class ApiServiceKinopoisk {
     const data = await response.json();
     return data;
   }
-
 }
 
 const apiKinopoisk = new ApiServiceKinopoisk();
