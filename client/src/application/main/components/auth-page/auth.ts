@@ -1,9 +1,11 @@
 import './auth.scss';
+import './login-form/login-form.scss';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import CloseAuth from './close/close';
 import ButtonElement from '../../../shared/components/base-elements/button-element';
 import ImageElement from '../../../shared/components/base-elements/image-element';
 import SVG from '../../../shared/components/svg-icons';
+import LoginForm from './login-form/login-form';
 
 export default class Auth extends DOMElement {
   private wrapper: DOMElement;
@@ -21,6 +23,8 @@ export default class Auth extends DOMElement {
   private logo: ImageElement;
 
   private formContainer: DOMElement;
+
+  private form: LoginForm;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, { tagName: 'div', classList: ['auth'] });
@@ -50,7 +54,7 @@ export default class Auth extends DOMElement {
 
     this.loginNav = new ButtonElement(this.navigation.node, {
       tagName: 'button',
-      classList: ['auth__nav-login'],
+      classList: ['auth__nav-login', 'active'],
       content: 'Войти',
     });
 
@@ -64,5 +68,7 @@ export default class Auth extends DOMElement {
       tagName: 'div',
       classList: ['auth__form-container'],
     });
+
+    this.form = new LoginForm(this.formContainer.node);
   }
 }
