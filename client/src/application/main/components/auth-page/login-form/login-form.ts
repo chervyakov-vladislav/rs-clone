@@ -20,8 +20,10 @@ export default class LoginForm extends FormElement {
     super(parentNode, {
       tagName: 'form',
       classList: ['auth-form'],
-      action: '#auth',
+      action: '#',
     });
+    // обработчик сабмита формы
+    this.node.addEventListener('submit', (e) => e.preventDefault());
 
     this.formRow = new DOMElement(this.node, {
       tagName: 'div',

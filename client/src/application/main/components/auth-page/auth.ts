@@ -6,6 +6,7 @@ import ButtonElement from '../../../shared/components/base-elements/button-eleme
 import ImageElement from '../../../shared/components/base-elements/image-element';
 import SVG from '../../../shared/components/svg-icons';
 import LoginForm from './login-form/login-form';
+import formRouter from '../../services/auth-page/form-router/form-router';
 
 export default class Auth extends DOMElement {
   private wrapper: DOMElement;
@@ -68,7 +69,21 @@ export default class Auth extends DOMElement {
       tagName: 'div',
       classList: ['auth__form-container'],
     });
+    formRouter.appendContainer(this.formContainer.node);
 
     this.form = new LoginForm(this.formContainer.node);
+    formRouter.appendLoginForm(this.form.node);
+
+    this.loginNav.node.addEventListener('click', () => {
+      this.regNav.node.classList.remove('active');
+      this.loginNav.node.classList.add('active');
+      formRouter.routeLogin();
+    });
+
+    this.regNav.node.addEventListener('click', () => {
+      this.regNav.node.classList.add('active');
+      this.loginNav.node.classList.remove('active');
+      formRouter.routeRegister();
+    });
   }
 }
