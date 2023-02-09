@@ -53,12 +53,20 @@ class ValueCheck {
 
   private analyzeCountries(countries: Countries[]) {
     if (countries.length === 1) return countries[0].country;
-    return countries.length > 1 ? countries.join(', ') : '';
+    if (countries.length === 0) return '';
+    const result = countries.map((item) => item.country);
+    return result.join(', ');
   }
 
   public getGenres(data: ITopFilm) {
     if (data.genres.length === 1) return data.genres[0].genre;
-    return data.genres.length > 1 ? data.genres.join(', ') : '';
+    if (data.genres.length === 0) return '';
+    const result = data.genres.map((item) => item.genre);
+    return result.join(', ');
+  }
+
+  public getRating(data: ITopFilm) {
+    return data.rating === 'null' ? 0 : data.rating;
   }
 }
 

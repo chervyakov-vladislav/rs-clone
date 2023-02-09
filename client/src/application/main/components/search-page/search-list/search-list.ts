@@ -1,3 +1,4 @@
+import './search-list.scss';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import state from '../../../../shared/services/state';
 import SearchListCard from './card/card';
