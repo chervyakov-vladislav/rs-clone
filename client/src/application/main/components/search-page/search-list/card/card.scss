@@ -61,6 +61,7 @@
 
   &__buttons {
     display: flex;
+    width: 150px;
   }
 
   &__rating-container {
@@ -85,5 +86,6 @@
     color: rgba(0, 0, 0, 0.6);
     font-size: 14px;
     margin-left: 10px;
+    margin-right: 20px;
   }
 }
