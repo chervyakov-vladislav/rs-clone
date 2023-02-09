@@ -24,9 +24,11 @@ class State {
         previousPageHash: '',
         previousPageID: '',
       },
-      searchKeyWord: null,
-      searchKeywordValue: '',
-      searchFilmsCountResult: 0,
+      search: {
+        searchKeyWord: null,
+        searchKeywordValue: '',
+        searchFilmsCountResult: 0,
+      },
     };
   }
 
@@ -125,20 +127,20 @@ class State {
   }
 
   public setSearchKeyword(value: KeyWordSearchInterface) {
-    this.allData.searchKeyWord = value;
-    this.allData.searchFilmsCountResult = value.searchFilmsCountResult;
+    this.allData.search.searchKeyWord = value;
+    this.allData.search.searchFilmsCountResult = value.searchFilmsCountResult;
   }
 
   public getSearchKeyword() {
-    return this.allData.searchKeyWord as KeyWordSearchInterface;
+    return this.allData.search.searchKeyWord as KeyWordSearchInterface;
   }
 
   public setSearchKeywordValue(value: string) {
-    this.allData.searchKeywordValue = value;
+    this.allData.search.searchKeywordValue = value;
   }
 
   public getSearchKeywordValue() {
-    return this.allData.searchKeywordValue;
+    return this.allData.search.searchKeywordValue;
   }
 }
 

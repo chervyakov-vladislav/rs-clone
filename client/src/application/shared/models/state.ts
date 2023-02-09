@@ -11,9 +11,11 @@ export interface StateInterface {
     currentData: IFilmData | null;
   };
   previousPageInfo: PreviousPageInfoInterface;
-  searchKeyWord: KeyWordSearchInterface | null;
-  searchKeywordValue: string;
-  searchFilmsCountResult: number;
+  search: {
+    searchKeyWord: KeyWordSearchInterface | null;
+    searchKeywordValue: string;
+    searchFilmsCountResult: number;
+  }
 }
 
 export interface PreviousPageInfoInterface {

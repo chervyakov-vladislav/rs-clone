@@ -43,7 +43,7 @@ export interface ITopFilm {
   type: string;
 }
 
-interface Countries {
+export interface Countries {
   country: string;
 } 
 

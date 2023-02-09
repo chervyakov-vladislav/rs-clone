@@ -2,6 +2,7 @@ import DOMElement from '../../../../../shared/components/base-elements/dom-eleme
 import ImageElement from '../../../../../shared/components/base-elements/image-element';
 import LinkElement from '../../../../../shared/components/base-elements/link-element';
 import { ITopFilm } from '../../../../../shared/models/response-data';
+import valueCheck from '../../../../services/search-page/value-check/value-check.service';
 
 export default class SearchListCard extends DOMElement {
   private link: LinkElement;
@@ -17,6 +18,12 @@ export default class SearchListCard extends DOMElement {
   private title: DOMElement;
 
   private buttons: DOMElement;
+
+  private firstRowInfo: DOMElement;
+
+  private secondRowInfo: DOMElement;
+
+  private thirdRowInfo: DOMElement;
 
   constructor(parentNode: HTMLElement, data: ITopFilm, count: number) {
     super(parentNode, {
@@ -56,18 +63,30 @@ export default class SearchListCard extends DOMElement {
     this.title = new DOMElement(this.desc.node, {
       tagName: 'h3',
       classList: ['search-card__film-title'],
-      content: this.checkNameRu(data),
+      content: valueCheck.isNameRU(data),
+    });
+
+    this.firstRowInfo = new DOMElement(this.desc.node, {
+      tagName: 'p',
+      classList: ['search-card__year-time'],
+      content: valueCheck.getEngnameYearTotalTime(data),
+    });
+
+    this.secondRowInfo = new DOMElement(this.desc.node, {
+      tagName: 'p',
+      classList: ['search-card__type-country'],
+      content: valueCheck.getTypeCountry(data),
+    });
+
+    this.thirdRowInfo = new DOMElement(this.desc.node, {
+      tagName: 'p',
+      classList: ['search-card__info-row'],
+      content: valueCheck.getGenres(data),
     });
 
     this.buttons = new DOMElement(this.info.node, {
       tagName: 'div',
       classList: ['search-card__buttons'],
     });
-  }
-
-  private checkNameRu(data: ITopFilm) {
-    const isNameRu = data.nameRu ? data.nameRu : data.nameEn;
-    const isName = isNameRu.length > 0 ? isNameRu : '-';
-    return isName;
   }
 }
