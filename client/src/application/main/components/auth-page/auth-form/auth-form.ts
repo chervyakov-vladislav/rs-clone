@@ -2,6 +2,8 @@ import ButtonElement from '../../../../shared/components/base-elements/button-el
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
+import { TSObject } from '../../../../shared/models/base-types';
+import apiService from '../../../../shared/services/api/server-api.service';
 import authValidation from '../../../services/auth-page/validation/validation';
 
 export default class AuthForm extends FormElement {
@@ -27,7 +29,10 @@ export default class AuthForm extends FormElement {
     });
     this.isRegister = false;
     // обработчик сабмита формы
-    this.node.addEventListener('submit', (e) => e.preventDefault());
+    this.node.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.submit();
+    });
 
     this.formRow = new DOMElement(this.node, {
       tagName: 'div',
@@ -44,7 +49,6 @@ export default class AuthForm extends FormElement {
     this.nameValidation = new DOMElement(this.formRow.node, {
       tagName: 'span',
       classList: ['auth-form__message'],
-      content: 'Пример хорошего сообщения',
     });
     authValidation.registerLoginNameMessage(this.nameValidation.node);
 
@@ -63,7 +67,6 @@ export default class AuthForm extends FormElement {
     this.passwordValidation = new DOMElement(this.formRow.node, {
       tagName: 'span',
       classList: ['auth-form__message', 'auth-form__message--invalid'],
-      content: 'Пример плохого сообщения',
     });
     authValidation.registerLoginPassMessage(this.passwordValidation.node);
 
@@ -73,13 +76,40 @@ export default class AuthForm extends FormElement {
       type: 'submit',
       content: 'Войти',
     });
-
-    this.submitButton.node.addEventListener('click', () => {});
   }
 
   public changeMode(isRegister: boolean) {
     this.isRegister = isRegister;
     if (this.isRegister) this.submitButton.node.textContent = 'Зарегистрировать';
     else this.submitButton.node.textContent = 'Войти';
+  }
+
+  public showValidationMessage(type: string, message: string, wrong = false) {
+    const node = type === 'login' ? this.nameValidation.node : this.passwordValidation.node;
+    node.textContent = message;
+    if (wrong) node.classList.add('auth-form__message--invalid');
+    else node.classList.remove('auth-form__message--invalid');
+  }
+
+  public async submit() {
+    let resp;
+    try {
+      if (this.isRegister)
+        resp = await apiService.registerUser({
+          login: this.nameInput.inputNode.value,
+          password: this.passwordInput.inputNode.value,
+        });
+      else
+        resp = await apiService.loginUser({
+          login: this.nameInput.inputNode.value,
+          password: this.passwordInput.inputNode.value,
+        });
+    } catch (error) {
+      console.log(error);
+    }
+    if (resp && resp.errors) {
+      const { msg, param } = resp.errors as unknown as TSObject;
+      this.showValidationMessage(param, msg, true);
+    }
   }
 }
