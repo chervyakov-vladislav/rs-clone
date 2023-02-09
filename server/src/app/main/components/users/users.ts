@@ -17,11 +17,12 @@ export default class UsersRouter {
   }
 
   private async login(req: Request , res: Response) {
+    let paramErr = 'login';
     const validateErr = validationResult(req);
     if (!validateErr.isEmpty()) {
       return res.status(400).json({ errors: validateErr.array()[0] });
     }
-
+    console.log(req.body);
     try {
       const existedUser = await this.usersService.findByLogin(req.body.login);
       if (!existedUser) {
@@ -29,6 +30,7 @@ export default class UsersRouter {
       }
       const validPassword = await bcrypt.compare(req.body.password, existedUser.password);
       if (!validPassword) {
+        paramErr = 'password';
         throw new Error('Password is wrong');
       }
 
@@ -42,12 +44,13 @@ export default class UsersRouter {
 
     } catch (err) {
       return res.status(400).json({
-        errors: (err as Error).message,
+        errors: { msg: (err as Error).message, param: paramErr},
       });
     }
   }
 
   private async register(req: Request , res: Response) {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array()[0] });
@@ -60,7 +63,7 @@ export default class UsersRouter {
       }
     } catch (err) {
       return res.status(400).json({
-        errors: (err as Error).message,
+        errors: { msg: (err as Error).message, param: 'login'},
       });
     }
 
@@ -92,7 +95,7 @@ export default class UsersRouter {
       res.send('authorization success');
     } catch (err) {
       return res.status(400).json({
-        errors: (err as Error).message,
+        errors: { msg: (err as Error).message },
       });
     }
   }
