@@ -50,3 +50,14 @@ export interface KeyWordSearchInterface {
   pageCount: number;
   searchFilmsCountResult: number;
 }
+
+export interface searchOptions {
+  order?: 'RATING' | 'NUM_VOTE' | 'YEAR';
+  type?: 'ALL' | 'FILM' | 'TV_SHOW' | 'TV_SERIES' | 'MINI_SERIES';
+  ratingFrom?: number;
+  ratingTo?: number;
+  yearFrom?: number;
+  yearTo?: number;
+  keyword?: string;
+  page?: number;
+}

@@ -1,4 +1,4 @@
-import { IFilmData, ITopData } from '../../models/response-data';
+import { IFilmData, ITopData, searchOptions } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
   // private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
@@ -19,6 +19,8 @@ class ApiServiceKinopoisk {
   private topBestFilms: string = `${this.filmData}/top?type=TOP_250_BEST_FILMS&page=`;
 
   private searchByKeyword: string = `${this.baseUrl}/v2.1/films/search-by-keyword`;
+
+  private searchFilterAdress: string = `${this.baseUrl}/v2.2/films`;
 
   public async getFilmData(id: number): Promise<IFilmData> {
     const response = await fetch(`${this.filmData}/${id}`, {
@@ -122,6 +124,17 @@ class ApiServiceKinopoisk {
 
   public async searchKeyword(word: string, page = 1) {
     const response = await fetch(`${this.searchByKeyword}?keyword=${word}&page=${page}`, {
+      headers: {
+        Accept: 'application/json',
+        'X-Api-Key': this.apiKey,
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  public async searchByFilter(word = '', page = 1) {
+    const response = await fetch(`${this.searchByKeyword}потом напишем этот гениальный запрос${word}&page=${page}`, {
       headers: {
         Accept: 'application/json',
         'X-Api-Key': this.apiKey,
