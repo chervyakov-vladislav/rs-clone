@@ -13,6 +13,7 @@ export interface StateInterface {
   previousPageInfo: PreviousPageInfoInterface;
   searchKeyWord: KeyWordSearchInterface | null;
   searchKeywordValue: string;
+  searchFilmsCountResult: number;
 }
 
 export interface PreviousPageInfoInterface {

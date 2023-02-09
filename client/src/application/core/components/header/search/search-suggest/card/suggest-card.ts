@@ -97,7 +97,7 @@ export default class SuggestCard extends DOMElement {
     if (data.nameEn) text.push(data.nameEn);
     if (data.genres) {
       data.genres.forEach((genre, index) => {
-        if (index < 4) {
+        if (index < 2) {
           text.push(genre.genre);
         }
       });

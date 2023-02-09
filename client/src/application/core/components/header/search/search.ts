@@ -69,10 +69,11 @@ export default class Search extends DOMElement {
     this.searchButton.node.addEventListener('click', () => {
       const { length } = (this.input.node as HTMLInputElement).value;
       if (length > 0) {
-        state.setSearchKeywordValue((this.input.node as HTMLInputElement).value);
+        const { value } = this.input.node as HTMLInputElement;
+        state.setSearchKeywordValue(value);
         headerObserver.closeAll();
         headerObserver.clearInput();
-        window.location.hash = '#searchPage';
+        window.location.hash = `#searchPage/?keyword=${value}`;
       }
     });
   }

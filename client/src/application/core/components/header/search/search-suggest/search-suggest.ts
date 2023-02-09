@@ -29,9 +29,10 @@ export default class Suggest extends DOMElement {
     this.showAllBtn.node.addEventListener('click', () => {
       const { length } = state.getSearchKeywordValue();
       if (length > 0) {
+        const value = state.getSearchKeywordValue();
         headerObserver.closeAll();
         headerObserver.clearInput();
-        window.location.hash = '#searchPage';
+        window.location.hash = `#searchPage/?keyword=${value}`;
       }
     });
   }

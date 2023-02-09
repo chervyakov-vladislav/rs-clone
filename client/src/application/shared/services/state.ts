@@ -26,6 +26,7 @@ class State {
       },
       searchKeyWord: null,
       searchKeywordValue: '',
+      searchFilmsCountResult: 0,
     };
   }
 
@@ -125,6 +126,7 @@ class State {
 
   public setSearchKeyword(value: KeyWordSearchInterface) {
     this.allData.searchKeyWord = value;
+    this.allData.searchFilmsCountResult = value.searchFilmsCountResult;
   }
 
   public getSearchKeyword() {

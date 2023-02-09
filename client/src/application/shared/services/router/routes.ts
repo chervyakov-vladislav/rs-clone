@@ -23,7 +23,7 @@ const mainRoutes = [
   },
   {
     id: 'searchPage',
-    template: () => new SearchPage('search-page'),
+    template: () => new SearchPage('search-result-page'),
   },
 ];
 
