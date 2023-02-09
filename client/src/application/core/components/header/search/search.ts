@@ -26,6 +26,7 @@ export default class Search extends DOMElement {
     });
     this.node.addEventListener('input', (e: Event) => {
       let value: string = '';
+      state.setSearchKeywordValue((this.input.node as HTMLInputElement).value);
       apiHelpers.debounce(() => {
         value = (e.target as HTMLInputElement).value;
 
@@ -66,7 +67,9 @@ export default class Search extends DOMElement {
     });
     this.searchButton.node.innerHTML = SVG.searchIcon;
     this.searchButton.node.addEventListener('click', () => {
-      if (state.getSearchKeyword().films.length > 0) {
+      const { length } = (this.input.node as HTMLInputElement).value;
+      if (length > 0) {
+        state.setSearchKeywordValue((this.input.node as HTMLInputElement).value);
         headerObserver.closeAll();
         headerObserver.clearInput();
         window.location.hash = '#searchPage';

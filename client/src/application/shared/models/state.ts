@@ -12,6 +12,7 @@ export interface StateInterface {
   };
   previousPageInfo: PreviousPageInfoInterface;
   searchKeyWord: KeyWordSearchInterface | null;
+  searchKeywordValue: string;
 }
 
 export interface PreviousPageInfoInterface {

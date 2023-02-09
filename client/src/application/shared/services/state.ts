@@ -25,6 +25,7 @@ class State {
         previousPageID: '',
       },
       searchKeyWord: null,
+      searchKeywordValue: '',
     };
   }
 
@@ -128,6 +129,14 @@ class State {
 
   public getSearchKeyword() {
     return this.allData.searchKeyWord as KeyWordSearchInterface;
+  }
+
+  public setSearchKeywordValue(value: string) {
+    this.allData.searchKeywordValue = value;
+  }
+
+  public getSearchKeywordValue() {
+    return this.allData.searchKeywordValue;
   }
 }
 

@@ -27,7 +27,8 @@ export default class Suggest extends DOMElement {
       content: 'Показать больше',
     });
     this.showAllBtn.node.addEventListener('click', () => {
-      if (state.getSearchKeyword().films.length > 0) {
+      const { length } = state.getSearchKeywordValue();
+      if (length > 0) {
         headerObserver.closeAll();
         headerObserver.clearInput();
         window.location.hash = '#searchPage';

@@ -1,4 +1,4 @@
-import { IFilmData, ITopData, searchOptions } from '../../models/response-data';
+import { IFilmData, ITopData, KeyWordSearchInterface } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
   // private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
@@ -129,7 +129,7 @@ class ApiServiceKinopoisk {
         'X-Api-Key': this.apiKey,
       },
     });
-    const data = await response.json();
+    const data: KeyWordSearchInterface = await response.json();
     return data;
   }
 
