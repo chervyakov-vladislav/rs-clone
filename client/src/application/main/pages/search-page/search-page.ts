@@ -4,11 +4,14 @@ import apiKinopoisk from '../../../shared/services/api/api-kinopoisk';
 import state from '../../../shared/services/state';
 import QuerryDescription from '../../components/search-page/querry-description/querry-description';
 import headerObserver from '../../../core/services/menu/header-observer.service';
+import SearchList from '../../components/search-page/search-list/search-list';
 
 export default class SearchPage extends Page {
   private container: DOMElement;
 
   private title: QuerryDescription | null = null;
+
+  private list: SearchList | null = null;
 
   constructor(id: string) {
     super(id);
@@ -27,5 +30,6 @@ export default class SearchPage extends Page {
     headerObserver.closeAll();
 
     this.title = new QuerryDescription(this.container.node);
+    this.list = new SearchList(this.container.node);
   }
 }

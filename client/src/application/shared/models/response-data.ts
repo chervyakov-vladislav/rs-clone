@@ -24,7 +24,10 @@ export interface ITopData {
 }
 
 export interface ITopFilm {
+  countries: Countries[];
+  desctiption: string;
   filmId: number;
+  filmLength: string;
   genres: [
     {
       genre: string;
@@ -35,8 +38,14 @@ export interface ITopFilm {
   posterUrl: string;
   posterUrlPreview: string;
   rating: string;
+  ratingVoteCount: number;
   year: string;
+  type: string;
 }
+
+interface Countries {
+  country: string;
+} 
 
 export type ObjectLocalStorage = {
   filmId: number;
