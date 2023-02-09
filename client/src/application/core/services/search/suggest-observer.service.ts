@@ -1,5 +1,6 @@
 import state from '../../../shared/services/state';
 import SuggestCard from '../../components/header/search/search-suggest/card/suggest-card';
+import NotFound from '../../components/header/search/search-suggest/not-found/not-found';
 import Suggest from '../../components/header/search/search-suggest/search-suggest';
 
 class SuggestObserver {
@@ -27,7 +28,11 @@ class SuggestObserver {
     const data = state.getSearchKeyword().films.slice(0, 5);
     const container = this.container as HTMLElement;
     container.innerHTML = '';
-    data.forEach((item) => new SuggestCard(container, item));
+    if (data.length === 0) {
+      container.append(new NotFound(container).node);
+    } else {
+      data.forEach((item) => new SuggestCard(container, item));
+    }
   }
 }
 

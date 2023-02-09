@@ -2,6 +2,7 @@ import MainPage from '../../../main/pages/main-page/main-page';
 import PremierePage from '../../../main/pages/premiere-page/premiere-page';
 import BestPage from '../../../main/pages/recomend-page/best-page';
 import RecomendPage from '../../../main/pages/recomend-page/recomend-page';
+import SearchPage from '../../../main/pages/search-page/search-page';
 
 const mainRoutes = [
   {
@@ -19,6 +20,10 @@ const mainRoutes = [
   {
     id: 'best',
     template: () => new BestPage('best-page'),
+  },
+  {
+    id: 'searchPage',
+    template: () => new SearchPage('search-page'),
   },
 ];
 

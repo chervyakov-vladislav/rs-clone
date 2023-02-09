@@ -8,6 +8,7 @@ import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 import searchService from '../../../services/search/search.service';
 import suggestObserver from '../../../services/search/suggest-observer.service';
 import headerObserver from '../../../services/menu/header-observer.service';
+import state from '../../../../shared/services/state';
 
 export default class Search extends DOMElement {
   private input: InputElement;
@@ -64,5 +65,12 @@ export default class Search extends DOMElement {
       classList: ['search__search-button'],
     });
     this.searchButton.node.innerHTML = SVG.searchIcon;
+    this.searchButton.node.addEventListener('click', () => {
+      if (state.getSearchKeyword().films.length > 0) {
+        headerObserver.closeAll();
+        headerObserver.clearInput();
+        window.location.hash = '#searchPage';
+      }
+    });
   }
 }
