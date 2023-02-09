@@ -4,15 +4,20 @@ const PATH = 'http://localhost:3000/api/';
 
 class Loader {
   private errorHandler(res: Response): Response {
-    if (!res.ok) {
-      if (res.status === 404) console.log('Object not found on Server');
-      else throw Error(res.status.toString());
-    }
+    // if (!res.ok) {
+    //   res
+    //     .clone()
+    //     .json()
+    //     .then((data) => {
+    //       throw Error(data.errors);
+    //     });
+    // }
 
     return res;
   }
 
   private load(url: URL, method: Method, data?: TSObject): Promise<Response> {
+    console.log(url.href, method, data);
     return fetch(url, {
       headers: { 'Content-Type': 'application/json' },
       method,
