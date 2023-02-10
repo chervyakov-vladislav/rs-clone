@@ -13,20 +13,22 @@ class InfiniteScroll {
     const position = scrolled + screenHeight;
 
     if (position >= threshold) {
-      apiHelpers.throttle(async () => {
-        state.setSearchNextPage();
-        const page = state.getSearchNextPage();
-        if (page <= state.getSearchMaxPages()) {
-          const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page);
-          state.setSearchKeyword(newState);
-          renderCards.append();
-        }
-      })();
+      apiHelpers.throttle(this.createNewCards)();
     }
   }
 
   public scrollListener() {
     this.checkPosition();
+  }
+
+  private async createNewCards() {
+    state.setSearchNextPage();
+    const page = state.getSearchNextPage();
+    if (page <= state.getSearchMaxPages()) {
+      const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page);
+      state.setSearchKeyword(newState);
+      renderCards.append();
+    }
   }
 }
 
