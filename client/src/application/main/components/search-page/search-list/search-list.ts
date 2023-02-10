@@ -1,7 +1,7 @@
 import './search-list.scss';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import renderCards from '../../../services/search-page/render-cards/render-card.service';
-import infiniteScroll from '../../../services/search-page/inifinite-scroll/infinite-scroll.service';
+import infiniteScroll from '../../../services/search-page/infinite-scroll/infinite-scroll.service';
 import state from '../../../../shared/services/state';
 
 export default class SearchList extends DOMElement {

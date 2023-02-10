@@ -1,4 +1,5 @@
 import { Countries, ITopFilm } from '../../../../shared/models/response-data';
+import state from '../../../../shared/services/state';
 
 class ValueCheck {
   public isNameRU(data: ITopFilm) {
@@ -67,6 +68,12 @@ class ValueCheck {
 
   public getRating(data: ITopFilm) {
     return data.rating === 'null' ? 0 : data.rating;
+  }
+
+  public getListCount(count: number) {
+    const currentPage = state.getSearchNextPage();
+    if (currentPage === 1) return count.toString();
+    return `${(currentPage - 1) * 20 + count}`;
   }
 }
 

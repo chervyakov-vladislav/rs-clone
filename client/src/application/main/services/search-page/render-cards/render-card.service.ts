@@ -16,6 +16,14 @@ class RenderCards {
       data.forEach((item, index) => new SearchListCard(container, item, index + 1));
     }
   }
+
+  public append() {
+    const data = state.getSearchKeyword().films;
+    const container = this.container as HTMLElement;
+    if (data.length > 0) {
+      data.forEach((item, index) => new SearchListCard(container, item, index + 1));
+    }
+  }
 }
 
 const renderCards = new RenderCards();

@@ -15,7 +15,9 @@ export interface StateInterface {
     searchKeyWord: KeyWordSearchInterface | null;
     searchKeywordValue: string;
     searchFilmsCountResult: number;
-  }
+    searchMaxPages: number;
+    searchNextPage: number;
+  };
 }
 
 export interface PreviousPageInfoInterface {

@@ -52,7 +52,7 @@ export default class SearchListCard extends DOMElement {
     this.count = new DOMElement(this.link.node, {
       tagName: 'span',
       classList: ['search-card__count'],
-      content: count.toString(),
+      content: valueCheck.getListCount(count),
     });
 
     this.image = new ImageElement(this.link.node, {

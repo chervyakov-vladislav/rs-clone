@@ -45,7 +45,7 @@ export interface ITopFilm {
 
 export interface Countries {
   country: string;
-} 
+}
 
 export type ObjectLocalStorage = {
   filmId: number;
@@ -60,7 +60,7 @@ export interface KeyWordSearchInterface {
   searchFilmsCountResult: number;
 }
 
-export interface searchOptions {
+export interface SearchOptions {
   order?: 'RATING' | 'NUM_VOTE' | 'YEAR';
   type?: 'ALL' | 'FILM' | 'TV_SHOW' | 'TV_SERIES' | 'MINI_SERIES';
   ratingFrom?: number;

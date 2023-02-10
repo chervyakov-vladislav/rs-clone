@@ -28,6 +28,8 @@ class State {
         searchKeyWord: null,
         searchKeywordValue: '',
         searchFilmsCountResult: 0,
+        searchMaxPages: 1,
+        searchNextPage: 1,
       },
     };
   }
@@ -129,6 +131,19 @@ class State {
   public setSearchKeyword(value: KeyWordSearchInterface) {
     this.allData.search.searchKeyWord = value;
     this.allData.search.searchFilmsCountResult = value.searchFilmsCountResult;
+    this.allData.search.searchMaxPages = Math.ceil(value.searchFilmsCountResult / 20);
+  }
+
+  public getSearchMaxPages() {
+    return this.allData.search.searchMaxPages;
+  }
+
+  public getSearchNextPage() {
+    return this.allData.search.searchNextPage;
+  }
+
+  public setSearchNextPage(value?: number) {
+    this.allData.search.searchNextPage = value || this.allData.search.searchNextPage + 1;
   }
 
   public getSearchKeyword() {

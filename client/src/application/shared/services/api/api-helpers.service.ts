@@ -17,7 +17,7 @@ class ApiHelpers {
 
   public throttle<F extends (...args: Parameters<F>) => ReturnType<F>>(
     func: F,
-    ms = 2_000
+    ms = 1_500
   ): (...args: Parameters<F>) => void {
     return (...args: Parameters<F>): void => {
       if (this.throttleTimeout) return;
