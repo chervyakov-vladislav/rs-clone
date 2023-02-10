@@ -85,6 +85,8 @@ export default class AuthForm extends FormElement {
   }
 
   public showValidationMessage(type: string, message: string, wrong = false) {
+    this.nameValidation.node.textContent = '';
+    this.passwordValidation.node.textContent = '';
     const node = type === 'login' ? this.nameValidation.node : this.passwordValidation.node;
     node.textContent = message;
     if (wrong) node.classList.add('auth-form__message--invalid');
