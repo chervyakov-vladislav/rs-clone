@@ -26,12 +26,12 @@ export default class UsersRouter {
     try {
       const existedUser = await this.usersService.findByLogin(req.body.login);
       if (!existedUser) {
-        throw new Error('Login is wrong');
+        throw new Error('Неверный логин');
       }
       const validPassword = await bcrypt.compare(req.body.password, existedUser.password);
       if (!validPassword) {
         paramErr = 'password';
-        throw new Error('Password is wrong');
+        throw new Error('Неверный пароль');
       }
 
       const token = this.usersService.createToken(existedUser.login);
@@ -59,7 +59,7 @@ export default class UsersRouter {
     try {
       const existedUser = await this.usersService.findByLogin(req.body.login);
       if (existedUser) {
-        throw new Error('user is already exists');
+        throw new Error('Пользователь уже зарегистрирован');
       }
     } catch (err) {
       return res.status(400).json({

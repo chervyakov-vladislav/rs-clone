@@ -1,11 +1,11 @@
 import { body } from 'express-validator';
 
 export const registerValidation = [
-  body('login', 'login must have at least 3 symbols').isLength({ min: 3 }),
-  body('password', 'password must have at least 6 symbols').isLength({ min: 6 })
+  body('login', 'логин должен иметь не меньше 3 символов').isLength({ min: 3 }),
+  body('password', 'длина пароля должна быть больше 5 символов').isLength({ min: 6 })
 ];
 
 export const loginValidation = [
-  body('login', 'login cannot be empty').exists(),
-  body('password', 'unsupported blank passwords').exists()
+  body('login', 'логин не может быть пустым').exists(),
+  body('password', 'вход без пароля не возможен').exists()
 ];
