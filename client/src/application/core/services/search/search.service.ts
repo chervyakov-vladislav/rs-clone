@@ -6,7 +6,7 @@ class SearchService {
   public async headerSearch(value: string) {
     state.setSearchNextPage(1);
     const res = await apiKinopoisk.searchKeyword(value);
-    state.setSearchKeyword(res);
+    state.setSearchResult(res);
     suggestObserver.render();
   }
 }

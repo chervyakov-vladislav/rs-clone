@@ -15,7 +15,7 @@ export default class QuerryDescription extends DOMElement {
       classList: ['querry-desc'],
     });
     // проверяем искали через обычный поиск или через расширенный, берем нужную дату
-    const data = state.getSearchKeyword();
+    const data = state.getSearchResult();
 
     this.title = new DOMElement(this.node, {
       tagName: 'h1',

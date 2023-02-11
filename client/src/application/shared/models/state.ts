@@ -12,7 +12,7 @@ export interface StateInterface {
   };
   previousPageInfo: PreviousPageInfoInterface;
   search: {
-    searchKeyWord: KeyWordSearchInterface | null;
+    searchResult: KeyWordSearchInterface | null;
     searchKeywordValue: string;
     searchFilmsCountResult: number;
     searchMaxPages: number;

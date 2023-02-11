@@ -27,7 +27,7 @@ export default class SearchPage extends Page {
   private async render() {
     state.setSearchNextPage(1);
     const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue());
-    state.setSearchKeyword(newState);
+    state.setSearchResult(newState);
     headerObserver.closeAll();
 
     this.title = new QuerryDescription(this.container.node);

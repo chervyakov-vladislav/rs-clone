@@ -25,7 +25,7 @@ class State {
         previousPageID: '',
       },
       search: {
-        searchKeyWord: null,
+        searchResult: null,
         searchKeywordValue: '',
         searchFilmsCountResult: 0,
         searchMaxPages: 1,
@@ -128,8 +128,8 @@ class State {
     return this.allData.previousPageInfo;
   }
 
-  public setSearchKeyword(value: KeyWordSearchInterface) {
-    this.allData.search.searchKeyWord = value;
+  public setSearchResult(value: KeyWordSearchInterface) {
+    this.allData.search.searchResult = value;
     this.allData.search.searchFilmsCountResult = value.searchFilmsCountResult;
     this.allData.search.searchMaxPages = Math.ceil(value.searchFilmsCountResult / 20);
   }
@@ -146,8 +146,8 @@ class State {
     this.allData.search.searchNextPage = value || this.allData.search.searchNextPage + 1;
   }
 
-  public getSearchKeyword() {
-    return this.allData.search.searchKeyWord as KeyWordSearchInterface;
+  public getSearchResult() {
+    return this.allData.search.searchResult as KeyWordSearchInterface;
   }
 
   public setSearchKeywordValue(value: string) {

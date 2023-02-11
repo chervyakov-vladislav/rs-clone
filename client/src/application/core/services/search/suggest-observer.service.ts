@@ -25,7 +25,7 @@ class SuggestObserver {
   }
 
   public render() {
-    const data = state.getSearchKeyword().films.slice(0, 5);
+    const data = state.getSearchResult().films.slice(0, 5);
     const container = this.container as HTMLElement;
     container.innerHTML = '';
     if (data.length === 0) {

@@ -9,7 +9,7 @@ class RenderCards {
   }
 
   public render() {
-    const data = state.getSearchKeyword().films;
+    const data = state.getSearchResult().films;
     const container = this.container as HTMLElement;
     container.innerHTML = '';
     if (data.length > 0) {
@@ -18,7 +18,7 @@ class RenderCards {
   }
 
   public append() {
-    const data = state.getSearchKeyword().films;
+    const data = state.getSearchResult().films;
     const container = this.container as HTMLElement;
     if (data.length > 0) {
       data.forEach((item, index) => new SearchListCard(container, item, index + 1));

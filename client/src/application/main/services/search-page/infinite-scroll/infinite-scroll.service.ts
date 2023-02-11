@@ -26,7 +26,7 @@ class InfiniteScroll {
     const page = state.getSearchNextPage();
     if (page <= state.getSearchMaxPages()) {
       const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page);
-      state.setSearchKeyword(newState);
+      state.setSearchResult(newState);
       renderCards.append();
     }
   }
