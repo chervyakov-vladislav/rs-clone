@@ -60,6 +60,21 @@ export default class Search extends DOMElement {
       classList: ['search__filter-button'],
     });
     this.filterButton.node.innerHTML = SVG.filterIcon;
+    this.filterButton.node.addEventListener('click', () => {
+      const { length } = (this.input.node as HTMLInputElement).value;
+      if (length > 0) {
+        const { value } = this.input.node as HTMLInputElement;
+        state.setSearchKeywordValue(value);
+        headerObserver.closeAll();
+        headerObserver.clearInput();
+        window.location.hash = `#s/?keyword=${value}`;
+      } else {
+        window.location.hash = `#s`;
+        state.setSearchKeywordValue('');
+        headerObserver.closeAll();
+        headerObserver.clearInput();
+      }
+    });
 
     this.searchButton = new ButtonElement(this.node, {
       tagName: 'button',
