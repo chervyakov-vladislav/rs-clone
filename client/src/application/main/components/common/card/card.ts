@@ -114,7 +114,7 @@ export default class SearchListCard extends DOMElement {
     this.rating = new DOMElement(this.ratingContainer.node, {
       tagName: 'div',
       classList: ['search-card__rating'],
-      content: valueCheck.getRating(data).toString(),
+      content: valueCheck.getRating(data),
     });
 
     this.rightBranch = new DOMElement(this.ratingContainer.node, {
@@ -126,7 +126,7 @@ export default class SearchListCard extends DOMElement {
     this.ratingCount = new DOMElement(this.buttons.node, {
       tagName: 'div',
       classList: ['search-card__rating-count'],
-      content: data.ratingVoteCount.toLocaleString('ru'),
+      content: data.ratingVoteCount !== null ? data.ratingVoteCount.toLocaleString('ru') : '-',
     });
   }
 }

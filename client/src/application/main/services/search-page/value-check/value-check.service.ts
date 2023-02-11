@@ -67,7 +67,8 @@ class ValueCheck {
   }
 
   public getRating(data: ITopFilm) {
-    return data.rating === 'null' ? 0 : data.rating;
+    if (Number.isNaN(data.rating)) return '0';
+    return data.rating === 'null' ? '0' : data.rating;
   }
 
   public getListCount(count: number) {

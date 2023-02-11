@@ -13,10 +13,13 @@ export interface StateInterface {
   previousPageInfo: PreviousPageInfoInterface;
   search: {
     searchResult: KeyWordSearchInterface | null;
+    searchTopResult: ITopFilm[];
     searchKeywordValue: string;
     searchFilmsCountResult: number;
     searchMaxPages: number;
     searchNextPage: number;
+    searchStatus: 'search' | 'top';
+    searchTopStatus: 'TOP_250_BEST_FILMS' | 'TOP_100_POPULAR_FILMS' | 'TOP_AWAIT_FILMS';
   };
 }
 

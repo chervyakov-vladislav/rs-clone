@@ -21,6 +21,7 @@ export interface IFilmData {
 
 export interface ITopData {
   films: ITopFilm[];
+  pagesCount: number;
 }
 
 export interface ITopFilm {

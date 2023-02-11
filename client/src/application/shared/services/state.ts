@@ -1,4 +1,4 @@
-import { KeyWordSearchInterface } from '../models/response-data';
+import { ITopData, KeyWordSearchInterface } from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
@@ -26,10 +26,13 @@ class State {
       },
       search: {
         searchResult: null,
+        searchTopResult: [],
         searchKeywordValue: '',
         searchFilmsCountResult: 0,
         searchMaxPages: 1,
         searchNextPage: 1,
+        searchStatus: 'search',
+        searchTopStatus: 'TOP_250_BEST_FILMS',
       },
     };
   }
@@ -132,6 +135,34 @@ class State {
     this.allData.search.searchResult = value;
     this.allData.search.searchFilmsCountResult = value.searchFilmsCountResult;
     this.allData.search.searchMaxPages = Math.ceil(value.searchFilmsCountResult / 20);
+  }
+
+  public setSearchTopResult(value: ITopData) {
+    this.allData.search.searchTopResult = value.films;
+  }
+
+  public getSearchTopResult() {
+    return this.allData.search.searchTopResult;
+  }
+
+  public setSearchMaxPages(value: number) {
+    this.allData.search.searchMaxPages = value;
+  }
+
+  public setSearchStatus(value: 'search' | 'top') {
+    this.allData.search.searchStatus = value;
+  }
+
+  public getSearchStatus() {
+    return this.allData.search.searchStatus;
+  }
+
+  public setSearchTopStatus(value: 'TOP_250_BEST_FILMS' | 'TOP_100_POPULAR_FILMS' | 'TOP_AWAIT_FILMS') {
+    this.allData.search.searchTopStatus = value;
+  }
+
+  public getSearchTopStatus() {
+    return this.allData.search.searchTopStatus;
   }
 
   public getSearchMaxPages() {
