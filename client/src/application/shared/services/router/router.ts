@@ -45,7 +45,6 @@ export default class Router extends DOMElement {
     const filmID = this.getPageID(pageID);
     state.setMoviePageID(filmID);
     await state.setMoviePageCurrentData();
-    console.log(state.allData.moviePage.currentData);
   }
 
   private getCurrentPageId() {

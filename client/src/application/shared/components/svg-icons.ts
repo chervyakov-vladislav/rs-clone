@@ -230,6 +230,9 @@ const enum SVG {
   </clipPath>
   </defs>
   </svg>`,
+  tabBookmark = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2 2C2 1.73478 2.10536 1.48043 2.29289 1.29289C2.48043 1.10536 2.73478 1 3 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V13L7 9.82L2 13V2Z" fill="black" fill-opacity="0.4"/>
+  </svg>`,
 }
 
 export default SVG;

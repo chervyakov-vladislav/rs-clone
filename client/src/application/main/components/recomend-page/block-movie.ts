@@ -14,9 +14,6 @@ export default class BlockMovieData {
   constructor(container: HTMLElement, page: string) {
     this.page = page;
 
-    // const filmdata = this.page === 'recomend' ? state.allData.films : state.allData.best;
-    // console.log(filmdata);
-
     this.blockMovie = new DOMElement(container, {
       tagName: 'div',
       classList: ['block-movie__cards'],

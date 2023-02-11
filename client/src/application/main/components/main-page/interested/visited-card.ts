@@ -24,7 +24,7 @@ export default class VisitedCard {
 
     this.visitedCardLink = new LinkElement(this.visitedCard.node, {
       tagName: 'a',
-      href: `#/movie/${item.filmId}`,
+      href: `#movie/${item.filmId}`,
       classList: ['interested__card_link'],
       content: '',
     });

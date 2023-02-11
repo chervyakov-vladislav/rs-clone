@@ -1,7 +1,9 @@
-import { IFilmData, ITopFilm } from './response-data';
+import { IFilmData, IStaff, ITopFilm } from './response-data';
 
 export interface StateInterface {
   premiere: IFilmData | null;
+  movieData: IFilmData | null;
+  movieStaff: IStaff[];
   films: ITopFilm[];
   best: ITopFilm[];
   player: Record<string, string>;

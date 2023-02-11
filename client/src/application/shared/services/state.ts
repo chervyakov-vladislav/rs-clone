@@ -7,6 +7,8 @@ class State {
   constructor() {
     this.allData = {
       premiere: null,
+      movieData: null,
+      movieStaff: [],
       player: {
         status: 'paused',
       },
@@ -40,6 +42,24 @@ class State {
     // Получаем массив данных лучших фильмов
     const dataBestTop = await apiKinopoisk.getTopBestData();
     this.allData.best = dataBestTop.films;
+  }
+
+  public async loadMovieBuget(movieID: number) {
+    // грузим данные для фильма
+    const buget = await apiKinopoisk.getFilmBoxOffice(movieID);
+    console.log('buget: ', buget);
+    // this.allData.movieStaff = staffAllData;
+  }
+
+  public async loadMovieData(movieID: number) {
+    // грузим данные для фильма
+    this.allData.movieData = await apiKinopoisk.getFilmData(movieID);
+    const staffAllData = await apiKinopoisk.getFilmStaff(movieID);
+    this.allData.movieStaff = staffAllData;
+  }
+
+  public getStaffInfo() {
+    return this.allData.movieStaff;
   }
 
   public getPremiereInfo() {

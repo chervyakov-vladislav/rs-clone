@@ -85,7 +85,7 @@ export default class BlockMovieCard {
 
     this.movieCardLink = new LinkElement(this.movieCardInfoMain.node, {
       tagName: 'a',
-      href: `#/movie/${item.filmId}`,
+      href: `#movie/${item.filmId}`,
       classList: ['movie-card-flat__link'],
       content: `${item.nameRu}`,
     });
