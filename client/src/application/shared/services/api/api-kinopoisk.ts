@@ -157,6 +157,17 @@ class ApiServiceKinopoisk {
     const data = await response.json();
     return data;
   }
+
+  public async searchTopFilms(type = 'TOP_250_BEST_FILMS', page = 1): Promise<KeyWordSearchInterface> {
+    const response = await fetch(`${this.filmData}/top?type=${type}&page=${page}`, {
+      headers: {
+        Accept: 'application/json',
+        'X-Api-Key': this.apiKey,
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
 }
 
 const apiKinopoisk = new ApiServiceKinopoisk();

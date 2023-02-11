@@ -1,7 +1,7 @@
 import state from '../../../../shared/services/state';
 import SearchListCard from '../../../components/common/card/card';
 
-class RenderCards {
+class ExtenedRenderCards {
   private container: HTMLElement | null = null;
 
   public setContainer(elem: HTMLElement) {
@@ -26,5 +26,5 @@ class RenderCards {
   }
 }
 
-const renderCards = new RenderCards();
-export default renderCards;
+const extendedRenderCards = new ExtenedRenderCards();
+export default extendedRenderCards;

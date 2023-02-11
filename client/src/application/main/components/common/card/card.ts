@@ -1,10 +1,10 @@
 import './card.scss';
-import DOMElement from '../../../../../shared/components/base-elements/dom-element';
-import ImageElement from '../../../../../shared/components/base-elements/image-element';
-import LinkElement from '../../../../../shared/components/base-elements/link-element';
-import SVG from '../../../../../shared/components/svg-icons';
-import { ITopFilm } from '../../../../../shared/models/response-data';
-import valueCheck from '../../../../services/search-page/value-check/value-check.service';
+import DOMElement from '../../../../shared/components/base-elements/dom-element';
+import ImageElement from '../../../../shared/components/base-elements/image-element';
+import LinkElement from '../../../../shared/components/base-elements/link-element';
+import SVG from '../../../../shared/components/svg-icons';
+import { ITopFilm } from '../../../../shared/models/response-data';
+import valueCheck from '../../../services/search-page/value-check/value-check.service';
 
 export default class SearchListCard extends DOMElement {
   private link: LinkElement;
