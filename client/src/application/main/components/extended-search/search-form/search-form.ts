@@ -5,6 +5,8 @@ import FormElement from '../../../../shared/components/base-elements/form-elemen
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import selectRender from '../../../services/extended-search-page/form/select-render.service';
 import state from '../../../../shared/services/state';
+import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
+import extendedRenderCards from '../../../services/extended-search-page/list-render/extended-render.service';
 
 export default class ExtendedSearchForm extends FormElement {
   private formColumn: DOMElement;
@@ -29,10 +31,16 @@ export default class ExtendedSearchForm extends FormElement {
       classList: ['extended-search-form'],
       action: '#',
     });
-    this.node.addEventListener('submit', (e: Event) => {
+    this.node.addEventListener('submit', async (e: Event) => {
       e.preventDefault();
+      state.setSearchNextPage(1);
       const options = state.getSearchFilterOptions();
-      console.log(options);
+      const newState = await apiKinopoisk.searchByFilter(options);
+      state.setSearchStatus('search');
+      state.setSearchExtendedResult(newState);
+      state.setSearchMaxPages(newState.totalPages);
+      state.setSearchFilmsCountResult(newState.total);
+      extendedRenderCards.renderSearchFilms();
     });
 
     this.formColumn = new DOMElement(this.node, {

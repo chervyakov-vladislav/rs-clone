@@ -30,8 +30,11 @@ class InfiniteScroll {
       // переписать apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page); на расширенный поиск с новыми параметрами
       const status = state.getSearchStatus();
       if (status === 'search') {
-        // какой-то новый запрос на поиск
-        // const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page);
+        const currentParams = state.getSearchFilterOptions();
+        const newState = await apiKinopoisk.searchByFilter(currentParams, page);
+        if (newState.items.length > 0) {
+          newState.items.forEach((item, index) => new SearchExtendedCard(container, item, index + 1));
+        }
       } else if (status === 'yearSearch') {
         const currentYear = state.getFilterYearTo().toString();
         const newState = await apiKinopoisk.searchByYear(currentYear, page);
