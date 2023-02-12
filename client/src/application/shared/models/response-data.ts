@@ -16,11 +16,7 @@ export interface WinnerInterface {
 }
 
 export interface IFilmData {
-  countries: [
-    {
-      country: string;
-    }
-  ];
+  countries: Countries[];
   description: string;
   coverUrl: string;
   filmLength: string;
@@ -88,4 +84,24 @@ export interface IStaff {
 
 export interface IStaffData {
   movieStaff: IStaff[];
+}
+
+export interface IReviewsData {
+  items: IReview[];
+  total: number;
+  totalNegativeReviews: number;
+  totalNeutralReviews: number;
+  totalPages: number;
+  totalPositiveReviews: number;
+}
+
+export interface IReview {
+  author: string;
+  date: string;
+  description: string;
+  kinopoiskId: number;
+  negativeRating: number;
+  positiveRating: number;
+  title: string;
+  type: string;
 }
