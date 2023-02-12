@@ -2,6 +2,7 @@ import ButtonElement from '../../../../shared/components/base-elements/button-el
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
+import storage from '../../../../shared/components/local-storage';
 import { TSObject } from '../../../../shared/models/base-types';
 import apiService from '../../../../shared/services/api/server-api.service';
 import authValidation from '../../../services/auth-page/validation/validation';
@@ -29,10 +30,7 @@ export default class AuthForm extends FormElement {
     });
     this.isRegister = false;
     // обработчик сабмита формы
-    this.node.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.submit();
-    });
+    this.node.addEventListener('submit', () => this.submit());
 
     this.formRow = new DOMElement(this.node, {
       tagName: 'div',
@@ -112,6 +110,10 @@ export default class AuthForm extends FormElement {
     if (resp && resp.errors) {
       const { msg, param } = resp.errors as unknown as TSObject;
       this.showValidationMessage(param, msg, true);
+    }
+    if (resp && resp.token) {
+      storage.setToken(resp.token);
+      await apiService.authorizationUser();
     }
   }
 }
