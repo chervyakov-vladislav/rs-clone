@@ -43,7 +43,7 @@ class ExtenedRenderCards {
     container.innerHTML = '';
     if (films.length > 0) {
       films.forEach((item, index) => new SearchExtendedCard(container, item, index + 1));
-      // this.addEventListeners();
+      this.addEventListeners();
     }
   }
 

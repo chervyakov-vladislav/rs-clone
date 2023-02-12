@@ -2,6 +2,7 @@ import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
 import state from '../../../../shared/services/state';
 import SearchListCard from '../../../components/common/card/card';
+import SearchExtendedCard from '../../../components/common/extended-card/extended-card';
 
 class InfiniteScroll {
   public checkPosition() {
@@ -30,8 +31,12 @@ class InfiniteScroll {
       const status = state.getSearchStatus();
       if (status === 'search') {
         // какой-то новый запрос на поиск
-        const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page);
-        state.setSearchResult(newState);
+        // const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page);
+      } else if (status === 'yearSearch') {
+        const newState = await apiKinopoisk.searchByYear('2023', page);
+        if (newState.items.length > 0) {
+          newState.items.forEach((item, index) => new SearchExtendedCard(container, item, index + 1));
+        }
       } else {
         const topStatus = state.getSearchTopStatus();
         const newState = await apiKinopoisk.searchTopFilms(topStatus, page);

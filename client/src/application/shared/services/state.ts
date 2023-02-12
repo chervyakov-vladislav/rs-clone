@@ -170,7 +170,7 @@ class State {
     return this.allData.search.searchMaxPages;
   }
 
-  public setSearchStatus(value: 'search' | 'top') {
+  public setSearchStatus(value: 'search' | 'top' | 'yearSearch') {
     this.allData.search.searchStatus = value;
   }
 

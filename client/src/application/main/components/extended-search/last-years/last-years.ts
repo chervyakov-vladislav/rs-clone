@@ -30,7 +30,7 @@ export default class LastYearFilms extends DOMElement {
     this.currentYearButton.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
       const newState = await apiKinopoisk.searchByYear(`${year}`);
-      state.setSearchStatus('search');
+      state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);
       state.setSearchMaxPages(newState.totalPages);
       state.setSearchFilmsCountResult(newState.total);
@@ -45,7 +45,7 @@ export default class LastYearFilms extends DOMElement {
     this.prevYearButton1.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
       const newState = await apiKinopoisk.searchByYear(`${year - 1}`);
-      state.setSearchStatus('search');
+      state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);
       state.setSearchMaxPages(newState.totalPages);
       state.setSearchFilmsCountResult(newState.total);
@@ -60,7 +60,7 @@ export default class LastYearFilms extends DOMElement {
     this.prevYearButton2.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
       const newState = await apiKinopoisk.searchByYear(`${year - 2}`);
-      state.setSearchStatus('search');
+      state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);
       state.setSearchMaxPages(newState.totalPages);
       state.setSearchFilmsCountResult(newState.total);
@@ -75,7 +75,7 @@ export default class LastYearFilms extends DOMElement {
     this.prevYearButton3.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
       const newState = await apiKinopoisk.searchByYear(`${year - 3}`);
-      state.setSearchStatus('search');
+      state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);
       state.setSearchMaxPages(newState.totalPages);
       state.setSearchFilmsCountResult(newState.total);
