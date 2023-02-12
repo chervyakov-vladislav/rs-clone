@@ -1,3 +1,4 @@
+import { ExtendedSearchResultInterface, ITopData, KeyWordSearchInterface } from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
@@ -25,6 +26,24 @@ class State {
         currentPageID: '',
         previousPageHash: '',
         previousPageID: '',
+      },
+      search: {
+        searchResult: null,
+        searchTopResult: [],
+        searchExtendedResult: [],
+        searchKeywordValue: '',
+        searchFilmsCountResult: 0,
+        searchMaxPages: 1,
+        searchNextPage: 1,
+        searchStatus: 'search',
+        searchTopStatus: 'TOP_250_BEST_FILMS',
+        filterOptions: {
+          yearFrom: 1000,
+          yearTo: 3000,
+          keyword: '',
+          genre: 0,
+          country: 0,
+        },
       },
     };
   }
@@ -144,6 +163,134 @@ class State {
 
   public getPreviousPageInfo() {
     return this.allData.previousPageInfo;
+  }
+
+  public setSearchResult(value: KeyWordSearchInterface) {
+    this.allData.search.searchResult = value;
+    this.allData.search.searchFilmsCountResult = value.searchFilmsCountResult;
+    this.allData.search.searchMaxPages = Math.ceil(value.searchFilmsCountResult / 20);
+  }
+
+  public setSearchTopResult(value: ITopData) {
+    this.allData.search.searchTopResult = value.films;
+  }
+
+  public getSearchTopResult() {
+    return this.allData.search.searchTopResult;
+  }
+
+  public setSearchExtendedResult(value: ExtendedSearchResultInterface) {
+    this.allData.search.searchExtendedResult = value.items;
+  }
+
+  public getSearchExtendedResult() {
+    return this.allData.search.searchExtendedResult;
+  }
+
+  public setSearchFilmsCountResult(value: number) {
+    this.allData.search.searchFilmsCountResult = value;
+  }
+
+  public getSearchFilmsCountResult() {
+    return this.allData.search.searchFilmsCountResult;
+  }
+
+  public setSearchMaxPages(value: number) {
+    this.allData.search.searchMaxPages = value;
+  }
+
+  public getSearchMaxPages() {
+    return this.allData.search.searchMaxPages;
+  }
+
+  public setSearchStatus(value: 'search' | 'top' | 'yearSearch') {
+    this.allData.search.searchStatus = value;
+  }
+
+  public getSearchStatus() {
+    return this.allData.search.searchStatus;
+  }
+
+  public setSearchTopStatus(value: 'TOP_250_BEST_FILMS' | 'TOP_100_POPULAR_FILMS' | 'TOP_AWAIT_FILMS') {
+    this.allData.search.searchTopStatus = value;
+  }
+
+  public getSearchTopStatus() {
+    return this.allData.search.searchTopStatus;
+  }
+
+  public getSearchNextPage() {
+    return this.allData.search.searchNextPage;
+  }
+
+  public setSearchNextPage(value?: number) {
+    this.allData.search.searchNextPage = value || this.allData.search.searchNextPage + 1;
+  }
+
+  public getSearchResult() {
+    return this.allData.search.searchResult as KeyWordSearchInterface;
+  }
+
+  public setSearchKeywordValue(value: string) {
+    this.allData.search.searchKeywordValue = value;
+  }
+
+  public getSearchKeywordValue() {
+    return this.allData.search.searchKeywordValue;
+  }
+
+  public setDefaultFilter() {
+    this.allData.search.filterOptions = {
+      yearFrom: 1000,
+      yearTo: 3000,
+      keyword: '',
+      genre: 0,
+      country: 0,
+    };
+  }
+
+  public getSearchFilterOptions() {
+    return this.allData.search.filterOptions;
+  }
+
+  public setFilterYearTo(year: number) {
+    this.allData.search.filterOptions.yearTo = year;
+  }
+
+  public setFilterYearFrom(year: number) {
+    this.allData.search.filterOptions.yearFrom = year;
+  }
+
+  public getFilterYearTo() {
+    return this.allData.search.filterOptions.yearTo;
+  }
+
+  public getFilterYearFrom() {
+    return this.allData.search.filterOptions.yearFrom;
+  }
+
+  public setFilterKeyword(keyword: string) {
+    this.allData.search.filterOptions.keyword = keyword;
+  }
+
+  public getFilterKeyword() {
+    return this.allData.search.filterOptions.keyword;
+  }
+
+  public setFilterGenre(id: number) {
+    this.allData.search.filterOptions.genre = id;
+  }
+
+  public getFilterGenre() {
+    return this.allData.search.filterOptions.genre;
+  }
+
+  public setFilterCountry(id: number) {
+    this.allData.search.filterOptions.country = id;
+  }
+
+  public getFilterCountry() {
+    return this.allData.search.filterOptions.country;
   }
 }
 

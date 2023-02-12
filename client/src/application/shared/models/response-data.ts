@@ -41,6 +41,7 @@ export interface IFilmData {
 
 export interface ITopData {
   films: ITopFilm[];
+  pagesCount: number;
 }
 
 export interface ITopFilm {
@@ -48,22 +49,23 @@ export interface ITopFilm {
   desctiption: string;
   filmId: number;
   filmLength: string;
-  genres: [
-    {
-      genre: string;
-    }
-  ];
+  genres: Genres[];
   nameRu: string;
   nameEn: string;
   posterUrl: string;
   posterUrlPreview: string;
   rating: string;
+  ratingVoteCount: number;
   year: string;
   type: string;
 }
 
 export interface Countries {
   country: string;
+}
+
+export interface Genres {
+  genre: string;
 }
 
 export type ObjectLocalStorage = {
@@ -104,4 +106,52 @@ export interface IReview {
   positiveRating: number;
   title: string;
   type: string;
+}
+
+export interface KeyWordSearchInterface {
+  films: ITopFilm[];
+  keyword: string;
+  pageCount: number;
+  searchFilmsCountResult: number;
+}
+
+export interface SearchOptions {
+  order?: 'RATING' | 'NUM_VOTE' | 'YEAR';
+  type?: 'ALL' | 'FILM' | 'TV_SHOW' | 'TV_SERIES' | 'MINI_SERIES';
+  ratingFrom?: number;
+  ratingTo?: number;
+  yearFrom?: number;
+  yearTo?: number;
+  keyword?: string;
+  page?: number;
+}
+
+export interface ExtendedSearchResultInterface {
+  items: ExtendedSearchResultItem[];
+  total: number;
+  totalPages: number;
+}
+
+export interface ExtendedSearchResultItem {
+  countries: Countries[];
+  genres: Genres[];
+  imdbId: string;
+  kinopoiskId: number;
+  nameEn: string;
+  nameOriginal: string;
+  nameRu: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+  ratingImdb: number;
+  ratingKinopoisk: number;
+  year: string;
+  type: string;
+}
+
+export interface SearchQuerryOptions {
+  yearFrom: number;
+  yearTo: number;
+  keyword: string;
+  genre: number;
+  country: number;
 }

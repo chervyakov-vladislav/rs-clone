@@ -1,8 +1,10 @@
+import ExtendedSearchPage from '../../../main/pages/extended-search-page/extended-search';
 import MainPage from '../../../main/pages/main-page/main-page';
 import MoviePage from '../../../main/pages/movie-page/movie-page';
 import PremierePage from '../../../main/pages/premiere-page/premiere-page';
 import BestPage from '../../../main/pages/recomend-page/best-page';
 import RecomendPage from '../../../main/pages/recomend-page/recomend-page';
+import SearchPage from '../../../main/pages/search-page/search-page';
 
 const mainRoutes = [
   {
@@ -24,6 +26,14 @@ const mainRoutes = [
   {
     id: 'movie',
     template: () => new MoviePage('movie-page'),
+  },
+  {
+    id: 'searchPage',
+    template: () => new SearchPage('search-result-page'),
+  },
+  {
+    id: 's',
+    template: () => new ExtendedSearchPage('extended-search'),
   },
 ];
 

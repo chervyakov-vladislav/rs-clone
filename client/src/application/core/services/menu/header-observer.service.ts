@@ -1,7 +1,9 @@
-import DOMElement from '../../shared/components/base-elements/dom-element';
+import DOMElement from '../../../shared/components/base-elements/dom-element';
 
 class HeaderObserver {
   private subscribers: DOMElement[];
+
+  private headerInput: HTMLInputElement | null = null;
 
   constructor() {
     this.subscribers = [];
@@ -13,6 +15,15 @@ class HeaderObserver {
 
   public unregister(observer: DOMElement) {
     this.subscribers = this.subscribers.filter((el) => el !== observer);
+  }
+
+  public addInput(input: HTMLInputElement) {
+    this.headerInput = input;
+  }
+
+  public clearInput() {
+    const input = this.headerInput as HTMLInputElement;
+    input.value = '';
   }
 
   public closeAll() {

@@ -1,4 +1,12 @@
-import { IFilmData, IReviewsData, IStaff, ITopFilm } from './response-data';
+import {
+  ExtendedSearchResultItem,
+  IFilmData,
+  ITopFilm,
+  KeyWordSearchInterface,
+  SearchQuerryOptions,
+  IStaff,
+  IReviewsData,
+} from './response-data';
 
 export interface StateInterface {
   premiere: IFilmData | null;
@@ -14,6 +22,18 @@ export interface StateInterface {
     currentData: IFilmData | null;
   };
   previousPageInfo: PreviousPageInfoInterface;
+  search: {
+    searchResult: KeyWordSearchInterface | null;
+    searchTopResult: ITopFilm[];
+    searchExtendedResult: ExtendedSearchResultItem[];
+    searchKeywordValue: string;
+    searchFilmsCountResult: number;
+    searchMaxPages: number;
+    searchNextPage: number;
+    searchStatus: 'search' | 'top' | 'yearSearch';
+    searchTopStatus: 'TOP_250_BEST_FILMS' | 'TOP_100_POPULAR_FILMS' | 'TOP_AWAIT_FILMS';
+    filterOptions: SearchQuerryOptions;
+  };
 }
 
 export interface PreviousPageInfoInterface {
