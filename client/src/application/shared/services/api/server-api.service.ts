@@ -10,6 +10,10 @@ class ApiService {
     return apiLoader.post('user/register', data);
   }
 
+  public authorizationUser(): Promise<TSObject> {
+    return apiLoader.get('user/me', {});
+  }
+
   public deleteUser(id: string) {
     return apiLoader.delete(`user/delete/${id}`);
   }

@@ -1,3 +1,4 @@
+import storage from '../../components/local-storage';
 import { TSObject, Method, ResponseData } from '../../models/base-types';
 
 const PATH = 'http://localhost:3000/api/';
@@ -19,7 +20,7 @@ class Loader {
   private load(url: URL, method: Method, data?: TSObject): Promise<Response> {
     console.log(url.href, method, data);
     return fetch(url, {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${storage.getToken()}` },
       method,
       body: data ? JSON.stringify(data) : undefined,
     }).then((res: Response) => this.errorHandler(res));
