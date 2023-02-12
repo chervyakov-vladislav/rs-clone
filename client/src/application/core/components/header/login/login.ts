@@ -2,26 +2,27 @@ import './login.scss';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import LoginMenu from './login-menu/login-menu';
+import apiService from '../../../../shared/services/api/server-api.service';
 
 export default class Login extends DOMElement {
   private loginBtn: ButtonElement;
 
-  private loginMenu: LoginMenu | null = null;
+  private loginMenu: LoginMenu;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'div',
       classList: ['login'],
     });
+    this.loginMenu = new LoginMenu(this.node);
     this.node.addEventListener('click', () => {
-      // проверка на авторизацию. Если авторизованы, то выпадает менюха
-      // если не авторизованы перебразывает на авторизацию
-      window.location.hash = '#auth';
-      if (this.loginMenu !== null) {
-        const { node } = this.loginMenu as LoginMenu;
-        node.remove();
-      }
-      this.loginMenu = new LoginMenu(this.node);
+      apiService.authorizationUser().then((res) => {
+        if (!res.ok) window.location.hash = '#auth';
+      });
+      // if (this.loginMenu !== null) {
+      //   const { node } = this.loginMenu as LoginMenu;
+      //   node.remove();
+      // }
     });
 
     this.loginBtn = new ButtonElement(this.node, {
