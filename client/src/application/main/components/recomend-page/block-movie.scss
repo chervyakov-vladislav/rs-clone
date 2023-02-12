@@ -124,4 +124,10 @@
       background-color: #eeeeee;
     }
   }
+
+  &__star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

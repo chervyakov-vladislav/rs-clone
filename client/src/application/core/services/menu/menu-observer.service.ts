@@ -1,6 +1,6 @@
-import DOMElement from '../../shared/components/base-elements/dom-element';
-import { PreviousPageInfoInterface } from '../../shared/models/state';
-import state from '../../shared/services/state';
+import DOMElement from '../../../shared/components/base-elements/dom-element';
+import { PreviousPageInfoInterface } from '../../../shared/models/state';
+import state from '../../../shared/services/state';
 
 class MenuObserver {
   private subscribers: Record<string, DOMElement>;

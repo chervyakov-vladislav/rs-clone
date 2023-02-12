@@ -2,7 +2,7 @@ import './login-menu.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
 import LinkElement from '../../../../../shared/components/base-elements/link-element';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
-import headerObserver from '../../../../services/header-observer.service';
+import headerObserver from '../../../../services/menu/header-observer.service';
 
 export default class LoginMenu extends DOMElement {
   private accountItem: DOMElement;

@@ -1,7 +1,7 @@
 import './main-container.scss';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import SideMenu from './side-menu/side-menu';
-import headerObserver from '../../services/header-observer.service';
+import headerObserver from '../../services/menu/header-observer.service';
 
 export default class Main extends DOMElement {
   private mainContainer: DOMElement;

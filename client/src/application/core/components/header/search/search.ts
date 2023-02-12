@@ -4,6 +4,11 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import SVG from '../../../../shared/components/svg-icons';
 import Suggest from './search-suggest/search-suggest';
+import apiHelpers from '../../../../shared/services/api/api-helpers.service';
+import searchService from '../../../services/search/search.service';
+import suggestObserver from '../../../services/search/suggest-observer.service';
+import headerObserver from '../../../services/menu/header-observer.service';
+import state from '../../../../shared/services/state';
 
 export default class Search extends DOMElement {
   private input: InputElement;
@@ -19,30 +24,72 @@ export default class Search extends DOMElement {
       tagName: 'div',
       classList: ['search'],
     });
-    this.node.addEventListener('click', () => {
-      if (this.searchSuggest !== null) {
-        const { node } = this.searchSuggest as Suggest;
-        node.remove();
-      }
-      this.searchSuggest = new Suggest(this.node);
+    this.node.addEventListener('input', (e: Event) => {
+      let value: string = '';
+      state.setSearchKeywordValue((this.input.node as HTMLInputElement).value);
+      apiHelpers.debounce(() => {
+        value = (e.target as HTMLInputElement).value;
+
+        if (this.searchSuggest !== null) {
+          const { node } = this.searchSuggest as Suggest;
+          node.remove();
+          suggestObserver.unregister(this.searchSuggest);
+        }
+
+        if (value.length > 0) {
+          suggestObserver.register(this.searchSuggest as Suggest);
+          searchService.headerSearch(value);
+        }
+        this.searchSuggest = value.length > 0 ? new Suggest(this.node) : null;
+        if (this.searchSuggest) {
+          suggestObserver.setContainer((this.searchSuggest as Suggest).suggestList.node);
+        }
+      })();
     });
 
     this.input = new InputElement(this.node, {
       tagName: 'input',
       classList: ['search__input-text'],
+      type: 'search',
       placeholder: 'Фильмы, сериалы, персоны',
     });
+    headerObserver.addInput(this.input.node as HTMLInputElement);
 
     this.filterButton = new ButtonElement(this.node, {
       tagName: 'button',
       classList: ['search__filter-button'],
     });
     this.filterButton.node.innerHTML = SVG.filterIcon;
+    this.filterButton.node.addEventListener('click', () => {
+      const { length } = (this.input.node as HTMLInputElement).value;
+      if (length > 0) {
+        const { value } = this.input.node as HTMLInputElement;
+        state.setSearchKeywordValue(value);
+        headerObserver.closeAll();
+        headerObserver.clearInput();
+        window.location.hash = `#s/?keyword=${value}`;
+      } else {
+        window.location.hash = `#s`;
+        state.setSearchKeywordValue('');
+        headerObserver.closeAll();
+        headerObserver.clearInput();
+      }
+    });
 
     this.searchButton = new ButtonElement(this.node, {
       tagName: 'button',
       classList: ['search__search-button'],
     });
     this.searchButton.node.innerHTML = SVG.searchIcon;
+    this.searchButton.node.addEventListener('click', () => {
+      const { length } = (this.input.node as HTMLInputElement).value;
+      if (length > 0) {
+        const { value } = this.input.node as HTMLInputElement;
+        state.setSearchKeywordValue(value);
+        headerObserver.closeAll();
+        headerObserver.clearInput();
+        window.location.hash = `#searchPage/?keyword=${value}`;
+      }
+    });
   }
 }

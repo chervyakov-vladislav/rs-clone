@@ -1,0 +1,91 @@
+.search-card {
+  display: flex;
+  padding: 20px 5px;
+  transition: .3s;
+
+  &:hover {
+    background: #e6e6e6;
+  }
+
+  &__card {
+    display: flex;
+  }
+
+  &__link {
+    display: flex;
+    width: 100%;
+  }
+
+  &__count {
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-family: "Kinopoisk-bold" , Arial, sans-serif;
+    line-height: 22px;
+    color: #000;
+  }
+
+  &__image {
+    width: 72px;
+    margin-left: 10px;
+  }
+
+  &__info {
+    margin-left: 20px;
+    display: flex;
+    width: 100%;
+  }
+
+  &__desc {
+    flex: 1;
+  }
+
+  &__film-title {
+    font-family: "Kinopoisk-medium" , Arial, sans-serif;
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 10px;
+  }
+
+  &__year-time {
+    color: #000;
+    margin-bottom: 7px;
+  }
+
+  &__type-country,
+  &__genres {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__buttons {
+    display: flex;
+    width: 150px;
+  }
+
+  &__rating-container {
+    display: flex;
+    align-items: center;
+  } 
+
+  &__rating {
+    -webkit-font-smoothing: antialiased;
+    background: -webkit-linear-gradient(285deg,#ffdb80 16.44%,#ac9c71 63.42%);
+    background: linear-gradient(165deg,#ffdb80 16.44%,#ac9c71 63.42%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: "Kinopoisk-bold" , Arial, sans-serif;
+    margin: 0 4px;
+  }
+
+  &__rating-count {
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+}

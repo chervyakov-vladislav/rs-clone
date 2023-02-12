@@ -64,6 +64,6 @@ export default class Description extends DOMElement {
       tagName: 'div',
       classList: ['premiere-desc__rating'],
     });
-    this.rating.node.innerHTML = `${SVG.leftGoldBranch} ${data?.ratingImdb} ${SVG.rightGoldBranch}`;
+    this.rating.node.innerHTML = `${SVG.leftGoldBranch} ${data?.ratingKinopoisk} ${SVG.rightGoldBranch}`;
   }
 }
