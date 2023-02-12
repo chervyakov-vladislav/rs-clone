@@ -1,4 +1,4 @@
-import { IFilmData, ITopData, KeyWordSearchInterface } from '../../models/response-data';
+import { ExtendedSearchResultInterface, IFilmData, ITopData, KeyWordSearchInterface } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
   // private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
@@ -154,6 +154,20 @@ class ApiServiceKinopoisk {
         'X-Api-Key': this.apiKey,
       },
     });
+    const data = await response.json();
+    return data;
+  }
+
+  public async searchByYear(year = '2000', page = 1): Promise<ExtendedSearchResultInterface> {
+    const response = await fetch(
+      `${this.searchFilterAdress}?order=RATING&type=ALL&ratingFrom=0&ratingTo=10&yearFrom=${year}&yearTo=${year}&page=${page}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'X-Api-Key': this.apiKey,
+        },
+      }
+    );
     const data = await response.json();
     return data;
   }

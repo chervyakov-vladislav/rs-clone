@@ -1,4 +1,4 @@
-import { IFilmData, ITopFilm, KeyWordSearchInterface } from './response-data';
+import { ExtendedSearchResultItem, IFilmData, ITopFilm, KeyWordSearchInterface } from './response-data';
 
 export interface StateInterface {
   premiere: IFilmData | null;
@@ -14,6 +14,7 @@ export interface StateInterface {
   search: {
     searchResult: KeyWordSearchInterface | null;
     searchTopResult: ITopFilm[];
+    searchExtendedResult: ExtendedSearchResultItem[];
     searchKeywordValue: string;
     searchFilmsCountResult: number;
     searchMaxPages: number;

@@ -29,11 +29,7 @@ export interface ITopFilm {
   desctiption: string;
   filmId: number;
   filmLength: string;
-  genres: [
-    {
-      genre: string;
-    }
-  ];
+  genres: Genres[];
   nameRu: string;
   nameEn: string;
   posterUrl: string;
@@ -46,6 +42,10 @@ export interface ITopFilm {
 
 export interface Countries {
   country: string;
+}
+
+export interface Genres {
+  genre: string;
 }
 
 export type ObjectLocalStorage = {
@@ -70,4 +70,26 @@ export interface SearchOptions {
   yearTo?: number;
   keyword?: string;
   page?: number;
+}
+
+export interface ExtendedSearchResultInterface {
+  items: ExtendedSearchResultItem[];
+  total: number;
+  totalPages: number;
+}
+
+export interface ExtendedSearchResultItem {
+  countries: Countries[];
+  genres: Genres[];
+  imdbId: string;
+  kinopoiskId: number;
+  nameEn: string;
+  nameOriginal: string;
+  nameRu: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+  ratingImdb: number;
+  ratingKinopoisk: number;
+  year: string;
+  type: string;
 }

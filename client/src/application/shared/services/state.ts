@@ -1,4 +1,4 @@
-import { ITopData, KeyWordSearchInterface } from '../models/response-data';
+import { ExtendedSearchResultInterface, ITopData, KeyWordSearchInterface } from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
@@ -27,6 +27,7 @@ class State {
       search: {
         searchResult: null,
         searchTopResult: [],
+        searchExtendedResult: [],
         searchKeywordValue: '',
         searchFilmsCountResult: 0,
         searchMaxPages: 1,
@@ -145,8 +146,28 @@ class State {
     return this.allData.search.searchTopResult;
   }
 
+  public setSearchExtendedResult(value: ExtendedSearchResultInterface) {
+    this.allData.search.searchExtendedResult = value.items;
+  }
+
+  public getSearchExtendedResult() {
+    return this.allData.search.searchExtendedResult;
+  }
+
+  public setSearchFilmsCountResult(value: number) {
+    this.allData.search.searchFilmsCountResult = value;
+  }
+
+  public getSearchFilmsCountResult() {
+    return this.allData.search.searchFilmsCountResult;
+  }
+
   public setSearchMaxPages(value: number) {
     this.allData.search.searchMaxPages = value;
+  }
+
+  public getSearchMaxPages() {
+    return this.allData.search.searchMaxPages;
   }
 
   public setSearchStatus(value: 'search' | 'top') {
@@ -163,10 +184,6 @@ class State {
 
   public getSearchTopStatus() {
     return this.allData.search.searchTopStatus;
-  }
-
-  public getSearchMaxPages() {
-    return this.allData.search.searchMaxPages;
   }
 
   public getSearchNextPage() {
