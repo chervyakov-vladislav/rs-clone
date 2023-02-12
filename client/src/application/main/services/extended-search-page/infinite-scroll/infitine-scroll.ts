@@ -27,7 +27,6 @@ class InfiniteScroll {
     const page = state.getSearchNextPage();
     const container = document.querySelector('.extended-search-list') as HTMLElement;
     if (page <= state.getSearchMaxPages()) {
-      // переписать apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page); на расширенный поиск с новыми параметрами
       const status = state.getSearchStatus();
       if (status === 'search') {
         const currentParams = state.getSearchFilterOptions();

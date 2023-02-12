@@ -4,6 +4,7 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import state from '../../../../shared/services/state';
 import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
 import extendedRenderCards from '../../../services/extended-search-page/list-render/extended-render.service';
+import formInputsObserver from '../../../services/extended-search-page/form/clear-inputs-observer';
 
 export default class LastYearFilms extends DOMElement {
   private currentYearButton: ButtonElement;
@@ -37,6 +38,7 @@ export default class LastYearFilms extends DOMElement {
       state.setSearchFilmsCountResult(newState.total);
       extendedRenderCards.renderSearchFilms();
       state.setDefaultFilter();
+      formInputsObserver.clear();
     });
 
     this.prevYearButton1 = new ButtonElement(this.node, {
@@ -54,6 +56,7 @@ export default class LastYearFilms extends DOMElement {
       state.setSearchFilmsCountResult(newState.total);
       extendedRenderCards.renderSearchFilms();
       state.setDefaultFilter();
+      formInputsObserver.clear();
     });
 
     this.prevYearButton2 = new ButtonElement(this.node, {
@@ -71,6 +74,7 @@ export default class LastYearFilms extends DOMElement {
       state.setSearchFilmsCountResult(newState.total);
       extendedRenderCards.renderSearchFilms();
       state.setDefaultFilter();
+      formInputsObserver.clear();
     });
 
     this.prevYearButton3 = new ButtonElement(this.node, {
@@ -88,6 +92,7 @@ export default class LastYearFilms extends DOMElement {
       state.setSearchFilmsCountResult(newState.total);
       extendedRenderCards.renderSearchFilms();
       state.setDefaultFilter();
+      formInputsObserver.clear();
     });
   }
 }

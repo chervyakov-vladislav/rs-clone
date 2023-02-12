@@ -51,6 +51,7 @@ export default class Router extends DOMElement {
   private getCurrentPageId() {
     const { hash } = window.location;
     const id = hash.slice(1).split('/')[0];
+    if (id !== 's') state.setDefaultFilter();
     this.setPrevPage(hash, id);
     return id;
   }

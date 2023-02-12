@@ -4,6 +4,7 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import state from '../../../../shared/services/state';
 import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
 import extendedRenderCards from '../../../services/extended-search-page/list-render/extended-render.service';
+import formInputsObserver from '../../../services/extended-search-page/form/clear-inputs-observer';
 
 export default class TopFilms extends DOMElement {
   private bestButton: ButtonElement;
@@ -31,6 +32,8 @@ export default class TopFilms extends DOMElement {
       state.setSearchTopResult(newState);
       state.setSearchMaxPages(newState.pagesCount);
       extendedRenderCards.renderTopFilms();
+      state.setDefaultFilter();
+      formInputsObserver.clear();
     });
 
     this.popularButton = new ButtonElement(this.node, {
@@ -46,6 +49,8 @@ export default class TopFilms extends DOMElement {
       state.setSearchTopResult(newState);
       state.setSearchMaxPages(newState.pagesCount);
       extendedRenderCards.renderTopFilms();
+      state.setDefaultFilter();
+      formInputsObserver.clear();
     });
 
     this.awaitButton = new ButtonElement(this.node, {
@@ -61,6 +66,8 @@ export default class TopFilms extends DOMElement {
       state.setSearchTopResult(newState);
       state.setSearchMaxPages(newState.pagesCount);
       extendedRenderCards.renderTopFilms();
+      state.setDefaultFilter();
+      formInputsObserver.clear();
     });
   }
 }

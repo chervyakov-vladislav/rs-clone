@@ -7,6 +7,7 @@ import selectRender from '../../../services/extended-search-page/form/select-ren
 import state from '../../../../shared/services/state';
 import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
 import extendedRenderCards from '../../../services/extended-search-page/list-render/extended-render.service';
+import formInputsObserver from '../../../services/extended-search-page/form/clear-inputs-observer';
 
 export default class ExtendedSearchForm extends FormElement {
   private formColumn: DOMElement;
@@ -31,6 +32,7 @@ export default class ExtendedSearchForm extends FormElement {
       classList: ['extended-search-form'],
       action: '#',
     });
+    formInputsObserver.register(this.node as HTMLFormElement);
     this.node.addEventListener('submit', async (e: Event) => {
       e.preventDefault();
       state.setSearchNextPage(1);
