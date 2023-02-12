@@ -1,4 +1,10 @@
-import { ExtendedSearchResultInterface, IFilmData, ITopData, KeyWordSearchInterface } from '../../models/response-data';
+import {
+  ExtendedSearchResultInterface,
+  IFilmData,
+  ITopData,
+  KeyWordSearchInterface,
+  SearchQuerryOptions,
+} from '../../models/response-data';
 
 class ApiServiceKinopoisk {
   // private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
@@ -147,13 +153,21 @@ class ApiServiceKinopoisk {
     return data;
   }
 
-  public async searchByFilter(word = '', page = 1) {
-    const response = await fetch(`${this.searchByKeyword}потом напишем этот гениальный запрос${word}&page=${page}`, {
-      headers: {
-        Accept: 'application/json',
-        'X-Api-Key': this.apiKey,
-      },
-    });
+  public async searchByFilter(options: SearchQuerryOptions, page = 1): Promise<ExtendedSearchResultInterface> {
+    const yearFromQuerry = options.yearFrom !== 1000 ? `&yearFrom=${options.yearFrom}` : '&yearFrom=1000';
+    const yearToQuerry = options.yearTo !== 3000 ? `&yearTo=${options.yearTo}` : '&yearTo=3000';
+    const keywordQuerry = options.keyword !== '' ? `&keyword=${options.keyword}` : '';
+    const countryQuerry = options.country !== 0 ? `&countries=${options.country}` : '';
+    const genreQuerry = options.genre !== 0 ? `&countries=${options.genre}` : '';
+    const response = await fetch(
+      `${this.searchFilterAdress}?order=RATING${countryQuerry}${genreQuerry}&type=ALL&ratingFrom=0&ratingTo=10${yearFromQuerry}${yearToQuerry}${keywordQuerry}&page=${page}`,
+      {
+        headers: {
+          Accept: 'application/json',
+          'X-Api-Key': this.apiKey,
+        },
+      }
+    );
     const data = await response.json();
     return data;
   }

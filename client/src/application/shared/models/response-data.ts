@@ -93,3 +93,11 @@ export interface ExtendedSearchResultItem {
   year: string;
   type: string;
 }
+
+export interface SearchQuerryOptions {
+  yearFrom: number;
+  yearTo: number;
+  keyword: string;
+  genre: number;
+  country: number;
+}

@@ -33,7 +33,8 @@ class InfiniteScroll {
         // какой-то новый запрос на поиск
         // const newState = await apiKinopoisk.searchKeyword(state.getSearchKeywordValue(), page);
       } else if (status === 'yearSearch') {
-        const newState = await apiKinopoisk.searchByYear('2023', page);
+        const currentYear = state.getFilterYearTo().toString();
+        const newState = await apiKinopoisk.searchByYear(currentYear, page);
         if (newState.items.length > 0) {
           newState.items.forEach((item, index) => new SearchExtendedCard(container, item, index + 1));
         }

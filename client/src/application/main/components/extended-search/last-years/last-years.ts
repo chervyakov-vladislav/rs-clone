@@ -29,6 +29,8 @@ export default class LastYearFilms extends DOMElement {
     });
     this.currentYearButton.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
+      state.setDefaultFilter();
+      state.setFilterYearTo(year);
       const newState = await apiKinopoisk.searchByYear(`${year}`);
       state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);
@@ -44,6 +46,8 @@ export default class LastYearFilms extends DOMElement {
     });
     this.prevYearButton1.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
+      state.setDefaultFilter();
+      state.setFilterYearTo(year - 1);
       const newState = await apiKinopoisk.searchByYear(`${year - 1}`);
       state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);
@@ -59,6 +63,8 @@ export default class LastYearFilms extends DOMElement {
     });
     this.prevYearButton2.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
+      state.setDefaultFilter();
+      state.setFilterYearTo(year - 2);
       const newState = await apiKinopoisk.searchByYear(`${year - 2}`);
       state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);
@@ -74,6 +80,8 @@ export default class LastYearFilms extends DOMElement {
     });
     this.prevYearButton3.node.addEventListener('click', async () => {
       state.setSearchNextPage(1);
+      state.setDefaultFilter();
+      state.setFilterYearTo(year - 3);
       const newState = await apiKinopoisk.searchByYear(`${year - 3}`);
       state.setSearchStatus('yearSearch');
       state.setSearchExtendedResult(newState);

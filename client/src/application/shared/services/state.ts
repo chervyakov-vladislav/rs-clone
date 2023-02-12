@@ -34,6 +34,13 @@ class State {
         searchNextPage: 1,
         searchStatus: 'search',
         searchTopStatus: 'TOP_250_BEST_FILMS',
+        filterOptions: {
+          yearFrom: 1000,
+          yearTo: 3000,
+          keyword: '',
+          genre: 0,
+          country: 0,
+        },
       },
     };
   }
@@ -204,6 +211,32 @@ class State {
 
   public getSearchKeywordValue() {
     return this.allData.search.searchKeywordValue;
+  }
+
+  public setDefaultFilter() {
+    this.allData.search.filterOptions = {
+      yearFrom: 1000,
+      yearTo: 3000,
+      keyword: '',
+      genre: 0,
+      country: 0,
+    };
+  }
+
+  public setFilterYearTo(year: number) {
+    this.allData.search.filterOptions.yearTo = year;
+  }
+
+  public setFilterYearFrom(year: number) {
+    this.allData.search.filterOptions.yearFrom = year;
+  }
+
+  public getFilterYearTo() {
+    return this.allData.search.filterOptions.yearTo;
+  }
+
+  public getFilterYearFrom() {
+    return this.allData.search.filterOptions.yearFrom;
   }
 }
 
