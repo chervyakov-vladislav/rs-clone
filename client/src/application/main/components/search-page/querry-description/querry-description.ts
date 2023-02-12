@@ -32,7 +32,7 @@ export default class QuerryDescription extends DOMElement {
     this.count = new DOMElement(this.countTitle.node, {
       tagName: 'span',
       classList: ['querry-desc__count'],
-      content: data.searchFilmsCountResult.toString(),
+      content: data.searchFilmsCountResult.toLocaleString(),
     });
     // если есть параметры запроса добавляем строку с параметрами
   }
