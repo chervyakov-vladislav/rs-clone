@@ -25,12 +25,13 @@ export default class MoviePage extends Page {
   public async render() {
     const { hash } = window.location;
     const movieID = hash.split('/')[1];
-    await state.loadMovieData(+movieID);
-    await state.loadMovieBuget(+movieID);
+    await state.loadMovieDataStaff(+movieID);
+    await state.loadMovieReviews(+movieID);
     const data = state.allData.movieData;
     const staff = state.allData.movieStaff;
-    if (data && staff) {
-      this.movieInfo = new MovieInfo(this.movieInfoContainer.node, data, staff);
+    const reviews = state.allData.movieReviews;
+    if (data && staff && reviews) {
+      this.movieInfo = new MovieInfo(this.movieInfoContainer.node, data, staff, reviews);
     }
   }
 }

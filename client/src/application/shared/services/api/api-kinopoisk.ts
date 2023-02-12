@@ -1,4 +1,4 @@
-import { IFilmData, IStaff, ITopData } from '../../models/response-data';
+import { IFilmData, IReviewsData, IStaff, ITopData } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
   // private apiKey = '182fab2b-cb7a-4562-b6c0-fefa3b89590f';
@@ -52,7 +52,7 @@ class ApiServiceKinopoisk {
     return data;
   }
 
-  public async getFilmReviews(id: number): Promise<void> {
+  public async getFilmReviews(id: number): Promise<IReviewsData> {
     const response = await fetch(`${this.filmData}/${id}/reviews`, {
       headers: {
         Accept: 'application/json',

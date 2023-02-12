@@ -1,12 +1,14 @@
 import './movie-info.scss';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
-import { IFilmData, IStaff } from '../../../../shared/models/response-data';
+import { IFilmData, IReviewsData, IStaff } from '../../../../shared/models/response-data';
 import ImageElement from '../../../../shared/components/base-elements/image-element';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import SVG from '../../../../shared/components/svg-icons';
 import movieValue from '../../../services/movie-page/movie-value.service';
 
 export default class MovieInfo {
+  staff: IStaff[];
+
   private column1: DOMElement;
 
   private moviePoster: DOMElement;
@@ -69,7 +71,21 @@ export default class MovieInfo {
 
   private gridTime2: DOMElement;
 
-  constructor(container: HTMLElement, item: IFilmData, staff: IStaff[]) {
+  private column3: DOMElement;
+
+  private gridRating: DOMElement;
+
+  private gridRatingTotal: DOMElement;
+
+  private gridReviewsTotal: DOMElement;
+
+  private movieCast: DOMElement;
+
+  private movieCastTitle: DOMElement;
+
+  constructor(container: HTMLElement, item: IFilmData, staff: IStaff[], reviews: IReviewsData) {
+    this.staff = staff;
+
     this.column1 = new DOMElement(container, {
       tagName: 'div',
       classList: ['movie-info__column1'],
@@ -249,6 +265,55 @@ export default class MovieInfo {
       tagName: 'p',
       classList: ['movie-info__grid_text'],
       content: movieValue.getTime(item),
+    });
+
+    this.column3 = new DOMElement(container, {
+      tagName: 'div',
+      classList: ['movie-info__column3'],
+    });
+
+    this.gridRating = new DOMElement(this.column3.node, {
+      tagName: 'p',
+      classList: movieValue.getRatingStyle(item),
+      content: `${item.ratingKinopoisk}`,
+    });
+
+    this.gridRatingTotal = new DOMElement(this.column3.node, {
+      tagName: 'p',
+      classList: ['movie-info__ratings-total'],
+      content: `Оценок: ${item.ratingKinopoiskVoteCount}`,
+    });
+
+    this.gridReviewsTotal = new DOMElement(this.column3.node, {
+      tagName: 'p',
+      classList: ['movie-info__reviews-total'],
+      content: `Рецензий: ${reviews.total}`,
+    });
+
+    this.movieCast = new DOMElement(this.column3.node, {
+      tagName: 'div',
+      classList: ['movie-info__cast'],
+    });
+
+    this.movieCastTitle = new DOMElement(this.movieCast.node, {
+      tagName: 'h4',
+      classList: ['movie-info__cast_title'],
+      content: 'В главных ролях',
+    });
+
+    this.renderActor();
+  }
+
+  private renderActor() {
+    const container = this.movieCast.node;
+    const actors = movieValue.getStaff(this.staff, 'ACTOR').split(', ').slice(0, 13);
+
+    actors.forEach((actor) => {
+      return new DOMElement(container, {
+        tagName: 'p',
+        classList: ['movie-info__actor'],
+        content: `${actor}`,
+      });
     });
   }
 }

@@ -43,6 +43,11 @@ class MovieValue {
     const minutes = totalMinutes % 60;
     return hours > 0 ? `${hours} ч. ${minutes} мин.` : `${minutes} мин.`;
   }
+
+  public getRatingStyle(data: IFilmData) {
+    const rating = +data.ratingKinopoisk < 7 ? ['movie-info__rating'] : ['movie-info__rating', 'positive'];
+    return rating;
+  }
 }
 
 const movieValue = new MovieValue();
