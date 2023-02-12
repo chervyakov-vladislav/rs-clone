@@ -223,6 +223,10 @@ class State {
     };
   }
 
+  public getSearchFilterOptions() {
+    return this.allData.search.filterOptions;
+  }
+
   public setFilterYearTo(year: number) {
     this.allData.search.filterOptions.yearTo = year;
   }
@@ -237,6 +241,30 @@ class State {
 
   public getFilterYearFrom() {
     return this.allData.search.filterOptions.yearFrom;
+  }
+
+  public setFilterKeyword(keyword: string) {
+    this.allData.search.filterOptions.keyword = keyword;
+  }
+
+  public getFilterKeyword() {
+    return this.allData.search.filterOptions.keyword;
+  }
+
+  public setFilterGenre(id: number) {
+    this.allData.search.filterOptions.genre = id;
+  }
+
+  public getFilterGenre() {
+    return this.allData.search.filterOptions.genre;
+  }
+
+  public setFilterCountry(id: number) {
+    this.allData.search.filterOptions.country = id;
+  }
+
+  public getFilterCountry() {
+    return this.allData.search.filterOptions.country;
   }
 }
 

@@ -27,6 +27,10 @@ class SelectRender {
     });
   }
 
+  public getGenreID(name: string) {
+    return genres.filter((item) => item.genre === name)[0].id;
+  }
+
   public renderCountry() {
     countries.forEach((country) => {
       this.option = new DOMElement(this.countriesContainer, {
@@ -35,6 +39,10 @@ class SelectRender {
         content: country.country,
       });
     });
+  }
+
+  public getCountryID(name: string) {
+    return countries.filter((item) => item.country === name)[0].id;
   }
 }
 

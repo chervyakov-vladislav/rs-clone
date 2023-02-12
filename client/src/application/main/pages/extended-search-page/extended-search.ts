@@ -6,7 +6,6 @@ import LastYearFilms from '../../components/extended-search/last-years/last-year
 import ExtendedSearchForm from '../../components/extended-search/search-form/search-form';
 import ExtendedSearchList from '../../components/extended-search/search-list/search-list';
 import state from '../../../shared/services/state';
-import ExtendedQuerryDescription from '../../components/extended-search/querry-description/extended-querry-description';
 
 export default class ExtendedSearchPage extends Page {
   private container: DOMElement;
@@ -16,8 +15,6 @@ export default class ExtendedSearchPage extends Page {
   private lastYearFilms: LastYearFilms;
 
   private searchForm: ExtendedSearchForm;
-
-  private querryDesc: ExtendedQuerryDescription;
 
   private list: ExtendedSearchList;
 
@@ -33,7 +30,6 @@ export default class ExtendedSearchPage extends Page {
     this.topFilms = new TopFilms(this.container.node);
     this.lastYearFilms = new LastYearFilms(this.container.node);
     this.searchForm = new ExtendedSearchForm(this.container.node);
-    this.querryDesc = new ExtendedQuerryDescription(this.container.node);
     this.list = new ExtendedSearchList(this.container.node);
   }
 }

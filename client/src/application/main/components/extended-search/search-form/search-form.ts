@@ -4,6 +4,7 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import selectRender from '../../../services/extended-search-page/form/select-render.service';
+import state from '../../../../shared/services/state';
 
 export default class ExtendedSearchForm extends FormElement {
   private formColumn: DOMElement;
@@ -28,6 +29,11 @@ export default class ExtendedSearchForm extends FormElement {
       classList: ['extended-search-form'],
       action: '#',
     });
+    this.node.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
+      const options = state.getSearchFilterOptions();
+      console.log(options);
+    });
 
     this.formColumn = new DOMElement(this.node, {
       tagName: 'div',
@@ -40,6 +46,10 @@ export default class ExtendedSearchForm extends FormElement {
       classList: ['extended-search-form__text-input'],
       placeholder: 'Введите название фильма',
     });
+    this.keywordInput.node.addEventListener('change', (e: Event) => {
+      const { value } = e.target as HTMLInputElement;
+      state.setFilterKeyword(value);
+    });
 
     this.genreSelectInput = new InputElement(this.formColumn.node, {
       tagName: 'select',
@@ -47,9 +57,15 @@ export default class ExtendedSearchForm extends FormElement {
     });
     selectRender.registerGenresContainer(this.genreSelectInput.node);
     selectRender.renderGenres();
+    this.genreSelectInput.node.addEventListener('change', (e: Event) => {
+      const { value } = e.target as HTMLInputElement;
+      const genreID = selectRender.getGenreID(value);
+      state.setFilterGenre(genreID);
+    });
 
     this.submit = new ButtonElement(this.formColumn.node, {
       tagName: 'button',
+      type: 'submit',
       classList: ['extended-search-form__submit'],
       content: 'Искать',
     });
@@ -65,6 +81,11 @@ export default class ExtendedSearchForm extends FormElement {
     });
     selectRender.registerCountriesContainer(this.countrySelectInput.node);
     selectRender.renderCountry();
+    this.countrySelectInput.node.addEventListener('change', (e: Event) => {
+      const { value } = e.target as HTMLInputElement;
+      const countryID = selectRender.getCountryID(value);
+      state.setFilterCountry(countryID);
+    });
 
     this.formRow = new DOMElement(this.formColumn.node, {
       tagName: 'div',
@@ -77,12 +98,30 @@ export default class ExtendedSearchForm extends FormElement {
       classList: ['extended-search-form__text-input'],
       placeholder: 'Год от',
     });
+    this.yearFrom.node.addEventListener('input', (e: Event) => {
+      const { value } = e.target as HTMLInputElement;
+      if (!/^\d+$/.test(value.slice(-1))) (e.target as HTMLInputElement).value = value.slice(0, -1);
+      if (value.length > 4) (e.target as HTMLInputElement).value = value.slice(0, -1);
+    });
+    this.yearFrom.node.addEventListener('change', (e: Event) => {
+      const { value } = e.target as HTMLInputElement;
+      state.setFilterYearFrom(Number(value));
+    });
 
     this.yearTo = new InputElement(this.formRow.node, {
       tagName: 'input',
       type: 'text',
       classList: ['extended-search-form__text-input'],
       placeholder: 'Год до',
+    });
+    this.yearTo.node.addEventListener('input', (e: Event) => {
+      const { value } = e.target as HTMLInputElement;
+      if (!/^\d+$/.test(value.slice(-1))) (e.target as HTMLInputElement).value = value.slice(0, -1);
+      if (value.length > 4) (e.target as HTMLInputElement).value = value.slice(0, -1);
+    });
+    this.yearTo.node.addEventListener('change', (e: Event) => {
+      const { value } = e.target as HTMLInputElement;
+      state.setFilterYearTo(Number(value));
     });
   }
 }
