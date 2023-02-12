@@ -3,11 +3,16 @@ import DOMElement from '../../../shared/components/base-elements/dom-element';
 import Page from '../../../shared/components/page';
 import state from '../../../shared/services/state';
 import MovieInfo from '../../components/movie-page/movie-info/movie-info';
+import MovieDescription from '../../components/movie-page/movie-description/movie-description';
 
 export default class MoviePage extends Page {
   private movieInfoContainer: DOMElement;
 
+  private movieDescriptionContainer: DOMElement;
+
   private movieInfo: MovieInfo | null;
+
+  private movieDescription: MovieDescription | null;
 
   constructor(id: string) {
     super(id);
@@ -17,7 +22,14 @@ export default class MoviePage extends Page {
       classList: ['movie-info'],
     });
 
+    this.movieDescriptionContainer = new DOMElement(this.node, {
+      tagName: 'div',
+      classList: ['movie-description'],
+    });
+
     this.movieInfo = null;
+
+    this.movieDescription = null;
 
     this.render();
   }
@@ -32,6 +44,7 @@ export default class MoviePage extends Page {
     const reviews = state.allData.movieReviews;
     if (data && staff && reviews) {
       this.movieInfo = new MovieInfo(this.movieInfoContainer.node, data, staff, reviews);
+      this.movieDescription = new MovieDescription(this.movieDescriptionContainer.node, data);
     }
   }
 }
