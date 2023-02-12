@@ -1,5 +1,6 @@
 import state from '../../../../shared/services/state';
 import SearchListCard from '../../../components/common/card/card';
+import SearchExtendedCard from '../../../components/common/extended-card/extended-card';
 import extendedInfiniteScroll from '../infinite-scroll/infitine-scroll';
 
 class ExtenedRenderCards {
@@ -33,6 +34,16 @@ class ExtenedRenderCards {
     if (films.length > 0) {
       films.forEach((item, index) => new SearchListCard(container, item, index + 1));
       this.addEventListeners();
+    }
+  }
+
+  public renderSearchFilms() {
+    const films = state.getSearchExtendedResult();
+    const container = this.container as HTMLElement;
+    container.innerHTML = '';
+    if (films.length > 0) {
+      films.forEach((item, index) => new SearchExtendedCard(container, item, index + 1));
+      // this.addEventListeners();
     }
   }
 
