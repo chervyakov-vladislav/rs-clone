@@ -158,7 +158,7 @@ class ApiServiceKinopoisk {
     const yearToQuerry = options.yearTo !== 3000 ? `&yearTo=${options.yearTo}` : '&yearTo=3000';
     const keywordQuerry = options.keyword !== '' ? `&keyword=${options.keyword}` : '';
     const countryQuerry = options.country !== 0 ? `&countries=${options.country}` : '';
-    const genreQuerry = options.genre !== 0 ? `&countries=${options.genre}` : '';
+    const genreQuerry = options.genre !== 0 ? `&genres=${options.genre}` : '';
     const response = await fetch(
       `${this.searchFilterAdress}?order=RATING${countryQuerry}${genreQuerry}&type=ALL&ratingFrom=0&ratingTo=10${yearFromQuerry}${yearToQuerry}${keywordQuerry}&page=${page}`,
       {

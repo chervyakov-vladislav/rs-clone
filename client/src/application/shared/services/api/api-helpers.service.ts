@@ -1,7 +1,7 @@
 class ApiHelpers {
-  private debounceTimeout: NodeJS.Timeout | number = 0;
+  private debounceTimeout = 0;
 
-  private throttleTimeout: NodeJS.Timeout | number = 0;
+  private throttleTimeout = 0;
 
   public debounce<F extends (...args: Parameters<F>) => ReturnType<F>>(
     func: F,

@@ -1,4 +1,5 @@
 import './user-data.scss';
+import userPhoto from '../../../../../assets/images/login.png';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import ImageElement from '../../../../shared/components/base-elements/image-element';
@@ -51,7 +52,7 @@ export default class UserData extends DOMElement {
     this.userPhoto = new ImageElement(this.userPicWrapper.node, {
       tagName: 'img',
       classList: ['user-data__image'],
-      src: '../../../../../assets/images/login.png',
+      src: userPhoto,
     });
 
     this.uploadButton = new DOMElement(this.imageContainer.node, {
