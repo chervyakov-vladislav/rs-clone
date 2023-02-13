@@ -281,13 +281,17 @@ export default class MovieInfo {
     this.gridRatingTotal = new DOMElement(this.column3.node, {
       tagName: 'p',
       classList: ['movie-info__ratings-total'],
-      content: `Оценок: ${item.ratingKinopoiskVoteCount}`,
+      content: `${item.ratingKinopoiskVoteCount} ${this.declOfNum(item.ratingKinopoiskVoteCount, [
+        'оценка',
+        'оценки',
+        'оценок',
+      ])}`,
     });
 
     this.gridReviewsTotal = new DOMElement(this.column3.node, {
       tagName: 'p',
       classList: ['movie-info__reviews-total'],
-      content: `Рецензий: ${reviews.total}`,
+      content: `${reviews.total} ${this.declOfNum(reviews.total, ['рецензия', 'рецензии', 'рецензий'])}`,
     });
 
     this.movieCast = new DOMElement(this.column3.node, {
@@ -315,5 +319,12 @@ export default class MovieInfo {
         content: `${actor}`,
       });
     });
+  }
+
+  private declOfNum(n: number, titles: string[]) {
+    if (n % 10 === 1 && n % 100 !== 11) {
+      return titles[0];
+    }
+    return titles[n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
   }
 }
