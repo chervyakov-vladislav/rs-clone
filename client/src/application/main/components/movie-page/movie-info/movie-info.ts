@@ -7,7 +7,7 @@ import SVG from '../../../../shared/components/svg-icons';
 import movieValue from '../../../services/movie-page/movie-value.service';
 
 export default class MovieInfo {
-  staff: IStaff[];
+  private staff: IStaff[];
 
   private column1: DOMElement;
 
@@ -281,7 +281,7 @@ export default class MovieInfo {
     this.gridRatingTotal = new DOMElement(this.column3.node, {
       tagName: 'p',
       classList: ['movie-info__ratings-total'],
-      content: `${item.ratingKinopoiskVoteCount} ${this.declOfNum(item.ratingKinopoiskVoteCount, [
+      content: `${item.ratingKinopoiskVoteCount} ${movieValue.declOfNum(item.ratingKinopoiskVoteCount, [
         'оценка',
         'оценки',
         'оценок',
@@ -291,7 +291,7 @@ export default class MovieInfo {
     this.gridReviewsTotal = new DOMElement(this.column3.node, {
       tagName: 'p',
       classList: ['movie-info__reviews-total'],
-      content: `${reviews.total} ${this.declOfNum(reviews.total, ['рецензия', 'рецензии', 'рецензий'])}`,
+      content: `${reviews.total} ${movieValue.declOfNum(reviews.total, ['рецензия', 'рецензии', 'рецензий'])}`,
     });
 
     this.movieCast = new DOMElement(this.column3.node, {
@@ -319,12 +319,5 @@ export default class MovieInfo {
         content: `${actor}`,
       });
     });
-  }
-
-  private declOfNum(n: number, titles: string[]) {
-    if (n % 10 === 1 && n % 100 !== 11) {
-      return titles[0];
-    }
-    return titles[n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
   }
 }

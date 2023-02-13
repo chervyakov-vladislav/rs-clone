@@ -1,0 +1,60 @@
+.movie-rating {
+
+  &__title {
+    color: #333;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 13px;
+  }
+
+  &__content {
+    align-items: center;
+    color: rgba(0,0,0,.4);
+    display: flex;
+    flex-wrap: wrap;
+    height: 65px;
+    gap: 20px;
+    
+    &_stars {
+      --star-size: 40px;
+      --star-color: #acacac;
+      --star-background: #fc0;
+      --percent: calc(var(--rating) / 10 * 100%);
+      
+      display: inline-block;
+      font-size: var(--star-size);
+      font-family: Times; // make sure ★ appears correctly
+      line-height: 1;
+      
+      &::before {
+        content: '★★★★★★★★★★';
+        letter-spacing: 3px;
+        background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    &_num {
+      font-size: 40px;
+      font-weight: 700;
+
+      &.positive {
+        color: #3bb33b;
+      }
+    }
+
+    &_sum {
+      font-size: 13px;
+    }
+
+    &_imdb {
+      display: flex;
+      gap: 10px;
+
+      &-num {
+        font-weight: 700;
+      }
+    }
+  }
+}

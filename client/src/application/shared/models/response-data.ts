@@ -31,6 +31,7 @@ export interface IFilmData {
   posterUrl: string;
   posterUrlPreview: string;
   ratingImdb: number;
+  ratingImdbVoteCount: number;
   ratingKinopoisk: number;
   ratingKinopoiskVoteCount: number;
   shortDescription: string;

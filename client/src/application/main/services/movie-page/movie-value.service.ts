@@ -1,5 +1,4 @@
 import { IFilmData, IStaff, ITopFilm } from '../../../shared/models/response-data';
-// import state from '../../../shared/services/state';
 
 class MovieValue {
   public isNameRU(data: ITopFilm) {
@@ -26,6 +25,10 @@ class MovieValue {
     return data.ratingKinopoisk === null ? 0 : data.ratingKinopoisk;
   }
 
+  public getRatingImdb(data: IFilmData) {
+    return data.ratingImdb === null ? 0 : data.ratingKinopoisk;
+  }
+
   public getStaff(data: IStaff[], prof: string) {
     const staff = data
       .filter((item) => item.professionKey === prof)
@@ -47,6 +50,13 @@ class MovieValue {
   public getRatingStyle(data: IFilmData) {
     const rating = +data.ratingKinopoisk < 7 ? ['movie-info__rating'] : ['movie-info__rating', 'positive'];
     return rating;
+  }
+
+  public declOfNum(n: number, titles: string[]) {
+    if (n % 10 === 1 && n % 100 !== 11) {
+      return titles[0];
+    }
+    return titles[n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
   }
 }
 
