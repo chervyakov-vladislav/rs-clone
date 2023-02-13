@@ -29,7 +29,7 @@ export default class LoginMenu extends DOMElement {
       tagName: 'a',
       classList: ['login-menu__link'],
       content: 'Личный кабинет',
-      href: '#',
+      href: '#account',
     });
 
     this.exitItem = new DOMElement(this.node, {

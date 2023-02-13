@@ -1,3 +1,4 @@
+import AccountPage from '../../../main/pages/account-page/account-page';
 import ExtendedSearchPage from '../../../main/pages/extended-search-page/extended-search';
 import MainPage from '../../../main/pages/main-page/main-page';
 import PremierePage from '../../../main/pages/premiere-page/premiere-page';
@@ -29,6 +30,10 @@ const mainRoutes = [
   {
     id: 's',
     template: () => new ExtendedSearchPage('extended-search'),
+  },
+  {
+    id: 'account',
+    template: () => new AccountPage('account-page'),
   },
 ];
 

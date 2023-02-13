@@ -1,0 +1,53 @@
+.user-data {
+  display: flex;
+  flex-direction: column;
+
+    &__title {
+      font-size: 18px;
+      color: #000;
+      font-family: "Kinopoisk-bold" , Arial, sans-serif;
+      margin-bottom: 20px;
+    }
+
+    &__info {
+      display: flex;
+      // flex-direction: column;
+    }
+
+    &__image-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    &__image-wrapper {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    &__image {
+      width: 100%;
+    }
+
+    &__image-label {
+      cursor: pointer;
+      font-size: 14px;
+      transition: .3s;
+      
+        &:hover {
+          color: #000;
+        }
+    }
+    
+    &__image-upload {
+      display: none;
+    }
+}
