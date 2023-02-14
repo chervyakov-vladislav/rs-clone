@@ -36,7 +36,7 @@ export interface StateInterface {
   };
   account: {
     userData: UserData;
-  }
+  };
 }
 
 export interface PreviousPageInfoInterface {

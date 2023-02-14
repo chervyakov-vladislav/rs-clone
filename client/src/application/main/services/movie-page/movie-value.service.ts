@@ -58,6 +58,27 @@ class MovieValue {
     }
     return titles[n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? 1 : 2];
   }
+
+  public convertDate(date: string) {
+    const year = date.slice(0, 4);
+    const month = date.slice(5, 7);
+    const day = date.slice(8, 10);
+    const hours = date.slice(11, 13);
+    const min = date.slice(14, 16);
+    return `${day}-${month}-${year} в ${hours}:${min}`;
+  }
+
+  public getReviewType(type: string) {
+    if (!type) throw new Error();
+    return type.toLowerCase();
+  }
+
+  public getReviewTitle(type: string) {
+    if (!type) {
+      return '';
+    }
+    return type;
+  }
 }
 
 const movieValue = new MovieValue();

@@ -1,13 +1,19 @@
-import DOMElement from '../../../../shared/components/base-elements/dom-element';
-import { IFilmData, IReviewsData } from '../../../../shared/models/response-data';
 import './movie-content.scss';
+import ButtonElement from '../../../../shared/components/base-elements/button-element';
+import DOMElement from '../../../../shared/components/base-elements/dom-element';
+import { IFilmData, IReview, IReviewsData } from '../../../../shared/models/response-data';
+import UserReview from './user-review';
 
 export default class MovieContent {
+  private userReview: UserReview | null;
+
   private contentColumn1: DOMElement;
 
   private usersReviews: DOMElement;
 
   private usersReviewsTitle: DOMElement;
+
+  private usersReviewsAdd: DOMElement;
 
   private usersReviewsContent: DOMElement;
 
@@ -39,7 +45,13 @@ export default class MovieContent {
 
   private usersReviewsNegativeS: DOMElement;
 
-  constructor(container: HTMLElement, item: IFilmData, rewiews: IReviewsData) {
+  private reviewsData: IReview[];
+
+  constructor(container: HTMLElement, item: IFilmData, reviews: IReviewsData) {
+    this.userReview = null;
+
+    this.reviewsData = reviews.items.slice(0, 6);
+
     this.contentColumn1 = new DOMElement(container, {
       tagName: 'h3',
       classList: ['movie-content__column1'],
@@ -54,6 +66,12 @@ export default class MovieContent {
       tagName: 'h3',
       classList: ['users-reviews__title'],
       content: 'Рецензии зрителей',
+    });
+
+    this.usersReviewsAdd = new ButtonElement(this.usersReviews.node, {
+      tagName: 'button',
+      classList: ['users-reviews__write-review-btn'],
+      content: 'Написать рецензию',
     });
 
     this.usersReviewsContent = new DOMElement(this.usersReviews.node, {
@@ -79,7 +97,7 @@ export default class MovieContent {
     this.usersReviewsTotalP = new DOMElement(this.usersReviewsTotal.node, {
       tagName: 'p',
       classList: ['users-reviews__amount'],
-      content: `${rewiews.total}`,
+      content: `${reviews.total}`,
     });
 
     this.usersReviewsTotalS = new DOMElement(this.usersReviewsTotal.node, {
@@ -95,7 +113,7 @@ export default class MovieContent {
     this.usersReviewsPositiveP = new DOMElement(this.usersReviewsPositive.node, {
       tagName: 'p',
       classList: ['users-reviews__amount', 'positive'],
-      content: `${rewiews.totalPositiveReviews}`,
+      content: `${reviews.totalPositiveReviews}`,
     });
 
     this.usersReviewsPositiveS = new DOMElement(this.usersReviewsPositive.node, {
@@ -111,7 +129,7 @@ export default class MovieContent {
     this.usersReviewsNeutralP = new DOMElement(this.usersReviewsNeutral.node, {
       tagName: 'p',
       classList: ['users-reviews__amount', 'neutral'],
-      content: `${rewiews.totalNeutralReviews}`,
+      content: `${reviews.totalNeutralReviews}`,
     });
 
     this.usersReviewsNeutralS = new DOMElement(this.usersReviewsNeutral.node, {
@@ -127,12 +145,20 @@ export default class MovieContent {
     this.usersReviewsNegativeP = new DOMElement(this.usersReviewsNegative.node, {
       tagName: 'p',
       classList: ['users-reviews__amount', 'negative'],
-      content: `${rewiews.totalNegativeReviews}`,
+      content: `${reviews.totalNegativeReviews}`,
     });
 
     this.usersReviewsNegativeS = new DOMElement(this.usersReviewsNegative.node, {
       tagName: 'span',
       content: 'Отрицательные',
     });
+
+    this.renderUserReview();
   }
+
+  public renderUserReview = () => {
+    this.reviewsData.forEach((review: IReview) => {
+      this.userReview = new UserReview(this.usersReviewsReviews.node, review);
+    });
+  };
 }

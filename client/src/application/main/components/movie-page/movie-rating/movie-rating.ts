@@ -48,7 +48,7 @@ export default class MovieRating {
     this.contentRatingNum = new DOMElement(this.contentRating.node, {
       tagName: 'div',
       classList: this.getRatingStyle(item),
-      content: `${item.ratingKinopoisk}`,
+      content: `${movieValue.getRating(item)}`,
     });
 
     this.contentRatingSum = new DOMElement(this.contentRating.node, {

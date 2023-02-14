@@ -275,7 +275,7 @@ export default class MovieInfo {
     this.gridRating = new DOMElement(this.column3.node, {
       tagName: 'p',
       classList: movieValue.getRatingStyle(item),
-      content: `${item.ratingKinopoisk}`,
+      content: `${movieValue.getRating(item)}`,
     });
 
     this.gridRatingTotal = new DOMElement(this.column3.node, {
