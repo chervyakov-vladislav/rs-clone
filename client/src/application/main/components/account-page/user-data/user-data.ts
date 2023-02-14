@@ -4,6 +4,9 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import ImageElement from '../../../../shared/components/base-elements/image-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
+import state from '../../../../shared/services/state';
+import ButtonElement from '../../../../shared/components/base-elements/button-element';
+import userValidation from '../../../services/account-page/user-data/user-validation.service';
 
 export default class UserData extends DOMElement {
   private title: DOMElement;
@@ -21,6 +24,14 @@ export default class UserData extends DOMElement {
   private loadImage: InputElement;
 
   private userForm: FormElement;
+
+  private userNameInput: InputElement;
+
+  private userPassInput: InputElement;
+
+  private userSubmit: ButtonElement;
+
+  private userValidationMassage: DOMElement;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -80,13 +91,53 @@ export default class UserData extends DOMElement {
 
     // грузим данные по пользователю из стейта или из бека, зависит от реализации
     // может грузим не тут, какая будет реализация, еще не известно
-    // пока положу тут шаблон
-    // const mockUserName = 'Выдуманный Организм';
-    // const mockUserPassword = 'chicksayskoko';
+    // пока положу отсуда данные в стейт
+    const mockUserName = 'Выдуманный Организм';
+    const mockUserPassword = 'chicksayskoko';
+    state.setUserData({
+      userName: mockUserName,
+      userPassword: mockUserPassword,
+    });
+
+    const data = state.getUserData();
     this.userForm = new FormElement(this.userInfo.node, {
       tagName: 'form',
       classList: ['user-data__name-password'],
-      content: 'форма с данными',
+      action: '#account',
+    });
+    this.userForm.node.addEventListener('submit', userValidation.submit.bind(userValidation));
+
+    this.userNameInput = new InputElement(this.userForm.node, {
+      tagName: 'input',
+      classList: ['user-data__text-input'],
+      placeholder: 'Имя пользователя',
+      value: data.userName,
+    });
+
+    this.userPassInput = new InputElement(this.userForm.node, {
+      tagName: 'input',
+      classList: ['user-data__text-input'],
+      placeholder: 'Пароль',
+      type: 'password',
+    });
+
+    this.userValidationMassage = new DOMElement(this.userForm.node, {
+      tagName: 'span',
+      classList: ['user-data__user-validation'],
+    });
+
+    this.userSubmit = new ButtonElement(this.userForm.node, {
+      tagName: 'button',
+      classList: ['user-data__submit'],
+      type: 'submit',
+      content: 'Изменить',
+    });
+
+    userValidation.registerElems({
+      form: this.userForm.node as HTMLFormElement,
+      nameInput: this.userNameInput.node as HTMLInputElement,
+      passInput: this.userPassInput.node as HTMLInputElement,
+      message: this.userValidationMassage.node,
     });
   }
 }
