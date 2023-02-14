@@ -15,21 +15,19 @@ export default class Login extends DOMElement {
       tagName: 'div',
       classList: ['login'],
     });
-    const isLogged = state.allData.account.userData.logged;
-    const { userName } = state.allData.account.userData;
     this.loginMenu = new LoginMenu(this.node);
     this.loginMenu.node.remove();
     this.node.addEventListener('click', () => {
-      if (isLogged) this.loginMenu = new LoginMenu(this.node);
+      if (state.allData.account.userData.logged) this.loginMenu = new LoginMenu(this.node);
     });
 
     this.loginBtn = new ButtonElement(this.node, {
       tagName: 'button',
       classList: ['login__button'],
-      content: isLogged ? `Привет, ${userName}` : 'Войти',
+      content: state.allData.account.userData.logged ? `Привет, ${state.allData.account.userData}` : 'Войти',
     });
     this.loginBtn.node.addEventListener('click', () => {
-      if (!isLogged) window.location.hash = '#auth';
+      if (!state.allData.account.userData.logged) window.location.hash = '#auth';
     });
     loginObserver.register(this.loginBtn.node);
   }

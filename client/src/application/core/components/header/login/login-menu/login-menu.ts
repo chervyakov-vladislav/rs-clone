@@ -51,6 +51,7 @@ export default class LoginMenu extends DOMElement {
 
     this.exitButton.node.addEventListener('click', () => {
       storage.setToken('');
+      window.location.hash = window.location.hash === '#account' ? '#' : window.location.hash;
       state.allData.account.userData.logged = false;
       state.allData.account.userData.userName = '';
       state.allData.account.userData.userToken = '';

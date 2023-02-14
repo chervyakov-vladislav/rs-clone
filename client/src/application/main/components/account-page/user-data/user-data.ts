@@ -93,7 +93,7 @@ export default class UserData extends DOMElement {
       const reader = new FileReader();
       reader.addEventListener('load', (event: Event) => {
         const { result } = event.target as FileReader;
-        console.log(result);
+        state.setUserData({ userPhoto: result as string });
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
       });
       reader.readAsDataURL(file);

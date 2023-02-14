@@ -50,12 +50,12 @@ export interface UserData {
   logged: boolean;
   userName: string;
   userToken: string;
-  userPhoto: File;
+  userPhoto: File | string;
 }
 
 export interface UserDataParams {
   logged?: boolean;
   userName?: string;
   userToken?: string;
-  userPhoto?: File;
+  userPhoto?: File | string;
 }
