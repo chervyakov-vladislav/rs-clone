@@ -3,6 +3,7 @@ import ButtonElement from '../../../../shared/components/base-elements/button-el
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import LoginMenu from './login-menu/login-menu';
 import state from '../../../../shared/services/state';
+import loginObserver from '../../../services/menu/login-observer.service';
 
 export default class Login extends DOMElement {
   private loginBtn: ButtonElement;
@@ -17,8 +18,7 @@ export default class Login extends DOMElement {
     this.loginMenu = new LoginMenu(this.node);
     this.loginMenu.node.remove();
     this.node.addEventListener('click', () => {
-      if (!state.allData.login.logged) window.location.hash = '#auth';
-      else this.loginMenu = new LoginMenu(this.node);
+      if (state.allData.login.logged) this.loginMenu = new LoginMenu(this.node);
     });
 
     this.loginBtn = new ButtonElement(this.node, {
@@ -26,5 +26,9 @@ export default class Login extends DOMElement {
       classList: ['login__button'],
       content: state.allData.login.logged ? `Привет, ${state.allData.login.name}` : 'Войти',
     });
+    this.loginBtn.node.addEventListener('click', () => {
+      if (!state.allData.login.logged) window.location.hash = '#auth';
+    });
+    loginObserver.register(this.loginBtn.node);
   }
 }
