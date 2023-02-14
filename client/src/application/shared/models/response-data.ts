@@ -16,7 +16,28 @@ export interface WinnerInterface {
 }
 
 export interface IFilmData {
-  [key: string]: string | null | boolean;
+  countries: Countries[];
+  description: string;
+  coverUrl: string;
+  filmLength: string;
+  genres: [
+    {
+      genre: string;
+    }
+  ];
+  nameEn: string;
+  nameOriginal: string;
+  nameRu: string;
+  posterUrl: string;
+  posterUrlPreview: string;
+  ratingImdb: number;
+  ratingImdbVoteCount: number;
+  ratingKinopoisk: number;
+  ratingKinopoiskVoteCount: number;
+  shortDescription: string;
+  type: string;
+  link: string;
+  year: number;
 }
 
 export interface ITopData {
@@ -53,6 +74,40 @@ export type ObjectLocalStorage = {
   posterUrlPreview: string;
   nameRu: string;
 };
+
+export interface IStaff {
+  description: string;
+  nameEn: string;
+  nameRu: string;
+  posterUrl: string;
+  professionKey: string;
+  professionText: string;
+  staffId: number;
+}
+
+export interface IStaffData {
+  movieStaff: IStaff[];
+}
+
+export interface IReviewsData {
+  items: IReview[];
+  total: number;
+  totalNegativeReviews: number;
+  totalNeutralReviews: number;
+  totalPages: number;
+  totalPositiveReviews: number;
+}
+
+export interface IReview {
+  author: string;
+  date: string;
+  description: string;
+  kinopoiskId: number;
+  negativeRating: number;
+  positiveRating: number;
+  title: string;
+  type: string;
+}
 
 export interface KeyWordSearchInterface {
   films: ITopFilm[];

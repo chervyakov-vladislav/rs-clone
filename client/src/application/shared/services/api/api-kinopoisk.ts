@@ -2,6 +2,8 @@ import {
   ExtendedSearchResultInterface,
   IFilmData,
   ITopData,
+  IReviewsData,
+  IStaff,
   KeyWordSearchInterface,
   SearchQuerryOptions,
 } from '../../models/response-data';
@@ -76,7 +78,7 @@ class ApiServiceKinopoisk {
     return data;
   }
 
-  public async getFilmReviews(id: number): Promise<void> {
+  public async getFilmReviews(id: number): Promise<IReviewsData> {
     const response = await fetch(`${this.filmData}/${id}/reviews`, {
       headers: {
         Accept: 'application/json',
@@ -109,7 +111,7 @@ class ApiServiceKinopoisk {
     return data;
   }
 
-  public async getFilmStaff(id: number): Promise<void> {
+  public async getFilmStaff(id: number): Promise<IStaff[]> {
     const response = await fetch(`${this.filmStaff}${id}`, {
       headers: {
         Accept: 'application/json',

@@ -1,6 +1,7 @@
 import AccountPage from '../../../main/pages/account-page/account-page';
 import ExtendedSearchPage from '../../../main/pages/extended-search-page/extended-search';
 import MainPage from '../../../main/pages/main-page/main-page';
+import MoviePage from '../../../main/pages/movie-page/movie-page';
 import PremierePage from '../../../main/pages/premiere-page/premiere-page';
 import AuthPage from '../../../main/pages/auth-page/auth-page';
 import BestPage from '../../../main/pages/recomend-page/best-page';
@@ -27,6 +28,10 @@ const mainRoutes = [
   {
     id: 'best',
     template: () => new BestPage('best-page'),
+  },
+  {
+    id: 'movie',
+    template: () => new MoviePage('movie-page'),
   },
   {
     id: 'searchPage',

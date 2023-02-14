@@ -4,10 +4,15 @@ import {
   ITopFilm,
   KeyWordSearchInterface,
   SearchQuerryOptions,
+  IStaff,
+  IReviewsData,
 } from './response-data';
 
 export interface StateInterface {
   premiere: IFilmData | null;
+  movieData: IFilmData | null;
+  movieStaff: IStaff[];
+  movieReviews: IReviewsData | null;
   films: ITopFilm[];
   best: ITopFilm[];
   player: Record<string, string>;
@@ -31,7 +36,7 @@ export interface StateInterface {
   };
   account: {
     userData: UserData;
-  }
+  };
   login: {
     logged: boolean;
     name: string;

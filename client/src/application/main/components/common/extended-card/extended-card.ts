@@ -44,7 +44,7 @@ export default class SearchExtendedCard extends DOMElement {
     this.link = new LinkElement(this.node, {
       tagName: 'a',
       classList: ['search-card__link'],
-      href: `#/movie/${data.kinopoiskId}`,
+      href: `#movie/${data.kinopoiskId}`,
     });
 
     this.count = new DOMElement(this.link.node, {
