@@ -3,6 +3,9 @@ import DOMElement from '../../../../../shared/components/base-elements/dom-eleme
 import FormElement from '../../../../../shared/components/base-elements/form-element';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 import InputElement from '../../../../../shared/components/base-elements/input-element';
+import state from '../../../../../shared/services/state';
+import { IFilmData } from '../../../../../shared/models/response-data';
+import apiKinopoisk from '../../../../../shared/services/api/api-kinopoisk';
 
 export default class ChangePreviere extends DOMElement {
   private title: DOMElement;
@@ -52,9 +55,23 @@ export default class ChangePreviere extends DOMElement {
       content: 'Изменить',
     });
 
-    this.form.node.addEventListener('submit', (e: Event) => {
+    this.form.node.addEventListener('submit', async (e: Event) => {
       e.preventDefault();
-      console.log('change');
+      const currentState = state.getPremiereInfo() as IFilmData;
+      const filmValue = (this.movieInput.node as HTMLInputElement).value;
+      const trailerValue = (this.trailerInput.node as HTMLInputElement).value;
+      const filmID = this.validateFilmID(filmValue);
+      const newData = filmValue.length > 0 ? await apiKinopoisk.getFilmData(filmID) : currentState;
+      newData.link = trailerValue.length > 0 ? trailerValue : currentState.link;
+      state.allData.premiere = newData;
     });
+  }
+
+  private validateFilmID(value: string) {
+    if (value.includes('#movie')) {
+      const newValue = value.split('/').pop();
+      return Number(newValue);
+    }
+    return Number(value);
   }
 }
