@@ -48,6 +48,11 @@ class State {
           userPassword: '',
         },
       },
+      login: {
+        logged: false,
+        name: 'lalala',
+        token: 'undefined',
+      },
     };
   }
 

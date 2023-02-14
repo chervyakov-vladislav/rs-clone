@@ -6,8 +6,9 @@
 
   &__button {
     transition: .3s;
-    height: 100%;
     user-select: none;
+    cursor: pointer;
+    color: inherit;
     
     &:hover {
       color: #fff;

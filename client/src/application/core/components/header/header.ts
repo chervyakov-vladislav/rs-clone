@@ -31,13 +31,9 @@ export default class Header extends DOMElement {
     this.headerLogoContainer = new LinkElement(this.container.node, {
       tagName: 'a',
       classList: ['header__logo'],
-      href: '/',
+      href: '#',
     });
     this.headerLogoContainer.node.innerHTML = SVG.headerLogo;
-    this.headerLogoContainer.node.addEventListener('click', (e) => {
-      e.preventDefault();
-      window.location.hash = '#';
-    });
 
     this.headerButtons = new DOMElement(this.container.node, {
       tagName: 'div',

@@ -32,6 +32,11 @@ export interface StateInterface {
   account: {
     userData: UserData;
   }
+  login: {
+    logged: boolean;
+    name: string;
+    token: string;
+  };
 }
 
 export interface PreviousPageInfoInterface {
