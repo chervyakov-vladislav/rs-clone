@@ -1,4 +1,4 @@
-import menuObserver from '../../../core/services/menu-observer.service';
+import menuObserver from '../../../core/services/menu/menu-observer.service';
 import fullscreenObserver from '../../../main/services/auth-page/fullsrceen/fullscreen-observer';
 import DOMElement from '../../components/base-elements/dom-element';
 import { RouterOptions } from '../../models/router-options';
@@ -52,6 +52,7 @@ export default class Router extends DOMElement {
   private getCurrentPageId() {
     const { hash } = window.location;
     const id = hash.slice(1).split('/')[0];
+    if (id !== 's') state.setDefaultFilter();
     this.setPrevPage(hash, id);
     this.checkStyles(id);
     return id;
