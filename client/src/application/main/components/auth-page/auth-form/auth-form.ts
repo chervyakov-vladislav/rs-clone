@@ -117,11 +117,9 @@ export default class AuthForm extends FormElement {
     }
     if (resp && resp.token) {
       storage.setToken(resp.token);
-      state.allData.login = {
-        logged: true,
-        name: resp.data.login,
-        token: resp.token,
-      };
+      state.allData.account.userData.logged = true;
+      state.allData.account.userData.userName = resp.data.login;
+      state.allData.account.userData.userToken = resp.token;
       loginObserver.setButtonText();
       await apiService.authorizationUser();
       window.location.hash = '#';
