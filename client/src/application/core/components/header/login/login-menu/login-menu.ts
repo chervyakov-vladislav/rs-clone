@@ -5,6 +5,8 @@ import ButtonElement from '../../../../../shared/components/base-elements/button
 import headerObserver from '../../../../services/menu/header-observer.service';
 
 export default class LoginMenu extends DOMElement {
+  private isHidden: boolean;
+
   private accountItem: DOMElement;
 
   private accountLink: LinkElement;
@@ -18,6 +20,7 @@ export default class LoginMenu extends DOMElement {
       tagName: 'ul',
       classList: ['login-menu'],
     });
+    this.isHidden = true;
     headerObserver.register(this);
 
     this.accountItem = new DOMElement(this.node, {
