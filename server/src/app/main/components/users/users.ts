@@ -13,41 +13,44 @@ export default class UsersRouter {
     this.usersService = new UsersService();
     this.router.post('/login', loginValidation, (req: Request, res: Response) => this.login(req ,res));
     this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req ,res));
-    this.router.get('/auth', (req, res) => this.authentification(req, res));
+    this.router.get('/me', (req, res) => this.authorization(req, res));
   }
 
   private async login(req: Request , res: Response) {
+    let paramErr = 'login';
     const validateErr = validationResult(req);
     if (!validateErr.isEmpty()) {
       return res.status(400).json({ errors: validateErr.array()[0] });
     }
-
+    console.log(req.body);
     try {
       const existedUser = await this.usersService.findByLogin(req.body.login);
       if (!existedUser) {
-        throw new Error('Login is wrong');
+        throw new Error('Неверный логин');
       }
       const validPassword = await bcrypt.compare(req.body.password, existedUser.password);
       if (!validPassword) {
-        throw new Error('Password is wrong');
+        paramErr = 'password';
+        throw new Error('Неверный пароль');
       }
 
       const token = this.usersService.createToken(existedUser.login);
 
       res.header('auth-token', token).json({
-        error: null,
+        errors: null,
         token,
         data: existedUser,
       });
 
     } catch (err) {
       return res.status(400).json({
-        errors: (err as Error).message,
+        errors: { msg: (err as Error).message, param: paramErr},
       });
     }
   }
 
   private async register(req: Request , res: Response) {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array()[0] });
@@ -56,11 +59,11 @@ export default class UsersRouter {
     try {
       const existedUser = await this.usersService.findByLogin(req.body.login);
       if (existedUser) {
-        throw new Error('user is already exists');
+        throw new Error('Пользователь уже зарегистрирован');
       }
     } catch (err) {
       return res.status(400).json({
-        errors: (err as Error).message,
+        errors: { msg: (err as Error).message, param: 'login'},
       });
     }
 
@@ -75,7 +78,7 @@ export default class UsersRouter {
       const token = this.usersService.createToken(user.login);
 
       res.header('auth-token', token).json({
-        error: null,
+        errors: null,
         token,
         data: user,
       });
@@ -84,15 +87,16 @@ export default class UsersRouter {
     }
   }
 
-  private async authentification(req: Request, res: Response) {
+  private async authorization(req: Request, res: Response) {
     try {
       if (!this.usersService.verifyToken(req.headers.authorization || '')) {
         throw new Error('Invalid token');
       }
-      res.send('authorization success');
+      res.send({ errors: null,
+        msg: 'authorization success' });
     } catch (err) {
       return res.status(400).json({
-        errors: (err as Error).message,
+        errors: { msg: (err as Error).message },
       });
     }
   }

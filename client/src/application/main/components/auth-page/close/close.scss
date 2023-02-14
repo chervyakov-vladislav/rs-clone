@@ -1,0 +1,19 @@
+.close-auth {
+  width: 3rem;
+  height: 3rem;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 8px #d8dce6;
+  position: absolute;
+  left: -1.5rem;
+  top: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(180deg);
+  transition: .3s;
+
+    &:hover {
+      left: -1.58rem;
+    }
+}
