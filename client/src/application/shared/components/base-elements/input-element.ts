@@ -58,6 +58,10 @@ export default class InputElement extends DOMElement {
     if (options.readonly) {
       this.inputNode.readOnly = options.readonly;
     }
+
+    if (options.accept) {
+      (this.node as HTMLInputElement).accept = options.accept;
+    }
   }
 
   public set value(val: unknown) {
