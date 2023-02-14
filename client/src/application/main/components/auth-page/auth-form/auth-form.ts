@@ -1,3 +1,4 @@
+import loginObserver from '../../../../core/services/menu/login-observer.service';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import FormElement from '../../../../shared/components/base-elements/form-element';
@@ -30,7 +31,10 @@ export default class AuthForm extends FormElement {
     });
     this.isRegister = false;
     // обработчик сабмита формы
-    this.node.addEventListener('submit', () => this.submit());
+    this.node.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      this.submit();
+    });
 
     this.formRow = new DOMElement(this.node, {
       tagName: 'div',
@@ -115,11 +119,12 @@ export default class AuthForm extends FormElement {
       storage.setToken(resp.token);
       state.allData.login = {
         logged: true,
-        name: resp.data.name,
+        name: resp.data.login,
         token: resp.token,
       };
-      console.log(resp);
+      loginObserver.setButtonText();
       await apiService.authorizationUser();
+      window.location.hash = '#';
     }
   }
 }
