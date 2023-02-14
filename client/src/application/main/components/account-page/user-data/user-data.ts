@@ -7,6 +7,9 @@ import InputElement from '../../../../shared/components/base-elements/input-elem
 import state from '../../../../shared/services/state';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import userValidation from '../../../services/account-page/user-data/user-validation.service';
+import LookLater from './look-later/look-later';
+import LikedFilms from './liked-films/liked-films';
+import ReviewsFilms from './reviews/reviews';
 
 export default class UserData extends DOMElement {
   private title: DOMElement;
@@ -32,6 +35,12 @@ export default class UserData extends DOMElement {
   private userSubmit: ButtonElement;
 
   private userValidationMassage: DOMElement;
+
+  private later: LookLater;
+
+  private liked: LikedFilms;
+
+  private reviews: ReviewsFilms;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -139,5 +148,9 @@ export default class UserData extends DOMElement {
       passInput: this.userPassInput.node as HTMLInputElement,
       message: this.userValidationMassage.node,
     });
+
+    this.later = new LookLater(this.node);
+    this.liked = new LikedFilms(this.node);
+    this.reviews = new ReviewsFilms(this.node);
   }
 }
