@@ -26,7 +26,7 @@ class MovieValue {
   }
 
   public getRatingImdb(data: IFilmData) {
-    return data.ratingImdb === null ? 0 : data.ratingKinopoisk;
+    return data.ratingImdb === null ? 0 : data.ratingImdb;
   }
 
   public getStaff(data: IStaff[], prof: string) {

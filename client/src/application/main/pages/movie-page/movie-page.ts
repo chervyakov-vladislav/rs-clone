@@ -5,6 +5,7 @@ import state from '../../../shared/services/state';
 import MovieInfo from '../../components/movie-page/movie-info/movie-info';
 import MovieDescription from '../../components/movie-page/movie-description/movie-description';
 import MovieRating from '../../components/movie-page/movie-rating/movie-rating';
+import MovieContent from '../../components/movie-page/movie-content/movie-content';
 
 export default class MoviePage extends Page {
   private movieInfoContainer: DOMElement;
@@ -13,11 +14,15 @@ export default class MoviePage extends Page {
 
   private movieRatingContainer: DOMElement;
 
+  private movieContentContainer: DOMElement;
+
   private movieInfo: MovieInfo | null;
 
   private movieDescription: MovieDescription | null;
 
   private movieRating: MovieRating | null;
+
+  private movieContent: MovieContent | null;
 
   constructor(id: string) {
     super(id);
@@ -37,11 +42,18 @@ export default class MoviePage extends Page {
       classList: ['movie-rating'],
     });
 
+    this.movieContentContainer = new DOMElement(this.node, {
+      tagName: 'div',
+      classList: ['movie-content'],
+    });
+
     this.movieInfo = null;
 
     this.movieDescription = null;
 
     this.movieRating = null;
+
+    this.movieContent = null;
 
     this.render();
   }
@@ -58,6 +70,7 @@ export default class MoviePage extends Page {
       this.movieInfo = new MovieInfo(this.movieInfoContainer.node, data, staff, reviews);
       this.movieDescription = new MovieDescription(this.movieDescriptionContainer.node, data);
       this.movieRating = new MovieRating(this.movieRatingContainer.node, data);
+      this.movieContent = new MovieContent(this.movieContentContainer.node, data, reviews);
     }
   }
 }
