@@ -37,7 +37,7 @@ export default class UsersRouter {
       const token = this.usersService.createToken(existedUser.login);
 
       res.header('auth-token', token).json({
-        error: null,
+        errors: null,
         token,
         data: existedUser,
       });
@@ -78,7 +78,7 @@ export default class UsersRouter {
       const token = this.usersService.createToken(user.login);
 
       res.header('auth-token', token).json({
-        error: null,
+        errors: null,
         token,
         data: user,
       });
