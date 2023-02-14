@@ -1,5 +1,5 @@
 import { ExtendedSearchResultInterface, ITopData, KeyWordSearchInterface } from '../models/response-data';
-import { PreviousPageInfoInterface, StateInterface } from '../models/state';
+import { PreviousPageInfoInterface, StateInterface, UserData } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
 class State {
@@ -43,6 +43,12 @@ class State {
           keyword: '',
           genre: 0,
           country: 0,
+        },
+      },
+      account: {
+        userData: {
+          userName: '',
+          userPassword: '',
         },
       },
     };
@@ -291,6 +297,14 @@ class State {
 
   public getFilterCountry() {
     return this.allData.search.filterOptions.country;
+  }
+
+  public setUserData(options: UserData) {
+    this.allData.account.userData = options;
+  }
+
+  public getUserData() {
+    return this.allData.account.userData;
   }
 }
 
