@@ -4,6 +4,7 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import storage from '../../../../shared/components/local-storage';
+import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 import apiService from '../../../../shared/services/api/server-api.service';
 import state from '../../../../shared/services/state';
 import authValidation from '../../../services/auth-page/validation/validation';
@@ -46,6 +47,14 @@ export default class AuthForm extends FormElement {
       type: 'text',
       classList: ['auth-form__input'],
       placeholder: 'Логин',
+    });
+    this.nameInput.node.addEventListener('input', () => {
+      if (this.isRegister) {
+        apiHelpers.debounce(() => {
+          // что тут нужно для проверки на наличие имени?
+          console.log('проверить на валидность');
+        })();
+      }
     });
 
     this.nameValidation = new DOMElement(this.formRow.node, {
