@@ -1,8 +1,11 @@
 .admin-data {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
   &__title {
     font-size: 18px;
     color: #000;
     font-family: "Kinopoisk-bold" , Arial, sans-serif;
-    margin-bottom: 20px;
   }
 }
