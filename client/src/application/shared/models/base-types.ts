@@ -6,3 +6,9 @@ export interface ResponseData<T> {
   total: number;
   items: T[];
 }
+
+export interface ResponseAuth {
+  errors: TSObject;
+  token: string;
+  data: TSObject;
+}

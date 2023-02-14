@@ -1,16 +1,16 @@
 import apiLoader from './server-api.loader';
-import { TSObject } from '../../models/base-types';
+import { ResponseAuth, TSObject } from '../../models/base-types';
 
 class ApiService {
-  public loginUser(data: TSObject): Promise<TSObject> {
+  public loginUser(data: TSObject): Promise<ResponseAuth> {
     return apiLoader.post('user/login', data);
   }
 
-  public registerUser(data: TSObject): Promise<TSObject> {
+  public registerUser(data: TSObject): Promise<ResponseAuth> {
     return apiLoader.post('user/register', data);
   }
 
-  public authorizationUser(): Promise<TSObject> {
+  public authorizationUser(): Promise<ResponseAuth> {
     return apiLoader.get('user/me', {});
   }
 
