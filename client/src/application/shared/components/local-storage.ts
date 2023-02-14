@@ -34,11 +34,11 @@ class LocalStorage {
   }
 
   public getToken(): string {
-    return localStorage.getItem(this.storageKeys.tokenJW) || '';
+    return localStorage.getItem(this.storageKeys.tokenKey) || '';
   }
 
   public setToken(token: string): void {
-    localStorage.setItem(this.storageKeys.tokenJW, token);
+    localStorage.setItem(this.storageKeys.tokenKey, token);
   }
 }
 
