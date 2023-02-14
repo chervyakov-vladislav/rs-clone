@@ -92,7 +92,8 @@ export default class UsersRouter {
       if (!this.usersService.verifyToken(req.headers.authorization || '')) {
         throw new Error('Invalid token');
       }
-      res.send('authorization success');
+      res.send({ errors: null,
+        msg: 'authorization success' });
     } catch (err) {
       return res.status(400).json({
         errors: { msg: (err as Error).message },
