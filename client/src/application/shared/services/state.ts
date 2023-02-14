@@ -43,7 +43,7 @@ class State {
         },
       },
       login: {
-        logged: true,
+        logged: false,
         name: 'lalala',
         token: 'undefined',
       },

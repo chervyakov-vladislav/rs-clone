@@ -3,8 +3,8 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import storage from '../../../../shared/components/local-storage';
-import { TSObject } from '../../../../shared/models/base-types';
 import apiService from '../../../../shared/services/api/server-api.service';
+import state from '../../../../shared/services/state';
 import authValidation from '../../../services/auth-page/validation/validation';
 
 export default class AuthForm extends FormElement {
@@ -108,11 +108,17 @@ export default class AuthForm extends FormElement {
       console.log(error);
     }
     if (resp && resp.errors) {
-      const { msg, param } = resp.errors as unknown as TSObject;
+      const { msg, param } = resp.errors;
       this.showValidationMessage(param, msg, true);
     }
     if (resp && resp.token) {
       storage.setToken(resp.token);
+      state.allData.login = {
+        logged: true,
+        name: resp.data.name,
+        token: resp.token,
+      };
+      console.log(resp);
       await apiService.authorizationUser();
     }
   }
