@@ -42,6 +42,11 @@ class State {
           country: 0,
         },
       },
+      login: {
+        logged: true,
+        name: 'lalala',
+        token: 'undefined',
+      },
     };
   }
 
