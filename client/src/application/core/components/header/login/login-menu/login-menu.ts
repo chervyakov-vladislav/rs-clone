@@ -3,6 +3,9 @@ import DOMElement from '../../../../../shared/components/base-elements/dom-eleme
 import LinkElement from '../../../../../shared/components/base-elements/link-element';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 import headerObserver from '../../../../services/menu/header-observer.service';
+import storage from '../../../../../shared/components/local-storage';
+import state from '../../../../../shared/services/state';
+import loginObserver from '../../../../services/menu/login-observer.service';
 
 export default class LoginMenu extends DOMElement {
   private isHidden: boolean;
@@ -44,6 +47,17 @@ export default class LoginMenu extends DOMElement {
       tagName: 'button',
       classList: ['login-menu__link'],
       content: 'Выйти',
+    });
+
+    this.exitButton.node.addEventListener('click', () => {
+      storage.setToken('');
+      state.allData.login = {
+        logged: false,
+        name: '',
+        token: '',
+      };
+      loginObserver.setButtonText();
+      this.node.remove();
     });
   }
 }
