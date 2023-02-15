@@ -167,9 +167,24 @@ export default class SearchExtendedCard extends DOMElement {
     });
 
     this.likeButton = new ButtonElement(this.accountButtons.node, {
-      tagName: 'div',
-      classList: ['search-card__account-button-like'],
+      tagName: 'button',
+      classList: likeFilmsService.checkLikedFilmsList(data.kinopoiskId)
+        ? ['search-card__account-button-like', 'search-card__account-button-like--active']
+        : ['search-card__account-button-like'],
     });
     this.likeButton.node.innerHTML = SVG.starRating;
+    this.likeButton.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        if (likeFilmsService.checkLikedFilmsList(data.kinopoiskId)) {
+          likeFilmsService.removeLikedFilmsValue(data.kinopoiskId);
+          this.likeButton.node.classList.remove('search-card__account-button-like--active');
+        } else {
+          likeFilmsService.appendLikedFilmsValue(data.kinopoiskId);
+          this.likeButton.node.classList.add('search-card__account-button-like--active');
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
+    });
   }
 }

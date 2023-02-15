@@ -176,8 +176,23 @@ export default class SearchListCard extends DOMElement {
 
     this.likeButton = new ButtonElement(this.accountButtons.node, {
       tagName: 'button',
-      classList: ['search-card__account-button-like'],
+      classList: likeFilmsService.checkLikedFilmsList(data.filmId)
+        ? ['search-card__account-button-like', 'search-card__account-button-like--active']
+        : ['search-card__account-button-like'],
     });
     this.likeButton.node.innerHTML = SVG.starRating;
+    this.likeButton.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        if (likeFilmsService.checkLikedFilmsList(data.filmId)) {
+          likeFilmsService.removeLikedFilmsValue(data.filmId);
+          this.likeButton.node.classList.remove('search-card__account-button-like--active');
+        } else {
+          likeFilmsService.appendLikedFilmsValue(data.filmId);
+          this.likeButton.node.classList.add('search-card__account-button-like--active');
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
+    });
   }
 }

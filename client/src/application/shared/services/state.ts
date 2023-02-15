@@ -328,6 +328,14 @@ class State {
   public setWatchLaterList(arr: number[]) {
     this.allData.account.watchLaterFilms = arr;
   }
+
+  public getLikedFilmsList() {
+    return this.allData.account.likedFilms;
+  }
+
+  public setLikedFilmsList(arr: number[]) {
+    this.allData.account.likedFilms = arr;
+  }
 }
 
 const state = new State();

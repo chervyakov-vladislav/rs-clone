@@ -148,7 +148,22 @@ export default class BlockMovieCard {
 
     this.movieCardButtonRate = new ButtonElement(this.movieCardButtons.node, {
       tagName: 'button',
-      classList: ['movie-card-flat__to-rate-btn'],
+      classList: likeFilmsService.checkLikedFilmsList(item.filmId)
+        ? ['movie-card-flat__to-rate-btn', 'movie-card-flat__to-rate-btn--active']
+        : ['movie-card-flat__to-rate-btn'],
+    });
+    this.movieCardButtonRate.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        if (likeFilmsService.checkLikedFilmsList(item.filmId)) {
+          likeFilmsService.removeLikedFilmsValue(item.filmId);
+          this.movieCardButtonRate.node.classList.remove('movie-card-flat__to-rate-btn--active');
+        } else {
+          likeFilmsService.appendLikedFilmsValue(item.filmId);
+          this.movieCardButtonRate.node.classList.add('movie-card-flat__to-rate-btn--active');
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
     });
 
     this.movieCardButtonRateStar = new DOMElement(this.movieCardButtonRate.node, {
