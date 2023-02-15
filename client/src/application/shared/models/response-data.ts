@@ -16,6 +16,7 @@ export interface WinnerInterface {
 }
 
 export interface IFilmData {
+  kinopoiskId: number;
   countries: Countries[];
   description: string;
   coverUrl: string;
