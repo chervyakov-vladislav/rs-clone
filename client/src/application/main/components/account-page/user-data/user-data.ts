@@ -38,9 +38,9 @@ export default class UserData extends DOMElement {
 
   private later: WatchLater | null;
 
-  private liked: LikedFilms | null;
+  private liked: LikedFilms | null = null;
 
-  private reviews: ReviewsFilms | null;
+  private reviews: ReviewsFilms | null = null;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -145,8 +145,13 @@ export default class UserData extends DOMElement {
     this.later = watchLaterFilms.length > 0 ? new WatchLater(this.node) : null;
 
     const likedFilms = state.getLikedFilmsList();
-    this.liked = likedFilms.length > 0 ? new LikedFilms(this.node) : null;
+    // из-за ограничения по количесву запрсов, нужно ставить таймаут. Другого решения не вижу
+    setTimeout(() => {
+      this.liked = likedFilms.length > 0 ? new LikedFilms(this.node) : null;
+    }, 1_000);
 
-    this.reviews = new ReviewsFilms(this.node);
+    setTimeout(() => {
+      this.reviews = new ReviewsFilms(this.node);
+    }, 2_000);
   }
 }

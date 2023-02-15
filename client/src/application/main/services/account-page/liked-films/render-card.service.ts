@@ -40,6 +40,24 @@ class LikeFilmsRenderService {
       }
     });
   }
+
+  public async renderLikedList() {
+    const currentDataID = state.getLikedFilmsList();
+    const filmsData = currentDataID.map(async (id, index) => {
+      if (index < 7) {
+        // есть ограничение на запрос, не больше 6 в секунду
+        const data = await apiKinopoisk.getFilmData(id);
+        return data;
+      }
+      return null;
+    });
+    filmsData.forEach(async (film, index) => {
+      if (index < 7) {
+        const data = await film;
+        this.newCard = new LikedFilmCard(this.containerLiked, data as IFilmData);
+      }
+    });
+  }
 }
 
 const likedFilmsRender = new LikeFilmsRenderService();
