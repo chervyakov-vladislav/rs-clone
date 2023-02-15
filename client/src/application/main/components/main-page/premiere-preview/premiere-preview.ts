@@ -8,6 +8,8 @@ import { IFilmData } from '../../../../shared/models/response-data';
 export default class PremierePreview extends DOMElement {
   private premiereImage: ImageElement;
 
+  private posterCover: DOMElement | null = null;
+
   private premiereText: DOMElement;
 
   private premiereName: DOMElement;
@@ -21,12 +23,19 @@ export default class PremierePreview extends DOMElement {
     });
 
     const premiereState = state.allData.premiere as IFilmData;
-
+    const bg = premiereState.coverUrl ? premiereState.coverUrl : premiereState.posterUrl;
     this.premiereImage = new ImageElement(this.node, {
       tagName: 'img',
-      classList: ['premiere__img'],
-      src: premiereState.coverUrl as string,
+      classList: premiereState.coverUrl ? ['premiere__img'] : ['premiere__img', 'premiere__img--poster'],
+      src: bg as string,
     });
+
+    this.posterCover = !premiereState.coverUrl
+      ? new DOMElement(this.node, {
+          tagName: 'div',
+          classList: ['premiere__cover'],
+        })
+      : null;
 
     this.premiereName = new DOMElement(this.node, {
       tagName: 'div',

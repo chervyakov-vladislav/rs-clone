@@ -64,6 +64,7 @@ export default class ChangePreviere extends DOMElement {
       const newData = filmValue.length > 0 ? await apiKinopoisk.getFilmData(filmID) : currentState;
       newData.link = trailerValue.length > 0 ? trailerValue : currentState.link;
       state.allData.premiere = newData;
+      // сохранить на беке newData
     });
   }
 
