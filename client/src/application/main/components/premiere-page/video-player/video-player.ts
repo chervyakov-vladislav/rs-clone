@@ -21,6 +21,10 @@ export default class VideoPlayer extends DOMElement {
 
   public coverImage: ImageElement;
 
+  private posterCover: DOMElement | null = null;
+
+  private blackCover: DOMElement | null = null;
+
   private playButton: ButtonElement;
 
   private pauseButton: ButtonElement;
@@ -51,11 +55,28 @@ export default class VideoPlayer extends DOMElement {
       classList: ['video-player__cover-container'],
     });
 
+    this.blackCover = !premierState.coverUrl
+      ? new DOMElement(this.cover.node, {
+          tagName: 'div',
+          classList: ['video-player__black-cover'],
+        })
+      : null;
+
+    const bg = premierState.coverUrl ? premierState.coverUrl : premierState.posterUrl;
     this.coverImage = new ImageElement(this.cover.node, {
       tagName: 'img',
-      src: premierState.coverUrl as string,
-      classList: ['video-player__cover-image'],
+      src: bg as string,
+      classList: premierState.coverUrl
+        ? ['video-player__cover-image']
+        : ['video-player__cover-image', 'video-player__cover-image--poster'],
     });
+
+    this.posterCover = !premierState.coverUrl
+      ? new DOMElement(this.cover.node, {
+          tagName: 'div',
+          classList: ['video-player__cover'],
+        })
+      : null;
 
     this.playButton = new ButtonElement(this.cover.node, {
       tagName: 'button',
@@ -75,6 +96,8 @@ export default class VideoPlayer extends DOMElement {
       setTimeout(() => this.coverImage.node.classList.add('video-player__cover-image--active'), 400);
       this.playButton.node.classList.add('video-player__play--active');
       this.pauseButton.node.classList.add('video-player__pause--active');
+      this.blackCover?.node.classList.add('video-player__black-cover--active');
+      this.posterCover?.node.classList.add('video-player__cover--active');
       this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
       state.setPlayerState({
         status: 'play',
@@ -87,6 +110,8 @@ export default class VideoPlayer extends DOMElement {
       this.coverImage.node.classList.remove('video-player__cover-image--active');
       this.playButton.node.classList.remove('video-player__play--active');
       this.pauseButton.node.classList.remove('video-player__pause--active');
+      this.blackCover?.node.classList.remove('video-player__black-cover--active');
+      this.posterCover?.node.classList.remove('video-player__cover--active');
       this.controls.playPauseButton.node.innerHTML = PlayerIcon.playButton;
       state.setPlayerState({
         status: 'paused',
@@ -101,6 +126,8 @@ export default class VideoPlayer extends DOMElement {
         setTimeout(() => this.coverImage.node.classList.add('video-player__cover-image--active'), 400);
         this.playButton.node.classList.add('video-player__play--active');
         this.pauseButton.node.classList.add('video-player__pause--active');
+        this.blackCover?.node.classList.add('video-player__black-cover--active');
+        this.posterCover?.node.classList.add('video-player__cover--active');
         this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
         state.setPlayerState({
           status: 'play',
@@ -110,6 +137,8 @@ export default class VideoPlayer extends DOMElement {
         this.coverImage.node.classList.remove('video-player__cover-image--active');
         this.playButton.node.classList.remove('video-player__play--active');
         this.pauseButton.node.classList.remove('video-player__pause--active');
+        this.blackCover?.node.classList.remove('video-player__black-cover--active');
+        this.posterCover?.node.classList.remove('video-player__cover--active');
         this.controls.playPauseButton.node.innerHTML = PlayerIcon.playButton;
         state.setPlayerState({
           status: 'paused',
@@ -172,6 +201,8 @@ export default class VideoPlayer extends DOMElement {
         this.coverImage.node.classList.remove('video-player__cover-image--active');
         this.playButton.node.classList.remove('video-player__play--active');
         this.pauseButton.node.classList.remove('video-player__pause--active');
+        this.blackCover?.node.classList.remove('video-player__black-cover--active');
+        this.posterCover?.node.classList.remove('video-player__cover--active');
         this.controls.playPauseButton.node.innerHTML = PlayerIcon.playButton;
         state.setPlayerState({
           status: 'paused',
@@ -203,6 +234,8 @@ export default class VideoPlayer extends DOMElement {
       setTimeout(() => this.coverImage.node.classList.add('video-player__cover-image--active'), 400);
       this.playButton.node.classList.add('video-player__play--active');
       this.pauseButton.node.classList.add('video-player__pause--active');
+      this.blackCover?.node.classList.add('video-player__black-cover--active');
+      this.posterCover?.node.classList.add('video-player__cover--active');
       this.controls.playPauseButton.node.innerHTML = PlayerIcon.pauseButton;
       state.setPlayerState({
         status: 'play',

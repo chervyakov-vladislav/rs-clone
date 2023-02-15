@@ -1,5 +1,6 @@
+import userPhoto from '../../../assets/images/login.png';
 import { ExtendedSearchResultInterface, ITopData, KeyWordSearchInterface } from '../models/response-data';
-import { PreviousPageInfoInterface, StateInterface, UserData } from '../models/state';
+import { PreviousPageInfoInterface, StateInterface, UserDataParams } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 
 class State {
@@ -47,14 +48,11 @@ class State {
       },
       account: {
         userData: {
+          logged: false,
           userName: '',
-          userPassword: '',
+          userToken: 'undefined',
+          userPhoto,
         },
-      },
-      login: {
-        logged: false,
-        name: 'lalala',
-        token: 'undefined',
       },
     };
   }
@@ -304,8 +302,17 @@ class State {
     return this.allData.search.filterOptions.country;
   }
 
-  public setUserData(options: UserData) {
-    this.allData.account.userData = options;
+  public setUserData(options: UserDataParams) {
+    this.allData.account.userData.logged = options.logged ? options.logged : this.allData.account.userData.logged;
+    this.allData.account.userData.userName = options.userName
+      ? options.userName
+      : this.allData.account.userData.userName;
+    this.allData.account.userData.userPhoto = options.userPhoto
+      ? options.userPhoto
+      : this.allData.account.userData.userPhoto;
+    this.allData.account.userData.userToken = options.userToken
+      ? options.userToken
+      : this.allData.account.userData.userToken;
   }
 
   public getUserData() {

@@ -12,7 +12,9 @@ class LoginObserver {
   }
 
   public setButtonText() {
-    this.headerLogin.textContent = state.allData.login.logged ? `Привет, ${state.allData.login.name}` : 'Войти';
+    this.headerLogin.textContent = state.allData.account.userData.logged
+      ? `Привет, ${state.allData.account.userData.userName}`
+      : 'Войти';
   }
 }
 

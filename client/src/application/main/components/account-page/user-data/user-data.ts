@@ -1,5 +1,4 @@
 import './user-data.scss';
-import userPhoto from '../../../../../assets/images/login.png';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import ImageElement from '../../../../shared/components/base-elements/image-element';
@@ -47,6 +46,7 @@ export default class UserData extends DOMElement {
       tagName: 'div',
       classList: ['user-data'],
     });
+    const data = state.getUserData();
 
     this.title = new DOMElement(this.node, {
       tagName: 'h1',
@@ -72,7 +72,7 @@ export default class UserData extends DOMElement {
     this.userPhoto = new ImageElement(this.userPicWrapper.node, {
       tagName: 'img',
       classList: ['user-data__image'],
-      src: userPhoto,
+      src: `${data.userPhoto}`,
     });
 
     this.uploadButton = new DOMElement(this.imageContainer.node, {
@@ -93,22 +93,12 @@ export default class UserData extends DOMElement {
       const reader = new FileReader();
       reader.addEventListener('load', (event: Event) => {
         const { result } = event.target as FileReader;
+        state.setUserData({ userPhoto: result as string });
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
       });
       reader.readAsDataURL(file);
     });
 
-    // грузим данные по пользователю из стейта или из бека, зависит от реализации
-    // может грузим не тут, какая будет реализация, еще не известно
-    // пока положу отсуда данные в стейт
-    const mockUserName = 'Выдуманный Организм';
-    const mockUserPassword = 'chicksayskoko';
-    state.setUserData({
-      userName: mockUserName,
-      userPassword: mockUserPassword,
-    });
-
-    const data = state.getUserData();
     this.userForm = new FormElement(this.userInfo.node, {
       tagName: 'form',
       classList: ['user-data__name-password'],
