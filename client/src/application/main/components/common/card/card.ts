@@ -6,6 +6,8 @@ import SVG from '../../../../shared/components/svg-icons';
 import { ITopFilm } from '../../../../shared/models/response-data';
 import valueCheck from '../../../services/search-page/value-check/value-check.service';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
+import likeFilmsService from '../../../services/account-page/liked-films/liked-films.service';
+import storage from '../../../../shared/components/local-storage';
 
 export default class SearchListCard extends DOMElement {
   private link: LinkElement;
@@ -54,6 +56,15 @@ export default class SearchListCard extends DOMElement {
       tagName: 'a',
       classList: ['search-card__link'],
       href: `#movie/${data.filmId}`,
+    });
+    this.link.node.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLLinkElement;
+      if (target !== this.lookLaterBtn.node && !target.closest('.search-card__account-button-like')) {
+        window.location.hash = `#movie/${data.filmId}`;
+        const movie = { filmId: data.filmId, posterUrlPreview: data.posterUrlPreview, nameRu: data.nameRu };
+        storage.putMovies(movie);
+      }
     });
 
     this.count = new DOMElement(this.link.node, {
@@ -146,9 +157,13 @@ export default class SearchListCard extends DOMElement {
       classList: ['search-card__account-button-later'],
       content: 'Буду смотреть',
     });
+    this.lookLaterBtn.node.addEventListener('click', () => {
+      likeFilmsService.appendWatchLaterValue(data.filmId);
+      console.log(data.filmId);
+    });
 
     this.likeButton = new ButtonElement(this.accountButtons.node, {
-      tagName: 'div',
+      tagName: 'button',
       classList: ['search-card__account-button-like'],
     });
     this.likeButton.node.innerHTML = SVG.starRating;

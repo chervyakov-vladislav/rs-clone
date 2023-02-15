@@ -6,6 +6,7 @@ import SVG from '../../../../shared/components/svg-icons';
 import { ExtendedSearchResultItem } from '../../../../shared/models/response-data';
 import extendedValueCheck from '../../../services/extended-search-page/value-check/value-check';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
+import storage from '../../../../shared/components/local-storage';
 
 export default class SearchExtendedCard extends DOMElement {
   private link: LinkElement;
@@ -52,6 +53,15 @@ export default class SearchExtendedCard extends DOMElement {
       tagName: 'a',
       classList: ['search-card__link'],
       href: `#movie/${data.kinopoiskId}`,
+    });
+    this.link.node.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLLinkElement;
+      if (target !== this.lookLaterBtn.node && !target.closest('.search-card__account-button-like')) {
+        window.location.hash = `#movie/${data.kinopoiskId}`;
+        const movie = { filmId: data.kinopoiskId, posterUrlPreview: data.posterUrlPreview, nameRu: data.nameRu };
+        storage.putMovies(movie);
+      }
     });
 
     this.count = new DOMElement(this.link.node, {

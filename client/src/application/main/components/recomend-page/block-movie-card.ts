@@ -90,10 +90,14 @@ export default class BlockMovieCard {
       content: `${item.nameRu}`,
     });
 
-    this.movieCardLink.node.addEventListener('click', () => {
-      window.location.hash = `#movie/${item.filmId}`;
-      const movie = { filmId: item.filmId, posterUrlPreview: item.posterUrlPreview, nameRu: item.nameRu };
-      storage.putMovies(movie);
+    this.movieCardLink.node.addEventListener('click', (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLLinkElement;
+      if (target !== this.movieCardButtonToWatch.node && !target.closest('.movie-card-flat__to-rate-btn')) {
+        window.location.hash = `#movie/${item.filmId}`;
+        const movie = { filmId: item.filmId, posterUrlPreview: item.posterUrlPreview, nameRu: item.nameRu };
+        storage.putMovies(movie);
+      }
     });
 
     this.movieCardInfoMainP = new DOMElement(this.movieCardInfoMain.node, {
