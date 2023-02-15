@@ -7,6 +7,8 @@ import { ExtendedSearchResultItem } from '../../../../shared/models/response-dat
 import extendedValueCheck from '../../../services/extended-search-page/value-check/value-check';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import storage from '../../../../shared/components/local-storage';
+import state from '../../../../shared/services/state';
+import likeFilmsService from '../../../services/account-page/liked-films/liked-films.service';
 
 export default class SearchExtendedCard extends DOMElement {
   private link: LinkElement;
@@ -145,8 +147,23 @@ export default class SearchExtendedCard extends DOMElement {
 
     this.lookLaterBtn = new ButtonElement(this.accountButtons.node, {
       tagName: 'button',
-      classList: ['search-card__account-button-later'],
+      classList: likeFilmsService.checkWatchLaterList(data.kinopoiskId)
+        ? ['search-card__account-button-later', 'search-card__account-button-later--active']
+        : ['search-card__account-button-later'],
       content: 'Буду смотреть',
+    });
+    this.lookLaterBtn.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        if (likeFilmsService.checkWatchLaterList(data.kinopoiskId)) {
+          likeFilmsService.removeWatchLaterValue(data.kinopoiskId);
+          this.lookLaterBtn.node.classList.remove('search-card__account-button-later--active');
+        } else {
+          likeFilmsService.appendWatchLaterValue(data.kinopoiskId);
+          this.lookLaterBtn.node.classList.add('search-card__account-button-later--active');
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
     });
 
     this.likeButton = new ButtonElement(this.accountButtons.node, {

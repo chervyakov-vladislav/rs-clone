@@ -5,6 +5,8 @@ import LinkElement from '../../../shared/components/base-elements/link-element';
 import storage from '../../../shared/components/local-storage';
 import SVG from '../../../shared/components/svg-icons';
 import { ITopFilm } from '../../../shared/models/response-data';
+import state from '../../../shared/services/state';
+import likeFilmsService from '../../services/account-page/liked-films/liked-films.service';
 
 export default class BlockMovieCard {
   private movieCardFlat: DOMElement;
@@ -125,8 +127,23 @@ export default class BlockMovieCard {
 
     this.movieCardButtonToWatch = new ButtonElement(this.movieCardButtons.node, {
       tagName: 'button',
-      classList: ['movie-card-flat__to-watch-btn'],
+      classList: likeFilmsService.checkWatchLaterList(item.filmId)
+        ? ['movie-card-flat__to-watch-btn', 'movie-card-flat__to-watch-btn--active']
+        : ['movie-card-flat__to-watch-btn'],
       content: 'Буду смотреть',
+    });
+    this.movieCardButtonToWatch.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        if (likeFilmsService.checkWatchLaterList(item.filmId)) {
+          likeFilmsService.removeWatchLaterValue(item.filmId);
+          this.movieCardButtonToWatch.node.classList.remove('movie-card-flat__to-watch-btn--active');
+        } else {
+          likeFilmsService.appendWatchLaterValue(item.filmId);
+          this.movieCardButtonToWatch.node.classList.add('movie-card-flat__to-watch-btn--active');
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
     });
 
     this.movieCardButtonRate = new ButtonElement(this.movieCardButtons.node, {
