@@ -5,6 +5,7 @@ import LinkElement from '../../../../shared/components/base-elements/link-elemen
 import SVG from '../../../../shared/components/svg-icons';
 import { ExtendedSearchResultItem } from '../../../../shared/models/response-data';
 import extendedValueCheck from '../../../services/extended-search-page/value-check/value-check';
+import ButtonElement from '../../../../shared/components/base-elements/button-element';
 
 export default class SearchExtendedCard extends DOMElement {
   private link: LinkElement;
@@ -34,6 +35,12 @@ export default class SearchExtendedCard extends DOMElement {
   private leftBranch: DOMElement;
 
   private rightBranch: DOMElement;
+
+  private accountButtons: DOMElement;
+
+  private lookLaterBtn: ButtonElement;
+
+  private likeButton: ButtonElement;
 
   constructor(parentNode: HTMLElement, data: ExtendedSearchResultItem, count: number) {
     super(parentNode, {
@@ -120,5 +127,22 @@ export default class SearchExtendedCard extends DOMElement {
       classList: ['search-card__right-branch'],
     });
     this.rightBranch.node.innerHTML = SVG.rightGoldBranch;
+
+    this.accountButtons = new DOMElement(this.buttons.node, {
+      tagName: 'div',
+      classList: ['search-card__account-buttons'],
+    });
+
+    this.lookLaterBtn = new ButtonElement(this.accountButtons.node, {
+      tagName: 'button',
+      classList: ['search-card__account-button-later'],
+      content: 'Буду смотреть',
+    });
+
+    this.likeButton = new ButtonElement(this.accountButtons.node, {
+      tagName: 'div',
+      classList: ['search-card__account-button-like'],
+    });
+    this.likeButton.node.innerHTML = SVG.starRating;
   }
 }

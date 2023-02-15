@@ -53,6 +53,8 @@ class State {
           userToken: 'undefined',
           userPhoto,
         },
+        lookLaterFilms: [],
+        likedFilms: [],
       },
     };
   }

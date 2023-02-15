@@ -5,6 +5,7 @@ import LinkElement from '../../../../shared/components/base-elements/link-elemen
 import SVG from '../../../../shared/components/svg-icons';
 import { ITopFilm } from '../../../../shared/models/response-data';
 import valueCheck from '../../../services/search-page/value-check/value-check.service';
+import ButtonElement from '../../../../shared/components/base-elements/button-element';
 
 export default class SearchListCard extends DOMElement {
   private link: LinkElement;
@@ -36,6 +37,12 @@ export default class SearchListCard extends DOMElement {
   private rightBranch: DOMElement;
 
   private ratingCount: DOMElement;
+
+  private accountButtons: DOMElement;
+
+  private lookLaterBtn: ButtonElement;
+
+  private likeButton: ButtonElement;
 
   constructor(parentNode: HTMLElement, data: ITopFilm, count: number) {
     super(parentNode, {
@@ -128,5 +135,22 @@ export default class SearchListCard extends DOMElement {
       classList: ['search-card__rating-count'],
       content: data.ratingVoteCount !== null ? data.ratingVoteCount.toLocaleString('ru') : '-',
     });
+
+    this.accountButtons = new DOMElement(this.buttons.node, {
+      tagName: 'div',
+      classList: ['search-card__account-buttons'],
+    });
+
+    this.lookLaterBtn = new ButtonElement(this.accountButtons.node, {
+      tagName: 'button',
+      classList: ['search-card__account-button-later'],
+      content: 'Буду смотреть',
+    });
+
+    this.likeButton = new ButtonElement(this.accountButtons.node, {
+      tagName: 'div',
+      classList: ['search-card__account-button-like'],
+    });
+    this.likeButton.node.innerHTML = SVG.starRating;
   }
 }
