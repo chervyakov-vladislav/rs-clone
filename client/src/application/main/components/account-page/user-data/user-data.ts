@@ -9,6 +9,7 @@ import userValidation from '../../../services/account-page/user-data/user-valida
 import LookLater from './look-later/look-later';
 import LikedFilms from './liked-films/liked-films';
 import ReviewsFilms from './reviews/reviews';
+import loginObserver from '../../../../core/services/menu/login-observer.service';
 
 export default class UserData extends DOMElement {
   private title: DOMElement;
@@ -94,6 +95,7 @@ export default class UserData extends DOMElement {
       reader.addEventListener('load', (event: Event) => {
         const { result } = event.target as FileReader;
         state.setUserData({ userPhoto: result as string });
+        loginObserver.setButtonText();
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
       });
       reader.readAsDataURL(file);
