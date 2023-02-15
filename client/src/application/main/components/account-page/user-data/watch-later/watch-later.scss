@@ -1,0 +1,20 @@
+.watch-later {
+  max-width: 1000px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 16px;
+    color: #000;
+    font-family: "Kinopoisk-bold" , Arial, sans-serif;
+    margin-bottom: 20px;
+  }
+
+  &__list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 20px;
+  }
+}

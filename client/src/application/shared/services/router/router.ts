@@ -14,6 +14,7 @@ export default class Router extends DOMElement {
     this.enableRouteChange();
     const id = this.getCurrentPageId();
     this.renderNewPage(id);
+    if (id === 'account' && !state.allData.account.userData.logged) window.location.hash = '#auth';
   }
 
   public renderNewPage(pageID: string) {
@@ -34,6 +35,7 @@ export default class Router extends DOMElement {
       if (id === 'movie') {
         await this.setMoviePage(window.location.hash);
       }
+      if (id === 'account' && !state.allData.account.userData.logged) window.location.hash = '#auth';
       this.renderNewPage(id);
     });
   }
