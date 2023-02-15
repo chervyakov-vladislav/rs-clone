@@ -37,11 +37,6 @@ export interface StateInterface {
   account: {
     userData: UserData;
   };
-  login: {
-    logged: boolean;
-    name: string;
-    token: string;
-  };
 }
 
 export interface PreviousPageInfoInterface {
@@ -52,6 +47,15 @@ export interface PreviousPageInfoInterface {
 }
 
 export interface UserData {
+  logged: boolean;
   userName: string;
-  userPassword: string;
+  userToken: string;
+  userPhoto: File | string;
+}
+
+export interface UserDataParams {
+  logged?: boolean;
+  userName?: string;
+  userToken?: string;
+  userPhoto?: File | string;
 }

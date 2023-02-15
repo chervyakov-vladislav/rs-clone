@@ -26,13 +26,11 @@ class UserValidation {
   public submit(e: Event) {
     e.preventDefault();
     const nameInput = this.userNameInput as HTMLInputElement;
-    const passInput = this.userPassInput as HTMLInputElement;
     const message = this.message as HTMLElement;
     // какая-то проверка значений, если нужна и другие манипуляции
 
     state.setUserData({
       userName: nameInput.value,
-      userPassword: passInput.value,
     });
     message.innerText = 'Данные изменены';
     setTimeout(() => {
