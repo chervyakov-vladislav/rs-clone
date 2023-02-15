@@ -3,9 +3,12 @@ import ButtonElement from '../../../../shared/components/base-elements/button-el
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import { IFilmData, IReview, IReviewsData } from '../../../../shared/models/response-data';
 import UserReview from './user-review';
+import ReviewForm from './review-form/review-form';
 
 export default class MovieContent {
   private userReview: UserReview | null;
+
+  private reviewForm: ReviewForm | null;
 
   private contentColumn1: DOMElement;
 
@@ -49,6 +52,7 @@ export default class MovieContent {
 
   constructor(container: HTMLElement, item: IFilmData, reviews: IReviewsData) {
     this.userReview = null;
+    this.reviewForm = null;
 
     this.reviewsData = reviews.items.slice(0, 6);
 
@@ -160,5 +164,6 @@ export default class MovieContent {
     this.reviewsData.forEach((review: IReview) => {
       this.userReview = new UserReview(this.usersReviewsReviews.node, review);
     });
+    this.reviewForm = new ReviewForm(this.usersReviewsReviews.node);
   };
 }

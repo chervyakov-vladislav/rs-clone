@@ -1,5 +1,4 @@
 import './movie-content.scss';
-// import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import { IReview } from '../../../../shared/models/response-data';
 import movieValue from '../../../services/movie-page/movie-value.service';
