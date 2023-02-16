@@ -1,4 +1,5 @@
 import menuObserver from '../../../core/services/menu/menu-observer.service';
+import authService from '../../../main/services/auth-page/auth.service';
 import fullscreenObserver from '../../../main/services/auth-page/fullsrceen/fullscreen-observer';
 import DOMElement from '../../components/base-elements/dom-element';
 import { RouterOptions } from '../../models/router-options';
@@ -17,7 +18,7 @@ export default class Router extends DOMElement {
     if (id === 'account' && !state.allData.account.userData.logged) window.location.hash = '#auth';
   }
 
-  public renderNewPage(pageID: string) {
+  public async renderNewPage(pageID: string) {
     this.node.innerHTML = '';
     menuObserver.setPage();
     const element = this.findNewtemplate(pageID);
@@ -32,6 +33,7 @@ export default class Router extends DOMElement {
   private enableRouteChange() {
     window.addEventListener('hashchange', async () => {
       const id = this.getCurrentPageId();
+      await authService.authorization();
       if (id === 'movie') {
         await this.setMoviePage(window.location.hash);
       }
