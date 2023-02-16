@@ -9,3 +9,8 @@ export const loginValidation = [
   body('login', 'логин не может быть пустым').exists(),
   body('password', 'вход без пароля не возможен').exists()
 ];
+
+export const premiereValidation = [
+  body('ID', 'неверный ID').exists(),
+  body('link', 'неверная ссылка').isURL()
+];

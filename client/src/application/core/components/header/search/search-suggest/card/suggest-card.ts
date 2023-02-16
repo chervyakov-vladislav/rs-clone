@@ -102,7 +102,7 @@ export default class SuggestCard extends DOMElement {
         }
       });
     }
-    if (data.year) text.push(data.year);
+    if (data.year && data.year !== 'null') text.push(data.year);
     return text.length > 0 ? text.join(', ') : '';
   }
 }

@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import { User } from '../../shared/types';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 export default class UsersService {
@@ -39,11 +39,11 @@ private users: User[];
   public verifyToken(auth: string) {
     const token:string = auth.split(' ')[0] === 'Bearer' ? auth.split(' ')[1]: '';
     try {
-      const verified = jwt.verify(token, process.env.TOKEN_SECRET!||'secret');
+      const verified = jwt.verify(token, process.env.TOKEN_SECRET!||'secret') as JwtPayload;
       console.log('verified', verified);
-      return true;
+      return verified.login as string;
     } catch (err) {
-      return false;
+      return '';
     }
   }
 }

@@ -6,6 +6,7 @@ import InputElement from '../../../../../shared/components/base-elements/input-e
 import state from '../../../../../shared/services/state';
 import { IFilmData } from '../../../../../shared/models/response-data';
 import apiKinopoisk from '../../../../../shared/services/api/api-kinopoisk';
+import apiService from '../../../../../shared/services/api/server-api.service';
 
 export default class ChangePreviere extends DOMElement {
   private title: DOMElement;
@@ -64,7 +65,10 @@ export default class ChangePreviere extends DOMElement {
       const newData = filmValue.length > 0 ? await apiKinopoisk.getFilmData(filmID) : currentState;
       newData.link = trailerValue.length > 0 ? trailerValue : currentState.link;
       state.allData.premiere = newData;
-      // сохранить на беке newData
+      await apiService.setPremiere({
+        ID: newData.kinopoiskId.toString(),
+        link: newData.link,
+      });
     });
   }
 

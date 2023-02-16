@@ -24,6 +24,9 @@ class YTPlayerService {
   }
 
   private getVideoID(link: string) {
+    if (link.includes('youtube.')) {
+      return link.trim().split('?v=').reverse()[0];
+    }
     return link.trim().split('/').pop()?.split('?t=')[0];
   }
 
