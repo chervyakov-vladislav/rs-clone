@@ -1,4 +1,3 @@
-import loginObserver from '../../../../core/services/menu/login-observer.service';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import FormElement from '../../../../shared/components/base-elements/form-element';
@@ -7,6 +6,7 @@ import storage from '../../../../shared/components/local-storage';
 import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 import apiService from '../../../../shared/services/api/server-api.service';
 import state from '../../../../shared/services/state';
+import authService from '../../../services/auth-page/auth.service';
 import authValidation from '../../../services/auth-page/validation/validation';
 
 export default class AuthForm extends FormElement {
@@ -131,8 +131,7 @@ export default class AuthForm extends FormElement {
         userName: resp.data.login,
         userToken: resp.token,
       });
-      loginObserver.setButtonText();
-      await apiService.authorizationUser();
+      await authService.authorization();
       window.location.hash = state.getPreviousPageInfo().previousPageHash as string;
     }
   }
