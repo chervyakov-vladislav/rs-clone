@@ -4,6 +4,7 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import { IFilmData, IReview, IReviewsData } from '../../../../shared/models/response-data';
 import UserReview from './user-review';
 import ReviewForm from './review-form/review-form';
+import LinkElement from '../../../../shared/components/base-elements/link-element';
 
 export default class MovieContent {
   private userReview: UserReview | null;
@@ -17,6 +18,8 @@ export default class MovieContent {
   private usersReviewsTitle: DOMElement;
 
   private usersReviewsAdd: DOMElement;
+
+  private AddReviewLink: LinkElement;
 
   private usersReviewsContent: DOMElement;
 
@@ -55,7 +58,7 @@ export default class MovieContent {
     this.reviewForm = null;
 
     this.reviewsData = reviews.items.slice(0, 6);
-
+    console.log(this.reviewsData[0].date);
     this.contentColumn1 = new DOMElement(container, {
       tagName: 'h3',
       classList: ['movie-content__column1'],
@@ -75,7 +78,21 @@ export default class MovieContent {
     this.usersReviewsAdd = new ButtonElement(this.usersReviews.node, {
       tagName: 'button',
       classList: ['users-reviews__write-review-btn'],
+      // content: 'Написать рецензию',
+    });
+
+    this.AddReviewLink = new LinkElement(this.usersReviewsAdd.node, {
+      tagName: 'a',
+      href: '',
+      classList: ['review-form__link'],
       content: 'Написать рецензию',
+    });
+
+    this.usersReviewsAdd.node.addEventListener('click', () => {
+      const reviewForm = document.getElementById('review-form');
+      if (reviewForm) {
+        reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
     });
 
     this.usersReviewsContent = new DOMElement(this.usersReviews.node, {
