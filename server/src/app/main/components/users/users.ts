@@ -3,7 +3,7 @@ import { Request, Response } from 'express-serve-static-core';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import UsersService from '../../services/users.service';
-import { loginValidation, registerValidation } from '../../../shared/validations';
+import { loginValidation, registerValidation } from '../../../shared/model/validations';
 
 export default class UsersRouter {
   public router = express.Router();
