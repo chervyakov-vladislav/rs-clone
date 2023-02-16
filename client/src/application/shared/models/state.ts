@@ -36,6 +36,8 @@ export interface StateInterface {
   };
   account: {
     userData: UserData;
+    watchLaterFilms: number[];
+    likedFilms: number[];
   };
 }
 

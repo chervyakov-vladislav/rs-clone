@@ -30,5 +30,6 @@ export default class Login extends DOMElement {
       if (!state.allData.account.userData.logged) window.location.hash = '#auth';
     });
     loginObserver.register(this.loginBtn.node);
+    loginObserver.registerContainer(this.node);
   }
 }

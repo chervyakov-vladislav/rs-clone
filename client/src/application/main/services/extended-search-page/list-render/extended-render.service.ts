@@ -39,8 +39,6 @@ class ExtenedRenderCards {
 
   public renderSearchFilms() {
     const films = state.getSearchExtendedResult();
-    console.log(state.getSearchFilterOptions);
-    console.log(films);
     const container = this.container as HTMLElement;
     container.innerHTML = '';
     if (films.length > 0) {

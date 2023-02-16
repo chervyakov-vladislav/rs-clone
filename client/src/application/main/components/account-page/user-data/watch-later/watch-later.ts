@@ -1,8 +1,8 @@
-import './liked-films.scss';
+import './watch-later.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
 import likedFilmsRender from '../../../../services/account-page/liked-films/render-card.service';
 
-export default class LikedFilms extends DOMElement {
+export default class WatchLater extends DOMElement {
   private title: DOMElement;
 
   private list: DOMElement;
@@ -10,20 +10,20 @@ export default class LikedFilms extends DOMElement {
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'div',
-      classList: ['liked-films'],
+      classList: ['watch-later'],
     });
 
     this.title = new DOMElement(this.node, {
       tagName: 'h2',
-      content: 'Вы оценили',
-      classList: ['liked-films__title'],
+      content: 'Буду смотреть',
+      classList: ['watch-later__title'],
     });
 
     this.list = new DOMElement(this.node, {
       tagName: 'ul',
       classList: ['watch-later__list'],
     });
-    likedFilmsRender.registerContainerLiked(this.list.node);
-    likedFilmsRender.renderLikedList();
+    likedFilmsRender.registerContainerWathcLater(this.list.node);
+    likedFilmsRender.renderWatchLater();
   }
 }

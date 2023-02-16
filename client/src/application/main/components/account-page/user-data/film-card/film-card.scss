@@ -1,0 +1,23 @@
+.liked-card {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    .liked-card__image {
+      opacity: .6;
+    }
+  }
+
+    &__title {
+      text-align: center;
+    }
+
+    &__image {
+      width: 100%;
+      height: 210px;
+    }
+}

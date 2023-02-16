@@ -5,6 +5,8 @@ import ImageElement from '../../../../shared/components/base-elements/image-elem
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import SVG from '../../../../shared/components/svg-icons';
 import movieValue from '../../../services/movie-page/movie-value.service';
+import state from '../../../../shared/services/state';
+import likeFilmsService from '../../../services/account-page/liked-films/liked-films.service';
 
 export default class MovieInfo {
   private staff: IStaff[];
@@ -126,15 +128,45 @@ export default class MovieInfo {
 
     this.buttonWatch = new ButtonElement(this.movieButtons.node, {
       tagName: 'button',
-      classList: ['movie-info__to-watch-btn'],
+      classList: likeFilmsService.checkWatchLaterList(item.kinopoiskId)
+        ? ['movie-info__to-watch-btn', 'movie-info__to-watch-btn--active']
+        : ['movie-info__to-watch-btn'],
     });
     this.buttonWatch.node.innerHTML = SVG.tabBookmark;
+    this.buttonWatch.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        if (likeFilmsService.checkWatchLaterList(item.kinopoiskId)) {
+          likeFilmsService.removeWatchLaterValue(item.kinopoiskId);
+          this.buttonWatch.node.classList.remove('movie-info__to-watch-btn--active');
+        } else {
+          likeFilmsService.appendWatchLaterValue(item.kinopoiskId);
+          this.buttonWatch.node.classList.add('movie-info__to-watch-btn--active');
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
+    });
 
     this.buttonRate = new ButtonElement(this.movieButtons.node, {
       tagName: 'button',
-      classList: ['movie-info__to-rate-btn'],
+      classList: likeFilmsService.checkLikedFilmsList(item.kinopoiskId)
+        ? ['movie-info__to-rate-btn', 'movie-info__to-rate-btn--active']
+        : ['movie-info__to-rate-btn'],
     });
     this.buttonRate.node.innerHTML = SVG.starRating;
+    this.buttonRate.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        if (likeFilmsService.checkLikedFilmsList(item.kinopoiskId)) {
+          likeFilmsService.removeLikedFilmsValue(item.kinopoiskId);
+          this.buttonRate.node.classList.remove('movie-info__to-rate-btn--active');
+        } else {
+          likeFilmsService.appendLikedFilmsValue(item.kinopoiskId);
+          this.buttonRate.node.classList.add('movie-info__to-rate-btn--active');
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
+    });
 
     this.movieAbout = new DOMElement(this.column2.node, {
       tagName: 'h3',
