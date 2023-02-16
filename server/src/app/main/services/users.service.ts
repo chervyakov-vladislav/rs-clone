@@ -1,7 +1,8 @@
 import { MongoClient } from 'mongodb';
-import { User } from '../../shared/types';
+import { User } from '../../shared/model/types';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import dbClient from '../../shared/db-client';
 
 export default class UsersService {
 private mongoClient: MongoClient;
@@ -17,13 +18,24 @@ private users: User[];
     this.users.push({ login: 'pavel', password: '$2a$05$DdHQBveVauNQjxLr59j7FuNHh5sXirrYEbzccI.rc1f8aKhQ2nmOu' }); //1234567
   }
 
-  public findByLogin(login: string) {
-    return this.users.find((user) => user.login === login);
+  public async findByLogin(login: string) {
+    const collection = await dbClient.getUsersCollection();
+    const data = await collection.findOne<User>({ login: login });
+    return data;
   }
 
-  public create(user: User) {
+  public async create(user: User) {
+    const collection = await dbClient.getUsersCollection();
+    const createdAt = new Date();
+
+    const { insertedId } = await collection.insertOne({
+      createdAt,
+      updatedAt: createdAt,
+      login: user.login,
+      password: user.password,
+    });
+    console.log(insertedId);
     console.log('created user', user);
-    this.users.push(user);
     return user;
   }
 
