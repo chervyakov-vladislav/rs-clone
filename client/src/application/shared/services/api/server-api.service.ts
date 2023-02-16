@@ -17,6 +17,14 @@ class ApiService {
   public deleteUser(id: string) {
     return apiLoader.delete(`user/delete/${id}`);
   }
+
+  public getPremiere(): Promise<TSObject> {
+    return apiLoader.get('settings/premiere', {});
+  }
+
+  public setPremiere(data: TSObject): Promise<TSObject> {
+    return apiLoader.post('settings/premiere', data);
+  }
 }
 
 const apiService = new ApiService();
