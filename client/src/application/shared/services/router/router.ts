@@ -32,8 +32,8 @@ export default class Router extends DOMElement {
 
   private enableRouteChange() {
     window.addEventListener('hashchange', async () => {
-      const id = this.getCurrentPageId();
       await authService.authorization();
+      const id = this.getCurrentPageId();
       if (id === 'movie') {
         await this.setMoviePage(window.location.hash);
       }
