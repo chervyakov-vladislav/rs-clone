@@ -11,7 +11,8 @@ class ValueCheck {
   public getEngnameYearTotalTime(data: ITopFilm) {
     const result: string[] = [];
     if (data.nameEn) result.push(data.nameEn);
-    if (data.year) result.push(`${data.year} год`);
+    console.log(data);
+    if (data.year && data.year !== 'null') result.push(`${data.year} год`);
     if (data.filmLength) {
       const time = this.analyzeTime(data.filmLength);
       result.push(time);
@@ -48,6 +49,7 @@ class ValueCheck {
       TV_SHOW: 'Тв-шоу',
       TV_SERIES: 'Cериал',
       MINI_SERIES: 'Мини-сериал',
+      VIDEO: 'Видео',
     };
     return showType[value];
   }

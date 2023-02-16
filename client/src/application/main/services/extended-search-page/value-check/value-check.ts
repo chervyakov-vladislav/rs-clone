@@ -12,7 +12,7 @@ class ExtendedValueCheck {
   public getEngnameYearTotalTime(data: ExtendedSearchResultItem) {
     const result: string[] = [];
     if (data.nameEn) result.push(data.nameEn);
-    if (data.year) result.push(`${data.year} год`);
+    if (data.year && data.year !== 'null') result.push(`${data.year} год`);
     if (result.length === 1) {
       return result[0];
     }
@@ -45,6 +45,7 @@ class ExtendedValueCheck {
       TV_SHOW: 'Тв-шоу',
       TV_SERIES: 'Cериал',
       MINI_SERIES: 'Мини-сериал',
+      VIDEO: 'Видео',
     };
     return showType[value];
   }
