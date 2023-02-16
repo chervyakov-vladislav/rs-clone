@@ -1,21 +1,21 @@
 import express from 'express';
 import { Request, Response } from 'express-serve-static-core';
 import { validationResult } from 'express-validator';
-import bcrypt from 'bcryptjs';
 import { premiereValidation } from '../../../shared/model/validations';
 import SettingService from '../../services/settings.service';
 
 export default class SettingsRouter {
   public router = express.Router();
+
   private settingsService: SettingService;
 
   constructor() {
     this.settingsService = new SettingService();
-    this.router.post('/premiere', premiereValidation, (req: Request, res: Response) => this.setPremiere(req ,res));
-    this.router.get('/premiere', (req: Request, res: Response) => this.getPremiere(req ,res));
+    this.router.post('/premiere', premiereValidation, (req: Request, res: Response) => this.setPremiere(req, res));
+    this.router.get('/premiere', (req: Request, res: Response) => this.getPremiere(req, res));
   }
 
-  private async getPremiere(req: Request , res: Response) {
+  private async getPremiere(req: Request, res: Response) {
     const validateErr = validationResult(req);
     if (!validateErr.isEmpty()) {
       return res.status(400).json({ errors: validateErr.array()[0] });
@@ -34,7 +34,7 @@ export default class SettingsRouter {
     }
   }
 
-  private async setPremiere(req: Request , res: Response) {
+  private async setPremiere(req: Request, res: Response) {
     console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
