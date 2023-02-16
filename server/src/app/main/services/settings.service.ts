@@ -23,6 +23,12 @@ private premiere: Premiere;
     this.premiere.link = link;
   }
 
+  public setPremiere(ID: string, link: string) {
+    this.premiere.ID = ID;
+    this.premiere.link = link;
+    return this.premiere;
+  }
+
   public getPremiere() {
     return this.premiere;
   }
