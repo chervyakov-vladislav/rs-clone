@@ -5,6 +5,7 @@ import { IFilmData, IReview, IReviewsData } from '../../../../shared/models/resp
 import UserReview from './user-review';
 import ReviewForm from './review-form/review-form';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
+import formServices from './review-form/review-form.services';
 
 export default class MovieContent {
   private userReview: UserReview | null = null;
@@ -120,7 +121,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount'],
       content: `${reviews.total}`,
     });
-
+    formServices.registredCount(this.usersReviewsTotalP.node);
     this.usersReviewsTotalS = new DOMElement(this.usersReviewsTotal.node, {
       tagName: 'span',
       content: 'Всего',

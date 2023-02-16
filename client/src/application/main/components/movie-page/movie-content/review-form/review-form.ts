@@ -4,6 +4,7 @@ import FormElement from '../../../../../shared/components/base-elements/form-ele
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 import InputElement from '../../../../../shared/components/base-elements/input-element';
 import { IReviewsData } from '../../../../../shared/models/response-data';
+import formServices from './review-form.services';
 
 export default class ReviewForm {
   private reviewForm: DOMElement;
@@ -150,66 +151,7 @@ export default class ReviewForm {
       content: 'Отправить рецензию',
     });
     this.formButton.node.addEventListener('click', () => {
-      this.addReviewToState();
+      formServices.addReviewToState(reviews);
     });
-  }
-
-  private addReviewToState() {
-    const inputSelect = document.querySelector('.review-form__select-input') as HTMLInputElement;
-    const select = this.checkTypeReview(inputSelect.value);
-    const messageType = document.querySelector('.review-form__message.type') as HTMLElement;
-
-    const inputTitle = document.querySelector('input[type="text"]') as HTMLInputElement;
-    const messageTitle = document.querySelector('.review-form__message.title') as HTMLElement;
-
-    const inputText = document.querySelector('.review-form__textarea') as HTMLInputElement;
-    const messageText = document.querySelector('.review-form__message.text') as HTMLElement;
-
-    const currentDate = new Date().toISOString().slice(0, 19);
-
-    if (select === undefined) {
-      messageType.innerText = 'Не выбран тип рецензии!';
-      return;
-    }
-    messageType.innerHTML = '';
-
-    if (inputTitle.value === '') {
-      messageTitle.innerText = 'Введите заголовок!';
-      return;
-    }
-    messageTitle.innerHTML = '';
-
-    if (inputText.value === '') {
-      messageText.innerText = 'Введите текст!';
-      return;
-    }
-    messageText.innerHTML = '';
-
-    const item = {
-      author: 'Test for new review',
-      date: currentDate,
-      description: inputText.value,
-      kinopoiskId: 4370148,
-      negativeRating: 0,
-      positiveRating: 1,
-      title: inputTitle.value,
-      type: select,
-    };
-
-    this.reviews.items.push(item);
-    console.log(this.reviews);
-  }
-
-  private checkTypeReview(type: string): string | undefined {
-    if (type === 'Позитивная') {
-      return 'POSITIVE';
-    }
-    if (type === 'Негативная') {
-      return 'NEGATIVE';
-    }
-    if (type === 'Нейтральная') {
-      return 'NEUTRAL';
-    }
-    return undefined;
   }
 }
