@@ -6,9 +6,10 @@ import InputElement from '../../../../shared/components/base-elements/input-elem
 import state from '../../../../shared/services/state';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import userValidation from '../../../services/account-page/user-data/user-validation.service';
-import LookLater from './look-later/look-later';
 import LikedFilms from './liked-films/liked-films';
 import ReviewsFilms from './reviews/reviews';
+import loginObserver from '../../../../core/services/menu/login-observer.service';
+import WatchLater from './watch-later/watch-later';
 
 export default class UserData extends DOMElement {
   private title: DOMElement;
@@ -35,11 +36,11 @@ export default class UserData extends DOMElement {
 
   private userValidationMassage: DOMElement;
 
-  private later: LookLater;
+  private later: WatchLater | null;
 
-  private liked: LikedFilms;
+  private liked: LikedFilms | null = null;
 
-  private reviews: ReviewsFilms;
+  private reviews: ReviewsFilms | null = null;
 
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
@@ -94,6 +95,7 @@ export default class UserData extends DOMElement {
       reader.addEventListener('load', (event: Event) => {
         const { result } = event.target as FileReader;
         state.setUserData({ userPhoto: result as string });
+        loginObserver.setButtonText();
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
       });
       reader.readAsDataURL(file);
@@ -139,8 +141,17 @@ export default class UserData extends DOMElement {
       message: this.userValidationMassage.node,
     });
 
-    this.later = new LookLater(this.node);
-    this.liked = new LikedFilms(this.node);
-    this.reviews = new ReviewsFilms(this.node);
+    const watchLaterFilms = state.getWatchLaterList();
+    this.later = watchLaterFilms.length > 0 ? new WatchLater(this.node) : null;
+
+    const likedFilms = state.getLikedFilmsList();
+    // из-за ограничения по количесву запрсов, нужно ставить таймаут. Другого решения не вижу
+    setTimeout(() => {
+      this.liked = likedFilms.length > 0 ? new LikedFilms(this.node) : null;
+    }, 1_000);
+
+    setTimeout(() => {
+      this.reviews = new ReviewsFilms(this.node);
+    }, 2_000);
   }
 }

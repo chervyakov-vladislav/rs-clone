@@ -53,6 +53,8 @@ class State {
           userToken: 'undefined',
           userPhoto,
         },
+        watchLaterFilms: [],
+        likedFilms: [],
       },
     };
   }
@@ -317,6 +319,22 @@ class State {
 
   public getUserData() {
     return this.allData.account.userData;
+  }
+
+  public getWatchLaterList() {
+    return this.allData.account.watchLaterFilms;
+  }
+
+  public setWatchLaterList(arr: number[]) {
+    this.allData.account.watchLaterFilms = arr;
+  }
+
+  public getLikedFilmsList() {
+    return this.allData.account.likedFilms;
+  }
+
+  public setLikedFilmsList(arr: number[]) {
+    this.allData.account.likedFilms = arr;
   }
 }
 
