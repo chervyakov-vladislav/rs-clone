@@ -150,7 +150,8 @@ export default class ReviewForm {
       classList: ['review-form__button'],
       content: 'Отправить рецензию',
     });
-    this.formButton.node.addEventListener('click', () => {
+    this.reviewForm.node.addEventListener('submit', (e: Event) => {
+      e.preventDefault();
       formServices.addReviewToState(reviews);
     });
   }

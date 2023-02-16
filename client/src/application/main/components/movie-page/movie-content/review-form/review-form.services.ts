@@ -57,14 +57,12 @@ class ReviewFormServices {
 
     if (reviews) {
       reviews.items.unshift(item);
-      // reviews.total = 1;
-      console.log(reviews);
+      (state.allData.movieReviews as IReviewsData).total = 1;
     }
 
     const reviewsReviews = document.querySelector('.users-reviews__reviews') as HTMLElement;
     const reviewContainer = document.createElement('div');
-    const newReview = new UserReview(reviewContainer, item);
-    reviewsReviews.prepend(reviewContainer);
+    reviewsReviews.prepend(new UserReview(reviewContainer, item).node);
   }
 
   private checkTypeReview(type: string): string | undefined {
