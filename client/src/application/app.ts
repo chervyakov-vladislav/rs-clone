@@ -1,5 +1,6 @@
 import Header from './core/components/header/header';
 import Main from './core/components/main-container/main-container';
+import authService from './main/services/auth-page/auth.service';
 import Router from './shared/services/router/router';
 import state from './shared/services/state';
 
@@ -16,6 +17,7 @@ class App {
   }
 
   public async start() {
+    await authService.authorization();
     await state.loadAppData();
     this.router = new Router(this.main.container);
   }

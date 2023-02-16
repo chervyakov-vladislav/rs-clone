@@ -18,8 +18,7 @@ export default class Router extends DOMElement {
     if (id === 'account' && !state.allData.account.userData.logged) window.location.hash = '#auth';
   }
 
-  public renderNewPage(pageID: string) {
-    authService.authorization();
+  public async renderNewPage(pageID: string) {
     this.node.innerHTML = '';
     menuObserver.setPage();
     const element = this.findNewtemplate(pageID);
@@ -33,6 +32,7 @@ export default class Router extends DOMElement {
 
   private enableRouteChange() {
     window.addEventListener('hashchange', async () => {
+      await authService.authorization();
       const id = this.getCurrentPageId();
       if (id === 'movie') {
         await this.setMoviePage(window.location.hash);

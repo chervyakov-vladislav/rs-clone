@@ -11,10 +11,17 @@ class AuthService {
 
   public async authorization() {
     const auth = await apiService.authorizationUser();
-    state.setUserData({
-      logged: true,
-      userName: auth.data.login,
-    });
+    if (!auth.errors) {
+      state.setUserData({
+        logged: true,
+        userName: auth.data.login,
+      });
+    } else {
+      state.setUserData({
+        logged: false,
+        userName: '',
+      });
+    }
     loginObserver.setButtonText();
   }
 }
