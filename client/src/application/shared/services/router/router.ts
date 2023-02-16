@@ -1,5 +1,4 @@
 import menuObserver from '../../../core/services/menu/menu-observer.service';
-import authService from '../../../main/services/auth-page/auth.service';
 import fullscreenObserver from '../../../main/services/auth-page/fullsrceen/fullscreen-observer';
 import DOMElement from '../../components/base-elements/dom-element';
 import { RouterOptions } from '../../models/router-options';
@@ -19,7 +18,6 @@ export default class Router extends DOMElement {
   }
 
   public renderNewPage(pageID: string) {
-    authService.authorization();
     this.node.innerHTML = '';
     menuObserver.setPage();
     const element = this.findNewtemplate(pageID);
