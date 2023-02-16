@@ -31,7 +31,11 @@ class DBClient {
   }
 
   public async getUsersCollection() {
-      return (await this.connect()).collection('users')
+    return (await this.connect()).collection('users');
+  }
+
+  public async getSettingsCollection() {
+    return (await this.connect()).collection('settings');
   }
 }
 
