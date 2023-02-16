@@ -2,7 +2,7 @@ import express from 'express';
 import { Request, Response } from 'express-serve-static-core';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
-import { premiereValidation } from '../../../shared/validations';
+import { premiereValidation } from '../../../shared/model/validations';
 import SettingService from '../../services/settings.service';
 
 export default class SettingsRouter {

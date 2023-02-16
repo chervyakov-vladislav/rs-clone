@@ -1,7 +1,6 @@
 import { MongoClient } from 'mongodb';
-import { Premiere, User } from '../../shared/types';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
+import dbClient from '../../shared/db-client';
+import { Premiere } from '../../shared/model/types';
 
 export default class SettingService {
 private mongoClient: MongoClient;
@@ -15,21 +14,18 @@ private premiere: Premiere;
     }
   }
 
-  public setPremiereID(ID: string) {
-    this.premiere.ID = ID;
-  }
-
-  public setPremiereLink(link: string) {
-    this.premiere.link = link;
-  }
-
-  public setPremiere(ID: string, link: string) {
+  public async setPremiere(ID: string, link: string) {
     this.premiere.ID = ID;
     this.premiere.link = link;
+    const collection = await dbClient.getSettingsCollection();
+    const data = await collection.updateOne({}, { $set: { premiere: this.premiere}});
     return this.premiere;
   }
 
-  public getPremiere() {
+  public async getPremiere() {
+    const collection = await dbClient.getSettingsCollection();
+    const data = await collection.findOne();
+    if (data) this.premiere = data.premiere;
     return this.premiere;
   }
 }
