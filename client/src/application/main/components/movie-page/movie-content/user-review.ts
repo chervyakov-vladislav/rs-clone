@@ -35,7 +35,7 @@ export default class UserReview {
     this.userReviewUsername = new DOMElement(this.userReviewHeader.node, {
       tagName: 'p',
       classList: ['user-review__username'],
-      content: `${review.author}`,
+      content: `${movieValue.getReviewAuthor(review.author)}`,
     });
 
     this.userReviewDate = new DOMElement(this.userReviewHeader.node, {
@@ -58,7 +58,7 @@ export default class UserReview {
     this.userReviewText = new DOMElement(this.userReviewMain.node, {
       tagName: 'p',
       classList: ['user-review__text'],
-      content: `${review.description}`,
+      content: `${movieValue.getReviewDescription(review.description)}`,
     });
 
     this.userReviewButton = new ButtonElement(this.userReview.node, {
@@ -69,7 +69,6 @@ export default class UserReview {
 
     this.userReviewButton.node.addEventListener('click', () => {
       this.userReviewText.node.classList.toggle('show-all');
-      // this.userReviewButton.node.classList.toggle('hide');
     });
   }
 }
