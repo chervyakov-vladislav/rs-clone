@@ -7,9 +7,9 @@ import ReviewForm from './review-form/review-form';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
 
 export default class MovieContent {
-  private userReview: UserReview | null;
+  private userReview: UserReview | null = null;
 
-  private reviewForm: ReviewForm | null;
+  private reviewForm: ReviewForm | null = null;
 
   private contentColumn1: DOMElement;
 
@@ -53,12 +53,12 @@ export default class MovieContent {
 
   private reviewsData: IReview[];
 
-  constructor(container: HTMLElement, item: IFilmData, reviews: IReviewsData) {
-    this.userReview = null;
-    this.reviewForm = null;
+  private reviews: IReviewsData;
 
+  constructor(container: HTMLElement, item: IFilmData, reviews: IReviewsData) {
+    this.reviews = reviews;
     this.reviewsData = reviews.items.slice(0, 6);
-    console.log(this.reviewsData[0].date);
+
     this.contentColumn1 = new DOMElement(container, {
       tagName: 'h3',
       classList: ['movie-content__column1'],
@@ -181,6 +181,6 @@ export default class MovieContent {
     this.reviewsData.forEach((review: IReview) => {
       this.userReview = new UserReview(this.usersReviewsReviews.node, review);
     });
-    this.reviewForm = new ReviewForm(this.usersReviewsReviews.node);
+    this.reviewForm = new ReviewForm(this.usersReviewsReviews.node, this.reviews);
   };
 }

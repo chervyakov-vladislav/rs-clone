@@ -25,12 +25,13 @@
     gap: 10px;
   }
 
+  &__keyword_title,
   &__select {
     position: relative;
     display: block;
     box-sizing: border-box;
     height: 44px;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     border-radius: 8px;
   }
 
@@ -45,7 +46,6 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
-    margin-bottom: 20px;
     padding: 8px 0 8px 16px;
     font-family: "Kinopoisk-light" , Arial, sans-serif;
     font-size: 15px;
@@ -71,7 +71,6 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 100%;
-    margin: 0;
     padding: 8px 16px 8px 16px;
     font-family: "Kinopoisk-light" , Arial, sans-serif;
     font-size: 15px;
@@ -117,5 +116,11 @@
     &:hover {
       border: 2px solid #F9804B;
     }
+  }
+
+  &__message {
+    // height: 15px;
+    font-size: 13px;
+    color: red;
   }
 }
