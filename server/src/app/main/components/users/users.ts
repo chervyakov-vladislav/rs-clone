@@ -89,11 +89,15 @@ export default class UsersRouter {
 
   private async authorization(req: Request, res: Response) {
     try {
-      if (!this.usersService.verifyToken(req.headers.authorization || '')) {
+      const login = this.usersService.verifyToken(req.headers.authorization || '');
+      if (!login) {
         throw new Error('Invalid token');
       }
-      res.send({ errors: null,
-        msg: 'authorization success' });
+      res.send({ 
+        errors: null,
+        token: '',
+        data: {login, result: true, msg: 'authorization success',},
+      });
     } catch (err) {
       return res.status(400).json({
         errors: { msg: (err as Error).message },
