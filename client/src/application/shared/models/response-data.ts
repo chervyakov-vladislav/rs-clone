@@ -1,20 +1,3 @@
-export interface CarInterface {
-  id?: number;
-  name: string;
-  color: string;
-}
-
-export interface EngineData {
-  distance: number;
-  velocity: number;
-}
-
-export interface WinnerInterface {
-  id: number;
-  time: number;
-  wins: number;
-}
-
 export interface IFilmData {
   kinopoiskId: number;
   countries: Countries[];
@@ -156,4 +139,9 @@ export interface SearchQuerryOptions {
   keyword: string;
   genre: number;
   country: number;
+}
+
+export interface PremiereInfoBackend {
+  ID: string;
+  link: string;
 }

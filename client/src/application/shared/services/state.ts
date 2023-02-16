@@ -2,6 +2,7 @@ import userPhoto from '../../../assets/images/login.png';
 import { ExtendedSearchResultInterface, ITopData, KeyWordSearchInterface } from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface, UserDataParams } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
+import apiService from './api/server-api.service';
 
 class State {
   public allData: StateInterface;
@@ -60,9 +61,9 @@ class State {
   }
 
   public async loadAppData() {
-    // грузим данные для обложки
-    const premiereID = 301; // пока вынесем нужный ID в константу
-    const premiereLink = 'https://youtu.be/8qB8EGNOtr8';
+    const backendPremiereData = await apiService.getPremiere();
+    const premiereID = Number(backendPremiereData.ID);
+    const premiereLink = backendPremiereData.link;
     this.allData.premiere = await apiKinopoisk.getFilmData(premiereID);
     this.allData.premiere.link = premiereLink;
 
