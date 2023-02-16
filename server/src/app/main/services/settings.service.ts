@@ -1,5 +1,5 @@
 import { MongoClient } from 'mongodb';
-import { Premiere, User } from '../../shared/types';
+import { Premiere, User } from '../../shared/model/types';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
