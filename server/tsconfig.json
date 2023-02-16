@@ -9,6 +9,7 @@
     "noImplicitAny": true, 
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "typeRoots": ["../node_modules/@types"],
     "moduleResolution": "node",
     "esModuleInterop": true
   },
