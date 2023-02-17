@@ -36,6 +36,11 @@
         &:hover {
           opacity: .6;
         }
+
+        &:disabled {
+          pointer-events: none;
+          opacity: .3;
+        }
     }
 
     &__next {
@@ -46,6 +51,11 @@
       transition: .3s;
         &:hover {
           opacity: .6;
+        }
+
+        &:disabled {
+          pointer-events: none;
+          opacity: .3;
         }
     }
 

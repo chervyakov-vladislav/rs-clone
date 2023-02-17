@@ -2,6 +2,7 @@ import state from '../../../shared/services/state';
 import ImageModal from '../../components/wallpapers-page/modal/image-modal/image-modal';
 import WallpaperModal from '../../components/wallpapers-page/modal/modal';
 import ImageCard from '../../components/wallpapers-page/wallpaper-card/wallpaper-card';
+// import wallpaperAnimation from './animation.service';
 
 class WallpepersController {
   private container: HTMLElement;
@@ -21,8 +22,6 @@ class WallpepersController {
   private showingCount: number;
 
   private currentIndex: number;
-
-  private size: number;
 
   private prevBtn: HTMLButtonElement;
 
@@ -55,8 +54,6 @@ class WallpepersController {
     this.padding = 2 * 16;
     this.showingCount = 4;
     this.currentIndex = 0;
-
-    this.size = 0;
   }
 
   public registerContainer(elem: HTMLElement) {
@@ -74,7 +71,7 @@ class WallpepersController {
   public renderGrid() {
     const data = state.getMoviePagePosters();
     this.container.innerHTML = '';
-
+    this.cardCollection = [];
     data.photoBank.forEach((cardInfo, index) => {
       this.card = new ImageCard(this.container, cardInfo);
       this.cardCollection.push(this.card.node);
@@ -82,19 +79,34 @@ class WallpepersController {
       this.card.node.addEventListener('click', () => {
         this.modal = new WallpaperModal(document.body);
         this.registerControls();
-        this.counterText.innerHTML = `${index + 1}/${this.size}`;
+        this.counterText.innerHTML = `${index + 1}/${state.getMoviePagePosters().photoBank.length}`;
         this.openBtn.href = data.photoBank[index].imageUrl;
         this.renderModelImages();
       });
     });
-    this.size = this.cardCollection.length;
   }
 
   private renderModelImages() {
     const data = state.getMoviePagePosters();
     data.photoBank.forEach((cardInfo, index) => {
-      this.imageModal = index < 2 ? new ImageModal(this.modalImageContainer as HTMLElement, cardInfo) : null;
+      this.imageModal = new ImageModal(this.modalImageContainer as HTMLElement, cardInfo);
+      (this.imageModal as ImageModal).node.style.transition = '';
+      const elemData = this.cardCollection[index].getBoundingClientRect();
+      this.imageModal.node.style.width = `${elemData.width}px`;
+      this.imageModal.node.style.height = `${elemData.height}px`;
+      this.imageModal.node.style.overflow = 'hidden';
+      this.imageModal.node.style.transform = `translate3d(${elemData.left.toFixed(1)}px, ${(elemData.top - 70).toFixed(
+        1
+      )}px, 0)`;
+      setTimeout(() => {
+        (this.imageModal as ImageModal).node.style.transition = `transform .7s, opacity .7s`;
+        this.setCurrentState();
+      });
     });
+  }
+
+  private setCurrentState() {
+    const data = this.cardCollection[0].getBoundingClientRect();
   }
 }
 

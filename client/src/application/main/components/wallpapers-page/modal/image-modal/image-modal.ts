@@ -1,3 +1,4 @@
+import './image-modal.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
 import ImageElement from '../../../../../shared/components/base-elements/image-element';
 import { PostersInfoArray } from '../../../../../shared/models/response-data';

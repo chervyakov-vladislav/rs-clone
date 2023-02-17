@@ -1,19 +1,13 @@
 .wallpepers-image-card {
-  height: 250px;
-  min-width: 250px;
+  width: 25%;
+  aspect-ratio: 1/1;
   overflow: hidden;
   cursor: pointer;
   transition: .3s;
 
-  &:hover {
-    .wallpepers-image-card__img {
-      transform: scale(1.2);
-    }
-  }
-
     &__img {
-      transform: scale(1.1);
       transition: 1s;
       width: 100%;
+      object-fit: cover;
     }
 }
