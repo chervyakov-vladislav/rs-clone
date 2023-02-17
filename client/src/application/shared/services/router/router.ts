@@ -37,6 +37,9 @@ export default class Router extends DOMElement {
       if (id === 'movie') {
         await this.setMoviePage(window.location.hash);
       }
+      if (id === 'wallpapers') {
+        await this.setWallpapers(window.location.hash);
+      }
       if (id === 'account' && !state.allData.account.userData.logged) window.location.hash = '#auth';
       this.renderNewPage(id);
     });
@@ -77,5 +80,11 @@ export default class Router extends DOMElement {
     } else {
       fullscreenObserver.removeFullscreen();
     }
+  }
+
+  private async setWallpapers(hash: string) {
+    const filmID = this.getPageID(hash);
+    state.setMoviePageID(filmID);
+    await state.setMoviePagePosters();
   }
 }

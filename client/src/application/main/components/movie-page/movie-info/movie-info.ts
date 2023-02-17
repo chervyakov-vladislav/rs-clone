@@ -353,8 +353,7 @@ export default class MovieInfo {
   }
 
   private async checkWallapapers(id: number) {
-    const res = await apiKinopoisk.getFilmImages(id, 1, 'WALLPAPER');
-    console.log(res);
+    const res = await apiKinopoisk.getFilmImages(id, 1, 'POSTER');
     this.movieWallpapers =
       res.items.length > 0
         ? new ButtonElement(this.column1.node, {
@@ -363,5 +362,10 @@ export default class MovieInfo {
             content: 'Постеры',
           })
         : null;
+    if (res.items.length > 0) {
+      (this.movieWallpapers as ButtonElement).node.addEventListener('click', () => {
+        window.location.hash = `#wallpapers/${id}`;
+      });
+    }
   }
 }

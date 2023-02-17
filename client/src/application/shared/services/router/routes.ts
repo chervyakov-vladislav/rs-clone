@@ -7,6 +7,7 @@ import AuthPage from '../../../main/pages/auth-page/auth-page';
 import BestPage from '../../../main/pages/recomend-page/best-page';
 import RecomendPage from '../../../main/pages/recomend-page/recomend-page';
 import SearchPage from '../../../main/pages/search-page/search-page';
+import WallpapersPage from '../../../main/pages/wallpapers-page/wallpapers-page';
 
 const mainRoutes = [
   {
@@ -44,6 +45,10 @@ const mainRoutes = [
   {
     id: 'account',
     template: () => new AccountPage('account-page'),
+  },
+  {
+    id: 'wallpapers',
+    template: () => new WallpapersPage('wallpapers-page'),
   },
 ];
 

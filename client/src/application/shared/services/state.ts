@@ -57,6 +57,12 @@ class State {
         watchLaterFilms: [],
         likedFilms: [],
       },
+      wallpapers: {
+        fanArt: null,
+        photoBank: [],
+        posters: null,
+        wallpapers: null,
+      }
     };
   }
 
@@ -164,6 +170,21 @@ class State {
   public async setMoviePageCurrentData() {
     const data = await apiKinopoisk.getFilmData(Number(this.getMoviePageID()));
     this.allData.moviePage.currentData = data;
+  }
+
+  public async setMoviePagePosters() {
+    const wallpaperData = await apiKinopoisk.getFilmImages(Number(this.getMoviePageID()), 1, 'WALLPAPER');
+    const posterData = await apiKinopoisk.getFilmImages(Number(this.getMoviePageID()), 1, 'POSTER');
+    const fanArtData = await apiKinopoisk.getFilmImages(Number(this.getMoviePageID()), 1, 'FAN_ART');
+    this.allData.wallpapers.wallpapers = wallpaperData;
+    this.allData.wallpapers.posters = posterData;
+    this.allData.wallpapers.fanArt = fanArtData;
+    this.allData.wallpapers.photoBank = [...wallpaperData.items, ...posterData.items, ...fanArtData.items];
+    console.log(this.allData.wallpapers.photoBank);
+  }
+
+  public getMoviePagePosters() {
+    return this.allData.wallpapers;
   }
 
   public setPreviousPageInfo(options: PreviousPageInfoInterface) {

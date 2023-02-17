@@ -6,6 +6,8 @@ import {
   SearchQuerryOptions,
   IStaff,
   IReviewsData,
+  PostersInfoInterface,
+  PostersInfoArray,
 } from './response-data';
 
 export interface StateInterface {
@@ -39,6 +41,12 @@ export interface StateInterface {
     watchLaterFilms: number[];
     likedFilms: number[];
   };
+  wallpapers: {
+    wallpapers: PostersInfoInterface | null;
+    posters: PostersInfoInterface | null;
+    fanArt: PostersInfoInterface | null;
+    photoBank: PostersInfoArray[];
+  }
 }
 
 export interface PreviousPageInfoInterface {
