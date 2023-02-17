@@ -154,5 +154,12 @@ export default class ReviewForm {
       e.preventDefault();
       formServices.addReviewToState(reviews);
     });
+
+    this.formButton.node.addEventListener('click', () => {
+      const reviewForm = document.querySelector('.users-reviews__title');
+      if (reviewForm) {
+        reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      }
+    });
   }
 }
