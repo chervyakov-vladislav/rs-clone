@@ -46,7 +46,7 @@ export interface StateInterface {
     posters: PostersInfoInterface | null;
     fanArt: PostersInfoInterface | null;
     photoBank: PostersInfoArray[];
-  }
+  };
 }
 
 export interface PreviousPageInfoInterface {

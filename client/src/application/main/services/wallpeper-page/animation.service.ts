@@ -4,14 +4,14 @@ class WallpepersAnimation {
 
     function animation(): FrameRequestCallback | void {
       let opacity = Number(elem.style.opacity);
-  
+
       if (opacity < 1) {
-        opacity = opacity + 0.1;
+        opacity += 0.1;
         elem.style.opacity = opacity.toString();
         window.requestAnimationFrame(animation() as FrameRequestCallback);
         return;
       }
-  
+
       if (callback) {
         callback();
       }
@@ -23,14 +23,14 @@ class WallpepersAnimation {
 
     function animation(): FrameRequestCallback | void {
       let opacity = Number(elem.style.opacity);
-  
+
       if (opacity > 0) {
-        opacity = opacity - 0.04;
+        opacity -= 0.04;
         elem.style.opacity = opacity.toString();
         window.requestAnimationFrame(animation() as FrameRequestCallback);
         return;
       }
-  
+
       if (callback) {
         callback();
       }

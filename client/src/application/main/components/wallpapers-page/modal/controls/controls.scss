@@ -1,9 +1,71 @@
 .wallpepers-controls {
-  background: initial;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 25%;
+  height: 16rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+    &__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .3s;
+        &:hover {
+          opacity: .6;
+        }
+    }
+
+    &__navigation {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 10rem;
+    }
+
+    &__prev {
+      transform: rotate(-90deg);
+      transition: .3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+        &:hover {
+          opacity: .6;
+        }
+    }
+
+    &__next {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform: rotate(90deg);
+      transition: .3s;
+        &:hover {
+          opacity: .6;
+        }
+    }
+
+    &__counter {
+      color: #fff;
+      font-family: "Kinopoisk-medium" , Arial, sans-serif;
+      font-size: 18px;
+    }
 }
 
 .close-modal-icon {
-  width: 100px;
-  height: 100px;
+  width: 3rem;
+  height: 3rem;
   fill: #fff;
+}
+
+.arrow-icon {
+  width: 3rem;
+  height: 3rem;
+    &__fill {
+      fill: #fff;
+    }
 }
