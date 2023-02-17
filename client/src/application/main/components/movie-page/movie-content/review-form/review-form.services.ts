@@ -64,6 +64,7 @@ class ReviewFormServices {
       return;
     }
     messageText.innerHTML = '';
+
     const userData = state.getUserData();
     const item = {
       author: userData.userName,
@@ -76,22 +77,22 @@ class ReviewFormServices {
       type: select,
     };
 
-    if (reviews) {
-      reviews.items.unshift(item);
-      (state.allData.movieReviews as IReviewsData).total += 1;
-      this.countTotal.innerHTML = `${(state.allData.movieReviews as IReviewsData).total}`;
-    }
+    reviews.items.unshift(item);
+
+    (state.allData.movieReviews as IReviewsData).total += 1;
+    this.countTotal.innerHTML = `${reviews.total}`;
+
     if (select === 'POSITIVE') {
       (state.allData.movieReviews as IReviewsData).totalPositiveReviews += 1;
-      this.countPositive.innerHTML = `${(state.allData.movieReviews as IReviewsData).totalPositiveReviews}`;
+      this.countPositive.innerHTML = `${reviews.totalPositiveReviews}`;
     }
     if (select === 'NEGATIVE') {
       (state.allData.movieReviews as IReviewsData).totalNegativeReviews += 1;
-      this.countNegative.innerHTML = `${(state.allData.movieReviews as IReviewsData).totalNegativeReviews}`;
+      this.countNegative.innerHTML = `${reviews.totalNegativeReviews}`;
     }
     if (select === 'NEUTRAL') {
       (state.allData.movieReviews as IReviewsData).totalNeutralReviews += 1;
-      this.countNeutral.innerHTML = `${(state.allData.movieReviews as IReviewsData).totalNeutralReviews}`;
+      this.countNeutral.innerHTML = `${reviews.totalNeutralReviews}`;
     }
 
     const reviewsReviews = document.querySelector('.users-reviews__reviews') as HTMLElement;
