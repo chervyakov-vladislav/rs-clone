@@ -6,6 +6,7 @@ import UserReview from './user-review';
 import ReviewForm from './review-form/review-form';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
 import formServices from './review-form/review-form.services';
+import state from '../../../../shared/services/state';
 
 export default class MovieContent {
   private userReview: UserReview | null = null;
@@ -90,9 +91,13 @@ export default class MovieContent {
     });
 
     this.usersReviewsAdd.node.addEventListener('click', () => {
-      const reviewForm = document.getElementById('review-form');
-      if (reviewForm) {
-        reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      if (state.allData.account.userData.logged) {
+        const reviewForm = document.getElementById('review-form');
+        if (reviewForm) {
+          reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+      } else {
+        window.location.hash = '#auth';
       }
     });
 
@@ -186,6 +191,8 @@ export default class MovieContent {
     this.reviewsData.forEach((review: IReview) => {
       this.userReview = new UserReview(this.usersReviewsReviews.node, review);
     });
-    this.reviewForm = new ReviewForm(this.usersReviewsReviews.node, this.reviews);
+    if (state.allData.account.userData.logged) {
+      this.reviewForm = new ReviewForm(this.usersReviewsReviews.node, this.reviews);
+    }
   };
 }
