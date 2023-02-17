@@ -62,7 +62,7 @@ class State {
         photoBank: [],
         posters: null,
         wallpapers: null,
-      }
+      },
     };
   }
 
@@ -180,7 +180,6 @@ class State {
     this.allData.wallpapers.posters = posterData;
     this.allData.wallpapers.fanArt = fanArtData;
     this.allData.wallpapers.photoBank = [...wallpaperData.items, ...posterData.items, ...fanArtData.items];
-    console.log(this.allData.wallpapers.photoBank);
   }
 
   public getMoviePagePosters() {

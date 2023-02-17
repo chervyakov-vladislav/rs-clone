@@ -1,0 +1,21 @@
+.wallpepers-image-card {
+  max-width: 250px;
+  max-height: 250px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .3s;
+
+  &:hover {
+    .wallpepers-image-card__img {
+      transform: scale(1.1);
+    }
+  }
+
+    &__img {
+      transition: .3s;
+      width: 100%;
+      height: 100%;
+    }
+}

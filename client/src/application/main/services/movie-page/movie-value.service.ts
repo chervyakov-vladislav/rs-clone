@@ -2,9 +2,8 @@ import { IFilmData, IStaff } from '../../../shared/models/response-data';
 
 class MovieValue {
   public isNameRU(data: IFilmData) {
-    const isNameRu = data.nameRu ? data.nameRu : data.nameEn;
-    const isName = isNameRu.length > 0 ? isNameRu : '-';
-    return isName;
+    const name = data.nameRu === null ? data.nameOriginal : data.nameRu;
+    return name === null ? '-' : name;
   }
 
   public getCountry(data: IFilmData) {
