@@ -7,16 +7,17 @@ import { loginValidation, registerValidation } from '../../../shared/model/valid
 
 export default class UsersRouter {
   public router = express.Router();
+
   private usersService: UsersService;
 
   constructor() {
     this.usersService = new UsersService();
-    this.router.post('/login', loginValidation, (req: Request, res: Response) => this.login(req ,res));
-    this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req ,res));
+    this.router.post('/login', loginValidation, (req: Request, res: Response) => this.login(req, res));
+    this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req, res));
     this.router.get('/me', (req, res) => this.authorization(req, res));
   }
 
-  private async login(req: Request , res: Response) {
+  private async login(req: Request, res: Response) {
     let paramErr = 'login';
     const validateErr = validationResult(req);
     if (!validateErr.isEmpty()) {
@@ -41,15 +42,14 @@ export default class UsersRouter {
         token,
         data: existedUser,
       });
-
     } catch (err) {
       return res.status(400).json({
-        errors: { msg: (err as Error).message, param: paramErr},
+        errors: { msg: (err as Error).message, param: paramErr },
       });
     }
   }
 
-  private async register(req: Request , res: Response) {
+  private async register(req: Request, res: Response) {
     console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -63,7 +63,7 @@ export default class UsersRouter {
       }
     } catch (err) {
       return res.status(400).json({
-        errors: { msg: (err as Error).message, param: 'login'},
+        errors: { msg: (err as Error).message, param: 'login' },
       });
     }
 
@@ -93,10 +93,10 @@ export default class UsersRouter {
       if (!login) {
         throw new Error('Invalid token');
       }
-      res.send({ 
+      res.send({
         errors: null,
         token: '',
-        data: {login, result: true, msg: 'authorization success',},
+        data: { login, result: true, msg: 'authorization success' },
       });
     } catch (err) {
       return res.status(400).json({
