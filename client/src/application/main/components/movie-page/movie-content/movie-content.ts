@@ -121,7 +121,8 @@ export default class MovieContent {
       classList: ['users-reviews__amount'],
       content: `${reviews.total}`,
     });
-    formServices.registredCount(this.usersReviewsTotalP.node);
+    formServices.registredCountTotal(this.usersReviewsTotalP.node);
+
     this.usersReviewsTotalS = new DOMElement(this.usersReviewsTotal.node, {
       tagName: 'span',
       content: 'Всего',
@@ -137,6 +138,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount', 'positive'],
       content: `${reviews.totalPositiveReviews}`,
     });
+    formServices.registredCountPositive(this.usersReviewsPositiveP.node);
 
     this.usersReviewsPositiveS = new DOMElement(this.usersReviewsPositive.node, {
       tagName: 'span',
@@ -153,6 +155,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount', 'neutral'],
       content: `${reviews.totalNeutralReviews}`,
     });
+    formServices.registredCountNeutral(this.usersReviewsNeutralP.node);
 
     this.usersReviewsNeutralS = new DOMElement(this.usersReviewsNeutral.node, {
       tagName: 'span',
@@ -169,6 +172,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount', 'negative'],
       content: `${reviews.totalNegativeReviews}`,
     });
+    formServices.registredCountNegative(this.usersReviewsNegativeP.node);
 
     this.usersReviewsNegativeS = new DOMElement(this.usersReviewsNegative.node, {
       tagName: 'span',

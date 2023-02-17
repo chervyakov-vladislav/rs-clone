@@ -3,14 +3,35 @@ import state from '../../../../../shared/services/state';
 import UserReview from '../user-review';
 
 class ReviewFormServices {
-  private count: HTMLElement;
+  private countTotal: HTMLElement;
+
+  private countPositive: HTMLElement;
+
+  private countNegative: HTMLElement;
+
+  private countNeutral: HTMLElement;
 
   constructor() {
-    this.count = document.createElement('div');
+    this.countTotal = document.createElement('div');
+    this.countPositive = document.createElement('div');
+    this.countNegative = document.createElement('div');
+    this.countNeutral = document.createElement('div');
   }
 
-  public registredCount(element: HTMLElement) {
-    this.count = element;
+  public registredCountTotal(element: HTMLElement) {
+    this.countTotal = element;
+  }
+
+  public registredCountPositive(element: HTMLElement) {
+    this.countPositive = element;
+  }
+
+  public registredCountNegative(element: HTMLElement) {
+    this.countNegative = element;
+  }
+
+  public registredCountNeutral(element: HTMLElement) {
+    this.countNeutral = element;
   }
 
   public addReviewToState(reviews: IReviewsData) {
@@ -57,7 +78,20 @@ class ReviewFormServices {
 
     if (reviews) {
       reviews.items.unshift(item);
-      (state.allData.movieReviews as IReviewsData).total = 1;
+      (state.allData.movieReviews as IReviewsData).total += 1;
+      this.countTotal.innerHTML = `${(state.allData.movieReviews as IReviewsData).total}`;
+    }
+    if (select === 'POSITIVE') {
+      (state.allData.movieReviews as IReviewsData).totalPositiveReviews += 1;
+      this.countPositive.innerHTML = `${(state.allData.movieReviews as IReviewsData).totalPositiveReviews}`;
+    }
+    if (select === 'NEGATIVE') {
+      (state.allData.movieReviews as IReviewsData).totalNegativeReviews += 1;
+      this.countNegative.innerHTML = `${(state.allData.movieReviews as IReviewsData).totalNegativeReviews}`;
+    }
+    if (select === 'NEUTRAL') {
+      (state.allData.movieReviews as IReviewsData).totalNeutralReviews += 1;
+      this.countNeutral.innerHTML = `${(state.allData.movieReviews as IReviewsData).totalNeutralReviews}`;
     }
 
     const reviewsReviews = document.querySelector('.users-reviews__reviews') as HTMLElement;
