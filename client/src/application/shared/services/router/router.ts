@@ -16,6 +16,10 @@ export default class Router extends DOMElement {
     const id = this.getCurrentPageId();
     this.renderNewPage(id);
     if (id === 'account' && !state.allData.account.userData.logged) window.location.hash = '#auth';
+    if (id === 'wallpapers') {
+      this.setWallpapers(window.location.hash);
+      setTimeout(() => this.renderNewPage(id), 1500);
+    }
   }
 
   public async renderNewPage(pageID: string) {
