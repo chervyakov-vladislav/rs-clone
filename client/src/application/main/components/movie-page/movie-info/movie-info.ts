@@ -117,7 +117,7 @@ export default class MovieInfo {
     this.movieTitle = new DOMElement(this.column2.node, {
       tagName: 'h2',
       classList: ['movie-info__title'],
-      content: `${item.nameRu} (${item.year})`,
+      content: `${movieValue.isNameRU(item)} (${movieValue.getYear(item)})`,
     });
 
     this.movieButtons = new DOMElement(this.column2.node, {
@@ -187,7 +187,7 @@ export default class MovieInfo {
     this.gridYear2 = new DOMElement(this.movieGrid.node, {
       tagName: 'p',
       classList: ['movie-info__grid_text'],
-      content: `${item.year}`,
+      content: `${movieValue.getYear(item)}`,
     });
 
     this.gridCountry1 = new DOMElement(this.movieGrid.node, {

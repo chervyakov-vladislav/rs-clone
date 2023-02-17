@@ -1,5 +1,6 @@
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import { IFilmData } from '../../../../shared/models/response-data';
+import movieValue from '../../../services/movie-page/movie-value.service';
 import './movie-description.scss';
 
 export default class MovieDescription {
@@ -17,7 +18,7 @@ export default class MovieDescription {
     this.description = new DOMElement(container, {
       tagName: 'p',
       classList: ['movie-description__text'],
-      content: `${item.description}`,
+      content: `${movieValue.getDescription(item)}`,
     });
   }
 }
