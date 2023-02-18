@@ -145,3 +145,8 @@ export interface PremiereInfoBackend {
   ID: string;
   link: string;
 }
+
+export interface IActor {
+  nameRu: string;
+  staffId: number;
+}
