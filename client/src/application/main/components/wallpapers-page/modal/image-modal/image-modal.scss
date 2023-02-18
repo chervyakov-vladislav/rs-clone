@@ -1,0 +1,19 @@
+.wallpepers-modal-image {
+  position: fixed;
+  width: 500px;
+  transform: translate3d(250%, 130%,0) scale(1);
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+    &__pic {
+      object-fit: cover;
+      width: 100%;
+      user-select: none;
+    }
+
+    &--transition {
+      transition: transform .7s, opacity .7s;
+    }
+}

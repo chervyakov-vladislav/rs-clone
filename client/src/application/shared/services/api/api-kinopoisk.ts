@@ -6,6 +6,7 @@ import {
   IStaff,
   KeyWordSearchInterface,
   SearchQuerryOptions,
+  PostersInfoInterface,
 } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
@@ -67,8 +68,8 @@ class ApiServiceKinopoisk {
   // WALLPAPER - обои
   // COVER - обложки
   // SCREENSHOT - скриншоты
-  public async getFilmImages(id: number, page = 1): Promise<void> {
-    const response = await fetch(`${this.filmData}/${id}/images?type=POSTER&page=${page}`, {
+  public async getFilmImages(id: number, page = 1, type = 'POSTER'): Promise<PostersInfoInterface> {
+    const response = await fetch(`${this.filmData}/${id}/images?type=${type}&page=${page}`, {
       headers: {
         Accept: 'application/json',
         'X-Api-Key': this.apiKey,

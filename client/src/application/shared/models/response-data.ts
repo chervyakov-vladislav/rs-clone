@@ -145,3 +145,14 @@ export interface PremiereInfoBackend {
   ID: string;
   link: string;
 }
+
+export interface PostersInfoInterface {
+  total: number;
+  totalPages: number;
+  items: PostersInfoArray[];
+}
+
+export interface PostersInfoArray {
+  imageUrl: string;
+  previewUrl: string;
+}
