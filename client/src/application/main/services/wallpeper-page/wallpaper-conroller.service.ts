@@ -100,6 +100,7 @@ class WallpepersController {
     const data = state.getMoviePagePosters();
     this.container.innerHTML = '';
     this.cardCollection = [];
+    this.imageModalArray = [];
     this.resetModalImagesArrs();
     data.photoBank.forEach((cardInfo, index) => {
       this.card = new ImageCard(this.container, cardInfo);
@@ -109,6 +110,7 @@ class WallpepersController {
         this.cardCollection.forEach((elem) => {
           elem.style.opacity = '0';
         });
+        this.imageModalArray = [];
         this.resetModalImagesArrs();
         this.modal = new WallpaperModal(document.body);
         this.modal.controls.close.node.addEventListener('click', () => {
@@ -119,6 +121,18 @@ class WallpepersController {
         this.registerControls();
         this.currentIndex = index;
         this.renderModelImages();
+        this.nextBtn.addEventListener('click', () => {
+          if (this.currentIndex < state.getMoviePagePosters().photoBank.length) {
+            this.currentIndex += 1;
+            this.shitchChanges();
+          }
+        });
+        this.prevBtn.addEventListener('click', () => {
+          if (this.currentIndex > 0) {
+            this.currentIndex -= 1;
+            this.shitchChanges();
+          }
+        });
       });
     });
   }
@@ -178,6 +192,7 @@ class WallpepersController {
   }
 
   private setCurrentState() {
+    this.resetModalImagesArrs();
     this.imageModalArray.forEach((elem, index) => {
       elem.node.classList.add('wallpepers-modal-image--transition');
       if (index + this.showingCount < this.currentIndex) {
@@ -325,7 +340,6 @@ class WallpepersController {
   }
 
   private resetModalImagesArrs() {
-    this.imageModalArray = [];
     this.prevHiddenImagenodes = [];
     this.prevShowingImagenodes = [];
     this.activeImageNode = [];
