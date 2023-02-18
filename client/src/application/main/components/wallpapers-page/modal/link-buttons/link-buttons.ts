@@ -14,7 +14,7 @@ export default class LinksModal extends DOMElement {
     this.openLink = new LinkElement(this.node, {
       tagName: 'a',
       classList: ['wallpepers-links__open'],
-      content: 'открыть в новом окне',
+      content: 'открыть в максимальном разрешении',
       target: '_blank',
     });
   }

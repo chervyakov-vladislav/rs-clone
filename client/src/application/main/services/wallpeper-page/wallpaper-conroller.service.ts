@@ -106,11 +106,15 @@ class WallpepersController {
       this.cardCollection.push(this.card.node);
 
       this.card.node.addEventListener('click', () => {
-        this.cardCollection.forEach((elem) => elem.style.opacity = '0');
+        this.cardCollection.forEach((elem) => {
+          elem.style.opacity = '0';
+        });
         this.resetModalImagesArrs();
         this.modal = new WallpaperModal(document.body);
         this.modal.controls.close.node.addEventListener('click', () => {
-          this.cardCollection.forEach((elem) => elem.style.opacity = '1');
+          this.cardCollection.forEach((elem) => {
+            elem.style.opacity = '1';
+          });
         });
         this.registerControls();
         this.counterText.innerHTML = `${index + 1}/${state.getMoviePagePosters().photoBank.length}`;
@@ -177,36 +181,106 @@ class WallpepersController {
       });
     });
 
-    this.setImagestyles(this.prevShowingImagenodes[0].node, {
-      top: modalHeight - imageHeight,
-      left: 0.32 * modalWidth,
-      zIndex: 4,
-      opacity: 0.4,
-      scale: 0.75,
-    });
+    if (this.prevShowingImagenodes[0]) {
+      this.setImagestyles(this.prevShowingImagenodes[0].node, {
+        top: modalHeight - imageHeight,
+        left: 0.32 * modalWidth,
+        zIndex: 4,
+        opacity: 0.4,
+        scale: 0.75,
+      });
+    }
 
-    this.setImagestyles(this.prevShowingImagenodes[1].node, {
-      top: 0.405 * modalHeight,
-      left: 0.11 * modalWidth,
-      zIndex: 3,
-      opacity: 0.3,
-      scale: 0.6,
-    });
+    if (this.prevShowingImagenodes[1]) {
+      this.setImagestyles(this.prevShowingImagenodes[1].node, {
+        top: 0.405 * modalHeight,
+        left: 0.11 * modalWidth,
+        zIndex: 3,
+        opacity: 0.3,
+        scale: 0.6,
+      });
+    }
 
-    this.setImagestyles(this.prevShowingImagenodes[2].node, {
-      top: 0.095 * modalHeight,
-      left: 0.17 * modalWidth,
-      zIndex: 2,
-      opacity: 0.2,
-      scale: 0.5,
-    });
+    if (this.prevShowingImagenodes[2]) {
+      this.setImagestyles(this.prevShowingImagenodes[2].node, {
+        top: 0.095 * modalHeight,
+        left: 0.17 * modalWidth,
+        zIndex: 2,
+        opacity: 0.2,
+        scale: 0.5,
+      });
+    }
 
-    this.setImagestyles(this.prevShowingImagenodes[3].node, {
-      top: -0.3 * imageHeight,
-      left: 0.31 * modalWidth,
-      zIndex: 1,
-      opacity: 0.1,
-      scale: 0.4,
+    if (this.prevShowingImagenodes[3]) {
+      this.setImagestyles(this.prevShowingImagenodes[3].node, {
+        top: -0.3 * imageHeight,
+        left: 0.31 * modalWidth,
+        zIndex: 1,
+        opacity: 0.1,
+        scale: 0.4,
+      });
+    }
+
+    // active image
+    if (this.activeImageNode[0]) {
+      this.setImagestyles(this.activeImageNode[0].node, {
+        top: (modalHeight - imageHeight) / 2,
+        left: (modalWidth - imageWidth) / 2,
+        zIndex: 5,
+        opacity: 1,
+        scale: 1.5,
+      });
+    }
+
+    // next
+    if (this.nextShowingImagenodes[0]) {
+      this.setImagestyles(this.nextShowingImagenodes[0].node, {
+        top: 0,
+        left: 0.52 * modalWidth,
+        zIndex: 4,
+        opacity: 0.4,
+        scale: 0.75,
+      });
+    }
+
+    if (this.nextShowingImagenodes[1]) {
+      this.setImagestyles(this.nextShowingImagenodes[1].node, {
+        top: 0.12 * modalHeight,
+        left: 0.73 * modalWidth,
+        zIndex: 3,
+        opacity: 0.3,
+        scale: 0.6,
+      });
+    }
+
+    if (this.nextShowingImagenodes[2]) {
+      this.setImagestyles(this.nextShowingImagenodes[2].node, {
+        top: 0.43 * modalHeight,
+        left: 0.67 * modalWidth,
+        zIndex: 2,
+        opacity: 0.2,
+        scale: 0.5,
+      });
+    }
+
+    if (this.nextShowingImagenodes[3]) {
+      this.setImagestyles(this.nextShowingImagenodes[3].node, {
+        top: 0.67 * modalHeight,
+        left: 0.53 * modalWidth,
+        zIndex: 1,
+        opacity: 0.1,
+        scale: 0.4,
+      });
+    }
+
+    this.nextHiddenImagenodes.forEach((item) => {
+      this.setImagestyles(item.node, {
+        top: 1.5 * modalHeight,
+        left: 0.53 * modalWidth,
+        opacity: 0.1,
+        zIndex: 1,
+        scale: 0.4,
+      });
     });
   }
 
