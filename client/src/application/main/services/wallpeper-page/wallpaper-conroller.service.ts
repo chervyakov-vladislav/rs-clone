@@ -107,17 +107,17 @@ class WallpepersController {
       this.cardCollection.push(this.card.node);
 
       this.card.node.addEventListener('click', () => {
-        /* eslint-disable no-param-reassign */
         this.cardCollection.forEach((elem) => {
-          elem.style.opacity = '0';
+          const options = elem.style;
+          options.opacity = '0';
         });
         this.imageModalArray = [];
         this.resetModalImagesArrs();
         this.modal = new WallpaperModal(document.body);
         this.modal.controls.close.node.addEventListener('click', () => {
-          /* eslint-disable no-param-reassign */
           this.cardCollection.forEach((elem) => {
-            elem.style.opacity = '1';
+            const options = elem.style;
+            options.opacity = '1';
           });
         });
         this.registerControls();
@@ -332,14 +332,14 @@ class WallpepersController {
     });
   }
 
-  /* eslint-disable no-param-reassign */
   private setImagestyles(elem: HTMLElement, params: SetImagestylesInterface) {
     if (!elem) return;
-    elem.style.transform = `translate3d(${params.left.toFixed(1)}px, ${(params.top - 70).toFixed(1)}px, 0) scale(${
+    const options = elem.style;
+    options.transform = `translate3d(${params.left.toFixed(1)}px, ${(params.top - 70).toFixed(1)}px, 0) scale(${
       params.scale
     })`;
-    elem.style.opacity = params.opacity.toString();
-    elem.style.zIndex = params.zIndex.toString();
+    options.opacity = params.opacity.toString();
+    options.zIndex = params.zIndex.toString();
   }
 
   private resetModalImagesArrs() {
