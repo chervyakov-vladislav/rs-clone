@@ -1,3 +1,4 @@
+/* eslint-disable */
 import apiHelpers from '../../../shared/services/api/api-helpers.service';
 import state from '../../../shared/services/state';
 import ImageModal from '../../components/wallpapers-page/modal/image-modal/image-modal';

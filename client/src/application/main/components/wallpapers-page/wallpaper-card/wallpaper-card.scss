@@ -4,6 +4,9 @@
   overflow: hidden;
   cursor: pointer;
   transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
     &__img {
       transition: 1s;
