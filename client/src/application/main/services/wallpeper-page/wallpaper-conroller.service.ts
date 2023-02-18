@@ -1,4 +1,3 @@
-/* eslint-disable */
 import apiHelpers from '../../../shared/services/api/api-helpers.service';
 import state from '../../../shared/services/state';
 import ImageModal from '../../components/wallpapers-page/modal/image-modal/image-modal';
@@ -108,6 +107,7 @@ class WallpepersController {
       this.cardCollection.push(this.card.node);
 
       this.card.node.addEventListener('click', () => {
+        /* eslint-disable no-param-reassign */
         this.cardCollection.forEach((elem) => {
           elem.style.opacity = '0';
         });
@@ -115,6 +115,7 @@ class WallpepersController {
         this.resetModalImagesArrs();
         this.modal = new WallpaperModal(document.body);
         this.modal.controls.close.node.addEventListener('click', () => {
+          /* eslint-disable no-param-reassign */
           this.cardCollection.forEach((elem) => {
             elem.style.opacity = '1';
           });
@@ -331,6 +332,7 @@ class WallpepersController {
     });
   }
 
+  /* eslint-disable no-param-reassign */
   private setImagestyles(elem: HTMLElement, params: SetImagestylesInterface) {
     if (!elem) return;
     elem.style.transform = `translate3d(${params.left.toFixed(1)}px, ${(params.top - 70).toFixed(1)}px, 0) scale(${
