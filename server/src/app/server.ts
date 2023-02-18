@@ -1,4 +1,5 @@
 import e, { Express } from 'express';
+import fileUpload from 'express-fileupload';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import UsersRouter from './main/components/users/users';
