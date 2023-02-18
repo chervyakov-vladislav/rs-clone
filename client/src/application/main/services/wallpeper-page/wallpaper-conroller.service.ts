@@ -1,8 +1,8 @@
+import apiHelpers from '../../../shared/services/api/api-helpers.service';
 import state from '../../../shared/services/state';
 import ImageModal from '../../components/wallpapers-page/modal/image-modal/image-modal';
 import WallpaperModal from '../../components/wallpapers-page/modal/modal';
 import ImageCard from '../../components/wallpapers-page/wallpaper-card/wallpaper-card';
-// import wallpaperAnimation from './animation.service';
 
 class WallpepersController {
   private container: HTMLElement;
@@ -35,6 +35,18 @@ class WallpepersController {
 
   private imageModal: ImageModal | null = null;
 
+  private imageModalArray: ImageModal[];
+
+  private prevHiddenImagenodes: ImageModal[];
+
+  private prevShowingImagenodes: ImageModal[];
+
+  private activeImageNode: ImageModal[];
+
+  private nextShowingImagenodes: ImageModal[];
+
+  private nextHiddenImagenodes: ImageModal[];
+
   constructor() {
     this.container = document.createElement('div');
     this.prevBtn = document.createElement('button');
@@ -43,6 +55,14 @@ class WallpepersController {
     this.openBtn = document.createElement('a');
     this.modalImageContainer = document.createElement('div');
     this.modal = null;
+
+    this.imageModalArray = [];
+    this.prevHiddenImagenodes = [];
+    this.prevShowingImagenodes = [];
+    this.activeImageNode = [];
+    this.nextShowingImagenodes = [];
+    this.nextHiddenImagenodes = [];
+
     this.card = new ImageCard(this.container, {
       imageUrl: '',
       previewUrl: '',
@@ -72,14 +92,17 @@ class WallpepersController {
     const data = state.getMoviePagePosters();
     this.container.innerHTML = '';
     this.cardCollection = [];
+    this.resetModalImagesArrs();
     data.photoBank.forEach((cardInfo, index) => {
       this.card = new ImageCard(this.container, cardInfo);
       this.cardCollection.push(this.card.node);
 
       this.card.node.addEventListener('click', () => {
+        this.resetModalImagesArrs();
         this.modal = new WallpaperModal(document.body);
         this.registerControls();
         this.counterText.innerHTML = `${index + 1}/${state.getMoviePagePosters().photoBank.length}`;
+        this.currentIndex = index;
         this.openBtn.href = data.photoBank[index].imageUrl;
         this.renderModelImages();
       });
@@ -102,11 +125,35 @@ class WallpepersController {
         (this.imageModal as ImageModal).node.style.transition = `transform .7s, opacity .7s`;
         this.setCurrentState();
       });
+      this.imageModalArray.push(this.imageModal);
     });
   }
 
   private setCurrentState() {
-    const data = this.cardCollection[0].getBoundingClientRect();
+    apiHelpers.debounce(() => {
+      this.imageModalArray.forEach((elem, index) => {
+        if (index + this.showingCount < this.currentIndex) {
+          this.prevHiddenImagenodes.unshift(elem);
+        } else if (index < this.currentIndex) {
+          this.prevShowingImagenodes.unshift(elem); // prevShowingImagenodes
+        } else if (index === this.currentIndex) {
+          this.activeImageNode.push(elem); // activeImageNode
+        } else if (index <= this.currentIndex + this.showingCount) {
+          this.nextShowingImagenodes.push(elem); // nextShowingImagenodes
+        } else {
+          this.nextHiddenImagenodes.push(elem); // nextHiddenImagenodes
+        }
+      });
+    }, 1)();
+  }
+
+  private resetModalImagesArrs() {
+    this.imageModalArray = [];
+    this.prevHiddenImagenodes = [];
+    this.prevShowingImagenodes = [];
+    this.activeImageNode = [];
+    this.nextShowingImagenodes = [];
+    this.nextHiddenImagenodes = [];
   }
 }
 
