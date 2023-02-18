@@ -117,9 +117,7 @@ class WallpepersController {
           });
         });
         this.registerControls();
-        this.counterText.innerHTML = `${index + 1}/${state.getMoviePagePosters().photoBank.length}`;
         this.currentIndex = index;
-        this.openBtn.href = data.photoBank[index].imageUrl;
         this.renderModelImages();
       });
     });
@@ -138,31 +136,64 @@ class WallpepersController {
         1
       )}px, 0)`;
       setTimeout(() => {
-        this.setCurrentState();
+        this.shitchChanges();
       });
       this.imageModalArray.push(this.imageModal);
     });
   }
 
-  private setCurrentState() {
+  private shitchChanges() {
     apiHelpers.debounce(() => {
-      this.imageModalArray.forEach((elem, index) => {
-        elem.node.classList.add('wallpepers-modal-image--transition');
-        if (index + this.showingCount < this.currentIndex) {
-          this.prevHiddenImagenodes.unshift(elem);
-        } else if (index < this.currentIndex) {
-          this.prevShowingImagenodes.unshift(elem); // prevShowingImagenodes
-        } else if (index === this.currentIndex) {
-          this.activeImageNode.push(elem); // activeImageNode
-        } else if (index <= this.currentIndex + this.showingCount) {
-          this.nextShowingImagenodes.push(elem); // nextShowingImagenodes
-        } else {
-          this.nextHiddenImagenodes.push(elem); // nextHiddenImagenodes
-        }
-      });
-
-      this.setGallaryStyles();
+      this.setCurrentState(); // засетить картинки по массивам и отрисовать
+      this.switchDisabledNav(); // засетить состояние кнопок
+      this.changeCounter(); // обновление счетчика
+      this.changeLink(); // обновление ссылки
     }, 1)();
+  }
+
+  private switchDisabledNav() {
+    if (this.currentIndex === 0 && !this.prevBtn.disabled) {
+      this.prevBtn.disabled = true;
+    }
+
+    if (this.currentIndex > 0 && this.prevBtn.disabled) {
+      this.prevBtn.disabled = false;
+    }
+
+    if (this.currentIndex === state.getMoviePagePosters().photoBank.length - 1 && !this.nextBtn.disabled) {
+      this.nextBtn.disabled = true;
+    }
+
+    if (this.currentIndex < state.getMoviePagePosters().photoBank.length - 1 && this.nextBtn.disabled) {
+      this.nextBtn.disabled = false;
+    }
+  }
+
+  private changeCounter() {
+    this.counterText.innerHTML = `${this.currentIndex + 1}/${state.getMoviePagePosters().photoBank.length}`;
+  }
+
+  private changeLink() {
+    this.openBtn.href = state.getMoviePagePosters().photoBank[this.currentIndex].imageUrl;
+  }
+
+  private setCurrentState() {
+    this.imageModalArray.forEach((elem, index) => {
+      elem.node.classList.add('wallpepers-modal-image--transition');
+      if (index + this.showingCount < this.currentIndex) {
+        this.prevHiddenImagenodes.unshift(elem);
+      } else if (index < this.currentIndex) {
+        this.prevShowingImagenodes.unshift(elem); // prevShowingImagenodes
+      } else if (index === this.currentIndex) {
+        this.activeImageNode.push(elem); // activeImageNode
+      } else if (index <= this.currentIndex + this.showingCount) {
+        this.nextShowingImagenodes.push(elem); // nextShowingImagenodes
+      } else {
+        this.nextHiddenImagenodes.push(elem); // nextHiddenImagenodes
+      }
+    });
+
+    this.setGallaryStyles();
   }
 
   private setGallaryStyles() {
