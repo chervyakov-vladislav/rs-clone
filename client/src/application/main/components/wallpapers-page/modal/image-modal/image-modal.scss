@@ -2,13 +2,15 @@
   position: fixed;
   width: 500px;
   transform: translate3d(250%, 130%,0) scale(1);
-  // transform-origin: 50% 50%;
   backface-visibility: hidden;
-  // transition: transform .7s, opacity .7s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
     &__pic {
       object-fit: cover;
       width: 100%;
+      user-select: none;
     }
 
     &--transition {
