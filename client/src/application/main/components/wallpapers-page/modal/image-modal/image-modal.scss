@@ -10,4 +10,8 @@
       object-fit: cover;
       width: 100%;
     }
+
+    &--transition {
+      transition: transform .7s, opacity .7s;
+    }
 }

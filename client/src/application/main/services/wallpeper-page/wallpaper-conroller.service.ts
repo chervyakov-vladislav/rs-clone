@@ -4,6 +4,14 @@ import ImageModal from '../../components/wallpapers-page/modal/image-modal/image
 import WallpaperModal from '../../components/wallpapers-page/modal/modal';
 import ImageCard from '../../components/wallpapers-page/wallpaper-card/wallpaper-card';
 
+interface SetImagestylesInterface {
+  top: number;
+  left: number;
+  opacity: number;
+  zIndex: number;
+  scale: number;
+}
+
 class WallpepersController {
   private container: HTMLElement;
 
@@ -98,8 +106,12 @@ class WallpepersController {
       this.cardCollection.push(this.card.node);
 
       this.card.node.addEventListener('click', () => {
+        this.cardCollection.forEach((elem) => elem.style.opacity = '0');
         this.resetModalImagesArrs();
         this.modal = new WallpaperModal(document.body);
+        this.modal.controls.close.node.addEventListener('click', () => {
+          this.cardCollection.forEach((elem) => elem.style.opacity = '1');
+        });
         this.registerControls();
         this.counterText.innerHTML = `${index + 1}/${state.getMoviePagePosters().photoBank.length}`;
         this.currentIndex = index;
@@ -113,7 +125,7 @@ class WallpepersController {
     const data = state.getMoviePagePosters();
     data.photoBank.forEach((cardInfo, index) => {
       this.imageModal = new ImageModal(this.modalImageContainer as HTMLElement, cardInfo);
-      (this.imageModal as ImageModal).node.style.transition = '';
+      (this.imageModal as ImageModal).node.classList.remove('wallpepers-modal-image--transition');
       const elemData = this.cardCollection[index].getBoundingClientRect();
       this.imageModal.node.style.width = `${elemData.width}px`;
       this.imageModal.node.style.height = `${elemData.height}px`;
@@ -122,7 +134,6 @@ class WallpepersController {
         1
       )}px, 0)`;
       setTimeout(() => {
-        (this.imageModal as ImageModal).node.style.transition = `transform .7s, opacity .7s`;
         this.setCurrentState();
       });
       this.imageModalArray.push(this.imageModal);
@@ -132,6 +143,7 @@ class WallpepersController {
   private setCurrentState() {
     apiHelpers.debounce(() => {
       this.imageModalArray.forEach((elem, index) => {
+        elem.node.classList.add('wallpepers-modal-image--transition');
         if (index + this.showingCount < this.currentIndex) {
           this.prevHiddenImagenodes.unshift(elem);
         } else if (index < this.currentIndex) {
@@ -144,7 +156,67 @@ class WallpepersController {
           this.nextHiddenImagenodes.push(elem); // nextHiddenImagenodes
         }
       });
+
+      this.setGallaryStyles();
     }, 1)();
+  }
+
+  private setGallaryStyles() {
+    const imageWidth = this.cardCollection[0].offsetWidth;
+    const imageHeight = this.cardCollection[0].offsetHeight;
+    const modalWidth = Math.max(this.minWidth, window.innerWidth);
+    const modalHeight = Math.max(this.minHeight, window.innerHeight);
+
+    this.prevHiddenImagenodes.forEach((item) => {
+      this.setImagestyles(item.node, {
+        top: -1.5 * modalHeight,
+        left: 0.31 * modalWidth,
+        opacity: 0.1,
+        zIndex: 1,
+        scale: 0.4,
+      });
+    });
+
+    this.setImagestyles(this.prevShowingImagenodes[0].node, {
+      top: modalHeight - imageHeight,
+      left: 0.32 * modalWidth,
+      zIndex: 4,
+      opacity: 0.4,
+      scale: 0.75,
+    });
+
+    this.setImagestyles(this.prevShowingImagenodes[1].node, {
+      top: 0.405 * modalHeight,
+      left: 0.11 * modalWidth,
+      zIndex: 3,
+      opacity: 0.3,
+      scale: 0.6,
+    });
+
+    this.setImagestyles(this.prevShowingImagenodes[2].node, {
+      top: 0.095 * modalHeight,
+      left: 0.17 * modalWidth,
+      zIndex: 2,
+      opacity: 0.2,
+      scale: 0.5,
+    });
+
+    this.setImagestyles(this.prevShowingImagenodes[3].node, {
+      top: -0.3 * imageHeight,
+      left: 0.31 * modalWidth,
+      zIndex: 1,
+      opacity: 0.1,
+      scale: 0.4,
+    });
+  }
+
+  private setImagestyles(elem: HTMLElement, params: SetImagestylesInterface) {
+    if (!elem) return;
+    elem.style.transform = `translate3d(${params.left.toFixed(1)}px, ${(params.top - 70).toFixed(1)}px, 0) scale(${
+      params.scale
+    })`;
+    elem.style.opacity = params.opacity.toString();
+    elem.style.zIndex = params.zIndex.toString();
   }
 
   private resetModalImagesArrs() {
