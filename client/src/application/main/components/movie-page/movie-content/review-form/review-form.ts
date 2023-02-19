@@ -155,7 +155,7 @@ export default class ReviewForm {
       formServices.addReviewToState(reviews);
       const reviewForm = document.querySelector('.users-reviews__title');
       if (reviewForm && formServices.formCheck) {
-        reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        reviewForm.scrollIntoView({ block: 'start', behavior: 'smooth' });
       }
     });
   }
