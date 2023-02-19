@@ -11,11 +11,14 @@ class ReviewFormServices {
 
   private countNeutral: HTMLElement;
 
+  public formCheck: boolean;
+
   constructor() {
     this.countTotal = document.createElement('div');
     this.countPositive = document.createElement('div');
     this.countNegative = document.createElement('div');
     this.countNeutral = document.createElement('div');
+    this.formCheck = false;
   }
 
   public registredCountTotal(element: HTMLElement) {
@@ -64,6 +67,8 @@ class ReviewFormServices {
       return;
     }
     messageText.innerHTML = '';
+
+    this.formCheck = true;
 
     const userData = state.getUserData();
     const item = {

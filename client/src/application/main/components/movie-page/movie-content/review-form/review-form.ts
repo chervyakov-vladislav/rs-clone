@@ -153,11 +153,8 @@ export default class ReviewForm {
     this.reviewForm.node.addEventListener('submit', (e: Event) => {
       e.preventDefault();
       formServices.addReviewToState(reviews);
-    });
-
-    this.formButton.node.addEventListener('click', () => {
       const reviewForm = document.querySelector('.users-reviews__title');
-      if (reviewForm) {
+      if (reviewForm && formServices.formCheck) {
         reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
       }
     });
