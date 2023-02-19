@@ -6,6 +6,7 @@ import {
   IStaff,
   KeyWordSearchInterface,
   SearchQuerryOptions,
+  PostersInfoInterface,
 } from '../../models/response-data';
 
 class ApiServiceKinopoisk {
@@ -23,18 +24,20 @@ class ApiServiceKinopoisk {
   // private apiKey = 'b7f13992-d5e9-4deb-a225-1692bcdd1f07';
   // private apiKey = '4360dfd4-1413-43a7-b5a6-626e1fe9713d';
   // private apiKey = '34f08f04-ad84-4aec-a0dd-bab9cc1bd380';
-  // private apiKey = 'fc38be4e-921f-4af0-8179-561fd1af5e4a';
+  private apiKey = 'fc38be4e-921f-4af0-8179-561fd1af5e4a';
   // private apiKey = 'd6a2af2f-ddaf-4bf0-bcba-a6322a5c79f7';
   // private apiKey = '4ff0511d-539f-4451-98c7-d1076f9af595';
   // private apiKey = 'f7de8df4-0ae7-4497-a141-7f6248e170eb';
   // private apiKey = 'ddaadbdb-686d-4194-ba6e-cd6b7a171d5d';
-  private apiKey = '9e8a516e-69e2-4800-815b-cc50b900a5c8';
+  // private apiKey = '9e8a516e-69e2-4800-815b-cc50b900a5c8';
 
   private baseUrl: string = 'https://kinopoiskapiunofficial.tech/api';
 
   private filmData: string = `${this.baseUrl}/v2.2/films`;
 
   private filmStaff: string = `${this.baseUrl}/v1/staff?filmId=`;
+
+  private actorData: string = `${this.baseUrl}/v1/staff`;
 
   private topFilms: string = `${this.filmData}/top?type=TOP_100_POPULAR_FILMS&page=`;
 
@@ -67,8 +70,8 @@ class ApiServiceKinopoisk {
   // WALLPAPER - обои
   // COVER - обложки
   // SCREENSHOT - скриншоты
-  public async getFilmImages(id: number, page = 1): Promise<void> {
-    const response = await fetch(`${this.filmData}/${id}/images?type=POSTER&page=${page}`, {
+  public async getFilmImages(id: number, page = 1, type = 'POSTER'): Promise<PostersInfoInterface> {
+    const response = await fetch(`${this.filmData}/${id}/images?type=${type}&page=${page}`, {
       headers: {
         Accept: 'application/json',
         'X-Api-Key': this.apiKey,
@@ -113,6 +116,17 @@ class ApiServiceKinopoisk {
 
   public async getFilmStaff(id: number): Promise<IStaff[]> {
     const response = await fetch(`${this.filmStaff}${id}`, {
+      headers: {
+        Accept: 'application/json',
+        'X-Api-Key': this.apiKey,
+      },
+    });
+    const data = await response.json();
+    return data;
+  }
+
+  public async getActorData(id: number): Promise<void> {
+    const response = await fetch(`${this.actorData}/${id}`, {
       headers: {
         Accept: 'application/json',
         'X-Api-Key': this.apiKey,

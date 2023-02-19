@@ -176,6 +176,10 @@ const enum SVG {
   recomendArrow = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path fill-rule="evenodd" clip-rule="evenodd" d="M8.08865 2.2225L15.5562 9.99875L8.0899 17.7775L6.6674 16.3013L12.7374 9.99875L6.6674 3.69875L8.08865 2.2225Z" fill="#999999"/>
   </svg>`,
+  arrow = `<svg class="arrow-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path class="arrow-icon__fill" d="M8.08865 2.2225L15.5562 9.99875L8.0899 17.7775L6.6674 16.3013L12.7374 
+  9.99875L6.6674 3.69875L8.08865 2.2225Z" fill="#999999"/>
+  </svg>`,
   leftGoldBranch = `
   <svg width='10' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'>
   <path d='M7.26 19.395s1.385-.617 1.768-1.806c.382-1.188-.384-2.498-.384-2.498s-1.386.618-1.768 1.806c-.382 1.189.384 2.498.384 2.498Z' 
@@ -252,6 +256,12 @@ const enum SVG {
   tabBookmark = `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M2 2C2 1.73478 2.10536 1.48043 2.29289 1.29289C2.48043 1.10536 2.73478 1 3 1H11C11.2652 1 11.5196 1.10536 11.7071 1.29289C11.8946 1.48043 12 1.73478 12 2V13L7 9.82L2 13V2Z" fill="black" fill-opacity="0.4"/>
   </svg>`,
+  closeIcon = `<svg  class="close-modal-icon" version="1.1" 
+  viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <path d="M437.5,386.6L306.9,256l130.6-130.6c14.1-14.1,14.1-36.8,0-50.9c-14.1-14.1-36.8-14.1-50.9,0L256,205.1L125.4,74.5 
+   c-14.1-14.1-36.8-14.1-50.9,0c-14.1,14.1-14.1,36.8,0,50.9L205.1,256L74.5,386.6c-14.1,14.1-14.1,36.8,0,50.9 
+    c14.1,14.1,36.8,14.1,50.9,0L256,306.9l130.6,130.6c14.1,14.1,36.8,14.1,50.9,0C451.5,423.4,451.5,400.6,437.5,386.6z"/>
+    </svg>`,
 }
 
 export default SVG;

@@ -1,0 +1,25 @@
+.wallpepers-links {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 25rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  font-family: "Kinopoisk-medium" , Arial, sans-serif;
+  font-size: 18px;
+  margin-bottom: 50px;
+
+    &__download,
+    &__open {
+      color: #fff;
+      transition: .3s;
+      cursor: pointer;
+      user-select: none;
+
+        &:hover {
+          opacity: .6;
+        }
+    }
+}
