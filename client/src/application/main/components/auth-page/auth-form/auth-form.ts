@@ -91,7 +91,7 @@ export default class AuthForm extends FormElement {
 
   public changeMode(isRegister: boolean) {
     this.isRegister = isRegister;
-    if (this.isRegister) this.submitButton.node.textContent = 'Зарегистрировать';
+    if (this.isRegister) this.submitButton.node.textContent = 'Зарегистрироваться';
     else this.submitButton.node.textContent = 'Войти';
   }
 

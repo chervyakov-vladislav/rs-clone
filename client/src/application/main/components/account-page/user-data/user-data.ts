@@ -28,9 +28,13 @@ export default class UserData extends DOMElement {
 
   private userForm: FormElement;
 
+  private loginInfo: DOMElement;
+
   private userNameInput: InputElement;
 
   private userPassInput: InputElement;
+
+  private userOldPassInput: InputElement;
 
   private userSubmit: ButtonElement;
 
@@ -92,13 +96,28 @@ export default class UserData extends DOMElement {
     this.loadImage.node.addEventListener('change', (e: Event) => {
       const file = Array.from((e.target as HTMLInputElement).files as FileList)[0];
       const reader = new FileReader();
-      reader.addEventListener('load', (event: Event) => {
+      reader.addEventListener('load', async (event: Event) => {
         const { result } = event.target as FileReader;
         state.setUserData({ userPhoto: result as string });
         loginObserver.setButtonText();
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
+
+        // const formData = new FormData();
+        // formData.append('image', result as string);
+        // await fetch('куда грузим?', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'multipart/form-data',
+        //   },
+        //   body: formData,
+        // });
       });
-      reader.readAsDataURL(file);
+      if (file.size < 5242880) {
+        reader.readAsDataURL(file);
+        this.userValidationMassage.node.innerHTML = '';
+      } else {
+        this.userValidationMassage.node.innerHTML = 'Файл должен быть меньше 5мб';
+      }
     });
 
     this.userForm = new FormElement(this.userInfo.node, {
@@ -108,6 +127,12 @@ export default class UserData extends DOMElement {
     });
     this.userForm.node.addEventListener('submit', userValidation.submit.bind(userValidation));
 
+    this.loginInfo = new DOMElement(this.userForm.node, {
+      tagName: 'div',
+      classList: ['user-data__ligin-info'],
+      content: `Ваш логин для входа в аккаунт: ${data.userName}`,
+    });
+
     this.userNameInput = new InputElement(this.userForm.node, {
       tagName: 'input',
       classList: ['user-data__text-input'],
@@ -115,10 +140,17 @@ export default class UserData extends DOMElement {
       value: data.userName,
     });
 
+    this.userOldPassInput = new InputElement(this.userForm.node, {
+      tagName: 'input',
+      classList: ['user-data__text-input'],
+      placeholder: 'Старый пароль',
+      type: 'password',
+    });
+
     this.userPassInput = new InputElement(this.userForm.node, {
       tagName: 'input',
       classList: ['user-data__text-input'],
-      placeholder: 'Пароль',
+      placeholder: 'Новый пароль',
       type: 'password',
     });
 

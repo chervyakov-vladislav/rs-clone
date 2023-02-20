@@ -55,7 +55,10 @@ class WallpepersController {
 
   private nextHiddenImagenodes: ImageModal[];
 
+  private backBtn: HTMLButtonElement;
+
   constructor() {
+    this.backBtn = document.createElement('button');
     this.container = document.createElement('div');
     this.prevBtn = document.createElement('button');
     this.nextBtn = document.createElement('button');
@@ -88,6 +91,13 @@ class WallpepersController {
     this.container = elem;
   }
 
+  public registerBackButton(elem: HTMLButtonElement) {
+    this.backBtn = elem;
+    this.backBtn.addEventListener('click', () => {
+      window.location.hash = state.getPreviousPageInfo().previousPageHash || '#';
+    });
+  }
+
   public registerControls() {
     this.prevBtn = (this.modal as WallpaperModal).controls.prevBtn.node as HTMLButtonElement;
     this.counterText = (this.modal as WallpaperModal).controls.counter.node;
@@ -110,6 +120,7 @@ class WallpepersController {
         this.cardCollection.forEach((elem) => {
           const options = elem.style;
           options.opacity = '0';
+          this.backBtn.classList.add('wallpapers-page__back--hide');
         });
         this.imageModalArray = [];
         this.resetModalImagesArrs();
@@ -118,6 +129,7 @@ class WallpepersController {
           this.cardCollection.forEach((elem) => {
             const options = elem.style;
             options.opacity = '1';
+            this.backBtn.classList.remove('wallpapers-page__back--hide');
           });
         });
         this.registerControls();
@@ -261,7 +273,7 @@ class WallpepersController {
 
     if (this.prevShowingImagenodes[3]) {
       this.setImagestyles(this.prevShowingImagenodes[3].node, {
-        top: -0.3 * imageHeight,
+        top: -0.3 * imageHeight + 70,
         left: 0.31 * modalWidth,
         zIndex: 1,
         opacity: 0.1,
@@ -271,19 +283,20 @@ class WallpepersController {
 
     // active image
     if (this.activeImageNode[0]) {
+      const scaleSize = window.innerWidth > 1600 ? 2.5 : 1.5;
       this.setImagestyles(this.activeImageNode[0].node, {
         top: (modalHeight - imageHeight) / 2,
         left: (modalWidth - imageWidth) / 2,
         zIndex: 5,
         opacity: 1,
-        scale: 1.5,
+        scale: scaleSize,
       });
     }
 
     // next
     if (this.nextShowingImagenodes[0]) {
       this.setImagestyles(this.nextShowingImagenodes[0].node, {
-        top: 0,
+        top: 40,
         left: 0.52 * modalWidth,
         zIndex: 4,
         opacity: 0.4,
