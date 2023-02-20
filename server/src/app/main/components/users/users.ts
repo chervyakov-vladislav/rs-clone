@@ -2,8 +2,10 @@ import express from 'express';
 import { Request, Response } from 'express-serve-static-core';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
+import { UploadedFile } from 'express-fileupload';
 import UsersService from '../../services/users.service';
 import { loginValidation, registerValidation } from '../../../shared/model/validations';
+import fileService from '../../services/file.service';
 
 export default class UsersRouter {
   public router = express.Router();
@@ -14,7 +16,7 @@ export default class UsersRouter {
     this.usersService = new UsersService();
     this.router.post('/login', loginValidation, (req: Request, res: Response) => this.login(req, res));
     this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req, res));
-    this.router.patch('/update', registerValidation, (req: Request, res: Response) => this.update(req, res));
+    this.router.patch('/update', (req: Request, res: Response) => this.update(req, res));
     this.router.get('/me', (req, res) => this.authorization(req, res));
   }
 
@@ -110,6 +112,7 @@ export default class UsersRouter {
 
   private async update(req: Request, res: Response) {
     console.log(req.body);
+    if (req.files) fileService.saveFile(req.files.file as UploadedFile);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array()[0] });
