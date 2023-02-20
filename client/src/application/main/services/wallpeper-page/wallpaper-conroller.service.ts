@@ -261,7 +261,7 @@ class WallpepersController {
 
     if (this.prevShowingImagenodes[3]) {
       this.setImagestyles(this.prevShowingImagenodes[3].node, {
-        top: -0.3 * imageHeight,
+        top: -0.3 * imageHeight + 70,
         left: 0.31 * modalWidth,
         zIndex: 1,
         opacity: 0.1,
@@ -271,19 +271,20 @@ class WallpepersController {
 
     // active image
     if (this.activeImageNode[0]) {
+      const scaleSize = window.innerWidth > 1600 ? 2.5 : 1.5;
       this.setImagestyles(this.activeImageNode[0].node, {
         top: (modalHeight - imageHeight) / 2,
         left: (modalWidth - imageWidth) / 2,
         zIndex: 5,
         opacity: 1,
-        scale: 1.5,
+        scale: scaleSize,
       });
     }
 
     // next
     if (this.nextShowingImagenodes[0]) {
       this.setImagestyles(this.nextShowingImagenodes[0].node, {
-        top: 0,
+        top: 40,
         left: 0.52 * modalWidth,
         zIndex: 4,
         opacity: 0.4,
