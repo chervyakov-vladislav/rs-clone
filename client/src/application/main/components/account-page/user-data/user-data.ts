@@ -92,13 +92,27 @@ export default class UserData extends DOMElement {
     this.loadImage.node.addEventListener('change', (e: Event) => {
       const file = Array.from((e.target as HTMLInputElement).files as FileList)[0];
       const reader = new FileReader();
-      reader.addEventListener('load', (event: Event) => {
+      reader.addEventListener('load', async (event: Event) => {
         const { result } = event.target as FileReader;
         state.setUserData({ userPhoto: result as string });
         loginObserver.setButtonText();
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
+
+        // const formData = new FormData();
+        // formData.append('image', result as string);
+        // await fetch('куда грузим?', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'multipart/form-data',
+        //   },
+        //   body: formData,
+        // });
       });
-      reader.readAsDataURL(file);
+      if (file.size < 5242880) {
+        reader.readAsDataURL(file);
+      } else {
+        this.userValidationMassage.node.innerHTML = 'Файл должен быть меньше 5мб';
+      }
     });
 
     this.userForm = new FormElement(this.userInfo.node, {
