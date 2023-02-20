@@ -47,7 +47,7 @@ export default class UsersService {
           updatedAt,
           name: user.name || user.login,
           password: user.password,
-          role: user.role,
+          role: user.role || 'user',
           avatar: user.avatar,
         },
       }

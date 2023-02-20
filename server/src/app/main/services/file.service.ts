@@ -1,14 +1,15 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import uuid from 'uuid';
+// import uuid from 'uuid';
 import path from 'path';
 import fileUpload from 'express-fileupload';
 
 class FileService {
   public saveFile(file: fileUpload.UploadedFile) {
     try {
-      const fileName = `${uuid.v4()}.jpg`;
-      const filePath = path.resolve('static', fileName);
+      const fileName = file.name;
+      const filePath = path.resolve('src/files', fileName);
       file.mv(filePath);
+      console.log(`created file: ${filePath}`);
       return fileName;
     } catch (e) {
       console.log(e);
