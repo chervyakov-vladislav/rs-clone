@@ -55,7 +55,10 @@ class WallpepersController {
 
   private nextHiddenImagenodes: ImageModal[];
 
+  private backBtn: HTMLButtonElement;
+
   constructor() {
+    this.backBtn = document.createElement('button');
     this.container = document.createElement('div');
     this.prevBtn = document.createElement('button');
     this.nextBtn = document.createElement('button');
@@ -88,6 +91,13 @@ class WallpepersController {
     this.container = elem;
   }
 
+  public registerBackButton(elem: HTMLButtonElement) {
+    this.backBtn = elem;
+    this.backBtn.addEventListener('click', () => {
+      window.location.hash = state.getPreviousPageInfo().previousPageHash || '#';
+    });
+  }
+
   public registerControls() {
     this.prevBtn = (this.modal as WallpaperModal).controls.prevBtn.node as HTMLButtonElement;
     this.counterText = (this.modal as WallpaperModal).controls.counter.node;
@@ -110,6 +120,7 @@ class WallpepersController {
         this.cardCollection.forEach((elem) => {
           const options = elem.style;
           options.opacity = '0';
+          this.backBtn.classList.add('wallpapers-page__back--hide');
         });
         this.imageModalArray = [];
         this.resetModalImagesArrs();
@@ -118,6 +129,7 @@ class WallpepersController {
           this.cardCollection.forEach((elem) => {
             const options = elem.style;
             options.opacity = '1';
+            this.backBtn.classList.remove('wallpapers-page__back--hide');
           });
         });
         this.registerControls();
