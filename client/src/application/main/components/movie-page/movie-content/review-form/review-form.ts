@@ -135,7 +135,7 @@ export default class ReviewForm {
     this.keywordText = new InputElement(this.formBody.node, {
       tagName: 'textarea',
       classList: ['review-form__textarea'],
-      placeholder: 'Техт',
+      placeholder: 'Текст',
     });
 
     this.textMessage = new DOMElement(this.formBody.node, {
