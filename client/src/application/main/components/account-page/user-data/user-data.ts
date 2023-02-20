@@ -28,9 +28,13 @@ export default class UserData extends DOMElement {
 
   private userForm: FormElement;
 
+  private loginInfo: DOMElement;
+
   private userNameInput: InputElement;
 
   private userPassInput: InputElement;
+
+  private userOldPassInput: InputElement;
 
   private userSubmit: ButtonElement;
 
@@ -110,6 +114,7 @@ export default class UserData extends DOMElement {
       });
       if (file.size < 5242880) {
         reader.readAsDataURL(file);
+        this.userValidationMassage.node.innerHTML = '';
       } else {
         this.userValidationMassage.node.innerHTML = 'Файл должен быть меньше 5мб';
       }
@@ -122,6 +127,12 @@ export default class UserData extends DOMElement {
     });
     this.userForm.node.addEventListener('submit', userValidation.submit.bind(userValidation));
 
+    this.loginInfo = new DOMElement(this.userForm.node, {
+      tagName: 'div',
+      classList: ['user-data__ligin-info'],
+      content: `Ваш логин для входа в аккаунт: ${data.userName}`,
+    });
+
     this.userNameInput = new InputElement(this.userForm.node, {
       tagName: 'input',
       classList: ['user-data__text-input'],
@@ -129,10 +140,17 @@ export default class UserData extends DOMElement {
       value: data.userName,
     });
 
+    this.userOldPassInput = new InputElement(this.userForm.node, {
+      tagName: 'input',
+      classList: ['user-data__text-input'],
+      placeholder: 'Старый пароль',
+      type: 'password',
+    });
+
     this.userPassInput = new InputElement(this.userForm.node, {
       tagName: 'input',
       classList: ['user-data__text-input'],
-      placeholder: 'Пароль',
+      placeholder: 'Новый пароль',
       type: 'password',
     });
 
