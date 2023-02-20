@@ -17,12 +17,18 @@ class Loader {
     return res;
   }
 
-  private load(url: URL, method: Method, data?: TSObject): Promise<Response> {
+  private load(
+    url: URL,
+    method: Method,
+    data?: TSObject,
+    formData?: FormData,
+    contentType = 'application/json'
+  ): Promise<Response> {
     console.log(url.href, method, data);
     return fetch(url, {
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${storage.getToken()}` },
+      headers: { 'Content-Type': contentType, Authorization: `Bearer ${storage.getToken()}` },
       method,
-      body: data ? JSON.stringify(data) : undefined,
+      body: formData || (data ? JSON.stringify(data) : undefined),
     }).then((res: Response) => this.errorHandler(res));
   }
 
@@ -67,6 +73,12 @@ class Loader {
 
   public patch<T>(endpoint: string, params: TSObject): Promise<T> {
     return this.load(this.makeUrl(endpoint, params), 'PATCH').then((res: Response) => res.json());
+  }
+
+  public patchFormData<T>(endpoint: string, data: FormData): Promise<T> {
+    return this.load(new URL(`${PATH}${endpoint}`), 'PATCH', {}, data, 'multipart/form-data').then((res: Response) =>
+      res.json()
+    );
   }
 }
 
