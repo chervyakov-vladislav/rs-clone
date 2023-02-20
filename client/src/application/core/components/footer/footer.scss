@@ -1,0 +1,29 @@
+.footer {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background: #141414;
+  color: rgba(255,255,255,.6);
+
+  &__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+  }
+
+  &__rs {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__year {
+    justify-self: center;
+    font-size: 14px;
+  }
+}
+
+.rsschool-icon {
+  width: 70px;
+}
