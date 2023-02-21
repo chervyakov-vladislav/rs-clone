@@ -17,8 +17,8 @@ export default class Server {
   constructor() {
     this.PORT = process.env.PORT || '3000';
     this.app = e();
-    this.app.use(fileUpload());
     this.app.use(cors());
+    this.app.use(fileUpload());
     this.app.use(bodyParser.raw());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
