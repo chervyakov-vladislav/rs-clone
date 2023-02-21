@@ -8,6 +8,7 @@ import movieValue from '../../../services/movie-page/movie-value.service';
 import state from '../../../../shared/services/state';
 import likeFilmsService from '../../../services/account-page/liked-films/liked-films.service';
 import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
+import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 
 export default class MovieInfo {
   private staff: IStaff[];
@@ -337,60 +338,62 @@ export default class MovieInfo {
     });
 
     let tooltipElem: HTMLElement | null;
-    this.movieCast.node.addEventListener('mouseover', async (e: Event) => {
+    this.movieCast.node.addEventListener('mouseover', (e: Event) => {
       e.preventDefault();
       const target = e.target as HTMLElement;
-      let actor;
-      if (tooltipElem) {
-        tooltipElem.remove();
-      }
-      if (target && target.tagName === 'P') {
-        if (target.dataset.actor) {
-          actor = await apiKinopoisk.getActorData(+target.dataset.actor);
+      if (tooltipElem) tooltipElem.remove();
+      apiHelpers.debounce( async () => {
+        let actor;
+        tooltipElem = document.createElement('div');
+        tooltipElem.className = 'tooltip';
+
+        const coords = target.getBoundingClientRect();
+
+        let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) - 500;
+        if (left < 0) left = 0;
+
+        let top = coords.top - tooltipElem.offsetHeight - 5;
+        if (top < 0) {
+          top = coords.top + target.offsetHeight + 5;
         }
-        if (actor) {
-          tooltipElem = document.createElement('div');
-          tooltipElem.className = 'tooltip';
 
-          const actorPhoto = document.createElement('div');
-          actorPhoto.className = 'tooltip__actor-photo';
-          const actorPhotoPic = document.createElement('img');
-          actorPhotoPic.src = actor.posterUrl as string;
-          actorPhoto.append(actorPhotoPic);
-          tooltipElem.append(actorPhoto);
+        tooltipElem.style.left = `${left}px`;
+        tooltipElem.style.top = `${top}px`;
 
-          const actorData = document.createElement('div');
-          actorData.className = 'tooltip__actor-data';
+        document.body.append(tooltipElem);
 
-          const actorName = document.createElement('div');
-          actorName.className = 'tooltip__actor-name';
-          actorName.innerHTML = `${actor.nameRu}`;
-          actorData.append(actorName);
-
-          const actorProf = document.createElement('div');
-          actorProf.className = 'tooltip__actor-prof';
-          actorProf.innerHTML = `${actor.profession}`;
-          actorData.append(actorProf);
-
-          tooltipElem.append(actorData);
-          document.body.append(tooltipElem);
-
-          const coords = target.getBoundingClientRect();
-
-          let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) - 100;
-          if (left < 0) left = 0;
-
-          let top = coords.top - tooltipElem.offsetHeight - 5;
-          if (top < 0) {
-            top = coords.top + target.offsetHeight + 5;
+        if (target && target.tagName === 'P') {
+          if (target.dataset.actor) {
+            actor = await apiKinopoisk.getActorData(+target.dataset.actor);
           }
-
-          tooltipElem.style.left = `${left}px`;
-          tooltipElem.style.top = `${top}px`;
+          if (actor) {
+            const actorPhoto = document.createElement('div');
+            actorPhoto.className = 'tooltip__actor-photo';
+            const actorPhotoPic = document.createElement('img');
+            actorPhotoPic.src = actor.posterUrl as string;
+            actorPhoto.append(actorPhotoPic);
+            tooltipElem.append(actorPhoto);
+  
+            const actorData = document.createElement('div');
+            actorData.className = 'tooltip__actor-data';
+  
+            const actorName = document.createElement('div');
+            actorName.className = 'tooltip__actor-name';
+            actorName.innerHTML = `${actor.nameRu}`;
+            actorData.append(actorName);
+  
+            const actorProf = document.createElement('div');
+            actorProf.className = 'tooltip__actor-prof';
+            actorProf.innerHTML = `${actor.profession}`;
+            actorData.append(actorProf);
+  
+            tooltipElem.append(actorData);
+          }
         }
-      }
+      }, 500)();
+      
     });
-    this.movieCast.node.addEventListener('mouseout', () => {
+    document.body.addEventListener('mouseout', () => {
       if (tooltipElem) {
         tooltipElem.remove();
         tooltipElem = null;
