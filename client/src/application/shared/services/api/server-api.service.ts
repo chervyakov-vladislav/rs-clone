@@ -19,11 +19,14 @@ class ApiService {
     return apiLoader.delete(`user/delete/${id}`);
   }
 
-  public updateUser(data: TSObject, avatar?: File) {
+  public updateUser(data: TSObject, avatar: File) {
     const formData = new FormData();
-    formData.append('user', JSON.stringify(data));
-    if (avatar) formData.append('file', avatar);
-    return apiLoader.patchFormData('user/udate', formData);
+    formData.append('login', data.login);
+    formData.append('name', data.name);
+    formData.append('password', data.password);
+    formData.append('role', data.role);
+    formData.append('file', avatar, avatar.name);
+    return apiLoader.patchFormData('user/update', formData);
   }
 
   public getPremiere(): Promise<PremiereInfoBackend> {
