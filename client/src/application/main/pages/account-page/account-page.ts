@@ -1,3 +1,4 @@
+import './account-page.scss';
 import DOMElement from '../../../shared/components/base-elements/dom-element';
 import Page from '../../../shared/components/page';
 import AdminData from '../../components/account-page/admin/admin';
