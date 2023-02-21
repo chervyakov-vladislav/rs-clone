@@ -58,6 +58,7 @@ export interface PreviousPageInfoInterface {
 
 export interface UserData {
   logged: boolean;
+  userLogin: string;
   userName: string;
   userToken: string;
   userPhoto: File | string;
@@ -65,6 +66,7 @@ export interface UserData {
 
 export interface UserDataParams {
   logged?: boolean;
+  userLogin?: string;
   userName?: string;
   userToken?: string;
   userPhoto?: File | string;
