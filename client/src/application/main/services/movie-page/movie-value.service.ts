@@ -1,10 +1,9 @@
-import { IFilmData, IStaff, ITopFilm } from '../../../shared/models/response-data';
+import { IFilmData, IStaff } from '../../../shared/models/response-data';
 
 class MovieValue {
-  public isNameRU(data: ITopFilm) {
-    const isNameRu = data.nameRu ? data.nameRu : data.nameEn;
-    const isName = isNameRu.length > 0 ? isNameRu : '-';
-    return isName;
+  public isNameRU(data: IFilmData) {
+    const name = data.nameRu === null ? data.nameOriginal : data.nameRu;
+    return name === null ? '-' : name;
   }
 
   public getCountry(data: IFilmData) {
@@ -21,8 +20,16 @@ class MovieValue {
     return result.join(', ');
   }
 
+  public getYear(data: IFilmData) {
+    return data.year === null ? '-' : data.year;
+  }
+
   public getRating(data: IFilmData) {
     return data.ratingKinopoisk === null ? 0 : data.ratingKinopoisk;
+  }
+
+  public getDescription(data: IFilmData) {
+    return data.description === null ? '-' : data.description;
   }
 
   public getRatingImdb(data: IFilmData) {
@@ -78,6 +85,14 @@ class MovieValue {
       return '';
     }
     return type;
+  }
+
+  public getReviewAuthor(type: string) {
+    return type === null ? '-' : type;
+  }
+
+  public getReviewDescription(type: string) {
+    return type === null ? '-' : type;
   }
 }
 

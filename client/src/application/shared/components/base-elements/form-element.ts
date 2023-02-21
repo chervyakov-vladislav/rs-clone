@@ -12,5 +12,9 @@ export default class FormElement extends DOMElement {
     if (options.action) {
       this.node.setAttribute('action', options.action);
     }
+
+    if (options.enctype) {
+      (this.node as HTMLFormElement).enctype = options.enctype;
+    }
   }
 }

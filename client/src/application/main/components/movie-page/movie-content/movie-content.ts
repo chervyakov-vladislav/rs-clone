@@ -3,9 +3,15 @@ import ButtonElement from '../../../../shared/components/base-elements/button-el
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import { IFilmData, IReview, IReviewsData } from '../../../../shared/models/response-data';
 import UserReview from './user-review';
+import ReviewForm from './review-form/review-form';
+import LinkElement from '../../../../shared/components/base-elements/link-element';
+import formServices from './review-form/review-form.services';
+import state from '../../../../shared/services/state';
 
 export default class MovieContent {
-  private userReview: UserReview | null;
+  private userReview: UserReview | null = null;
+
+  private reviewForm: ReviewForm | null = null;
 
   private contentColumn1: DOMElement;
 
@@ -14,6 +20,8 @@ export default class MovieContent {
   private usersReviewsTitle: DOMElement;
 
   private usersReviewsAdd: DOMElement;
+
+  private AddReviewLink: LinkElement;
 
   private usersReviewsContent: DOMElement;
 
@@ -47,9 +55,10 @@ export default class MovieContent {
 
   private reviewsData: IReview[];
 
-  constructor(container: HTMLElement, item: IFilmData, reviews: IReviewsData) {
-    this.userReview = null;
+  private reviews: IReviewsData;
 
+  constructor(container: HTMLElement, item: IFilmData, reviews: IReviewsData) {
+    this.reviews = reviews;
     this.reviewsData = reviews.items.slice(0, 6);
 
     this.contentColumn1 = new DOMElement(container, {
@@ -71,7 +80,25 @@ export default class MovieContent {
     this.usersReviewsAdd = new ButtonElement(this.usersReviews.node, {
       tagName: 'button',
       classList: ['users-reviews__write-review-btn'],
+      // content: 'Написать рецензию',
+    });
+
+    this.AddReviewLink = new LinkElement(this.usersReviewsAdd.node, {
+      tagName: 'a',
+      href: '',
+      classList: ['review-form__link'],
       content: 'Написать рецензию',
+    });
+
+    this.usersReviewsAdd.node.addEventListener('click', () => {
+      if (state.allData.account.userData.logged) {
+        const reviewForm = document.getElementById('review-form');
+        if (reviewForm) {
+          reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }
+      } else {
+        window.location.hash = '#auth';
+      }
     });
 
     this.usersReviewsContent = new DOMElement(this.usersReviews.node, {
@@ -99,6 +126,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount'],
       content: `${reviews.total}`,
     });
+    formServices.registredCountTotal(this.usersReviewsTotalP.node);
 
     this.usersReviewsTotalS = new DOMElement(this.usersReviewsTotal.node, {
       tagName: 'span',
@@ -115,6 +143,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount', 'positive'],
       content: `${reviews.totalPositiveReviews}`,
     });
+    formServices.registredCountPositive(this.usersReviewsPositiveP.node);
 
     this.usersReviewsPositiveS = new DOMElement(this.usersReviewsPositive.node, {
       tagName: 'span',
@@ -131,6 +160,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount', 'neutral'],
       content: `${reviews.totalNeutralReviews}`,
     });
+    formServices.registredCountNeutral(this.usersReviewsNeutralP.node);
 
     this.usersReviewsNeutralS = new DOMElement(this.usersReviewsNeutral.node, {
       tagName: 'span',
@@ -147,6 +177,7 @@ export default class MovieContent {
       classList: ['users-reviews__amount', 'negative'],
       content: `${reviews.totalNegativeReviews}`,
     });
+    formServices.registredCountNegative(this.usersReviewsNegativeP.node);
 
     this.usersReviewsNegativeS = new DOMElement(this.usersReviewsNegative.node, {
       tagName: 'span',
@@ -160,5 +191,8 @@ export default class MovieContent {
     this.reviewsData.forEach((review: IReview) => {
       this.userReview = new UserReview(this.usersReviewsReviews.node, review);
     });
+    if (state.allData.account.userData.logged) {
+      this.reviewForm = new ReviewForm(this.usersReviewsReviews.node, this.reviews);
+    }
   };
 }

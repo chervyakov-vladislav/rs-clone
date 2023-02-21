@@ -1,0 +1,30 @@
+.wallpapers-page {
+  display: flex;
+  flex-direction: column;
+
+  &__back {
+    align-items: center;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    height: 30px;
+    justify-content: center;
+    line-height: 30px;
+    transition: .3s;
+    width: 145px;
+    color: #000;
+    background-color: #f7f7f7;
+    margin-bottom: 15px;
+
+    &:hover {
+      background-color: #fff;
+    }
+
+    &--hide {
+      transition: 0;
+      opacity: 0;
+    }
+  }
+}

@@ -11,7 +11,6 @@ class ValueCheck {
   public getEngnameYearTotalTime(data: ITopFilm) {
     const result: string[] = [];
     if (data.nameEn) result.push(data.nameEn);
-    console.log(data);
     if (data.year && data.year !== 'null') result.push(`${data.year} год`);
     if (data.filmLength) {
       const time = this.analyzeTime(data.filmLength);

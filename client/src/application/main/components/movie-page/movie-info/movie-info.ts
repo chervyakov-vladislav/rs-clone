@@ -7,6 +7,7 @@ import SVG from '../../../../shared/components/svg-icons';
 import movieValue from '../../../services/movie-page/movie-value.service';
 import state from '../../../../shared/services/state';
 import likeFilmsService from '../../../services/account-page/liked-films/liked-films.service';
+import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
 
 export default class MovieInfo {
   private staff: IStaff[];
@@ -17,7 +18,7 @@ export default class MovieInfo {
 
   private moviePosterImage: ImageElement;
 
-  private movieTrailer: DOMElement;
+  private movieWallpapers: ButtonElement | null;
 
   private column2: DOMElement;
 
@@ -105,10 +106,8 @@ export default class MovieInfo {
       alt: item.nameRu as string,
     });
 
-    this.movieTrailer = new DOMElement(this.column1.node, {
-      tagName: 'div',
-      classList: ['movie-info__trailer'],
-    });
+    this.movieWallpapers = null;
+    this.checkWallapapers(item.kinopoiskId);
 
     this.column2 = new DOMElement(container, {
       tagName: 'div',
@@ -118,7 +117,7 @@ export default class MovieInfo {
     this.movieTitle = new DOMElement(this.column2.node, {
       tagName: 'h2',
       classList: ['movie-info__title'],
-      content: `${item.nameRu} (${item.year})`,
+      content: `${movieValue.isNameRU(item)} (${movieValue.getYear(item)})`,
     });
 
     this.movieButtons = new DOMElement(this.column2.node, {
@@ -188,7 +187,7 @@ export default class MovieInfo {
     this.gridYear2 = new DOMElement(this.movieGrid.node, {
       tagName: 'p',
       classList: ['movie-info__grid_text'],
-      content: `${item.year}`,
+      content: `${movieValue.getYear(item)}`,
     });
 
     this.gridCountry1 = new DOMElement(this.movieGrid.node, {
@@ -351,5 +350,22 @@ export default class MovieInfo {
         content: `${actor}`,
       });
     });
+  }
+
+  private async checkWallapapers(id: number) {
+    const res = await apiKinopoisk.getFilmImages(id, 1, 'POSTER');
+    this.movieWallpapers =
+      res.items.length > 0
+        ? new ButtonElement(this.column1.node, {
+            tagName: 'button',
+            classList: ['movie-info__wallpapersbtn-btn'],
+            content: 'Постеры',
+          })
+        : null;
+    if (res.items.length > 0) {
+      (this.movieWallpapers as ButtonElement).node.addEventListener('click', () => {
+        window.location.hash = `#wallpapers/${id}`;
+      });
+    }
   }
 }
