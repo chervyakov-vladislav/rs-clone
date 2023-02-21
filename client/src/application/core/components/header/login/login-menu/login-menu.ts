@@ -55,8 +55,28 @@ export default class LoginMenu extends DOMElement {
       state.allData.account.userData.logged = false;
       state.allData.account.userData.userName = '';
       state.allData.account.userData.userToken = '';
+      state.resetLikedFimls();
       loginObserver.setButtonText();
       this.node.remove();
+      const currentPage = state.getPreviousPageInfo().currentPageID;
+      if (currentPage === 'movie') {
+        loginObserver.removeMoviePageElems();
+        const watchBtn = document.querySelector('.movie-info__to-watch-btn');
+        const likebtn = document.querySelector('.movie-info__to-rate-btn');
+        watchBtn?.classList.remove('movie-info__to-watch-btn--active');
+        likebtn?.classList.remove('movie-info__to-rate-btn--active');
+      }
+      if (currentPage === 'recomend' || currentPage === 'best' || currentPage === 'searchPage' || currentPage === 's') {
+        const watchBtnBest = document.querySelectorAll('.movie-card-flat__to-watch-btn');
+        const likeBtnBest = document.querySelectorAll('.movie-card-flat__to-rate-btn');
+        const watchBtnSearch = document.querySelectorAll('.search-card__account-button-later');
+        const likeBtnBestSearch = document.querySelectorAll('.search-card__account-button-like');
+
+        watchBtnBest.forEach((item) => item.classList.remove('movie-card-flat__to-watch-btn--active'));
+        likeBtnBest.forEach((item) => item.classList.remove('movie-card-flat__to-rate-btn--active'));
+        watchBtnSearch.forEach((item) => item.classList.remove('search-card__account-button-later--active'));
+        likeBtnBestSearch.forEach((item) => item.classList.remove('search-card__account-button-like--active'));
+      }
     });
   }
 }

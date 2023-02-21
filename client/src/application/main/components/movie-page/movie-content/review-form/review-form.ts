@@ -5,6 +5,7 @@ import ButtonElement from '../../../../../shared/components/base-elements/button
 import InputElement from '../../../../../shared/components/base-elements/input-element';
 import { IReviewsData } from '../../../../../shared/models/response-data';
 import formServices from './review-form.services';
+import loginObserver from '../../../../../core/services/menu/login-observer.service';
 
 export default class ReviewForm {
   private reviewForm: DOMElement;
@@ -52,6 +53,7 @@ export default class ReviewForm {
       tagName: 'form',
       classList: ['review-form'],
     });
+    loginObserver.registerReviewForm(this.reviewForm.node);
 
     this.formTitle = new DOMElement(this.reviewForm.node, {
       tagName: 'div',
