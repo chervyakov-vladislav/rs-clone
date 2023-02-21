@@ -1,7 +1,7 @@
 import './reviews.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
-import state from '../../../../../shared/services/state';
+// import state from '../../../../../shared/services/state';
 
 export default class ReviewsFilms extends DOMElement {
   private title: DOMElement;
