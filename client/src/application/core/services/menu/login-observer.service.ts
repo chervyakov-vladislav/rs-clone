@@ -8,10 +8,13 @@ class LoginObserver {
 
   private avatar: HTMLElement;
 
+  private reviewForm: HTMLElement;
+
   constructor() {
     this.headerLogin = document.createElement('button');
     this.loginContainer = document.createElement('div');
     this.avatar = document.createElement('div');
+    this.reviewForm = document.createElement('div');
   }
 
   public register(elem: HTMLElement) {
@@ -20,6 +23,10 @@ class LoginObserver {
 
   public registerContainer(elem: HTMLElement) {
     this.loginContainer = elem;
+  }
+
+  public registerReviewForm(elem: HTMLElement) {
+    this.reviewForm = elem;
   }
 
   public setButtonText() {
@@ -47,6 +54,10 @@ class LoginObserver {
   public changeAvatar() {
     const { userPhoto } = state.allData.account.userData;
     (this.avatar as HTMLImageElement).src = `${userPhoto}`;
+  }
+
+  public removeMoviePageElems() {
+    this.reviewForm.remove();
   }
 }
 
