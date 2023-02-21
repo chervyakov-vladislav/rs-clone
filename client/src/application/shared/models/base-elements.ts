@@ -17,6 +17,7 @@ export interface RouteOptions extends Options {
 
 export interface FormOptions extends Options {
   action?: string;
+  enctype?: string;
 }
 
 export interface ButtonOptions extends Options {

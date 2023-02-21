@@ -1,0 +1,33 @@
+.developers {
+  display: flex;
+  gap: 25px;
+
+    &__link {
+      display: flex;
+      align-items: center;
+
+        &:hover {
+          .developers__name,
+          .developers__icon {
+            opacity: .8;
+          }
+        }
+    }
+
+    &__name {
+      font-size: 14px;
+      color: #fff;
+      margin-left: 8px;
+      transition: .3s;
+    }
+
+    &__icon {
+      transition: .3s;
+    }
+}
+
+.github-icon {
+  fill: #fff;
+  width: 24px;
+  height: 24px;
+}
