@@ -361,6 +361,11 @@ class State {
   public setLikedFilmsList(arr: number[]) {
     this.allData.account.likedFilms = arr;
   }
+
+  public resetLikedFimls() {
+    this.allData.account.likedFilms = [];
+    this.allData.account.watchLaterFilms = [];
+  }
 }
 
 const state = new State();

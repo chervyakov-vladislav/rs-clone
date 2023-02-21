@@ -27,7 +27,6 @@ class UserValidation {
     e.preventDefault();
     const nameInput = this.userNameInput as HTMLInputElement;
     const message = this.message as HTMLElement;
-    // какая-то проверка значений, если нужна и другие манипуляции
 
     state.setUserData({
       userName: nameInput.value,
@@ -37,7 +36,6 @@ class UserValidation {
       message.innerText = '';
     }, 5_000);
   }
-  // какие-то методы для валидации, если нужно
 }
 
 const userValidation = new UserValidation();

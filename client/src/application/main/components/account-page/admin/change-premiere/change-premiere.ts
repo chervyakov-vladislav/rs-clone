@@ -17,6 +17,8 @@ export default class ChangePreviere extends DOMElement {
 
   private trailerInput: InputElement;
 
+  private formText: DOMElement;
+
   private submit: ButtonElement;
 
   constructor(parentNode: HTMLElement) {
@@ -49,6 +51,11 @@ export default class ChangePreviere extends DOMElement {
       placeholder: 'Ссылка на трейлер',
     });
 
+    this.formText = new DOMElement(this.form.node, {
+      tagName: 'div',
+      classList: ['change-premiere__info'],
+    });
+
     this.submit = new ButtonElement(this.form.node, {
       tagName: 'button',
       classList: ['change-premiere__submit'],
@@ -69,6 +76,10 @@ export default class ChangePreviere extends DOMElement {
         ID: newData.kinopoiskId.toString(),
         link: newData.link,
       });
+      this.formText.node.innerText = 'Данные изменены';
+      setTimeout(() => {
+        this.formText.node.innerText = '';
+      }, 5_000);
     });
   }
 

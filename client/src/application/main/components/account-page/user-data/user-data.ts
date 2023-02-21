@@ -46,6 +46,8 @@ export default class UserData extends DOMElement {
 
   private reviews: ReviewsFilms | null = null;
 
+  private clearLocalStorage: ButtonElement;
+
   constructor(parentNode: HTMLElement) {
     super(parentNode, {
       tagName: 'div',
@@ -101,16 +103,6 @@ export default class UserData extends DOMElement {
         state.setUserData({ userPhoto: result as string });
         loginObserver.setButtonText();
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
-
-        // const formData = new FormData();
-        // formData.append('image', result as string);
-        // await fetch('куда грузим?', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'multipart/form-data',
-        //   },
-        //   body: formData,
-        // });
       });
       if (file.size < 5242880) {
         reader.readAsDataURL(file);
@@ -171,6 +163,19 @@ export default class UserData extends DOMElement {
       nameInput: this.userNameInput.node as HTMLInputElement,
       passInput: this.userPassInput.node as HTMLInputElement,
       message: this.userValidationMassage.node,
+    });
+
+    this.clearLocalStorage = new ButtonElement(this.node, {
+      tagName: 'button',
+      classList: ['user-data__clearLocalStorage'],
+      content: 'Очистить список "Вы интересовались"',
+    });
+    this.clearLocalStorage.node.addEventListener('click', () => {
+      localStorage.removeItem('visitedMovies');
+      this.clearLocalStorage.node.innerText = 'Очищено';
+      setTimeout(() => {
+        this.clearLocalStorage.node.innerText = 'Очистить список "Вы интересовались"';
+      }, 6_000);
     });
 
     const watchLaterFilms = state.getWatchLaterList();

@@ -1,7 +1,7 @@
 .user-data {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 30px;
 
     &__title {
       font-size: 18px;
@@ -109,5 +109,25 @@
         &:hover {
           transform: scale(1.01);
         }
+    }
+
+    &__clearLocalStorage {
+      align-items: center;
+      border: 1px solid rgba(0,0,0,.1);
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 13px;
+      height: 30px;
+      justify-content: center;
+      line-height: 30px;
+      transition: .3s;
+      width: 405px;
+      color: #000;
+      background-color: #f7f7f7;
+
+      &:hover {
+        background-color: #fff;
+      }
     }
 }
