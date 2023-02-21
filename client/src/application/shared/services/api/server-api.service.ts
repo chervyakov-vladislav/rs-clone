@@ -19,13 +19,14 @@ class ApiService {
     return apiLoader.delete(`user/delete/${id}`);
   }
 
-  public updateUser(data: TSObject, avatar: File) {
+  public updateUser(data: TSObject, avatar?: File): Promise<ResponseAuth> {
+    console.log(data);
     const formData = new FormData();
     formData.append('login', data.login);
     formData.append('name', data.name);
     formData.append('password', data.password);
     formData.append('role', data.role);
-    formData.append('file', avatar, avatar.name);
+    if (avatar) formData.append('file', avatar, avatar.name);
     return apiLoader.patchFormData('user/update', formData);
   }
 
