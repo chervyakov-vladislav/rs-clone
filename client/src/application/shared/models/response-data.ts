@@ -148,7 +148,9 @@ export interface PremiereInfoBackend {
 
 export interface IActor {
   nameRu: string;
-  staffId: number;
+  staffId?: number;
+  posterUrl?: string;
+  profession?: string;
 }
 
 export interface PostersInfoInterface {

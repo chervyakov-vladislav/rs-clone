@@ -11,6 +11,9 @@ export default class DOMElement {
     if (options.id) {
       el.id = options.id;
     }
+    if (options.dataset) {
+      el.dataset.actor = options.dataset;
+    }
     if (options.content) {
       el.textContent = options.content;
     }

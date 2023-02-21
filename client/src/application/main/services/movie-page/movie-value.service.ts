@@ -47,6 +47,19 @@ class MovieValue {
     return staff.join(', ');
   }
 
+  public getActor(data: IStaff[], prof: string) {
+    const staff = data
+      .filter((item) => item.professionKey === prof)
+      .map((item) => {
+        return {
+          nameRu: item.nameRu,
+          staffId: item.staffId,
+        };
+      });
+    if (staff.length === 0) return '';
+    return staff;
+  }
+
   public getTime(data: IFilmData) {
     const totalMinutes = +data.filmLength;
     const hours = Math.floor(totalMinutes / 60);
