@@ -336,6 +336,43 @@ export default class MovieInfo {
       content: 'В главных ролях',
     });
 
+    let tooltipElem: HTMLElement | null;
+    this.movieCast.node.addEventListener('mouseover', (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      if (target && target.tagName === 'P') {
+        tooltipElem = document.createElement('div');
+        tooltipElem.className = 'tooltip';
+        const actorPhoto = document.createElement('div');
+        actorPhoto.className = 'tooltip__actor-photo';
+        tooltipElem.append(actorPhoto);
+        const actorName = document.createElement('div');
+        actorName.className = 'tooltip__actor-name';
+        actorName.innerHTML = `${target.outerText}`;
+        tooltipElem.append(actorName);
+        document.body.append(tooltipElem);
+
+        const coords = target.getBoundingClientRect();
+
+        let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) - 100;
+        if (left < 0) left = 0;
+
+        let top = coords.top - tooltipElem.offsetHeight - 5;
+        if (top < 0) {
+          top = coords.top + target.offsetHeight + 5;
+        }
+
+        tooltipElem.style.left = `${left}px`;
+        tooltipElem.style.top = `${top}px`;
+      }
+    });
+    this.movieCast.node.addEventListener('mouseout', () => {
+      if (tooltipElem) {
+        tooltipElem.remove();
+        tooltipElem = null;
+      }
+    });
+
     this.renderActor();
   }
 
