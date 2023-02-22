@@ -98,10 +98,14 @@ export default class UsersRouter {
       if (!login) {
         throw new Error('Invalid token');
       }
+      const existedUser = await this.usersService.findByLogin(login);
+      if (!existedUser) {
+        throw new Error('Такой пользователь не зарегистрирован');
+      }
       res.send({
         errors: null,
         token: '',
-        data: { login, result: true, msg: 'authorization success' },
+        data: existedUser,
       });
     } catch (err) {
       return res.status(401).json({
