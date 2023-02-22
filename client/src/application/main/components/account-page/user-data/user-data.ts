@@ -36,8 +36,6 @@ export default class UserData extends DOMElement {
 
   private userPassInput: InputElement;
 
-  private userOldPassInput: InputElement;
-
   private userSubmit: ButtonElement;
 
   private userValidationMassage: DOMElement;
@@ -141,17 +139,10 @@ export default class UserData extends DOMElement {
       value: this.data.userName,
     });
 
-    this.userOldPassInput = new InputElement(this.userForm.node, {
-      tagName: 'input',
-      classList: ['user-data__text-input'],
-      placeholder: 'Старый пароль',
-      type: 'password',
-    });
-
     this.userPassInput = new InputElement(this.userForm.node, {
       tagName: 'input',
       classList: ['user-data__text-input'],
-      placeholder: 'Новый пароль',
+      placeholder: 'Пароль',
       type: 'password',
     });
 
@@ -206,7 +197,7 @@ export default class UserData extends DOMElement {
       {
         login: this.data.userLogin,
         name: this.userNameInput.inputNode.value,
-        password: this.userOldPassInput.inputNode.value,
+        password: this.userPassInput.inputNode.value,
         role: '',
       },
       this.avatar instanceof File ? this.avatar : undefined
