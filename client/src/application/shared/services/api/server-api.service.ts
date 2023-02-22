@@ -23,9 +23,9 @@ class ApiService {
     console.log(data);
     const formData = new FormData();
     formData.append('login', data.login);
-    formData.append('name', data.name);
-    formData.append('password', data.password);
-    formData.append('role', data.role);
+    if (data.name) formData.append('name', data.name);
+    if (data.password) formData.append('password', data.password);
+    if (data.role) formData.append('role', data.role);
     if (avatar) {
       const avatarFileName = avatar ? `${data.login}_av.${avatar.name.split('.').pop()}` : '';
       formData.append('avatar', `http://localhost:3000/${avatarFileName}`);

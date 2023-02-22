@@ -131,21 +131,14 @@ export default class UsersRouter {
       if (!existedUser) {
         throw new Error('Такой пользователь не зарегистрирован');
       }
-    } catch (err) {
-      return res.status(400).json({
-        errors: { msg: (err as Error).message, param: 'login' },
-      });
-    }
-
-    try {
       const password = await this.usersService.hashPassword(req.body.password);
 
       const user = await this.usersService.update({
         login: req.body.login,
-        name: req.body.name,
-        password,
-        role: req.body.role,
-        avatar: req.body.avatar,
+        name: req.body.name || existedUser.name,
+        password: req.body.password ? password : '',
+        role: req.body.role || existedUser.role,
+        avatar: req.body.avatar || existedUser.avatar,
       });
 
       const token = this.usersService.createToken(user.login);
@@ -156,8 +149,9 @@ export default class UsersRouter {
         data: user,
       });
     } catch (err) {
+      console.log(err);
       return res.status(400).json({
-        errors: { msg: (err as Error).message, param: 'login' },
+        errors: { msg: (err as Error).message, param: 'update' },
       });
     }
   }
