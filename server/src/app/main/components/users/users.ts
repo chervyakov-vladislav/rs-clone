@@ -2,8 +2,10 @@ import express from 'express';
 import { Request, Response } from 'express-serve-static-core';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
+import { UploadedFile } from 'express-fileupload';
 import UsersService from '../../services/users.service';
 import { loginValidation, registerValidation } from '../../../shared/model/validations';
+import fileService from '../../services/file.service';
 
 export default class UsersRouter {
   public router = express.Router();
@@ -14,6 +16,7 @@ export default class UsersRouter {
     this.usersService = new UsersService();
     this.router.post('/login', loginValidation, (req: Request, res: Response) => this.login(req, res));
     this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req, res));
+    this.router.patch('/update', (req: Request, res: Response) => this.update(req, res));
     this.router.get('/me', (req, res) => this.authorization(req, res));
   }
 
@@ -72,7 +75,9 @@ export default class UsersRouter {
 
       const user = await this.usersService.create({
         login: req.body.login,
+        name: req.body.login,
         password,
+        role: 'user',
       });
 
       const token = this.usersService.createToken(user.login);
@@ -93,14 +98,60 @@ export default class UsersRouter {
       if (!login) {
         throw new Error('Invalid token');
       }
+      const existedUser = await this.usersService.findByLogin(login);
+      if (!existedUser) {
+        throw new Error('Такой пользователь не зарегистрирован');
+      }
       res.send({
         errors: null,
         token: '',
-        data: { login, result: true, msg: 'authorization success' },
+        data: existedUser,
       });
     } catch (err) {
-      return res.status(400).json({
+      return res.status(401).json({
         errors: { msg: (err as Error).message },
+      });
+    }
+  }
+
+  private async update(req: Request, res: Response) {
+    console.log(req.body);
+    if (req.files) fileService.saveFile(req.files.file as UploadedFile);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array()[0] });
+    }
+
+    try {
+      const login = this.usersService.verifyToken(req.headers.authorization || '');
+      if (!login) {
+        throw new Error('Invalid token');
+      }
+      const existedUser = await this.usersService.findByLogin(login);
+      if (!existedUser) {
+        throw new Error('Такой пользователь не зарегистрирован');
+      }
+      const password = await this.usersService.hashPassword(req.body.password);
+
+      const user = await this.usersService.update({
+        login: req.body.login,
+        name: req.body.name || existedUser.name,
+        password: req.body.password ? password : '',
+        role: req.body.role || existedUser.role,
+        avatar: req.body.avatar || existedUser.avatar,
+      });
+
+      const token = this.usersService.createToken(user.login);
+
+      res.header('auth-token', token).json({
+        errors: null,
+        token,
+        data: user,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({
+        errors: { msg: (err as Error).message, param: 'update' },
       });
     }
   }

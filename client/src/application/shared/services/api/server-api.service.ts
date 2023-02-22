@@ -19,6 +19,22 @@ class ApiService {
     return apiLoader.delete(`user/delete/${id}`);
   }
 
+  public updateUser(data: TSObject, avatar?: File): Promise<ResponseAuth> {
+    console.log(data);
+    const formData = new FormData();
+    formData.append('login', data.login);
+    if (data.name) formData.append('name', data.name);
+    if (data.password) formData.append('password', data.password);
+    if (data.role) formData.append('role', data.role);
+    if (avatar) {
+      const avatarFileName = avatar ? `${data.login}_av.${avatar.name.split('.').pop()}` : '';
+      formData.append('avatar', `http://localhost:3000/${avatarFileName}`);
+      formData.append('file', avatar, avatarFileName);
+    }
+
+    return apiLoader.patchFormData('user/update', formData);
+  }
+
   public getPremiere(): Promise<PremiereInfoBackend> {
     return apiLoader.get('settings/premiere', {});
   }

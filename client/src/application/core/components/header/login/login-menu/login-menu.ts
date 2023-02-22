@@ -53,6 +53,7 @@ export default class LoginMenu extends DOMElement {
       storage.setToken('');
       window.location.hash = window.location.hash === '#account' ? '#' : window.location.hash;
       state.allData.account.userData.logged = false;
+      state.allData.account.userData.userLogin = '';
       state.allData.account.userData.userName = '';
       state.allData.account.userData.userToken = '';
       state.resetLikedFimls();
