@@ -105,7 +105,6 @@ export default class UserData extends DOMElement {
       reader.addEventListener('load', async (event: Event) => {
         const { result } = event.target as FileReader;
         state.setUserData({ userPhoto: result as string });
-        loginObserver.setButtonText();
         (this.userPhoto.node as HTMLImageElement).src = `${result}`;
       });
       if (this.avatar.size < 5242880) {
@@ -155,7 +154,7 @@ export default class UserData extends DOMElement {
       tagName: 'button',
       classList: ['user-data__submit'],
       type: 'submit',
-      content: 'Изменить',
+      content: 'Сохранить изменения',
     });
 
     userValidation.registerElems({
@@ -202,5 +201,6 @@ export default class UserData extends DOMElement {
       },
       this.avatar instanceof File ? this.avatar : undefined
     );
+    loginObserver.setButtonText();
   }
 }
