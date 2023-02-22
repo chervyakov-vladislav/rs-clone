@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-// import uuid from 'uuid';
 import path from 'path';
 import fileUpload from 'express-fileupload';
 

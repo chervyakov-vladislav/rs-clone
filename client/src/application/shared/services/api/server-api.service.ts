@@ -26,7 +26,12 @@ class ApiService {
     formData.append('name', data.name);
     formData.append('password', data.password);
     formData.append('role', data.role);
-    if (avatar) formData.append('file', avatar, avatar.name);
+    if (avatar) {
+      const avatarFileName = avatar ? `${data.login}_av.${avatar.name.split('.').pop()}` : '';
+      formData.append('avatar', `http://localhost:3000/${avatarFileName}`);
+      formData.append('file', avatar, avatarFileName);
+    }
+
     return apiLoader.patchFormData('user/update', formData);
   }
 
