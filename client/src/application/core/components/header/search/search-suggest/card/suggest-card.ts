@@ -4,6 +4,7 @@ import ImageElement from '../../../../../../shared/components/base-elements/imag
 import LinkElement from '../../../../../../shared/components/base-elements/link-element';
 import { ITopFilm } from '../../../../../../shared/models/response-data';
 import headerObserver from '../../../../../services/menu/header-observer.service';
+import storage from '../../../../../../shared/components/local-storage';
 
 export default class SuggestCard extends DOMElement {
   private cardLink: LinkElement;
@@ -36,6 +37,8 @@ export default class SuggestCard extends DOMElement {
     this.cardLink.node.addEventListener('click', () => {
       headerObserver.closeAll();
       headerObserver.clearInput();
+      const movie = { filmId: data.filmId, posterUrlPreview: data.posterUrlPreview, nameRu: data.nameRu };
+      storage.putMovies(movie);
     });
 
     this.linkContainer = new DOMElement(this.cardLink.node, {
