@@ -15,6 +15,10 @@ class ApiService {
     return apiLoader.get('user/me', {});
   }
 
+  public getAllUsers(): Promise<ResponseAuth> {
+    return apiLoader.get('user/all', {});
+  }
+
   public deleteUser(id: string) {
     return apiLoader.delete(`user/delete/${id}`);
   }
