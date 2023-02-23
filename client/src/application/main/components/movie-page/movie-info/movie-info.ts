@@ -342,7 +342,7 @@ export default class MovieInfo {
       e.preventDefault();
       const target = e.target as HTMLElement;
       if (tooltipElem) tooltipElem.remove();
-      apiHelpers.debounce( async () => {
+      apiHelpers.debounce(async () => {
         let actor;
         tooltipElem = document.createElement('div');
         tooltipElem.className = 'tooltip';
@@ -373,25 +373,24 @@ export default class MovieInfo {
             actorPhotoPic.src = actor.posterUrl as string;
             actorPhoto.append(actorPhotoPic);
             tooltipElem.append(actorPhoto);
-  
+
             const actorData = document.createElement('div');
             actorData.className = 'tooltip__actor-data';
-  
+
             const actorName = document.createElement('div');
             actorName.className = 'tooltip__actor-name';
             actorName.innerHTML = `${actor.nameRu}`;
             actorData.append(actorName);
-  
+
             const actorProf = document.createElement('div');
             actorProf.className = 'tooltip__actor-prof';
             actorProf.innerHTML = `${actor.profession}`;
             actorData.append(actorProf);
-  
+
             tooltipElem.append(actorData);
           }
         }
       }, 500)();
-      
     });
     document.body.addEventListener('mouseout', () => {
       if (tooltipElem) {
