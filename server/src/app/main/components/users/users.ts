@@ -136,16 +136,14 @@ export default class UsersRouter {
       const user = await this.usersService.update({
         login: req.body.login,
         name: req.body.name || existedUser.name,
-        password: req.body.password ? password : '',
+        password: password || existedUser.password,
         role: req.body.role || existedUser.role,
         avatar: req.body.avatar || existedUser.avatar,
       });
 
-      const token = this.usersService.createToken(user.login);
-
-      res.header('auth-token', token).json({
+      res.send({
         errors: null,
-        token,
+        token: '',
         data: user,
       });
     } catch (err) {
