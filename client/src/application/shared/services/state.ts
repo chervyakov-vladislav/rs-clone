@@ -50,6 +50,7 @@ class State {
       account: {
         userData: {
           logged: false,
+          userLogin: '',
           userName: '',
           userToken: 'undefined',
           userPhoto,
@@ -327,6 +328,9 @@ class State {
 
   public setUserData(options: UserDataParams) {
     this.allData.account.userData.logged = options.logged ? options.logged : this.allData.account.userData.logged;
+    this.allData.account.userData.userLogin = options.userLogin
+      ? options.userLogin
+      : this.allData.account.userData.userLogin;
     this.allData.account.userData.userName = options.userName
       ? options.userName
       : this.allData.account.userData.userName;
@@ -356,6 +360,11 @@ class State {
 
   public setLikedFilmsList(arr: number[]) {
     this.allData.account.likedFilms = arr;
+  }
+
+  public resetLikedFimls() {
+    this.allData.account.likedFilms = [];
+    this.allData.account.watchLaterFilms = [];
   }
 }
 

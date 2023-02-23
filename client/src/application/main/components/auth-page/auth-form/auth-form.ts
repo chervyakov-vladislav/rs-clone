@@ -128,8 +128,10 @@ export default class AuthForm extends FormElement {
       storage.setToken(resp.token);
       state.setUserData({
         logged: true,
-        userName: resp.data.login,
+        userLogin: resp.data.login,
+        userName: resp.data.name,
         userToken: resp.token,
+        userPhoto: resp.data.avatar,
       });
       await authService.authorization();
       window.location.hash = state.getPreviousPageInfo().previousPageHash as string;

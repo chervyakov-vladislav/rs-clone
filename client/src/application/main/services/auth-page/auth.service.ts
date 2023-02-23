@@ -14,11 +14,14 @@ class AuthService {
     if (!auth.errors) {
       state.setUserData({
         logged: true,
-        userName: auth.data.login,
+        userLogin: auth.data.login,
+        userName: auth.data.name,
+        userPhoto: auth.data.avatar,
       });
     } else {
       state.setUserData({
         logged: false,
+        userLogin: '',
         userName: '',
       });
     }

@@ -1,8 +1,34 @@
 .liked-films {
+  &__container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
   &__title {
     font-size: 16px;
     color: #000;
     font-family: "Kinopoisk-bold" , Arial, sans-serif;
-    margin-bottom: 20px;
+  }
+
+  &__remove {
+    align-items: center;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    height: 30px;
+    justify-content: center;
+    line-height: 30px;
+    transition: .3s;
+    width: 145px;
+    color: #000;
+    background-color: #f7f7f7;
+
+    &:hover {
+      background-color: #fff;
+    }
   }
 }
