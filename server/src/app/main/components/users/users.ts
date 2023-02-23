@@ -18,6 +18,7 @@ export default class UsersRouter {
     this.router.post('/register', registerValidation, (req: Request, res: Response) => this.register(req, res));
     this.router.patch('/update', (req: Request, res: Response) => this.update(req, res));
     this.router.get('/me', (req, res) => this.authorization(req, res));
+    this.router.get('/all', (req, res) => this.getAllUsers(req, res));
   }
 
   private async login(req: Request, res: Response) {
@@ -150,6 +151,31 @@ export default class UsersRouter {
       console.log(err);
       return res.status(400).json({
         errors: { msg: (err as Error).message, param: 'update' },
+      });
+    }
+  }
+
+  public async getAllUsers(req: Request, res: Response) {
+    try {
+      const login = this.usersService.verifyToken(req.headers.authorization || '');
+      if (!login) {
+        throw new Error('Invalid token');
+      }
+      const existedUser = await this.usersService.findByLogin(login);
+      if (!(existedUser && existedUser.role === 'admin')) {
+        throw new Error('Только администратор имеет доступ к этой информации');
+      }
+      const data = await this.usersService.getAllUsers();
+      console.log(data);
+      res.send({
+        errors: null,
+        token: '',
+        data,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({
+        errors: { msg: (err as Error).message, param: 'getAllUsers' },
       });
     }
   }
