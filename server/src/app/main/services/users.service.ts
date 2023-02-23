@@ -20,6 +20,13 @@ export default class UsersService {
     return data;
   }
 
+  public async getAllUsers() {
+    const collection = await dbClient.getUsersCollection();
+    const data = await collection.find().toArray();
+    console.log('Get all users from DB');
+    return data;
+  }
+
   public async create(user: User) {
     const collection = await dbClient.getUsersCollection();
     const createdAt = new Date();
