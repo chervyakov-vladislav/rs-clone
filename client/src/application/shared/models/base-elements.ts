@@ -3,6 +3,7 @@ export interface Options {
   classList?: string[];
   content?: string;
   id?: string;
+  dataset?: string;
 }
 
 export interface LinkOptions extends Options {

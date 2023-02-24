@@ -137,7 +137,7 @@ export default class ReviewForm {
     this.keywordText = new InputElement(this.formBody.node, {
       tagName: 'textarea',
       classList: ['review-form__textarea'],
-      placeholder: 'Техт',
+      placeholder: 'Текст',
     });
 
     this.textMessage = new DOMElement(this.formBody.node, {
@@ -155,12 +155,9 @@ export default class ReviewForm {
     this.reviewForm.node.addEventListener('submit', (e: Event) => {
       e.preventDefault();
       formServices.addReviewToState(reviews);
-    });
-
-    this.formButton.node.addEventListener('click', () => {
       const reviewForm = document.querySelector('.users-reviews__title');
-      if (reviewForm) {
-        reviewForm.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      if (reviewForm && formServices.formCheck) {
+        reviewForm.scrollIntoView({ block: 'start', behavior: 'smooth' });
       }
     });
   }

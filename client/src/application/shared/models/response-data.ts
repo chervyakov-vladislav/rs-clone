@@ -146,6 +146,13 @@ export interface PremiereInfoBackend {
   link: string;
 }
 
+export interface IActor {
+  nameRu: string;
+  staffId?: number;
+  posterUrl?: string;
+  profession?: string;
+}
+
 export interface PostersInfoInterface {
   total: number;
   totalPages: number;

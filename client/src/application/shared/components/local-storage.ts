@@ -20,17 +20,10 @@ class LocalStorage {
   }
 
   public putMovies(ObjectMovie: ObjectLocalStorage) {
-    const movies = this.getMovies();
-    let isMovie = false;
-    movies.forEach((element: ObjectLocalStorage) => {
-      if (element.filmId === ObjectMovie.filmId) {
-        isMovie = true;
-      }
-    });
-    if (!isMovie) {
-      movies.push(ObjectMovie);
-      window.localStorage.setItem(this.storageKeys.moviesKey, JSON.stringify(movies));
-    }
+    let movies = this.getMovies();
+    movies = movies.filter((element: ObjectLocalStorage) => element.filmId !== ObjectMovie.filmId);
+    movies.unshift(ObjectMovie);
+    window.localStorage.setItem(this.storageKeys.moviesKey, JSON.stringify(movies));
   }
 
   public getToken(): string {

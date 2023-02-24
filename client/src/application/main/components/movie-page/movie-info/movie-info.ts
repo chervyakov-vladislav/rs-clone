@@ -8,6 +8,7 @@ import movieValue from '../../../services/movie-page/movie-value.service';
 import state from '../../../../shared/services/state';
 import likeFilmsService from '../../../services/account-page/liked-films/liked-films.service';
 import apiKinopoisk from '../../../../shared/services/api/api-kinopoisk';
+import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 
 export default class MovieInfo {
   private staff: IStaff[];
@@ -336,20 +337,85 @@ export default class MovieInfo {
       content: 'В главных ролях',
     });
 
+    let tooltipElem: HTMLElement | null;
+    this.movieCast.node.addEventListener('mouseover', (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      if (tooltipElem) tooltipElem.remove();
+      apiHelpers.debounce(async () => {
+        let actor;
+        tooltipElem = document.createElement('div');
+        tooltipElem.className = 'tooltip';
+
+        const coords = target.getBoundingClientRect();
+
+        let left = coords.left + (target.offsetWidth - tooltipElem.offsetWidth) - 500;
+        if (left < 0) left = 0;
+
+        let top = coords.top - tooltipElem.offsetHeight - 5;
+        if (top < 0) {
+          top = coords.top + target.offsetHeight + 5;
+        }
+
+        tooltipElem.style.left = `${left}px`;
+        tooltipElem.style.top = `${top}px`;
+
+        document.body.append(tooltipElem);
+
+        if (target && target.tagName === 'P') {
+          if (target.dataset.actor) {
+            actor = await apiKinopoisk.getActorData(+target.dataset.actor);
+          }
+          if (actor) {
+            const actorPhoto = document.createElement('div');
+            actorPhoto.className = 'tooltip__actor-photo';
+            const actorPhotoPic = document.createElement('img');
+            actorPhotoPic.src = actor.posterUrl as string;
+            actorPhoto.append(actorPhotoPic);
+            tooltipElem.append(actorPhoto);
+
+            const actorData = document.createElement('div');
+            actorData.className = 'tooltip__actor-data';
+
+            const actorName = document.createElement('div');
+            actorName.className = 'tooltip__actor-name';
+            actorName.innerHTML = `${actor.nameRu}`;
+            actorData.append(actorName);
+
+            const actorProf = document.createElement('div');
+            actorProf.className = 'tooltip__actor-prof';
+            actorProf.innerHTML = `${actor.profession}`;
+            actorData.append(actorProf);
+
+            tooltipElem.append(actorData);
+          }
+        }
+      }, 500)();
+    });
+    document.body.addEventListener('mouseout', () => {
+      if (tooltipElem) {
+        tooltipElem.remove();
+        tooltipElem = null;
+      }
+    });
+
     this.renderActor();
   }
 
   private renderActor() {
     const container = this.movieCast.node;
-    const actors = movieValue.getStaff(this.staff, 'ACTOR').split(', ').slice(0, 13);
+    const actors = movieValue.getActor(this.staff, 'ACTOR').slice(0, 13);
 
-    actors.forEach((actor) => {
-      return new DOMElement(container, {
-        tagName: 'p',
-        classList: ['movie-info__actor'],
-        content: `${actor}`,
+    if (Array.isArray(actors)) {
+      actors.forEach((actor) => {
+        return new DOMElement(container, {
+          tagName: 'p',
+          classList: ['movie-info__actor'],
+          content: `${actor.nameRu}`,
+          dataset: `${actor.staffId}`,
+        });
       });
-    });
+    }
   }
 
   private async checkWallapapers(id: number) {
