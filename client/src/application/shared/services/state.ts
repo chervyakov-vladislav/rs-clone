@@ -1,5 +1,5 @@
 import userPhoto from '../../../assets/images/login.png';
-import { ExtendedSearchResultInterface, ITopData, KeyWordSearchInterface } from '../models/response-data';
+import { ExtendedSearchResultInterface, IReview, ITopData, KeyWordSearchInterface } from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface, UserDataParams } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 import apiService from './api/server-api.service';
@@ -93,6 +93,9 @@ class State {
   public async loadMovieReviews(movieID: number) {
     // грузим рецензии фильма
     const reviews = await apiKinopoisk.getFilmReviews(movieID);
+    const ourReviews = await apiService.getFilmReviews(movieID);
+    reviews.items.splice(0, 0, ...(ourReviews.data as unknown as IReview[]));
+    console.log(reviews.items);
     this.allData.movieReviews = reviews;
   }
 

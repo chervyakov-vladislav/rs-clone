@@ -47,19 +47,19 @@ class ApiService {
     return apiLoader.post('settings/premiere', data);
   }
 
-  public createPost(data: TSObject, filmID: string): Promise<TSObject> {
+  public createReview(data: TSObject, filmID: string): Promise<TSObject> {
     return apiLoader.post(`posts/new/${filmID}`, data);
   }
 
-  public getAllPosts(): Promise<TSObject> {
+  public getAllReviews(): Promise<TSObject> {
     return apiLoader.get('posts/all', {});
   }
 
-  public getPostByFilm(filmID: string): Promise<TSObject> {
+  public getFilmReviews(filmID: number): Promise<TSObject> {
     return apiLoader.get(`posts/byfilm/${filmID}`, {});
   }
 
-  public getPostByLogin(login: string): Promise<TSObject> {
+  public getUserReviews(login: string): Promise<TSObject> {
     return apiLoader.get(`posts/bylogin/${login}`, {});
   }
 }
