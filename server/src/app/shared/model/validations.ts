@@ -25,6 +25,6 @@ export const premiereValidation = [
 export const postValidation = [
   body('author', 'Необходимо указать автора').exists(),
   body('title', 'Длина заголовка должна быть не менее 3 символов').isLength({ min: 3 }),
-  body('title', 'Заголовок должен состоять из букв').isAlpha(),
+  body('title', 'Заголовок должен состоять из букв').isAlpha('ru-RU' || 'en-US', { ignore: ' ' }),
   body('description', 'Слишком короткий текст рецензии').isLength({ min: 20 }),
 ];
