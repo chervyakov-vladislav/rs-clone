@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import UsersRouter from './main/components/users/users';
 import SettingsRouter from './main/components/settings/settings';
+import PostsRouter from './main/components/posts/posts';
 
 export default class Server {
   private PORT: string;
@@ -13,6 +14,8 @@ export default class Server {
   private usersRouter: UsersRouter;
 
   private settingsRouter: SettingsRouter;
+
+  private postsRouter: PostsRouter;
 
   constructor() {
     this.PORT = process.env.PORT || '3000';
@@ -25,11 +28,13 @@ export default class Server {
     this.app.use(e.static('src/files')); // C:\Users\Plastic Existence\Documents\VS Code\RS-Clone\server\src\files
     this.usersRouter = new UsersRouter();
     this.settingsRouter = new SettingsRouter();
+    this.postsRouter = new PostsRouter();
   }
 
   public start() {
     this.app.use('/api/user', this.usersRouter.router);
     this.app.use('/api/settings', this.settingsRouter.router);
+    this.app.use('/api/posts', this.postsRouter.router);
     this.app.listen(this.PORT);
     console.info(`Server is started on port ${this.PORT}`);
   }
