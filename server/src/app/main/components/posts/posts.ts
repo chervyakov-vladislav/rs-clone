@@ -13,7 +13,7 @@ export default class PostsRouter {
     this.postsService = new PostsService();
     this.router.post('/new/:filmID', postValidation, (req: Request, res: Response) => this.newPost(req, res));
     this.router.get('/all', (req: Request, res: Response) => this.getAllPosts(req, res));
-    this.router.get('/byfilm/:filmID', (req: Request, res: Response) => this.getAllPosts(req, res));
+    this.router.get('/byfilm/:filmID', (req: Request, res: Response) => this.getPostsbyFilmID(req, res));
     this.router.get('/bylogin/:login', (req: Request, res: Response) => this.getAllPosts(req, res));
   }
 
@@ -58,6 +58,22 @@ export default class PostsRouter {
   private async getPostsbyFilmID(req: Request, res: Response) {
     try {
       const data = await this.postsService.getPostsbyFilmID(req.params.filmID);
+      console.log(data);
+      res.send({
+        errors: null,
+        data,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({
+        errors: { msg: (err as Error).message, param: 'getPostsByFilm' },
+      });
+    }
+  }
+
+  private async getPostsbyLogin(req: Request, res: Response) {
+    try {
+      const data = await this.postsService.getPostsbyLogin(req.params.login);
       console.log(data);
       res.send({
         errors: null,
