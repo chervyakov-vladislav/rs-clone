@@ -1,4 +1,5 @@
-import { IReviewsData } from '../../../../../shared/models/response-data';
+import { TSObject } from '../../../../../shared/models/base-types';
+import apiService from '../../../../../shared/services/api/server-api.service';
 import state from '../../../../../shared/services/state';
 import UserReview from '../user-review';
 
@@ -13,10 +14,7 @@ class ReviewFormServices {
 
   public formCheck: boolean;
 
-  private reviews: IReviewsData;
-
   constructor() {
-    this.reviews = state.allData.movieReviews;
     this.countTotal = document.createElement('div');
     this.countPositive = document.createElement('div');
     this.countNegative = document.createElement('div');
@@ -40,17 +38,11 @@ class ReviewFormServices {
     this.countNeutral = element;
   }
 
-  public addReviewToState() {
-    const inputSelect = document.querySelector('.review-form__select-input') as HTMLInputElement;
-    const select = this.checkTypeReview(inputSelect.value);
+  public addReview(type: string, title: string, text: string) {
+    const select = this.checkTypeReview(type);
     const messageType = document.querySelector('.review-form__message.type') as HTMLElement;
-
-    const inputTitle = document.querySelector('input[type="text"]') as HTMLInputElement;
     const messageTitle = document.querySelector('.review-form__message.title') as HTMLElement;
-
-    const inputText = document.querySelector('.review-form__textarea') as HTMLInputElement;
     const messageText = document.querySelector('.review-form__message.text') as HTMLElement;
-
     const currentDate = new Date().toISOString().slice(0, 19);
 
     if (select === undefined) {
@@ -59,13 +51,13 @@ class ReviewFormServices {
     }
     messageType.innerHTML = '';
 
-    if (inputTitle.value === '') {
+    if (title === '') {
       messageTitle.innerText = 'Введите заголовок!';
       return;
     }
     messageTitle.innerHTML = '';
 
-    if (inputText.value === '') {
+    if (text === '') {
       messageText.innerText = 'Введите текст!';
       return;
     }
@@ -77,32 +69,31 @@ class ReviewFormServices {
     const item = {
       author: userData.userName,
       date: currentDate,
-      description: inputText.value,
+      description: text,
       kinopoiskId: 4370148,
       negativeRating: 0,
-      positiveRating: 1,
-      title: inputTitle.value,
+      positiveRating: 0,
+      title,
       type: select,
     };
-
-    this.reviews.items.unshift(item);
-
-    this.reviews.total += 1;
-    this.countTotal.innerHTML = `${this.reviews.total}`;
+    this.addReviewToServer(item as unknown as TSObject);
+    const reviews = state.allData.movieReviews;
+    reviews.items.unshift(item);
+    reviews.total += 1;
+    this.countTotal.innerHTML = `${reviews.total}`;
 
     if (select === 'POSITIVE') {
-      this.reviews.totalPositiveReviews += 1;
-      this.countPositive.innerHTML = `${this.reviews.totalPositiveReviews}`;
+      reviews.totalPositiveReviews += 1;
+      this.countPositive.innerHTML = `${reviews.totalPositiveReviews}`;
     }
     if (select === 'NEGATIVE') {
-      this.reviews.totalNegativeReviews += 1;
-      this.countNegative.innerHTML = `${this.reviews.totalNegativeReviews}`;
+      reviews.totalNegativeReviews += 1;
+      this.countNegative.innerHTML = `${reviews.totalNegativeReviews}`;
     }
     if (select === 'NEUTRAL') {
-      this.reviews.totalNeutralReviews += 1;
-      this.countNeutral.innerHTML = `${this.reviews.totalNeutralReviews}`;
+      reviews.totalNeutralReviews += 1;
+      this.countNeutral.innerHTML = `${reviews.totalNeutralReviews}`;
     }
-
     const reviewsReviews = document.querySelector('.users-reviews__reviews') as HTMLElement;
     const reviewContainer = document.createElement('div');
     reviewsReviews.prepend(new UserReview(reviewContainer, item).node);
@@ -119,6 +110,12 @@ class ReviewFormServices {
       return 'NEUTRAL';
     }
     return undefined;
+  }
+
+  private async addReviewToServer(item: TSObject) {
+    const { hash } = window.location;
+    const movieID = hash.split('/')[1];
+    await apiService.createReview(item, movieID);
   }
 }
 

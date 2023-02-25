@@ -35,7 +35,7 @@ export default class ReviewForm {
 
   private optionTypeNeutral: DOMElement;
 
-  private keywordText: DOMElement;
+  private keywordText: InputElement;
 
   private typeMessage: DOMElement;
 
@@ -149,7 +149,10 @@ export default class ReviewForm {
     });
     this.reviewForm.node.addEventListener('submit', (e: Event) => {
       e.preventDefault();
-      formServices.addReviewToState();
+      const type = this.keywordSelect.inputNode.value;
+      const title = this.keywordInput.inputNode.value;
+      const text = this.keywordText.inputNode.value;
+      formServices.addReview(type, title, text);
       const reviewForm = document.querySelector('.users-reviews__title');
       if (reviewForm && formServices.formCheck) {
         reviewForm.scrollIntoView({ block: 'start', behavior: 'smooth' });
