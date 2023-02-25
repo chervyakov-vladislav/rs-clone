@@ -5,7 +5,6 @@ import CloseAuth from './close/close';
 import ButtonElement from '../../../shared/components/base-elements/button-element';
 import ImageElement from '../../../shared/components/base-elements/image-element';
 import SVG from '../../../shared/components/svg-icons';
-// import authValidation from '../../services/auth-page/validation/validation';
 import AuthForm from './auth-form/auth-form';
 
 export default class Auth extends DOMElement {

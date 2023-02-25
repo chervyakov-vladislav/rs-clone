@@ -56,6 +56,8 @@ export default class LoginMenu extends DOMElement {
       state.allData.account.userData.userLogin = '';
       state.allData.account.userData.userName = '';
       state.allData.account.userData.userToken = '';
+      state.allData.account.userList = [];
+      state.allData.account.userData.userRole = 'guest';
       state.resetLikedFimls();
       loginObserver.setButtonText();
       this.node.remove();

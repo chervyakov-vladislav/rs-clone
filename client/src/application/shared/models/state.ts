@@ -40,6 +40,7 @@ export interface StateInterface {
     userData: User;
     watchLaterFilms: number[];
     likedFilms: number[];
+    userList: UserListUser[];
   };
   wallpapers: {
     wallpapers: PostersInfoInterface | null;
@@ -62,6 +63,7 @@ export interface User {
   userName: string;
   userToken: string;
   userPhoto: File | string;
+  userRole: Role;
 }
 
 export interface UserDataParams {
@@ -70,4 +72,15 @@ export interface UserDataParams {
   userName?: string;
   userToken?: string;
   userPhoto?: File | string;
+  userRole?: Role;
 }
+
+export type Role = 'banned' | 'guest' | 'user' | 'admin';
+
+export type UserListUser = {
+  login: string;
+  name: string;
+  password: string;
+  role: Role;
+  avatar?: string;
+};
