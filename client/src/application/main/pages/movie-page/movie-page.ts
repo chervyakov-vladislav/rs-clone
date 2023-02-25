@@ -70,7 +70,7 @@ export default class MoviePage extends Page {
       this.movieInfo = new MovieInfo(this.movieInfoContainer.node, data, staff, reviews);
       this.movieDescription = new MovieDescription(this.movieDescriptionContainer.node, data);
       this.movieRating = new MovieRating(this.movieRatingContainer.node, data);
-      this.movieContent = new MovieContent(this.movieContentContainer.node, data, reviews);
+      this.movieContent = new MovieContent(this.movieContentContainer.node);
     }
   }
 }

@@ -37,6 +37,10 @@ class DBClient {
   public async getSettingsCollection() {
     return (await this.connect()).collection('settings');
   }
+
+  public async getPostsCollection() {
+    return (await this.connect()).collection('posts');
+  }
 }
 
 const dbClient = new DBClient();

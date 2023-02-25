@@ -14,7 +14,7 @@ export interface StateInterface {
   premiere: IFilmData | null;
   movieData: IFilmData | null;
   movieStaff: IStaff[];
-  movieReviews: IReviewsData | null;
+  movieReviews: IReviewsData;
   films: ITopFilm[];
   best: ITopFilm[];
   player: Record<string, string>;

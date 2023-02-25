@@ -1,5 +1,5 @@
 import userPhoto from '../../../assets/images/login.png';
-import { ExtendedSearchResultInterface, ITopData, KeyWordSearchInterface } from '../models/response-data';
+import { ExtendedSearchResultInterface, IReview, ITopData, KeyWordSearchInterface } from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface, UserDataParams } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 import apiService from './api/server-api.service';
@@ -12,7 +12,14 @@ class State {
       premiere: null,
       movieData: null,
       movieStaff: [],
-      movieReviews: null,
+      movieReviews: {
+        items: [],
+        total: 0,
+        totalNegativeReviews: 0,
+        totalNeutralReviews: 0,
+        totalPages: 0,
+        totalPositiveReviews: 0,
+      },
       player: {
         status: 'paused',
       },
@@ -93,6 +100,13 @@ class State {
   public async loadMovieReviews(movieID: number) {
     // грузим рецензии фильма
     const reviews = await apiKinopoisk.getFilmReviews(movieID);
+    const ourReviews = await apiService.getFilmReviews(movieID);
+    const ourReviewItems = (ourReviews.data as unknown as IReview[]).reverse();
+    reviews.total += ourReviewItems.length;
+    reviews.totalNegativeReviews += ourReviewItems.filter((item) => item.type === 'NEGATIVE').length;
+    reviews.totalPositiveReviews += ourReviewItems.filter((item) => item.type === 'POSITIVE').length;
+    reviews.totalNeutralReviews += ourReviewItems.filter((item) => item.type === 'NEUTRAL').length;
+    reviews.items.splice(0, 0, ...ourReviewItems);
     this.allData.movieReviews = reviews;
   }
 

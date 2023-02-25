@@ -46,6 +46,22 @@ class ApiService {
   public setPremiere(data: TSObject): Promise<TSObject> {
     return apiLoader.post('settings/premiere', data);
   }
+
+  public createReview(data: TSObject, filmID: string): Promise<TSObject> {
+    return apiLoader.post(`posts/new/${filmID}`, data);
+  }
+
+  public getAllReviews(): Promise<TSObject> {
+    return apiLoader.get('posts/all', {});
+  }
+
+  public getFilmReviews(filmID: number): Promise<TSObject> {
+    return apiLoader.get(`posts/byfilm/${filmID}`, {});
+  }
+
+  public getUserReviews(login: string): Promise<TSObject> {
+    return apiLoader.get(`posts/bylogin/${login}`, {});
+  }
 }
 
 const apiService = new ApiService();
