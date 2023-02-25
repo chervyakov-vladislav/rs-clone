@@ -101,8 +101,12 @@ class State {
     // грузим рецензии фильма
     const reviews = await apiKinopoisk.getFilmReviews(movieID);
     const ourReviews = await apiService.getFilmReviews(movieID);
-    reviews.items.splice(0, 0, ...(ourReviews.data as unknown as IReview[]));
-    console.log(reviews.items);
+    const ourReviewItems = (ourReviews.data as unknown as IReview[]).reverse();
+    reviews.total += ourReviewItems.length;
+    reviews.totalNegativeReviews += ourReviewItems.filter((item) => item.type === 'NEGATIVE').length;
+    reviews.totalPositiveReviews += ourReviewItems.filter((item) => item.type === 'POSITIVE').length;
+    reviews.totalNeutralReviews += ourReviewItems.filter((item) => item.type === 'NEUTRAL').length;
+    reviews.items.splice(0, 0, ...ourReviewItems);
     this.allData.movieReviews = reviews;
   }
 
