@@ -13,7 +13,10 @@ class ReviewFormServices {
 
   public formCheck: boolean;
 
+  private reviews: IReviewsData;
+
   constructor() {
+    this.reviews = state.allData.movieReviews;
     this.countTotal = document.createElement('div');
     this.countPositive = document.createElement('div');
     this.countNegative = document.createElement('div');
@@ -37,7 +40,7 @@ class ReviewFormServices {
     this.countNeutral = element;
   }
 
-  public addReviewToState(reviews: IReviewsData) {
+  public addReviewToState() {
     const inputSelect = document.querySelector('.review-form__select-input') as HTMLInputElement;
     const select = this.checkTypeReview(inputSelect.value);
     const messageType = document.querySelector('.review-form__message.type') as HTMLElement;
@@ -82,22 +85,22 @@ class ReviewFormServices {
       type: select,
     };
 
-    reviews.items.unshift(item);
+    this.reviews.items.unshift(item);
 
-    (state.allData.movieReviews as IReviewsData).total += 1;
-    this.countTotal.innerHTML = `${reviews.total}`;
+    this.reviews.total += 1;
+    this.countTotal.innerHTML = `${this.reviews.total}`;
 
     if (select === 'POSITIVE') {
-      (state.allData.movieReviews as IReviewsData).totalPositiveReviews += 1;
-      this.countPositive.innerHTML = `${reviews.totalPositiveReviews}`;
+      this.reviews.totalPositiveReviews += 1;
+      this.countPositive.innerHTML = `${this.reviews.totalPositiveReviews}`;
     }
     if (select === 'NEGATIVE') {
-      (state.allData.movieReviews as IReviewsData).totalNegativeReviews += 1;
-      this.countNegative.innerHTML = `${reviews.totalNegativeReviews}`;
+      this.reviews.totalNegativeReviews += 1;
+      this.countNegative.innerHTML = `${this.reviews.totalNegativeReviews}`;
     }
     if (select === 'NEUTRAL') {
-      (state.allData.movieReviews as IReviewsData).totalNeutralReviews += 1;
-      this.countNeutral.innerHTML = `${reviews.totalNeutralReviews}`;
+      this.reviews.totalNeutralReviews += 1;
+      this.countNeutral.innerHTML = `${this.reviews.totalNeutralReviews}`;
     }
 
     const reviewsReviews = document.querySelector('.users-reviews__reviews') as HTMLElement;

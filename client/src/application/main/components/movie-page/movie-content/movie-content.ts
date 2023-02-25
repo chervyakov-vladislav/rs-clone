@@ -1,7 +1,7 @@
 import './movie-content.scss';
 import ButtonElement from '../../../../shared/components/base-elements/button-element';
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
-import { IFilmData, IReview, IReviewsData } from '../../../../shared/models/response-data';
+import { IReview, IReviewsData } from '../../../../shared/models/response-data';
 import UserReview from './user-review';
 import ReviewForm from './review-form/review-form';
 import LinkElement from '../../../../shared/components/base-elements/link-element';
@@ -57,9 +57,9 @@ export default class MovieContent {
 
   private reviews: IReviewsData;
 
-  constructor(container: HTMLElement, item: IFilmData, reviews: IReviewsData) {
-    this.reviews = reviews;
-    this.reviewsData = reviews.items.slice(0, 6);
+  constructor(container: HTMLElement) {
+    this.reviews = state.allData.movieReviews;
+    this.reviewsData = this.reviews.items.slice(0, 6);
 
     this.contentColumn1 = new DOMElement(container, {
       tagName: 'h3',
@@ -124,7 +124,7 @@ export default class MovieContent {
     this.usersReviewsTotalP = new DOMElement(this.usersReviewsTotal.node, {
       tagName: 'p',
       classList: ['users-reviews__amount'],
-      content: `${reviews.total}`,
+      content: `${this.reviews.total}`,
     });
     formServices.registredCountTotal(this.usersReviewsTotalP.node);
 
@@ -141,7 +141,7 @@ export default class MovieContent {
     this.usersReviewsPositiveP = new DOMElement(this.usersReviewsPositive.node, {
       tagName: 'p',
       classList: ['users-reviews__amount', 'positive'],
-      content: `${reviews.totalPositiveReviews}`,
+      content: `${this.reviews.totalPositiveReviews}`,
     });
     formServices.registredCountPositive(this.usersReviewsPositiveP.node);
 
@@ -158,7 +158,7 @@ export default class MovieContent {
     this.usersReviewsNeutralP = new DOMElement(this.usersReviewsNeutral.node, {
       tagName: 'p',
       classList: ['users-reviews__amount', 'neutral'],
-      content: `${reviews.totalNeutralReviews}`,
+      content: `${this.reviews.totalNeutralReviews}`,
     });
     formServices.registredCountNeutral(this.usersReviewsNeutralP.node);
 
@@ -175,7 +175,7 @@ export default class MovieContent {
     this.usersReviewsNegativeP = new DOMElement(this.usersReviewsNegative.node, {
       tagName: 'p',
       classList: ['users-reviews__amount', 'negative'],
-      content: `${reviews.totalNegativeReviews}`,
+      content: `${this.reviews.totalNegativeReviews}`,
     });
     formServices.registredCountNegative(this.usersReviewsNegativeP.node);
 
@@ -192,7 +192,7 @@ export default class MovieContent {
       this.userReview = new UserReview(this.usersReviewsReviews.node, review);
     });
     if (state.allData.account.userData.logged) {
-      this.reviewForm = new ReviewForm(this.usersReviewsReviews.node, this.reviews);
+      this.reviewForm = new ReviewForm(this.usersReviewsReviews.node);
     }
   };
 }

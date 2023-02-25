@@ -3,7 +3,6 @@ import DOMElement from '../../../../../shared/components/base-elements/dom-eleme
 import FormElement from '../../../../../shared/components/base-elements/form-element';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 import InputElement from '../../../../../shared/components/base-elements/input-element';
-import { IReviewsData } from '../../../../../shared/models/response-data';
 import formServices from './review-form.services';
 import loginObserver from '../../../../../core/services/menu/login-observer.service';
 
@@ -44,11 +43,7 @@ export default class ReviewForm {
 
   private textMessage: DOMElement;
 
-  private reviews: IReviewsData;
-
-  constructor(container: HTMLElement, reviews: IReviewsData) {
-    this.reviews = reviews;
-
+  constructor(container: HTMLElement) {
     this.reviewForm = new FormElement(container, {
       tagName: 'form',
       classList: ['review-form'],
@@ -154,7 +149,7 @@ export default class ReviewForm {
     });
     this.reviewForm.node.addEventListener('submit', (e: Event) => {
       e.preventDefault();
-      formServices.addReviewToState(reviews);
+      formServices.addReviewToState();
       const reviewForm = document.querySelector('.users-reviews__title');
       if (reviewForm && formServices.formCheck) {
         reviewForm.scrollIntoView({ block: 'start', behavior: 'smooth' });

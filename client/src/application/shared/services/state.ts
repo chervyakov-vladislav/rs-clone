@@ -12,7 +12,14 @@ class State {
       premiere: null,
       movieData: null,
       movieStaff: [],
-      movieReviews: null,
+      movieReviews: {
+        items: [],
+        total: 0,
+        totalNegativeReviews: 0,
+        totalNeutralReviews: 0,
+        totalPages: 0,
+        totalPositiveReviews: 0,
+      },
       player: {
         status: 'paused',
       },
