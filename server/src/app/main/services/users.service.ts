@@ -1,16 +1,12 @@
-import { MongoClient } from 'mongodb';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { User } from '../../shared/model/types';
 import dbClient from '../../shared/db-client';
 
 export default class UsersService {
-  private mongoClient: MongoClient;
-
   private users: User[];
 
   constructor() {
-    this.mongoClient = new MongoClient('mongodb+srv://rs-clone');
     this.users = [];
   }
 
