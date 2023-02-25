@@ -2,6 +2,7 @@ import e, { Express } from 'express';
 import fileUpload from 'express-fileupload';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import UsersRouter from './main/components/users/users';
 import SettingsRouter from './main/components/settings/settings';
 import PostsRouter from './main/components/posts/posts';
@@ -18,6 +19,7 @@ export default class Server {
   private postsRouter: PostsRouter;
 
   constructor() {
+    dotenv.config();
     this.PORT = process.env.PORT || '3000';
     this.app = e();
     this.app.use(cors());

@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import dotenv from 'dotenv';
 
 class DBClient {
   private DBName: string;
@@ -10,9 +11,10 @@ class DBClient {
   private client: MongoClient;
 
   constructor() {
+    dotenv.config();
     this.DBName = 'rsclone';
-    this.DBUser = process.env.DB_USER || 'rs-clone';
-    this.DBPassword = process.env.DB_PASSWORD || 'Z94ai17';
+    this.DBUser = process.env.DB_USER || 'secret';
+    this.DBPassword = process.env.DB_PASSWORD || 'secret';
     const uri = `mongodb+srv://${this.DBUser}:${this.DBPassword}@cluster0.2uewvbb.mongodb.net/?retryWrites=true&w=majority`;
     this.client = new MongoClient(uri);
   }
