@@ -31,7 +31,7 @@ export default class AdminList extends DOMElement {
     setAdminService.registerAdminList(this.list.node);
 
     data.forEach((userData, index) => {
-      if (userData.role === 'admin') {
+      if (userData.role === 'admin' && userData.login !== 'admin') {
         this.cardContainer = new DOMElement(this.list.node, {
           tagName: 'li',
           classList: this.checkStyle(userData),

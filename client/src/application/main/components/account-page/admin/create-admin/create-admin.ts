@@ -4,6 +4,7 @@ import UserList from './users-list/users-list';
 import { UsersList } from '../../../../../shared/models/state';
 import AdminList from './admin-list/admin-list';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
+import setAdminService from '../../../../services/account-page/set-admin/set-admin.service';
 
 export default class CreateAdmins extends DOMElement {
   private title: DOMElement;
@@ -40,6 +41,13 @@ export default class CreateAdmins extends DOMElement {
       tagName: 'button',
       classList: ['create-admin__button'],
       content: 'Назначить администраторов',
+    });
+    this.changeButton.node.addEventListener('click', () => {
+      setAdminService.submitNewRolesToServer();
+      this.changeButton.node.innerText = 'Новые роли назначены';
+      setTimeout(() => {
+        this.changeButton.node.innerText = 'Назначить администраторов';
+      }, 5_000);
     });
   }
 }

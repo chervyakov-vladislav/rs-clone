@@ -1,5 +1,7 @@
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import { UsersList } from '../../../../shared/models/state';
+import apiService from '../../../../shared/services/api/server-api.service';
+import state from '../../../../shared/services/state';
 import UserCard from '../../../components/account-page/admin/user-card/user-card';
 
 class SetAdmin {
@@ -21,6 +23,7 @@ class SetAdmin {
 
   public appendUser(data: UsersList) {
     // добавить в стейте в масссив новых users, убрать из массива новых admins
+    this.appendUserToState(data);
     this.cardContainer = new DOMElement(this.userList, {
       tagName: 'li',
       classList: ['user-list__card'],
@@ -32,6 +35,7 @@ class SetAdmin {
 
   public appendAdmin(data: UsersList) {
     // добавить в стейте в масссив новых admins, убрать из массива новых users
+    this.appendAdminToState(data);
     this.cardContainer = new DOMElement(this.adminList, {
       tagName: 'li',
       classList: ['user-list__card', 'user-list__card--admin'],
@@ -51,6 +55,37 @@ class SetAdmin {
     const namesArr = Array.from(this.userList.querySelectorAll('.user-card__login')).map((item) => item.innerHTML);
     const removeIndex = namesArr.indexOf(data.login);
     this.userList.childNodes[removeIndex].remove();
+  }
+
+  private appendUserToState(data: UsersList) {
+    const currrntRoles = state.getNewRoles();
+    state.setNewUsersOne(data);
+    const newAdminArr = currrntRoles.admins.filter((el) => el !== data);
+    state.setNewAdminsArr(newAdminArr);
+  }
+
+  private appendAdminToState(data: UsersList) {
+    const currrntRoles = state.getNewRoles();
+    state.setNewAdminOne(data);
+    const newUsersArr = currrntRoles.users.filter((el) => el !== data);
+    state.setNewUsersArr(newUsersArr);
+  }
+
+  public submitNewRolesToServer() {
+    const currrntRoles = state.getNewRoles();
+    currrntRoles.admins.forEach((user) => {
+      const params = user;
+      params.role = 'admin';
+      params.avatar = user.avatar;
+      apiService.updateUser(params);
+    });
+
+    currrntRoles.users.forEach((user) => {
+      const params = user;
+      params.role = 'user';
+      params.avatar = user.avatar;
+      apiService.updateUser(params);
+    });
   }
 }
 
