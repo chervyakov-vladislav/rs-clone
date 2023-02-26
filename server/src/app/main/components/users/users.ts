@@ -126,9 +126,16 @@ export default class UsersRouter {
     try {
       const login = this.usersService.verifyToken(req.headers.authorization || '');
       if (!login) {
-        throw new Error('Invalid token');
+        throw new Error('Пользователь неавторизован');
       }
-      const existedUser = await this.usersService.findByLogin(login);
+      let existedUser = await this.usersService.findByLogin(login);
+      if (!existedUser) {
+        throw new Error('Такой пользователь не зарегистрирован');
+      }
+      if (req.body.login !== existedUser.login && existedUser.role !== 'admin') {
+        throw new Error('Только администратор может менять параметры других пользователей');
+      }
+      existedUser = await this.usersService.findByLogin(req.body.login);
       if (!existedUser) {
         throw new Error('Такой пользователь не зарегистрирован');
       }
