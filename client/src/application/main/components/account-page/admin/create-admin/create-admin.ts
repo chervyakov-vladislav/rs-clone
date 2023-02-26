@@ -1,6 +1,9 @@
 import './create-admin.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
 import UserList from './users-list/users-list';
+import { UsersList } from '../../../../../shared/models/state';
+import AdminList from './admin-list/admin-list';
+import ButtonElement from '../../../../../shared/components/base-elements/button-element';
 
 export default class CreateAdmins extends DOMElement {
   private title: DOMElement;
@@ -9,7 +12,11 @@ export default class CreateAdmins extends DOMElement {
 
   private users: UserList;
 
-  constructor(parentNode: HTMLElement) {
+  private admins: AdminList;
+
+  private changeButton: ButtonElement;
+
+  constructor(parentNode: HTMLElement, data: UsersList[]) {
     super(parentNode, {
       tagName: 'div',
       classList: ['create-admin'],
@@ -26,6 +33,13 @@ export default class CreateAdmins extends DOMElement {
       classList: ['create-admin__table'],
     });
 
-    this.users = new UserList(this.table.node);
+    this.users = new UserList(this.table.node, data);
+    this.admins = new AdminList(this.table.node, data);
+
+    this.changeButton = new ButtonElement(this.node, {
+      tagName: 'button',
+      classList: ['create-admin__button'],
+      content: 'Назначить администраторов',
+    });
   }
 }

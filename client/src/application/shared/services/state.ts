@@ -1,6 +1,6 @@
 import userPhoto from '../../../assets/images/login.png';
 import { ExtendedSearchResultInterface, IReview, ITopData, KeyWordSearchInterface } from '../models/response-data';
-import { PreviousPageInfoInterface, StateInterface, UserDataParams, UserListUser } from '../models/state';
+import { PreviousPageInfoInterface, StateInterface, UserDataParams, UsersList } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 import apiService from './api/server-api.service';
 
@@ -395,7 +395,7 @@ class State {
 
   public async setUserList() {
     const res = await apiService.getAllUsers();
-    this.allData.account.userList = res.data as unknown as UserListUser[];
+    this.allData.account.userList = res.data as unknown as UsersList[];
   }
 
   public getUserList() {

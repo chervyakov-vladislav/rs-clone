@@ -1,9 +1,8 @@
-import './user-list.scss';
 import DOMElement from '../../../../../../shared/components/base-elements/dom-element';
 import { UsersList } from '../../../../../../shared/models/state';
 import UserCard from '../../user-card/user-card';
 
-export default class UserList extends DOMElement {
+export default class AdminList extends DOMElement {
   private title: DOMElement;
 
   private list: DOMElement;
@@ -20,7 +19,7 @@ export default class UserList extends DOMElement {
 
     this.title = new DOMElement(this.node, {
       classList: ['user-list__title'],
-      content: 'Пользователи',
+      content: 'Администраторы',
       tagName: 'h3',
     });
 
@@ -32,7 +31,7 @@ export default class UserList extends DOMElement {
     let card = this.cardContainer;
 
     data.forEach((userData, index) => {
-      if (userData.role !== 'admin') {
+      if (userData.role === 'admin') {
         card = new DOMElement(this.list.node, {
           tagName: 'li',
           classList: this.checkStyle(userData),
@@ -47,12 +46,12 @@ export default class UserList extends DOMElement {
   }
 
   private checkStyle(data: UsersList) {
-    if (data.role === 'banned') {
-      return ['user-list__card', 'user-list__card--banned'];
-    }
-
     if (data.role === 'admin') {
       return ['user-list__card', 'user-list__card--admin'];
+    }
+
+    if (data.role === 'banned') {
+      return ['user-list__card', 'user-list__card--banned'];
     }
 
     return ['user-list__card'];
