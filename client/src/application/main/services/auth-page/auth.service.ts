@@ -28,6 +28,9 @@ class AuthService {
       });
     }
     loginObserver.setButtonText();
+    if (state.allData.account.userData.userRole === 'admin') {
+      await state.setUserList();
+    }
   }
 }
 
