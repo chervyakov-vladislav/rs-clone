@@ -2,6 +2,8 @@ import loginObserver from '../../../core/services/menu/login-observer.service';
 import { Role } from '../../../shared/models/state';
 import apiService from '../../../shared/services/api/server-api.service';
 import state from '../../../shared/services/state';
+import avatar from '../../../../assets/images/login.png';
+
 
 class AuthService {
   private token: string;
@@ -25,6 +27,7 @@ class AuthService {
         logged: false,
         userLogin: '',
         userName: '',
+        userPhoto: avatar,
       });
     }
     loginObserver.setButtonText();
