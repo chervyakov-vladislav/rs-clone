@@ -27,7 +27,7 @@ export default class Server {
     this.app.use(bodyParser.raw());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
-    this.app.use(e.static('src/files')); // C:\Users\Plastic Existence\Documents\VS Code\RS-Clone\server\src\files
+    this.app.use(e.static('src/files'));
     this.usersRouter = new UsersRouter();
     this.settingsRouter = new SettingsRouter();
     this.postsRouter = new PostsRouter();

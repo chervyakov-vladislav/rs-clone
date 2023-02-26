@@ -159,7 +159,7 @@ export default class UsersRouter {
     try {
       const login = this.usersService.verifyToken(req.headers.authorization || '');
       if (!login) {
-        throw new Error('Invalid token');
+        throw new Error('Только администратор имеет доступ к запрашиваемой информации, пожалуйста авторизуйтесь.');
       }
       const existedUser = await this.usersService.findByLogin(login);
       if (!(existedUser && existedUser.role === 'admin')) {
