@@ -74,16 +74,18 @@ class SetAdmin {
   public submitNewRolesToServer() {
     const currrntRoles = state.getNewRoles();
     currrntRoles.admins.forEach((user) => {
-      const params = user;
-      params.role = 'admin';
-      params.avatar = user.avatar;
+      const params = {
+        role: 'admin',
+        login: user.login,
+      };
       apiService.updateUser(params);
     });
 
     currrntRoles.users.forEach((user) => {
-      const params = user;
-      params.role = 'user';
-      params.avatar = user.avatar;
+      const params = {
+        role: 'user',
+        login: user.login,
+      };
       apiService.updateUser(params);
     });
   }

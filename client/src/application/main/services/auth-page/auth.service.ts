@@ -4,7 +4,6 @@ import apiService from '../../../shared/services/api/server-api.service';
 import state from '../../../shared/services/state';
 import avatar from '../../../../assets/images/login.png';
 
-
 class AuthService {
   private token: string;
 
