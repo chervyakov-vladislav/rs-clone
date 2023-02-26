@@ -40,7 +40,10 @@ export default class UserList extends DOMElement {
           classList: this.checkStyle(userData),
         });
         this.createUserCard(this.cardContainer.node, data[index]);
-        this.cardContainer.node.addEventListener('click', setAdminService.appendAdmin.bind(setAdminService, data[index]));
+        this.cardContainer.node.addEventListener(
+          'click',
+          setAdminService.appendAdmin.bind(setAdminService, data[index])
+        );
       }
     });
   }

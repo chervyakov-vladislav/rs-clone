@@ -66,6 +66,11 @@ class State {
         watchLaterFilms: [],
         likedFilms: [],
         userList: [],
+        newRoles: {
+          admins: [],
+          banned: [],
+          users: [],
+        },
       },
       wallpapers: {
         fanArt: null,
@@ -400,6 +405,34 @@ class State {
 
   public getUserList() {
     return this.allData.account.userList;
+  }
+
+  public getNewRoles() {
+    return this.allData.account.newRoles;
+  }
+
+  public setNewAdminOne(data: UsersList) {
+    this.allData.account.newRoles.admins = [...new Set(this.allData.account.newRoles.admins.concat(data))];
+  }
+
+  public setNewUsersOne(data: UsersList) {
+    this.allData.account.newRoles.users = [...new Set(this.allData.account.newRoles.users.concat(data))];
+  }
+
+  public setNewBannedOne(data: UsersList) {
+    this.allData.account.newRoles.banned = [...new Set(this.allData.account.newRoles.banned.concat(data))];
+  }
+
+  public setNewAdminsArr(data: UsersList[]) {
+    this.allData.account.newRoles.admins = data;
+  }
+
+  public setNewUsersArr(data: UsersList[]) {
+    this.allData.account.newRoles.users = data;
+  }
+
+  public setNewBannedArr(data: UsersList[]) {
+    this.allData.account.newRoles.banned = data;
   }
 }
 

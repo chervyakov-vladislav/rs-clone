@@ -41,6 +41,11 @@ export interface StateInterface {
     watchLaterFilms: number[];
     likedFilms: number[];
     userList: UsersList[];
+    newRoles: {
+      users: UsersList[];
+      admins: UsersList[];
+      banned: UsersList[];
+    }
   };
   wallpapers: {
     wallpapers: PostersInfoInterface | null;
