@@ -1,5 +1,6 @@
 import DOMElement from '../../../../../../shared/components/base-elements/dom-element';
 import { UsersList } from '../../../../../../shared/models/state';
+import setAdminService from '../../../../../services/account-page/set-admin/set-admin.service';
 import UserCard from '../../user-card/user-card';
 
 export default class AdminList extends DOMElement {
@@ -27,16 +28,16 @@ export default class AdminList extends DOMElement {
       tagName: 'ul',
       classList: ['user-list__list'],
     });
-
-    let card = this.cardContainer;
+    setAdminService.registerAdminList(this.list.node);
 
     data.forEach((userData, index) => {
       if (userData.role === 'admin') {
-        card = new DOMElement(this.list.node, {
+        this.cardContainer = new DOMElement(this.list.node, {
           tagName: 'li',
           classList: this.checkStyle(userData),
         });
-        this.createUserCard(card.node, data[index]);
+        this.createUserCard(this.cardContainer.node, data[index]);
+        this.cardContainer.node.addEventListener('click', setAdminService.appendUser.bind(setAdminService, data[index]));
       }
     });
   }

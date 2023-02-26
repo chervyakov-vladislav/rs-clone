@@ -2,13 +2,14 @@ import './user-list.scss';
 import DOMElement from '../../../../../../shared/components/base-elements/dom-element';
 import { UsersList } from '../../../../../../shared/models/state';
 import UserCard from '../../user-card/user-card';
+import setAdminService from '../../../../../services/account-page/set-admin/set-admin.service';
 
 export default class UserList extends DOMElement {
   private title: DOMElement;
 
   private list: DOMElement;
 
-  private cardContainer: DOMElement | null = null;
+  private cardContainer: DOMElement;
 
   private userCard: UserCard | null = null;
 
@@ -17,6 +18,8 @@ export default class UserList extends DOMElement {
       tagName: 'div',
       classList: ['user-list'],
     });
+
+    this.cardContainer = new DOMElement(null, { tagName: 'div' });
 
     this.title = new DOMElement(this.node, {
       classList: ['user-list__title'],
@@ -28,16 +31,16 @@ export default class UserList extends DOMElement {
       tagName: 'ul',
       classList: ['user-list__list'],
     });
-
-    let card = this.cardContainer;
+    setAdminService.registerUserList(this.list.node);
 
     data.forEach((userData, index) => {
       if (userData.role !== 'admin') {
-        card = new DOMElement(this.list.node, {
+        this.cardContainer = new DOMElement(this.list.node, {
           tagName: 'li',
           classList: this.checkStyle(userData),
         });
-        this.createUserCard(card.node, data[index]);
+        this.createUserCard(this.cardContainer.node, data[index]);
+        this.cardContainer.node.addEventListener('click', setAdminService.appendAdmin.bind(setAdminService, data[index]));
       }
     });
   }
