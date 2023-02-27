@@ -5,6 +5,8 @@ import ButtonElement from '../../../../../shared/components/base-elements/button
 import InputElement from '../../../../../shared/components/base-elements/input-element';
 import formServices from './review-form.services';
 import loginObserver from '../../../../../core/services/menu/login-observer.service';
+import state from '../../../../../shared/services/state';
+import ImageElement from '../../../../../shared/components/base-elements/image-element';
 
 export default class ReviewForm {
   private reviewForm: DOMElement;
@@ -14,6 +16,10 @@ export default class ReviewForm {
   private formWrapper: DOMElement;
 
   private formHeader: DOMElement;
+
+  private formHeaderImg: ImageElement;
+
+  private formHeaderName: DOMElement;
 
   private formBody: DOMElement;
 
@@ -64,6 +70,18 @@ export default class ReviewForm {
     this.formHeader = new DOMElement(this.formWrapper.node, {
       tagName: 'div',
       classList: ['review-form__header'],
+    });
+
+    this.formHeaderImg = new ImageElement(this.formHeader.node, {
+      tagName: 'img',
+      src: `${state.allData.account.userData.userPhoto}`,
+      classList: ['review-form__header_img'],
+    });
+
+    this.formHeaderName = new DOMElement(this.formHeader.node, {
+      tagName: 'span',
+      classList: ['review-form__header_name'],
+      content: `${state.allData.account.userData.userName}`,
     });
 
     this.formBody = new DOMElement(this.formWrapper.node, {
