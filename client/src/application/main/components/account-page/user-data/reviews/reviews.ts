@@ -1,6 +1,7 @@
 import './reviews.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
+import apiService from '../../../../../shared/services/api/server-api.service';
 // import state from '../../../../../shared/services/state';
 
 export default class ReviewsFilms extends DOMElement {
@@ -37,5 +38,12 @@ export default class ReviewsFilms extends DOMElement {
       // что-то очистить в стейте
       this.node.remove();
     });
+
+    this.loadRev();
+  }
+
+  private async loadRev() {
+    const data = await apiService.getUserReviews('pavel');
+    console.log(data);
   }
 }

@@ -66,6 +66,7 @@ class State {
         watchLaterFilms: [],
         likedFilms: [],
         userList: [],
+        userReviews: [],
         newRoles: {
           admins: [],
           banned: [],
