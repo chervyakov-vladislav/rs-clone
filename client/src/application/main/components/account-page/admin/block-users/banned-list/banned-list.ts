@@ -2,6 +2,7 @@ import '../../create-admin/users-list/user-list.scss';
 import DOMElement from '../../../../../../shared/components/base-elements/dom-element';
 import { UsersList } from '../../../../../../shared/models/state';
 import UserCard from '../../user-card/user-card';
+import setBannedService from '../../../../../services/account-page/set-banned/set-banned.service';
 
 export default class BannedList extends DOMElement {
   private title: DOMElement;
@@ -30,6 +31,7 @@ export default class BannedList extends DOMElement {
       tagName: 'ul',
       classList: ['user-list__list'],
     });
+    setBannedService.registerBannedList(this.list.node);
 
     data.forEach((userData, index) => {
       if (userData.role === 'banned') {
@@ -38,10 +40,10 @@ export default class BannedList extends DOMElement {
           classList: this.checkStyle(userData),
         });
         this.createUserCard(this.cardContainer.node, data[index]);
-        // this.cardContainer.node.addEventListener(
-        //   'click',
-        //   setAdminService.appendAdmin.bind(setAdminService, data[index])
-        // );
+        this.cardContainer.node.addEventListener(
+          'click',
+          setBannedService.appendUser.bind(setBannedService, data[index])
+        );
       }
     });
   }

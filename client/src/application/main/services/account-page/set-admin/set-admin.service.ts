@@ -22,7 +22,6 @@ class SetAdmin {
   }
 
   public appendUser(data: UsersList) {
-    // добавить в стейте в масссив новых users, убрать из массива новых admins
     this.appendUserToState(data);
     this.cardContainer = new DOMElement(this.userList, {
       tagName: 'li',
@@ -34,7 +33,6 @@ class SetAdmin {
   }
 
   public appendAdmin(data: UsersList) {
-    // добавить в стейте в масссив новых admins, убрать из массива новых users
     this.appendAdminToState(data);
     this.cardContainer = new DOMElement(this.adminList, {
       tagName: 'li',
