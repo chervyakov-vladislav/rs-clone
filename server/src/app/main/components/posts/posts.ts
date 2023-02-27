@@ -54,7 +54,8 @@ export default class PostsRouter {
     try {
       const login = this.usersService.verifyToken(req.headers.authorization || '');
       if (!login) throw new Error('Пользователь неавторизован');
-      if (login !== req.params.login) throw new Error('Можно удалять только свои рецензии');
+      if (login !== req.params.login && !(await this.usersService.isAdmin(login)))
+        throw new Error('Можно удалять только свои рецензии, либо это может сделать только админ');
       const result = await this.postsService.deletePostsbyLogin(req.params.login);
       res.send({
         errors: null,

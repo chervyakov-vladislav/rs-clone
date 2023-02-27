@@ -449,6 +449,17 @@ class State {
   public getUserReviewList() {
     return this.allData.account.userReviews;
   }
+
+  public resetReviews() {
+    this.allData.movieReviews = {
+      items: [],
+      total: 0,
+      totalNegativeReviews: 0,
+      totalNeutralReviews: 0,
+      totalPages: 0,
+      totalPositiveReviews: 0,
+    };
+  }
 }
 
 const state = new State();
