@@ -8,12 +8,13 @@ export default class PostsService {
     this.posts = [];
   }
 
-  public async create(post: Post, filmID: string) {
+  public async create(post: Post, filmID: string, login: string) {
     const collection = await dbClient.getPostsCollection();
     const createdAt = new Date();
 
     const { insertedId } = await collection.insertOne({
       filmID,
+      login,
       author: post.author,
       date: createdAt,
       description: post.description,
