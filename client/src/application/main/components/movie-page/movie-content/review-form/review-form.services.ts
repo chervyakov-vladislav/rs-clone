@@ -38,7 +38,7 @@ class ReviewFormServices {
     this.countNeutral = element;
   }
 
-  public addReview(type: string, title: string, text: string) {
+  public async addReview(type: string, title: string, text: string) {
     const select = this.checkTypeReview(type);
     const messageType = document.querySelector('.review-form__message.type') as HTMLElement;
     const messageTitle = document.querySelector('.review-form__message.title') as HTMLElement;
@@ -69,8 +69,6 @@ class ReviewFormServices {
     }
     messageText.innerHTML = '';
 
-    this.formCheck = true;
-
     const userData = state.getUserData();
     const item = {
       author: userData.userName,
@@ -82,7 +80,16 @@ class ReviewFormServices {
       title,
       type: select,
     };
-    this.addReviewToServer(item as unknown as TSObject);
+
+    const res = await this.addReviewToServer(item as unknown as TSObject);
+
+    if (res && res.errors) {
+      messageText.innerText = (res.errors as unknown as TSObject).msg;
+      return;
+    }
+
+    this.formCheck = true;
+
     const reviews = state.allData.movieReviews;
     reviews.items.unshift(item);
     reviews.total += 1;
@@ -121,7 +128,8 @@ class ReviewFormServices {
   private async addReviewToServer(item: TSObject) {
     const { hash } = window.location;
     const movieID = hash.split('/')[1];
-    await apiService.createReview(item, movieID);
+    const res = await apiService.createReview(item, movieID);
+    return res;
   }
 }
 
