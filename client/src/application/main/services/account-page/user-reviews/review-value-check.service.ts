@@ -11,7 +11,7 @@ class ReviewCheck {
     const newData = new Date(Date.parse(data.date));
     const year = newData.getFullYear();
     const mounth = newData.getMonth() + 1;
-    const date = newData.getDay();
+    const date = newData.getDate();
     const hour = newData.getHours();
     let mins: number | string = newData.getMinutes();
     if (mins < 10) {
