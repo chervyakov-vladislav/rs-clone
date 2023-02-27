@@ -125,10 +125,14 @@ export default class UserData extends DOMElement {
       this.updateUser();
     });
 
+    const status = state.getUserRole();
     this.loginInfo = new DOMElement(this.userForm.node, {
       tagName: 'div',
       classList: ['user-data__ligin-info'],
-      content: `Ваш логин для входа в аккаунт: ${this.data.userLogin}`,
+      content:
+        status === 'banned'
+          ? `Ваш логин для входа в аккаунт: ${this.data.userLogin} - Вы забанены`
+          : `Ваш логин для входа в аккаунт: ${this.data.userLogin}`,
     });
 
     this.userNameInput = new InputElement(this.userForm.node, {

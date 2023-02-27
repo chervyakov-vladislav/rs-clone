@@ -2,6 +2,9 @@ import apiLoader from './server-api.loader';
 import { ResponseAuth, TSObject } from '../../models/base-types';
 import { PremiereInfoBackend } from '../../models/response-data';
 
+const PATH = 'http://localhost:3000';
+// const PATH = 'http://146.255.188.74:3000';
+
 class ApiService {
   public loginUser(data: TSObject): Promise<ResponseAuth> {
     return apiLoader.post('user/login', data);
@@ -32,7 +35,7 @@ class ApiService {
     if (data.role) formData.append('role', data.role);
     if (avatar) {
       const avatarFileName = avatar ? `${data.login}_av.${avatar.name.split('.').pop()}` : '';
-      formData.append('avatar', `http://localhost:3000/${avatarFileName}`);
+      formData.append('avatar', `${PATH}/${avatarFileName}`);
       formData.append('file', avatar, avatarFileName);
     }
 
