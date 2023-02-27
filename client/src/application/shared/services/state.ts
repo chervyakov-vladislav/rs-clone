@@ -1,5 +1,11 @@
 import userPhoto from '../../../assets/images/login.png';
-import { ExtendedSearchResultInterface, IReview, ITopData, KeyWordSearchInterface } from '../models/response-data';
+import {
+  ExtendedSearchResultInterface,
+  IReview,
+  IReviewBackend,
+  ITopData,
+  KeyWordSearchInterface,
+} from '../models/response-data';
 import { PreviousPageInfoInterface, StateInterface, UserDataParams, UsersList } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 import apiService from './api/server-api.service';
@@ -66,6 +72,7 @@ class State {
         watchLaterFilms: [],
         likedFilms: [],
         userList: [],
+        userReviews: [],
         newRoles: {
           admins: [],
           banned: [],
@@ -433,6 +440,25 @@ class State {
 
   public setNewBannedArr(data: UsersList[]) {
     this.allData.account.newRoles.banned = data;
+  }
+
+  public setUserReviewList(data: IReviewBackend[]) {
+    this.allData.account.userReviews = data;
+  }
+
+  public getUserReviewList() {
+    return this.allData.account.userReviews;
+  }
+
+  public resetReviews() {
+    this.allData.movieReviews = {
+      items: [],
+      total: 0,
+      totalNegativeReviews: 0,
+      totalNeutralReviews: 0,
+      totalPages: 0,
+      totalPositiveReviews: 0,
+    };
   }
 }
 

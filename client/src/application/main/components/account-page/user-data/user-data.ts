@@ -191,7 +191,7 @@ export default class UserData extends DOMElement {
     }, 1_000);
 
     setTimeout(() => {
-      this.reviews = new ReviewsFilms(this.node);
+      this.loadReviews();
     }, 2_000);
   }
 
@@ -206,5 +206,12 @@ export default class UserData extends DOMElement {
       this.avatar instanceof File ? this.avatar : undefined
     );
     loginObserver.setButtonText();
+  }
+
+  private async loadReviews() {
+    const myLogin = state.getUserData().userLogin;
+    const data = await apiService.getUserReviews(`${myLogin}`);
+    state.setUserReviewList(data.data);
+    this.reviews = data.data.length > 0 ? new ReviewsFilms(this.node) : null;
   }
 }

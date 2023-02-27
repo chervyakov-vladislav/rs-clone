@@ -16,6 +16,12 @@ export default class UsersService {
     return data;
   }
 
+  public async isAdmin(login: string) {
+    const user = await this.findByLogin(login);
+    if (user && user.role === 'admin') return true;
+    return false;
+  }
+
   public async getAllUsers() {
     const collection = await dbClient.getUsersCollection();
     const data = await collection.find().toArray();

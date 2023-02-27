@@ -163,3 +163,21 @@ export interface PostersInfoArray {
   imageUrl: string;
   previewUrl: string;
 }
+
+// тут еще есть поле errors, оно не описано
+export interface IReviewsDataBackend {
+  data: IReviewBackend[];
+}
+
+export interface IReviewBackend {
+  author: string;
+  date: string;
+  description: string;
+  filmID: string;
+  kinopoiskId: number;
+  login: string;
+  negativeRating: number;
+  positiveRating: number;
+  title: string;
+  type: 'NEGATIVE' | 'NEUTRAL' | 'POSITIVE';
+}

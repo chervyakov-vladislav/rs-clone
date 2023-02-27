@@ -1,6 +1,6 @@
 import apiLoader from './server-api.loader';
 import { ResponseAuth, TSObject } from '../../models/base-types';
-import { PremiereInfoBackend } from '../../models/response-data';
+import { IReviewsDataBackend, PremiereInfoBackend } from '../../models/response-data';
 
 const PATH = 'http://localhost:3000';
 // const PATH = 'http://146.255.188.74:3000';
@@ -62,7 +62,7 @@ class ApiService {
     return apiLoader.get(`posts/byfilm/${filmID}`, {});
   }
 
-  public getUserReviews(login: string): Promise<TSObject> {
+  public getUserReviews(login: string): Promise<IReviewsDataBackend> {
     return apiLoader.get(`posts/bylogin/${login}`, {});
   }
 

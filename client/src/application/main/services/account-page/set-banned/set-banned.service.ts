@@ -71,13 +71,14 @@ class SetBanned {
 
   public submitNewRolesToServer() {
     const currrntRoles = state.getNewRoles();
-    currrntRoles.banned.forEach((user) => {
+    currrntRoles.banned.forEach(async (user) => {
       const params = {
         role: 'banned',
         login: user.login,
       };
-      apiService.updateUser(params);
-      // api запрос на удаление рецензий пользователя
+      await apiService.updateUser(params);
+      await apiService.deleteUserReviews(user.login);
+      state.resetReviews();
     });
 
     currrntRoles.users.forEach((user) => {
