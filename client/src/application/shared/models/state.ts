@@ -42,12 +42,12 @@ export interface StateInterface {
     watchLaterFilms: number[];
     likedFilms: number[];
     userList: UsersList[];
-    userReviews: IReviewBackend[],
+    userReviews: IReviewBackend[];
     newRoles: {
       users: UsersList[];
       admins: UsersList[];
       banned: UsersList[];
-    }
+    };
   };
   wallpapers: {
     wallpapers: PostersInfoInterface | null;

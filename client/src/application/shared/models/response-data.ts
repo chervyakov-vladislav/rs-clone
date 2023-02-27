@@ -174,10 +174,10 @@ export interface IReviewBackend {
   date: string;
   description: string;
   filmID: string;
-  kinopoiskId: number
+  kinopoiskId: number;
   login: string;
   negativeRating: number;
-  positiveRating: number
+  positiveRating: number;
   title: string;
-  type: string;
+  type: 'NEGATIVE' | 'NEUTRAL' | 'POSITIVE';
 }
