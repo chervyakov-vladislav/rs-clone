@@ -30,6 +30,6 @@ export default class AdminData extends DOMElement {
 
     this.premiereBlock = new ChangePreviere(this.node);
     this.createAdmin = new CreateAdmins(this.node, data);
-    this.banBlock = new BlockUsers(this.node);
+    this.banBlock = new BlockUsers(this.node, data);
   }
 }
