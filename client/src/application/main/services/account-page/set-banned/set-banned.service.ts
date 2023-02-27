@@ -1,5 +1,6 @@
 import DOMElement from '../../../../shared/components/base-elements/dom-element';
 import { UsersList } from '../../../../shared/models/state';
+import apiService from '../../../../shared/services/api/server-api.service';
 import state from '../../../../shared/services/state';
 import UserCard from '../../../components/account-page/admin/user-card/user-card';
 
@@ -47,9 +48,6 @@ class SetBanned {
     state.setNewBannedOne(data);
     const newUsersArr = currrntRoles.users.filter((el) => el !== data);
     state.setNewUsersArr(newUsersArr);
-    console.log(currrntRoles.banned);
-    console.log(currrntRoles.users);
-    console.log(currrntRoles.admins);
   }
 
   private appendUserToState(data: UsersList) {
@@ -57,9 +55,6 @@ class SetBanned {
     state.setNewUsersOne(data);
     const newBannedArr = currrntRoles.banned.filter((el) => el !== data);
     state.setNewBannedArr(newBannedArr);
-    console.log(currrntRoles.banned);
-    console.log(currrntRoles.users);
-    console.log(currrntRoles.admins);
   }
 
   private removeBanned(data: UsersList) {
@@ -72,6 +67,25 @@ class SetBanned {
     const namesArr = Array.from(this.userList.querySelectorAll('.user-card__login')).map((item) => item.innerHTML);
     const removeIndex = namesArr.indexOf(data.login);
     this.userList.childNodes[removeIndex].remove();
+  }
+
+  public submitNewRolesToServer() {
+    const currrntRoles = state.getNewRoles();
+    currrntRoles.banned.forEach((user) => {
+      const params = {
+        role: 'banned',
+        login: user.login,
+      };
+      apiService.updateUser(params);
+    });
+
+    currrntRoles.users.forEach((user) => {
+      const params = {
+        role: 'user',
+        login: user.login,
+      };
+      apiService.updateUser(params);
+    });
   }
 }
 

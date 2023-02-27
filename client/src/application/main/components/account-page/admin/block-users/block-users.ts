@@ -3,6 +3,7 @@ import UserList from './user-list/users-list';
 import { UsersList } from '../../../../../shared/models/state';
 import BannedList from './banned-list/banned-list';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
+import setBannedService from '../../../../services/account-page/set-banned/set-banned.service';
 
 export default class BlockUsers extends DOMElement {
   private title: DOMElement;
@@ -41,7 +42,7 @@ export default class BlockUsers extends DOMElement {
       content: 'Забанить/разбанить пользователей',
     });
     this.changeButton.node.addEventListener('click', () => {
-      // setAdminService.submitNewRolesToServer();
+      setBannedService.submitNewRolesToServer();
       this.changeButton.node.innerText = 'Новые роли назначены';
       setTimeout(() => {
         this.changeButton.node.innerText = 'Забанить/разбанить пользователей';
