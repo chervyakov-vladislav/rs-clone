@@ -45,7 +45,14 @@ export default class PostsService {
   public async getPostsbyLogin(login: string) {
     const collection = await dbClient.getPostsCollection();
     const data = await collection.find({ login }).toArray();
-    console.log('Get posts by film ID from DB');
+    console.log('Get posts by login from DB');
+    return data;
+  }
+
+  public async deletePostsbyLogin(login: string) {
+    const collection = await dbClient.getPostsCollection();
+    const data = await collection.deleteMany({ login });
+    console.log(data);
     return data;
   }
 }
