@@ -65,6 +65,10 @@ class ApiService {
   public getUserReviews(login: string): Promise<TSObject> {
     return apiLoader.get(`posts/bylogin/${login}`, {});
   }
+
+  public deleteUserReviews(login: string): Promise<TSObject> {
+    return apiLoader.delete(`posts/${login}`);
+  }
 }
 
 const apiService = new ApiService();

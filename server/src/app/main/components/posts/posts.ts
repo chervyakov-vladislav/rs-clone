@@ -16,6 +16,7 @@ export default class PostsRouter {
     this.postsService = new PostsService();
     this.usersService = new UsersService();
     this.router.post('/new/:filmID', postValidation, (req: Request, res: Response) => this.newPost(req, res));
+    this.router.delete('/:login', (req: Request, res: Response) => this.deletePosts(req, res));
     this.router.get('/all', (req: Request, res: Response) => this.getAllPosts(req, res));
     this.router.get('/byfilm/:filmID', (req: Request, res: Response) => this.getPostsbyFilmID(req, res));
     this.router.get('/bylogin/:login', (req: Request, res: Response) => this.getPostsbyLogin(req, res));
@@ -29,11 +30,8 @@ export default class PostsRouter {
     }
     try {
       const login = this.usersService.verifyToken(req.headers.authorization || '');
-      if (!login) {
-        throw new Error('Пользователь неавторизован');
-      }
+      if (!login) throw new Error('Пользователь неавторизован');
       const post = await this.postsService.create(req.body, req.params.filmID, login);
-      console.log(req.params.filmID, login, post);
       res.send({
         errors: null,
         token: '',
@@ -43,6 +41,30 @@ export default class PostsRouter {
       console.log(err);
       return res.status(400).json({
         errors: { msg: (err as Error).message, param: 'post create' },
+      });
+    }
+  }
+
+  private async deletePosts(req: Request, res: Response) {
+    console.log(`Удаление всех рецензий пользователя: ${req.params.login}`);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array()[0] });
+    }
+    try {
+      const login = this.usersService.verifyToken(req.headers.authorization || '');
+      if (!login) throw new Error('Пользователь неавторизован');
+      if (login !== req.params.login) throw new Error('Можно удалять только свои рецензии');
+      const result = await this.postsService.deletePostsbyLogin(req.params.login);
+      res.send({
+        errors: null,
+        token: '',
+        data: result,
+      });
+    } catch (err) {
+      console.log(err);
+      return res.status(400).json({
+        errors: { msg: (err as Error).message, param: 'delete user posts' },
       });
     }
   }
