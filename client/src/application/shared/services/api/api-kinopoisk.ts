@@ -13,7 +13,7 @@ import {
 class ApiServiceKinopoisk {
   // private apiKey = 'd11e71fe-35f6-4512-896d-d9880388525c';
   // private apiKey = '864bc0bb-a854-41d0-b411-dcc8376d4427';
-  private apiKey = '182fab2b-cb7a-4562-b6c0-fefa3b89590f';
+  // private apiKey = '182fab2b-cb7a-4562-b6c0-fefa3b89590f';
   // private apiKey = '1eed0f50-3f3b-49f1-b171-1547c878ae42';
   // private apiKey = '7c38ea01-5532-4218-b760-e89055155e5a';
   // private apiKey = '268e5c31-c58a-4bdb-b553-7bb959f052b3';
@@ -27,7 +27,7 @@ class ApiServiceKinopoisk {
   // private apiKey = '34f08f04-ad84-4aec-a0dd-bab9cc1bd380';
   // private apiKey = 'fc38be4e-921f-4af0-8179-561fd1af5e4a';
   // private apiKey = 'd6a2af2f-ddaf-4bf0-bcba-a6322a5c79f7';
-  // private apiKey = '4ff0511d-539f-4451-98c7-d1076f9af595';
+  private apiKey = '4ff0511d-539f-4451-98c7-d1076f9af595';
   // private apiKey = 'f7de8df4-0ae7-4497-a141-7f6248e170eb';
   // private apiKey = 'ddaadbdb-686d-4194-ba6e-cd6b7a171d5d';
   // private apiKey = '9e8a516e-69e2-4800-815b-cc50b900a5c8';

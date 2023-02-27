@@ -45,6 +45,9 @@ export default class Router extends DOMElement {
         await this.setWallpapers(window.location.hash);
       }
       if (id === 'account' && !state.allData.account.userData.logged) window.location.hash = '#auth';
+      if (id === 'account' && state.getUserRole() === 'admin') {
+        state.setUserList();
+      }
       this.renderNewPage(id);
     });
   }

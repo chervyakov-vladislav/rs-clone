@@ -3,6 +3,7 @@ import DOMElement from '../../../../shared/components/base-elements/dom-element'
 import FormElement from '../../../../shared/components/base-elements/form-element';
 import InputElement from '../../../../shared/components/base-elements/input-element';
 import storage from '../../../../shared/components/local-storage';
+import { Role } from '../../../../shared/models/state';
 import apiHelpers from '../../../../shared/services/api/api-helpers.service';
 import apiService from '../../../../shared/services/api/server-api.service';
 import state from '../../../../shared/services/state';
@@ -132,6 +133,7 @@ export default class AuthForm extends FormElement {
         userName: resp.data.name,
         userToken: resp.token,
         userPhoto: resp.data.avatar,
+        userRole: resp.data.role as Role,
       });
       await authService.authorization();
       window.location.hash = state.getPreviousPageInfo().previousPageHash as string;

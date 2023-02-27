@@ -1,18 +1,19 @@
+import './create-admin.scss';
 import DOMElement from '../../../../../shared/components/base-elements/dom-element';
-import UserList from './user-list/users-list';
+import UserList from './users-list/users-list';
 import { UsersList } from '../../../../../shared/models/state';
-import BannedList from './banned-list/banned-list';
+import AdminList from './admin-list/admin-list';
 import ButtonElement from '../../../../../shared/components/base-elements/button-element';
-import setBannedService from '../../../../services/account-page/set-banned/set-banned.service';
+import setAdminService from '../../../../services/account-page/set-admin/set-admin.service';
 
-export default class BlockUsers extends DOMElement {
+export default class CreateAdmins extends DOMElement {
   private title: DOMElement;
 
   private table: DOMElement;
 
   private users: UserList;
 
-  private banned: BannedList;
+  private admins: AdminList;
 
   private changeButton: ButtonElement;
 
@@ -24,7 +25,7 @@ export default class BlockUsers extends DOMElement {
 
     this.title = new DOMElement(this.node, {
       tagName: 'h2',
-      content: 'Забанить пользователей',
+      content: 'Назначить администраторов',
       classList: ['create-admin__title'],
     });
 
@@ -34,18 +35,18 @@ export default class BlockUsers extends DOMElement {
     });
 
     this.users = new UserList(this.table.node, data);
-    this.banned = new BannedList(this.table.node, data);
+    this.admins = new AdminList(this.table.node, data);
 
     this.changeButton = new ButtonElement(this.node, {
       tagName: 'button',
       classList: ['create-admin__button'],
-      content: 'Забанить/разбанить пользователей',
+      content: 'Назначить администраторов',
     });
     this.changeButton.node.addEventListener('click', () => {
-      setBannedService.submitNewRolesToServer();
+      setAdminService.submitNewRolesToServer();
       this.changeButton.node.innerText = 'Новые роли назначены';
       setTimeout(() => {
-        this.changeButton.node.innerText = 'Забанить/разбанить пользователей';
+        this.changeButton.node.innerText = 'Назначить администраторов';
       }, 5_000);
     });
   }

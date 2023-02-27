@@ -63,6 +63,12 @@ class ReviewFormServices {
     }
     messageText.innerHTML = '';
 
+    if (state.getUserRole() === 'banned') {
+      messageText.innerText = 'Вы забанены за плохое поведение';
+      return;
+    }
+    messageText.innerHTML = '';
+
     this.formCheck = true;
 
     const userData = state.getUserData();

@@ -1,6 +1,6 @@
 import userPhoto from '../../../assets/images/login.png';
 import { ExtendedSearchResultInterface, IReview, ITopData, KeyWordSearchInterface } from '../models/response-data';
-import { PreviousPageInfoInterface, StateInterface, UserDataParams } from '../models/state';
+import { PreviousPageInfoInterface, StateInterface, UserDataParams, UsersList } from '../models/state';
 import apiKinopoisk from './api/api-kinopoisk';
 import apiService from './api/server-api.service';
 
@@ -59,11 +59,18 @@ class State {
           logged: false,
           userLogin: '',
           userName: '',
+          userRole: 'guest',
           userToken: 'undefined',
           userPhoto,
         },
         watchLaterFilms: [],
         likedFilms: [],
+        userList: [],
+        newRoles: {
+          admins: [],
+          banned: [],
+          users: [],
+        },
       },
       wallpapers: {
         fanArt: null,
@@ -75,6 +82,9 @@ class State {
   }
 
   public async loadAppData() {
+    if (this.allData.account.userData.userRole === 'admin') {
+      await this.setUserList();
+    }
     const backendPremiereData = await apiService.getPremiere();
     const premiereID = Number(backendPremiereData.ID);
     const premiereLink = backendPremiereData.link;
@@ -354,10 +364,17 @@ class State {
     this.allData.account.userData.userToken = options.userToken
       ? options.userToken
       : this.allData.account.userData.userToken;
+    this.allData.account.userData.userRole = options.userRole
+      ? options.userRole
+      : this.allData.account.userData.userRole;
   }
 
   public getUserData() {
     return this.allData.account.userData;
+  }
+
+  public getUserRole() {
+    return this.allData.account.userData.userRole;
   }
 
   public getWatchLaterList() {
@@ -379,6 +396,43 @@ class State {
   public resetLikedFimls() {
     this.allData.account.likedFilms = [];
     this.allData.account.watchLaterFilms = [];
+  }
+
+  public async setUserList() {
+    const res = await apiService.getAllUsers();
+    this.allData.account.userList = res.data as unknown as UsersList[];
+  }
+
+  public getUserList() {
+    return this.allData.account.userList;
+  }
+
+  public getNewRoles() {
+    return this.allData.account.newRoles;
+  }
+
+  public setNewAdminOne(data: UsersList) {
+    this.allData.account.newRoles.admins = [...new Set(this.allData.account.newRoles.admins.concat(data))];
+  }
+
+  public setNewUsersOne(data: UsersList) {
+    this.allData.account.newRoles.users = [...new Set(this.allData.account.newRoles.users.concat(data))];
+  }
+
+  public setNewBannedOne(data: UsersList) {
+    this.allData.account.newRoles.banned = [...new Set(this.allData.account.newRoles.banned.concat(data))];
+  }
+
+  public setNewAdminsArr(data: UsersList[]) {
+    this.allData.account.newRoles.admins = data;
+  }
+
+  public setNewUsersArr(data: UsersList[]) {
+    this.allData.account.newRoles.users = data;
+  }
+
+  public setNewBannedArr(data: UsersList[]) {
+    this.allData.account.newRoles.banned = data;
   }
 }
 
