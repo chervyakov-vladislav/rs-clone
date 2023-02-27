@@ -34,7 +34,7 @@ export default class BannedList extends DOMElement {
     setBannedService.registerBannedList(this.list.node);
 
     data.forEach((userData, index) => {
-      if (userData.role === 'banned') {
+      if (userData.role === 'banned' && userData.login !== 'admin') {
         this.cardContainer = new DOMElement(this.list.node, {
           tagName: 'li',
           classList: this.checkStyle(userData),
