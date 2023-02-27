@@ -2,7 +2,7 @@ import apiLoader from './server-api.loader';
 import { ResponseAuth, TSObject } from '../../models/base-types';
 import { IReviewsDataBackend, PremiereInfoBackend } from '../../models/response-data';
 
-const PATH = 'http://localhost:3000';
+const PATH = 'https://pvd.giize.com/';
 // const PATH = 'http://146.255.188.74:3000';
 
 class ApiService {
@@ -35,7 +35,7 @@ class ApiService {
     if (data.role) formData.append('role', data.role);
     if (avatar) {
       const avatarFileName = avatar ? `${data.login}_av.${avatar.name.split('.').pop()}` : '';
-      formData.append('avatar', `${PATH}/${avatarFileName}`);
+      formData.append('avatar', `${PATH}${avatarFileName}`);
       formData.append('file', avatar, avatarFileName);
     }
 
