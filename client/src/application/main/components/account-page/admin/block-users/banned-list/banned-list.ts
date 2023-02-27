@@ -23,7 +23,7 @@ export default class BannedList extends DOMElement {
 
     this.title = new DOMElement(this.node, {
       classList: ['user-list__title'],
-      content: 'Пользователи',
+      content: 'Забаненные',
       tagName: 'h3',
     });
 

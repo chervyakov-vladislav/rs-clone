@@ -77,6 +77,7 @@ class SetBanned {
         login: user.login,
       };
       apiService.updateUser(params);
+      // api запрос на удаление рецензий пользователя
     });
 
     currrntRoles.users.forEach((user) => {
