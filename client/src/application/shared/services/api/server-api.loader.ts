@@ -3,6 +3,7 @@ import { TSObject, Method, ResponseData } from '../../models/base-types';
 
 const PATH = 'https://pvd.giize.com/api/';
 // const PATH = 'http://146.255.188.74:3000/api/';
+// const PATH = 'http://localhost:3000/';
 
 class Loader {
   private errorHandler(res: Response): Response {
