@@ -4,6 +4,7 @@ import { IReviewsDataBackend, PremiereInfoBackend } from '../../models/response-
 
 const PATH = 'https://pvd.giize.com/';
 // const PATH = 'http://146.255.188.74:3000';
+// const PATH = 'http://localhost:3000/';
 
 class ApiService {
   public loginUser(data: TSObject): Promise<ResponseAuth> {
