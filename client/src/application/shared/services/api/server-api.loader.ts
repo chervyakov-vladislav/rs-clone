@@ -19,7 +19,6 @@ class Loader {
   }
 
   private load(url: URL, method: Method, data?: TSObject | FormData): Promise<Response> {
-    console.log(url.href, method, data);
     const headers = new Headers();
     headers.append('Authorization', `Bearer ${storage.getToken()}`);
     const requestOptions: RequestInit = {
@@ -61,7 +60,6 @@ class Loader {
   }
 
   public post<T>(endpoint: string, data: TSObject): Promise<T> {
-    console.log(endpoint, data);
     return this.load(new URL(`${PATH}${endpoint}`), 'POST', data).then((res: Response) => res.json());
   }
 
