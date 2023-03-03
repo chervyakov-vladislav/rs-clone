@@ -1,4 +1,4 @@
-import { body } from 'express-validator';
+import { body, oneOf } from 'express-validator';
 
 export const registerValidation = [
   body('login', 'логин должен иметь не меньше 3 символов').isLength({ min: 3 }),
@@ -25,6 +25,9 @@ export const premiereValidation = [
 export const postValidation = [
   body('author', 'Необходимо указать автора').exists(),
   body('title', 'Длина заголовка должна быть не менее 3 символов').isLength({ min: 3 }),
-  body('title', 'Заголовок должен состоять из букв').isAlpha('ru-RU' || 'en-US', { ignore: ' ' }),
+  oneOf([
+    body('title', 'Недопустимые символы в заголовке').isAlphanumeric('ru-RU', { ignore: ' ' }),
+    body('title', 'Недопустимые символы в заголовке').isAlphanumeric('en-US', { ignore: ' ' }),
+  ]),
   body('description', 'Слишком короткий текст рецензии').isLength({ min: 20 }),
 ];

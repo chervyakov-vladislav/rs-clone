@@ -165,12 +165,12 @@ export default class ReviewForm {
       classList: ['review-form__button'],
       content: 'Отправить рецензию',
     });
-    this.reviewForm.node.addEventListener('submit', (e: Event) => {
+    this.reviewForm.node.addEventListener('submit', async (e: Event) => {
       e.preventDefault();
       const type = this.keywordSelect.inputNode.value;
       const title = this.keywordInput.inputNode.value;
       const text = this.keywordText.inputNode.value;
-      formServices.addReview(type, title, text);
+      await formServices.addReview(type, title, text);
       const reviewForm = document.querySelector('.users-reviews__title');
       if (reviewForm && formServices.formCheck) {
         reviewForm.scrollIntoView({ block: 'start', behavior: 'smooth' });

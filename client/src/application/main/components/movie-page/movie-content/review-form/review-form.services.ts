@@ -39,6 +39,7 @@ class ReviewFormServices {
   }
 
   public async addReview(type: string, title: string, text: string) {
+    this.formCheck = true;
     const select = this.checkTypeReview(type);
     const messageType = document.querySelector('.review-form__message.type') as HTMLElement;
     const messageTitle = document.querySelector('.review-form__message.title') as HTMLElement;
@@ -47,24 +48,28 @@ class ReviewFormServices {
 
     if (select === undefined) {
       messageType.innerText = 'Не выбран тип рецензии!';
+      this.formCheck = false;
       return;
     }
     messageType.innerHTML = '';
 
     if (title === '') {
       messageTitle.innerText = 'Введите заголовок!';
+      this.formCheck = false;
       return;
     }
     messageTitle.innerHTML = '';
 
     if (text === '') {
       messageText.innerText = 'Введите текст!';
+      this.formCheck = false;
       return;
     }
     messageText.innerHTML = '';
 
     if (state.getUserRole() === 'banned') {
       messageText.innerText = 'Вы забанены за плохое поведение';
+      this.formCheck = false;
       return;
     }
     messageText.innerHTML = '';
@@ -85,10 +90,9 @@ class ReviewFormServices {
 
     if (res && res.errors) {
       messageText.innerText = (res.errors as unknown as TSObject).msg;
+      this.formCheck = false;
       return;
     }
-
-    this.formCheck = true;
 
     const reviews = state.allData.movieReviews;
     reviews.items.unshift(item);
