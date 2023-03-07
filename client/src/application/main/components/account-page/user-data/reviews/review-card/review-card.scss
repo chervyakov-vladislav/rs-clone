@@ -1,0 +1,42 @@
+.review-card {
+  min-width: 400px;
+  height: 340px;
+  padding: 15px;
+  background: #fff;
+  transition: .3s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+    &:hover {
+      background: #e6e6e6;
+    }
+
+    &--negative {
+      background: rgba(255, 0, 0, 0.08);
+    }
+
+    &--positive {
+      background: rgba(0, 153, 51, 0.15);
+    }
+
+    &__name {
+      font-size: 14px;
+      color: #000;
+      font-family: "Kinopoisk-bold" , Arial, sans-serif;
+      margin-bottom: 0;
+    }
+
+    &__date {
+      font-size: 14px;
+      color: #000;
+    }
+
+
+    &__text {
+      font-size: 14px;
+      height: 250px;
+      overflow-y: scroll;
+    }
+}

@@ -1,0 +1,31 @@
+.user-list {
+    &__list {
+      display: flex;
+      flex-direction: column;
+      width: 250px;
+      height: 300px;
+      background: #fff;
+      overflow-y: scroll;
+    }
+  
+    &__card {
+      transition: .3s;
+      height: 70px;
+      cursor: pointer;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        background: #e6e6e6;
+      }
+
+      &--banned {
+        background: rgba(255, 0, 0, 0.08);
+      }
+
+      &--admin {
+        background: rgba(0, 153, 51, 0.15);
+      }
+    }
+}

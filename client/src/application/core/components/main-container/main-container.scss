@@ -1,0 +1,15 @@
+.main {
+  flex: 1;
+  display: flex; 
+    &__container {
+      height: inherit;
+      padding: 50px 0;
+    }
+}
+
+.nav {
+  width: 200px;
+  padding-right: 10px;
+  padding-top: 50px;
+  padding-left: 10px;
+}

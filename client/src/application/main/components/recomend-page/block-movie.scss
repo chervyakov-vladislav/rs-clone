@@ -1,0 +1,143 @@
+.block-movie {
+
+  &__title {
+    font-weight: 600;
+    color: #000;
+  }
+}
+
+.movie-card-flat {
+  align-items: flex-start;
+  border: 1px solid #f7f7f7;
+  border-radius: 8px;
+  display: flex;
+  height: 150px;
+  justify-content: space-between;
+  padding: 25px 30px 25px 15px;
+  position: relative;
+  transition: .3s;
+  width: 860px;
+
+  &:hover {
+    background-color: #eeeeee;
+  }
+
+  &__number {
+    flex: 0 0 auto;
+    font-size: 16px;
+    font-weight: 700;
+    max-width: 40px;
+    text-align: center;
+  }
+
+  &__poster {
+    flex: 0 0 auto;
+    margin-left: 15px;
+    width: 100px;
+  }
+
+  & img {
+    border-radius: 5px;
+    height: 100px;
+    position: relative;
+    width: 65px;
+  }
+
+  &__info {
+    align-self: flex-start;
+    color: rgba(0,0,0,.4);
+    flex: 0 1 auto;
+    font-size: 13px;
+    line-height: 18px;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  &__link {
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 4px;
+    cursor: pointer;
+  }
+
+  &__info-main {
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  &__rating {
+    color: #777;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 30px;
+    width: 70px;
+
+    &.active {
+      color: #1cbb34;
+    }
+  }
+
+  &__buttons {
+    align-items: center;
+    display: flex;
+  }
+
+  &__to-watch-btn {
+    align-items: center;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    height: 30px;
+    justify-content: center;
+    line-height: 30px;
+    transition: .3s;
+    width: 145px;
+    color: #000;
+    background-color: #f7f7f7;
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+
+    &--active {
+      background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+      color: #fff;
+    }
+  }
+
+  &__to-rate-btn {
+    align-items: center;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    height: 30px;
+    justify-content: center;
+    margin-left: 5px;
+    width: 30px;
+    background-color: #f7f7f7;
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+
+    &--active {
+      background: linear-gradient(113.96deg, #F9804B 1.49%, #FE9013 101.44%);
+      color: #fff;
+    }
+  }
+
+  &__star {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
