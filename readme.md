@@ -13,7 +13,7 @@ SPA приложение с клиент-серверной архитектур
 
 ### Админ Login/Password: admin p@ssw0rd
 
-### deploy: https://chervyakov-vladislav.github.io/RS-Clone/
+### deploy: https://chervyakov-vladislav.github.io/rs-clone/
 
 
 
